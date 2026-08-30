@@ -1,204 +1,157 @@
-export default async function handler(req) {
-
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS"
-  };
-
-  if (req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 204,
-      headers
-    });
-  }
-
-  if (req.method !== "POST") {
-    return new Response(
-      JSON.stringify({
+exports.handler = async function (event) {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
         error: "Method Not Allowed"
-      }),
-      {
-        status: 405,
-        headers
-      }
-    );
+      })
+    };
   }
 
   try {
+    const apiKey = process.env.GEMINI_API_KEY;
 
-    const API_KEY =
-      process.env.AI_API_KEY;
-
-    const API_BASE =
-      process.env.AI_API_BASE;
-
-    const MODEL =
-      process.env.AI_MODEL;
-
-    if (!API_KEY) {
-
-      return new Response(
-        JSON.stringify({
-          error:
-            "AI_API_KEY در Netlify تنظیم نشده است."
-        }),
-        {
-          status:500,
-          headers
-        }
-      );
-
+    if (!apiKey) {
+      return {
+        statusCode: 500,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          error: "GEMINI_API_KEY is not configured on Netlify."
+        })
+      };
     }
 
-    if (!API_BASE) {
+    const body = JSON.parse(event.body || "{}");
 
-      return new Response(
-        JSON.stringify({
-          error:
-            "AI_API_BASE در Netlify تنظیم نشده است."
-        }),
-        {
-          status:500,
-          headers
-        }
-      );
-
+    if (!body.prompt) {
+      return {
+        statusCode: 400,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          error: "Prompt is required."
+        })
+      };
     }
 
-    if (!MODEL) {
+    const model = "gemini-2.5-flash";
 
-      return new Response(
-        JSON.stringify({
-          error:
-            "AI_MODEL در Netlify تنظیم نشده است."
-        }),
-        {
-          status:500,
-          headers
-        }
-      );
+    const url =
+      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
 
-    }
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [
+            {
+              text: `
+تو StudyCoach هستی؛
+مشاور خصوصی هوشمند یک دانش‌آموز کنکوری رشته تجربی.
 
-    const body=await req.json();
+همیشه فارسی پاسخ بده.
 
-    if(
-      !body ||
-      !Array.isArray(body.messages)
-    ){
+پاسخ‌ها باید:
+- دقیق
+- کاربردی
+- مرحله‌بندی‌شده
+- واقع‌بینانه
+- شخصی‌سازی‌شده
 
-      return new Response(
-        JSON.stringify({
-          error:
-            "messages معتبر نیست."
-        }),
-        {
-          status:400,
-          headers
-        }
-      );
+باشند.
 
-    }
+اگر کاربر برنامه مطالعاتی خواست،
+زمان‌بندی، درس، مبحث، تست و مرور را مشخص کن.
 
-    /*
-      محدودسازی اولیه درخواست
-    */
-
-    if(body.messages.length>30){
-
-      return new Response(
-        JSON.stringify({
-          error:
-            "تعداد پیام‌ها بیش از حد مجاز است."
-        }),
-        {
-          status:400,
-          headers
-        }
-      );
-
-    }
-
-    const url=
-      API_BASE.replace(/\/+$/,"")+
-      "/chat/completions";
-
-    const upstream=
-      await fetch(url,{
-
-        method:"POST",
-
-        headers:{
-          "Content-Type":
-            "application/json",
-
-          "Authorization":
-            `Bearer ${API_KEY}`
+اگر تحلیل عملکرد خواست،
+بر اساس داده‌های ارائه‌شده تحلیل کن و از حدس بی‌دلیل خودداری کن.
+`
+            }
+          ]
         },
 
-        body:JSON.stringify({
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: body.prompt
+              }
+            ]
+          }
+        ],
 
-          model:MODEL,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 5000
+        }
+      })
+    });
 
-          messages:body.messages,
+    const data = await response.json();
 
-          temperature:
-            typeof body.temperature==="number"
-              ?body.temperature
-              :.7,
-
-          max_tokens:
-            typeof body.max_tokens==="number"
-              ?Math.min(body.max_tokens,5000)
-              :3500
-
+    if (!response.ok) {
+      return {
+        statusCode: response.status,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          error:
+            data?.error?.message ||
+            "Gemini API request failed."
         })
-
-      });
-
-    const text=
-      await upstream.text();
-
-    let result;
-
-    try{
-
-      result=JSON.parse(text);
-
-    }catch{
-
-      result={
-        error:text
       };
-
     }
 
-    return new Response(
-      JSON.stringify(result),
-      {
-        status:upstream.status,
-        headers
-      }
-    );
+    const answer =
+      data?.candidates?.[0]?.content?.parts
+        ?.map(part => part.text || "")
+        .join("")
+        .trim();
 
-  }catch(error){
+    if (!answer) {
+      return {
+        statusCode: 502,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          error: "Gemini returned an empty response."
+        })
+      };
+    }
 
-    return new Response(
-      JSON.stringify({
-        error:
-          error?.message||
-          "خطای داخلی سرور"
-      }),
-      {
-        status:500,
-        headers
-      }
-    );
+    return {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        answer
+      })
+    };
+
+  } catch (error) {
+
+    return {
+      statusCode: 500,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        error: error.message || "Server error."
+      })
+    };
+
   }
-}
-
-export const config={
-  path:"/api/chat"
 };
