@@ -5,32 +5,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#4f46e5">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="StudyCoach Ultimate">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="StudyCoach">
 <title>StudyCoach Ultimate</title>
 
 <style>
 *{box-sizing:border-box}
-
 :root{
  --bg:#f4f6fb;
  --card:#fff;
- --text:#111827;
+ --text:#172033;
  --muted:#6b7280;
  --primary:#4f46e5;
- --primary2:#6366f1;
+ --primary2:#7c3aed;
  --border:#e5e7eb;
- --good:#059669;
- --bad:#dc2626;
- --warning:#d97706;
+ --green:#10b981;
+ --red:#ef4444;
+ --orange:#f59e0b;
 }
-
-body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;
-}
-
 body.dark{
  --bg:#0f172a;
  --card:#1e293b;
@@ -38,139 +30,93 @@ body.dark{
  --muted:#94a3b8;
  --border:#334155;
 }
-
-button,input,select,textarea{
- font:inherit;
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif;
 }
-
+button,input,select,textarea{font:inherit}
 button{
  border:0;
- border-radius:12px;
- padding:10px 13px;
- background:#e8ebf3;
- color:inherit;
  cursor:pointer;
+ border-radius:13px;
+ padding:11px 14px;
+ background:#e8ebf2;
+ color:inherit;
+ font-weight:700;
 }
-
-button.primary{
- background:var(--primary);
- color:white;
-}
-
-button.good{
- background:#d1fae5;
- color:#065f46;
-}
-
-button.danger{
- background:#fee2e2;
- color:#991b1b;
-}
-
+button.primary{background:var(--primary);color:white}
+button.green{background:#d1fae5;color:#065f46}
+button.red{background:#fee2e2;color:#991b1b}
+button.orange{background:#fef3c7;color:#92400e}
 input,select,textarea{
  width:100%;
- padding:11px;
+ padding:12px;
  border:1px solid var(--border);
- border-radius:12px;
+ border-radius:13px;
  background:var(--card);
  color:var(--text);
  outline:none;
 }
-
-textarea{
- resize:vertical;
-}
-
-.wrap{
- width:min(1150px,100%);
+textarea{resize:vertical}
+.app{
+ max-width:1150px;
  margin:auto;
  padding:15px 14px 105px;
 }
-
-header{
+.top{
  display:flex;
- align-items:center;
  justify-content:space-between;
+ align-items:center;
  gap:10px;
- margin-bottom:12px;
 }
-
-.brand{
- font-size:23px;
- font-weight:900;
-}
-
-.muted{
- color:var(--muted);
- font-size:13px;
-}
-
+.brand{font-size:23px;font-weight:900}
+.muted{color:var(--muted);font-size:13px}
 .card{
  background:var(--card);
  border:1px solid var(--border);
  border-radius:20px;
  padding:16px;
- margin:11px 0;
+ margin:12px 0;
  box-shadow:0 7px 25px rgba(0,0,0,.05);
 }
-
 .hero{
  display:flex;
- align-items:center;
  justify-content:space-between;
+ align-items:center;
  gap:15px;
 }
-
-.hero h1,
-.hero h2{
- margin:7px 0;
-}
-
-.score{
- min-width:90px;
- text-align:center;
-}
-
-.score strong{
- display:block;
- font-size:34px;
+.hero h1,.hero h2{margin:5px 0}
+.big{
+ font-size:36px;
+ font-weight:900;
  color:var(--primary);
 }
-
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px;
-}
-
 .stats{
  display:grid;
  grid-template-columns:repeat(4,1fr);
  gap:10px;
 }
-
-.stat{
- text-align:center;
-}
-
+.stat{text-align:center}
 .stat b{
  display:block;
- font-size:22px;
- margin-top:5px;
+ font-size:23px;
+ margin-bottom:4px;
 }
-
-.head{
- display:flex;
- align-items:center;
- justify-content:space-between;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
  gap:10px;
 }
-
-.list{
- display:grid;
+.form{display:grid;gap:9px}
+.row{
+ display:flex;
+ align-items:center;
  gap:8px;
 }
-
+.grow{flex:1}
+.list{display:grid;gap:8px}
 .item{
  display:flex;
  align-items:center;
@@ -179,20 +125,7 @@ header{
  border:1px solid var(--border);
  border-radius:14px;
 }
-
-.item.done{
- opacity:.55;
-}
-
-.item .grow{
- flex:1;
-}
-
-.item b,
-.item small{
- display:block;
-}
-
+.item.done{opacity:.55}
 .dot{
  width:10px;
  height:10px;
@@ -200,24 +133,6 @@ header{
  background:var(--primary);
  flex:none;
 }
-
-.done .dot{
- background:var(--good);
-}
-
-.bar{
- height:9px;
- border-radius:999px;
- overflow:hidden;
- background:#e5e7eb;
-}
-
-.bar i{
- display:block;
- height:100%;
- background:var(--primary);
-}
-
 .chip{
  display:inline-block;
  padding:5px 9px;
@@ -227,54 +142,34 @@ header{
  font-size:12px;
  margin:2px;
 }
-
-.msg{
- padding:11px;
- border-radius:14px;
- line-height:1.9;
- margin:7px 0;
+.bar{
+ height:9px;
+ background:#e5e7eb;
+ border-radius:999px;
+ overflow:hidden;
 }
-
-.msg.user{
- background:#eef2ff;
+.bar i{
+ display:block;
+ height:100%;
+ background:var(--primary);
 }
-
-.msg.bot{
- background:#f1f5f9;
-}
-
-.dark .msg.bot{
- background:#334155;
-}
-
 .clock{
- font-size:46px;
+ font-size:48px;
  font-weight:900;
  text-align:center;
- margin:20px 0;
  direction:ltr;
+ margin:20px 0;
 }
-
-.center{
- text-align:center;
+.center{text-align:center}
+.message{
+ padding:12px;
+ border-radius:14px;
+ line-height:1.9;
+ margin:8px 0;
 }
-
-.form{
- display:grid;
- gap:9px;
-}
-
-table{
- width:100%;
- border-collapse:collapse;
-}
-
-th,td{
- padding:9px;
- border-bottom:1px solid var(--border);
- text-align:right;
-}
-
+.message.user{background:#eef2ff}
+.message.bot{background:#f1f5f9}
+body.dark .message.bot{background:#334155}
 nav{
  position:fixed;
  left:0;
@@ -288,75 +183,59 @@ nav{
  border-top:1px solid #ddd;
  padding:7px 2px calc(7px + env(safe-area-inset-bottom));
 }
-
-.dark nav{
- background:rgba(15,23,42,.94);
+body.dark nav{
+ background:rgba(15,23,42,.95);
  border-color:#334155;
 }
-
 nav button{
  background:transparent;
- padding:8px 7px;
+ padding:8px 6px;
  font-size:11px;
 }
-
 nav button.active{
  background:#eef2ff;
  color:var(--primary);
- font-weight:800;
 }
-
-.hidden{
- display:none!important;
-}
-
-.progress-ring{
+.progress{
  width:100px;
  height:100px;
  border-radius:50%;
  display:grid;
  place-items:center;
- background:conic-gradient(var(--primary) 0deg,var(--primary) var(--deg),#e5e7eb var(--deg),#e5e7eb 360deg);
+ background:conic-gradient(var(--primary) var(--p),#e5e7eb var(--p));
 }
-
-.progress-ring div{
- width:78px;
- height:78px;
+.progress div{
+ width:76px;
+ height:76px;
  border-radius:50%;
  background:var(--card);
  display:grid;
  place-items:center;
  font-weight:900;
 }
-
+.hidden{display:none!important}
 @media(max-width:700px){
- .stats{
-  grid-template-columns:repeat(2,1fr);
- }
- .hero{
-  align-items:flex-start;
- }
+ .stats{grid-template-columns:repeat(2,1fr)}
 }
-
-@media(min-width:800px){
- .grid{
-  grid-template-columns:repeat(3,1fr);
- }
+@media(min-width:850px){
+ .grid{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<div class="app">
 
-<header>
+<header class="top">
+
 <div>
 <div class="brand">🎓 StudyCoach Ultimate</div>
-<div class="muted">نسخه رایگان • آفلاین • بدون API پولی</div>
+<div class="muted">مشاور هوشمند مطالعه • رایگان • بدون API پولی</div>
 </div>
 
-<button onclick="openSettings()">⚙️</button>
+<button onclick="settings()">⚙️</button>
+
 </header>
 
 <main id="app"></main>
@@ -366,27 +245,44 @@ nav button.active{
 
 <nav>
 
-<button class="active" onclick="go('home',this)">🏠<br>خانه</button>
+<button class="active" onclick="page('home',this)">
+🏠<br>خانه
+</button>
 
-<button onclick="go('coach',this)">🤖<br>مشاور</button>
+<button onclick="page('coach',this)">
+🤖<br>مشاور
+</button>
 
-<button onclick="go('plan',this)">📅<br>برنامه</button>
+<button onclick="page('plan',this)">
+📅<br>برنامه
+</button>
 
-<button onclick="go('study',this)">⏱️<br>مطالعه</button>
+<button onclick="page('study',this)">
+⏱️<br>مطالعه
+</button>
 
-<button onclick="go('tests',this)">📝<br>تست</button>
+<button onclick="page('tests',this)">
+📝<br>تست
+</button>
 
-<button onclick="go('analytics',this)">📊<br>تحلیل</button>
+<button onclick="page('analysis',this)">
+📊<br>تحلیل
+</button>
 
-<button onclick="go('tools',this)">🧰<br>بیشتر</button>
+<button onclick="page('more',this)">
+🧰<br>بیشتر
+</button>
 
 </nav>
 
 
 <script>
 
-const KEY="studycoach_ultimate_v1";
+/* =========================
+   DATABASE
+========================= */
 
+const KEY="StudyCoachUltimate_Final_2026";
 
 const DEFAULT_DATA={
 
@@ -430,15 +326,20 @@ let TIMER={
 };
 
 
+/* =========================
+   BASIC FUNCTIONS
+========================= */
+
 function load(){
 
 try{
 
-let x=JSON.parse(
+let saved=
+JSON.parse(
 localStorage.getItem(KEY)
 );
 
-return x || structuredClone(DEFAULT_DATA);
+return saved||structuredClone(DEFAULT_DATA);
 
 }catch(e){
 
@@ -459,6 +360,13 @@ JSON.stringify(DATA)
 }
 
 
+function $(id){
+
+return document.getElementById(id);
+
+}
+
+
 function today(){
 
 return new Date()
@@ -468,9 +376,9 @@ return new Date()
 }
 
 
-function fa(n){
+function fa(value){
 
-return String(n)
+return String(value)
 .replace(
 /\d/g,
 x=>"۰۱۲۳۴۵۶۷۸۹"[x]
@@ -479,9 +387,9 @@ x=>"۰۱۲۳۴۵۶۷۸۹"[x]
 }
 
 
-function escapeHTML(s){
+function esc(value){
 
-return String(s??"")
+return String(value??"")
 .replace(/[&<>"']/g,c=>({
 
 "&":"&amp;",
@@ -526,7 +434,7 @@ return DATA.tests
 }
 
 
-function testCountToday(){
+function testsTodayCount(){
 
 return testsToday()
 .reduce(
@@ -537,32 +445,32 @@ return testsToday()
 }
 
 
-function overallAccuracy(){
+function accuracyToday(){
 
-if(!DATA.tests.length)return null;
+let t=testsToday();
+
+if(!t.length)return null;
 
 return Math.round(
-DATA.tests.reduce(
+t.reduce(
 (a,x)=>a+x.accuracy,
 0
-)
-/DATA.tests.length
+)/t.length
 );
 
 }
 
 
-function todayAccuracy(){
+function overallAccuracy(){
 
-let a=testsToday();
-
-if(!a.length)return null;
+if(!DATA.tests.length)
+return null;
 
 return Math.round(
-a.reduce(
-(s,x)=>s+x.accuracy,
+DATA.tests.reduce(
+(a,x)=>a+x.accuracy,
 0
-)/a.length
+)/DATA.tests.length
 );
 
 }
@@ -587,71 +495,159 @@ new Date()
 }
 
 
-function formatTime(sec){
+/* =========================
+   NAVIGATION
+========================= */
 
-let h=Math.floor(sec/3600);
-
-let m=Math.floor(sec/60)%60;
-
-let s=sec%60;
-
-return [
-String(h).padStart(2,"0"),
-String(m).padStart(2,"0"),
-String(s).padStart(2,"0")
-].join(":");
-
-}
-
-
-function go(name,button){
+function page(name,button){
 
 document
 .querySelectorAll("nav button")
-.forEach(x=>x.classList.remove("active"));
+.forEach(
+x=>x.classList.remove("active")
+);
 
 if(button)
 button.classList.add("active");
 
-let pages={
+const pages={
  home:homePage,
  coach:coachPage,
  plan:planPage,
  study:studyPage,
  tests:testsPage,
- analytics:analyticsPage,
- tools:toolsPage
+ analysis:analysisPage,
+ more:morePage
 };
 
-$("app").innerHTML=pages[name]();
-
-let renderers={
- home:renderHome,
- coach:renderCoach,
- plan:renderPlan,
- study:renderStudy,
- tests:renderTests,
- analytics:renderAnalytics,
- tools:renderTools
-};
-
-renderers[name]();
+pages[name]();
 
 }
 
 
-function $(id){
+/* =========================
+   ADVISOR ENGINE
+========================= */
 
-return document.getElementById(id);
+function getAdvice(){
+
+let pending=
+DATA.plans.filter(
+x=>x.date===today()&&!x.done
+);
+
+let acc=accuracyToday();
+
+let openMistakes=
+DATA.mistakes.filter(
+x=>!x.reviewed
+).length;
+
+let target=
+DATA.profile.dailyHours*60;
+
+let studied=
+minutesToday();
+
+
+if(openMistakes>=5){
+
+return `دفتر اشتباهاتت ${fa(openMistakes)} مورد باز دارد. قبل از تست سنگین، حداقل چند مورد از اشتباهات را مرور کن.`;
 
 }
 
 
-/* HOME */
+if(acc!==null && acc<50){
+
+return "دقت تست‌های امروز پایین است. فعلاً تست بیشتر نزن؛ علت اشتباه‌ها را پیدا کن و مباحث ضعیف را دوباره بخوان.";
+
+}
+
+
+if(pending.length){
+
+return `جلسه بعدی پیشنهادی: ${pending[0].subject} — ${pending[0].topic}.`;
+
+}
+
+
+if(studied<target*.5){
+
+return "هنوز کمتر از نصف هدف روزانه را انجام داده‌ای. یک جلسه متمرکز دیگر شروع کن.";
+
+}
+
+
+if(studied>=target){
+
+return "هدف مطالعه امروز کامل شده. بهترین کار فعلی تحلیل تست‌ها، مرور و رفع اشکال است.";
+
+}
+
+
+return "روند امروز خوب است. جلسه بعدی را شروع کن و نتیجه‌اش را ثبت کن.";
+
+}
+
+
+function weakSubject(){
+
+let result=
+DATA.subjects.map(
+subject=>{
+
+let tests=
+DATA.tests.filter(
+x=>x.subject===subject.name
+);
+
+let accuracy=
+tests.length
+?
+tests.reduce(
+(a,x)=>a+x.accuracy,
+0
+)/tests.length
+:
+50;
+
+return{
+ name:subject.name,
+ accuracy
+};
+
+}
+)
+.sort(
+(a,b)=>a.accuracy-b.accuracy
+);
+
+return result[0];
+
+}
+
+
+/* =========================
+   HOME
+========================= */
 
 function homePage(){
 
-return `
+let target=
+DATA.profile.dailyHours*60;
+
+let studied=
+minutesToday();
+
+let percent=
+Math.min(
+100,
+Math.round(
+studied/Math.max(1,target)*100
+)
+);
+
+$("app").innerHTML=`
 
 <section class="card hero">
 
@@ -661,25 +657,30 @@ return `
 ULTIMATE
 </span>
 
-<h2 id="hello">
-سلام 👋
+<h2>
+${DATA.profile.name
+?
+"سلام "+esc(DATA.profile.name)+" 👋"
+:
+"سلام 👋"}
 </h2>
 
-<p id="advisorHome">
+<p class="muted">
+${esc(DATA.profile.goal||"هدف تحصیلی")}
+</p>
+
+<p>
+${esc(getAdvice())}
 </p>
 
 </div>
 
+<div class="progress"
+style="--p:${percent*3.6}deg">
 
-<div class="score">
-
-<strong id="todayProgress">
-۰٪
-</strong>
-
-<span class="muted">
-پیشرفت امروز
-</span>
+<div>
+${fa(percent)}٪
+</div>
 
 </div>
 
@@ -689,23 +690,62 @@ ULTIMATE
 <section class="stats">
 
 <div class="card stat">
-<b id="todayStudy">۰</b>
-<span class="muted">دقیقه مطالعه</span>
+
+<b>
+${fa(studied)}
+</b>
+
+<span class="muted">
+دقیقه مطالعه
+</span>
+
 </div>
 
-<div class="card stat">
-<b id="todayTests">۰</b>
-<span class="muted">تست امروز</span>
-</div>
 
 <div class="card stat">
-<b id="todayAcc">—</b>
-<span class="muted">دقت امروز</span>
+
+<b>
+${fa(testsTodayCount())}
+</b>
+
+<span class="muted">
+تست امروز
+</span>
+
 </div>
 
+
 <div class="card stat">
-<b id="remaining">—</b>
-<span class="muted">روز باقی‌مانده</span>
+
+<b>
+${accuracyToday()===null
+?
+"—"
+:
+fa(accuracyToday())+"٪"}
+</b>
+
+<span class="muted">
+دقت امروز
+</span>
+
+</div>
+
+
+<div class="card stat">
+
+<b>
+${daysLeft()===null
+?
+"—"
+:
+fa(daysLeft())}
+</b>
+
+<span class="muted">
+روز باقی‌مانده
+</span>
+
 </div>
 
 </section>
@@ -713,19 +753,34 @@ ULTIMATE
 
 <section class="card">
 
-<div class="head">
+<div class="row">
 
-<h3>
+<h3 class="grow">
 📅 برنامه امروز
 </h3>
 
-<button class="primary" onclick="generatePlan()">
-ساخت برنامه
+<button
+class="primary"
+onclick="generatePlan()">
+
+ساخت برنامه هوشمند
+
 </button>
 
 </div>
 
-<div id="todayPlans" class="list"></div>
+<div class="list">
+
+${
+DATA.plans
+.filter(x=>x.date===today())
+.map(planItem)
+.join("")
+||
+'<p class="muted">هنوز برنامه‌ای ساخته نشده.</p>'
+}
+
+</div>
 
 </section>
 
@@ -733,44 +788,34 @@ ULTIMATE
 <section class="card">
 
 <h3>
-🧠 توصیه مشاور
+🤖 توصیه مشاور
 </h3>
 
-<div id="smartAdvice" class="msg bot"></div>
+<div class="message bot">
+${esc(getAdvice())}
+</div>
 
 </section>
 
 
 <section class="card">
 
+<div class="row">
+
+<div class="grow">
+
 <h3>
-🔥 وضعیت استمرار
+🔥 استمرار
 </h3>
-
-<div class="grid">
-
-<div class="stat">
-
-<b>
-${fa(DATA.streak)}
-</b>
 
 <span class="muted">
-روز متوالی
+روزهای متوالی مطالعه
 </span>
 
 </div>
 
-<div class="stat">
-
-<b>
-${fa(totalMinutes())}
-</b>
-
-<span class="muted">
-دقیقه کل
-</span>
-
+<div class="big">
+${fa(DATA.streak)}
 </div>
 
 </div>
@@ -782,86 +827,9 @@ ${fa(totalMinutes())}
 }
 
 
-function renderHome(){
-
-let m=minutesToday();
-
-let target=DATA.profile.dailyHours*60;
-
-let p=Math.min(
-100,
-Math.round(
-m/Math.max(1,target)*100
-)
-);
-
-
-$("hello").textContent=
-DATA.profile.name
-?
-`سلام ${DATA.profile.name} 👋`
-:
-"سلام 👋";
-
-
-$("advisorHome").textContent=
-advisor();
-
-
-$("todayStudy").textContent=
-fa(m);
-
-
-$("todayTests").textContent=
-fa(testCountToday());
-
-
-let acc=todayAccuracy();
-
-
-$("todayAcc").textContent=
-acc===null
-?
-"—"
-:
-fa(acc)+"٪";
-
-
-$("remaining").textContent=
-daysLeft()===null
-?
-"—"
-:
-fa(daysLeft());
-
-
-$("todayProgress").textContent=
-fa(p)+"٪";
-
-
-$("smartAdvice").textContent=
-advisor();
-
-
-let plans=
-DATA.plans.filter(
-x=>x.date===today()
-);
-
-
-$("todayPlans").innerHTML=
-plans.length
-?
-plans.map(planItem).join("")
-:
-"<p class='muted'>برنامه‌ای برای امروز وجود ندارد.</p>";
-
-}
-
-
 function planItem(x){
 
-return `
+return`
 
 <div class="item ${x.done?"done":""}">
 
@@ -870,18 +838,17 @@ return `
 <div class="grow">
 
 <b>
-${escapeHTML(x.start)}
- ·
-${escapeHTML(x.subject)}
+${esc(x.start)} ·
+${esc(x.subject)}
 </b>
 
-<small>
-${escapeHTML(x.topic)}
+<div class="muted">
+${esc(x.topic)}
  ·
-${fa(x.duration)} دقیقه
+${fa(x.minutes)} دقیقه
  ·
-${escapeHTML(x.type)}
-</small>
+${esc(x.type)}
+</div>
 
 </div>
 
@@ -906,106 +873,306 @@ DATA.plans.find(
 x=>x.id===id
 );
 
-if(!x)return;
-
+if(x)
 x.done=!x.done;
 
 save();
 
-renderHome();
+homePage();
 
 }
 
 
-/* ADVISOR */
+/* =========================
+   SMART PLANNER
+========================= */
 
-function advisor(){
+function planPage(){
 
-let study=minutesToday();
+$("app").innerHTML=`
 
-let target=DATA.profile.dailyHours*60;
+<section class="card">
 
-let acc=todayAccuracy();
+<div class="row">
+
+<div class="grow">
+
+<h2>
+📅 برنامه‌ریز تطبیقی
+</h2>
+
+<p class="muted">
+بر اساس سطح دروس، هدف روزانه و عملکرد تست‌ها برنامه می‌سازد.
+</p>
+
+</div>
+
+<button
+class="primary"
+onclick="generatePlan()">
+
+ساخت برنامه
+
+</button>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+📋 برنامه امروز
+</h3>
+
+<div class="list">
+
+${
+DATA.plans
+.filter(x=>x.date===today())
+.map(planItem)
+.join("")
+||
+'<p class="muted">برنامه‌ای وجود ندارد.</p>'
+}
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+🔄 تحلیل عقب‌افتادگی
+</h3>
+
+<button
+class="orange"
+onclick="recoveryAnalysis()">
+
+تحلیل کن
+
+</button>
+
+<div
+id="recovery"
+class="message bot">
+
+هنوز تحلیل نشده.
+
+</div>
+
+</section>
+
+`;
+
+}
+
+
+function generatePlan(){
+
+DATA.plans=
+DATA.plans.filter(
+x=>x.date!==today()
+);
+
+
+let total=
+Math.max(
+120,
+DATA.profile.dailyHours*60
+);
+
+let used=0;
+
+let current=8*60;
+
+let subjects=
+[...DATA.subjects]
+.sort(
+(a,b)=>a.level-b.level
+);
+
+let types=[
+
+["مطالعه","یادگیری مفهومی"],
+
+["تست","تست آموزشی"],
+
+["تحلیل","تحلیل تست"],
+
+["مرور","مرور فعال"],
+
+["تست","تست زمان‌دار"]
+
+];
+
+let i=0;
+
+
+while(
+used+45<=total &&
+i<20
+){
+
+let subject=
+subjects[i%subjects.length];
+
+let duration=
+i===0
+?
+90
+:
+60;
+
+duration=
+Math.min(
+duration,
+total-used
+);
+
+if(duration<45)
+break;
+
+let h=
+String(
+Math.floor(current/60)
+)
+.padStart(2,"0");
+
+let m=
+String(
+current%60
+)
+.padStart(2,"0");
+
+let type=
+types[i%types.length];
+
+
+DATA.plans.push({
+
+id:
+crypto.randomUUID(),
+
+date:
+today(),
+
+start:
+`${h}:${m}`,
+
+subject:
+subject.name,
+
+topic:
+type[1],
+
+minutes:
+duration,
+
+type:
+type[0],
+
+done:false
+
+});
+
+
+used+=duration;
+
+current+=duration+20;
+
+i++;
+
+}
+
+
+save();
+
+page(
+"home",
+document.querySelector("nav button")
+);
+
+}
+
+
+function recoveryAnalysis(){
 
 let pending=
 DATA.plans
 .filter(
 x=>x.date===today()&&!x.done
+)
+.sort(
+(a,b)=>b.minutes-a.minutes
 );
 
 
-let mistakes=
-DATA.mistakes
-.filter(
-x=>!x.reviewed
-).length;
-
-
-if(!DATA.profile.name){
-
-return "برای شروع، نام و هدف خودت را در تنظیمات وارد کن.";
-
-}
-
-
-if(acc!==null && acc<50){
-
-return "دقت تست‌ها پایین است. فعلاً به‌جای تست بیشتر، اشتباهات و مفاهیم همان مبحث را بررسی کن.";
+$("recovery").textContent=
+pending.length
+?
+`برای جبران، ابتدا این جلسه‌ها را انجام بده: ${
+pending
+.slice(0,3)
+.map(x=>x.subject+" — "+x.topic)
+.join("، ")
+}`
+:
+"عقب‌افتادگی ثبت‌شده‌ای نداری.";
 
 }
 
 
-if(mistakes>=5){
-
-return `دفتر اشتباهات ${fa(mistakes)} مورد باز دارد. یک جلسه مرور اشتباهات را در اولویت قرار بده.`;
-
-}
-
-
-if(pending.length){
-
-return `جلسه بعدی پیشنهادی: ${pending[0].subject} — ${pending[0].topic}.`;
-
-}
-
-
-if(study<target*.5){
-
-return "هنوز کمتر از نصف هدف روزانه را انجام داده‌ای. یک جلسه متمرکز دیگر شروع کن.";
-
-}
-
-
-if(study>=target){
-
-return "هدف مطالعه امروز کامل شده. الان تحلیل، مرور و رفع اشکال بهترین انتخاب است.";
-
-}
-
-
-return "روند امروز مناسب است. جلسه بعدی را شروع کن و بعد نتیجه را ثبت کن.";
-
-}
-
+/* =========================
+   COACH
+========================= */
 
 function coachPage(){
 
-return `
+$("app").innerHTML=`
 
 <section class="card">
 
 <h2>
-🤖 مشاور خصوصی
+🤖 مشاور خصوصی هوشمند
 </h2>
 
 <p class="muted">
-
-مشاور داخلی بدون نیاز به API پولی.
-بر اساس مطالعه، تست، اشتباهات و برنامه تصمیم می‌گیرد.
-
+این مشاور بدون API پولی کار می‌کند و بر اساس داده‌های ثبت‌شده تصمیم می‌گیرد.
 </p>
 
-<div id="chat"></div>
+<div id="chat">
+
+${
+DATA.messages
+.slice(-15)
+.map(
+x=>`
+
+<div class="message user">
+${esc(x.q)}
+</div>
+
+<div class="message bot">
+${esc(x.a)}
+</div>
+
+`
+)
+.join("")
+||
+`
+<div class="message bot">
+${esc(getAdvice())}
+</div>
+`
+}
+
+</div>
+
 
 <div class="form">
 
@@ -1017,7 +1184,7 @@ placeholder="مثلاً امروز عقب افتادم، چه کار کنم؟">
 
 <button
 class="primary"
-onclick="askAdvisor()">
+onclick="askCoach()">
 
 مشاوره بده
 
@@ -1040,11 +1207,11 @@ onclick="askAdvisor()">
 درس بعدی
 </button>
 
-<button onclick="quickAsk('کدام درس من ضعیف‌تر است؟')">
-ضعف من
+<button onclick="quickAsk('کدام درس ضعیف‌تر است؟')">
+نقطه ضعف
 </button>
 
-<button onclick="quickAsk('امروز عقب افتادم چه کنم؟')">
+<button onclick="quickAsk('امروز عقب افتادم')">
 جبران
 </button>
 
@@ -1061,61 +1228,34 @@ onclick="askAdvisor()">
 }
 
 
-function renderCoach(){
-
-let messages=
-DATA.messages.slice(-15);
-
-
-$("chat").innerHTML=
-messages.length
-?
-messages.map(x=>`
-
-<div class="msg user">
-${escapeHTML(x.q)}
-</div>
-
-<div class="msg bot">
-${escapeHTML(x.a)}
-</div>
-
-`).join("")
-:
-`
-<div class="msg bot">
-${escapeHTML(advisor())}
-</div>
-`;
-
-}
-
-
 function quickAsk(q){
 
 $("question").value=q;
 
-askAdvisor();
+askCoach();
 
 }
 
 
-function askAdvisor(){
+function askCoach(){
 
 let q=
 $("question").value.trim();
 
-if(!q)return;
+if(!q)
+return;
 
 
 let answer=
-getAdvisorAnswer(q);
+coachAnswer(q);
 
 
 DATA.messages.push({
-date:today(),
+
 q,
-a:answer
+a:answer,
+date:today()
+
 });
 
 
@@ -1123,18 +1263,24 @@ save();
 
 $("question").value="";
 
-renderCoach();
+coachPage();
 
 }
 
 
-function getAdvisorAnswer(q){
+function coachAnswer(q){
 
-let pending=
-DATA.plans
-.filter(
-x=>x.date===today()&&!x.done
-);
+if(
+/ضعف|ضعیف|کدام درس|کدوم درس/
+.test(q)
+){
+
+let weak=
+weakSubject();
+
+return `بر اساس تست‌های ثبت‌شده، فعلاً ${weak.name} ضعیف‌ترین وضعیت را دارد. پیشنهاد من این است که یک جلسه مفهومی و سپس تست آموزشی برای آن بگذاری.`;
+
+}
 
 
 if(
@@ -1142,80 +1288,45 @@ if(
 .test(q)
 ){
 
-if(pending.length){
-
-return `برای جبران، همه جلسه‌ها را روی هم نریز. اول ${pending[0].subject} — ${pending[0].topic} را انجام بده و بعد جلسه بعدی را اجرا کن.`;
-
-}
-
-return "برای امروز برنامه‌ای عقب‌افتاده ثبت نشده. می‌توانی برنامه هوشمند را بازسازی کنی.";
+return getAdvice();
 
 }
 
 
 if(
-/ضعف|ضعیف|کدام درس|کدوم درس/
+/مرور/
 .test(q)
 ){
 
-let ranking=
-DATA.subjects.map(s=>{
+let n=
+DATA.mistakes
+.filter(x=>!x.reviewed)
+.length;
 
-let tests=
-DATA.tests.filter(
-x=>x.subject===s.name
+return n
+?
+`${fa(n)} اشتباه هنوز مرور نشده است. اول آن‌ها را بررسی کن.`
+:
+"دفتر اشتباهات فعلاً مورد باز ندارد.";
+
+}
+
+
+if(
+/امروز|بخوانم|درس بعد/
+.test(q)
+){
+
+let p=
+DATA.plans.find(
+x=>x.date===today()&&!x.done
 );
 
-let a=
-tests.length
+return p
 ?
-tests.reduce(
-(z,x)=>z+x.accuracy,
-0
-)/tests.length
+`جلسه بعدی تو ${p.subject} — ${p.topic} است.`
 :
-50;
-
-return {
-name:s.name,
-accuracy:a
-};
-
-})
-.sort((a,b)=>a.accuracy-b.accuracy);
-
-
-return `بر اساس داده‌های ثبت‌شده، اولویت فعلی برای تقویت: ${ranking[0].name} است.`;
-
-}
-
-
-if(
-/مرور|مرور کنم/
-.test(q)
-){
-
-let open=
-DATA.mistakes.filter(
-x=>!x.reviewed
-);
-
-
-return open.length
-?
-`${fa(open.length)} مورد در دفتر اشتباهات نیاز به مرور دارند. مرور آن‌ها را قبل از تست سنگین انجام بده.`
-:
-"فعلاً مورد بازی در دفتر اشتباهات نداری.";
-
-}
-
-
-if(
-/امروز|درس بعدی|بخوانم/
-.test(q)
-){
-
-return advisor();
+getAdvice();
 
 }
 
@@ -1225,267 +1336,23 @@ if(
 .test(q)
 ){
 
-return "اگر تمرکزت افت کرده، یک وقفه کوتاه داشته باش و سپس یک جلسه کوتاه و مشخص را شروع کن. کیفیت مطالعه را فدای ساعت بیشتر نکن.";
+return "اگر تمرکزت افت کرده، یک وقفه کوتاه داشته باش و بعد با یک جلسه مشخص و قابل اندازه‌گیری برگرد.";
 
 }
 
 
-return advisor();
+return getAdvice();
 
 }
 
 
-/* PLAN */
-
-function planPage(){
-
-return `
-
-<section class="card">
-
-<div class="head">
-
-<h2>
-📅 برنامه‌ریز تطبیقی
-</h2>
-
-<button
-class="primary"
-onclick="generatePlan()">
-
-ساخت برنامه هوشمند
-
-</button>
-
-</div>
-
-<p class="muted">
-برنامه بر اساس هدف روزانه، سطح دروس، مطالعه انجام‌شده و وضعیت تست‌ها ساخته می‌شود.
-</p>
-
-<div id="allPlans" class="list"></div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🔄 جبران عقب‌افتادگی
-</h3>
-
-<button
-onclick="recovery()">
-
-تحلیل عقب‌افتادگی
-</button>
-
-<div
-id="recoveryResult"
-class="msg bot">
-
-تحلیل نشده.
-
-</div>
-
-</section>
-
-`;
-
-}
-
-
-function renderPlan(){
-
-let plans=
-DATA.plans.filter(
-x=>x.date===today()
-);
-
-
-$("allPlans").innerHTML=
-plans.length
-?
-plans.map(planItem).join("")
-:
-"<p class='muted'>برنامه‌ای ساخته نشده.</p>";
-
-}
-
-
-function generatePlan(){
-
-if(!DATA.profile.name){
-
-openSettings();
-
-return;
-
-}
-
-
-DATA.plans=
-DATA.plans.filter(
-x=>x.date!==today()
-);
-
-
-let total=
-Math.max(
-120,
-DATA.profile.dailyHours*60
-);
-
-
-let used=0;
-
-let current=
-Math.max(
-8*60,
-new Date().getHours()*60+10
-);
-
-
-let subjects=
-[...DATA.subjects]
-.sort((a,b)=>a.level-b.level);
-
-
-let types=[
-
-["یادگیری","مطالعه مفهومی"],
-
-["تست","تست زمان‌دار"],
-
-["تحلیل","تحلیل تست"],
-
-["مرور","مرور فعال"],
-
-["تست","آزمونک"]
-
-];
-
-
-let i=0;
-
-
-while(
-used+45<=total &&
-i<20
-){
-
-let subject=
-subjects[i%subjects.length];
-
-
-let duration=
-i===0
-?
-90
-:
-60;
-
-
-if(
-used+duration>total
-){
-
-duration=total-used;
-
-}
-
-
-if(duration<45)break;
-
-
-let type=
-types[i%types.length];
-
-
-let h=
-Math.floor(current/60);
-
-let m=
-current%60;
-
-
-DATA.plans.push({
-
-id:crypto.randomUUID(),
-
-date:today(),
-
-start:
-String(h).padStart(2,"0")
-+
-":"+
-String(m).padStart(2,"0"),
-
-subject:subject.name,
-
-topic:type[1],
-
-duration,
-
-type:type[0],
-
-done:false
-
-});
-
-
-used+=duration;
-
-current+=duration+20;
-
-i++;
-
-}
-
-
-save();
-
-go(
-"home",
-document.querySelector("nav button")
-);
-
-}
-
-
-function recovery(){
-
-let p=
-DATA.plans
-.filter(
-x=>x.date===today()&&!x.done
-)
-.sort(
-(a,b)=>b.duration-a.duration
-);
-
-
-$("recoveryResult").textContent=
-p.length
-?
-"اولویت جبران: "+
-p.slice(
-0,
-Math.max(1,Math.ceil(p.length*.5))
-)
-.map(x=>x.subject+" — "+x.topic)
-.join("، ")
-:
-"عقب‌افتادگی ثبت‌شده‌ای وجود ندارد.";
-
-}
-
-
-/* STUDY */
+/* =========================
+   STUDY TIMER
+========================= */
 
 function studyPage(){
 
-return `
+$("app").innerHTML=`
 
 <section class="card">
 
@@ -1497,23 +1364,27 @@ return `
 
 <select id="studySubject">
 
-${DATA.subjects
-.map(x=>`<option>${x.name}</option>`)
-.join("")}
+${
+DATA.subjects
+.map(
+x=>`<option>${x.name}</option>`
+)
+.join("")
+}
 
 </select>
 
 <input
 id="studyTopic"
-placeholder="مبحث">
+placeholder="مبحث مطالعه">
 
 </div>
 
 
-<div id="timer"
+<div id="clock"
 class="clock">
 
-00:00:00
+${formatTime(TIMER.seconds)}
 
 </div>
 
@@ -1528,13 +1399,15 @@ onclick="startTimer()">
 
 </button>
 
-<button onclick="pauseTimer()">
+<button
+onclick="pauseTimer()">
 
 توقف
 
 </button>
 
-<button onclick="finishTimer()">
+<button
+onclick="finishTimer()">
 
 ثبت جلسه
 
@@ -1552,10 +1425,10 @@ onclick="startTimer()">
 </h3>
 
 <p class="muted">
-زمان پومودورو از تنظیمات قابل تغییر است.
+مدت فعلی:
+${fa(DATA.profile.pomodoro)}
+دقیقه
 </p>
-
-<div class="center">
 
 <button
 class="primary"
@@ -1564,8 +1437,6 @@ onclick="startPomodoro()">
 شروع پومودورو
 
 </button>
-
-</div>
 
 </section>
 
@@ -1576,7 +1447,43 @@ onclick="startPomodoro()">
 📚 جلسات امروز
 </h3>
 
-<div id="sessionsToday"></div>
+<div class="list">
+
+${
+DATA.sessions
+.filter(x=>x.date===today())
+.reverse()
+.map(
+x=>`
+
+<div class="item">
+
+<div class="grow">
+
+<b>
+${esc(x.subject)}
+</b>
+
+<div class="muted">
+${esc(x.topic)}
+</div>
+
+</div>
+
+<b>
+${fa(x.minutes)} دقیقه
+</b>
+
+</div>
+
+`
+)
+.join("")
+||
+'<p class="muted">جلسه‌ای ثبت نشده.</p>'
+}
+
+</div>
 
 </section>
 
@@ -1585,65 +1492,46 @@ onclick="startPomodoro()">
 }
 
 
-function renderStudy(){
+function formatTime(seconds){
 
-$("timer").textContent=
-formatTime(TIMER.seconds);
+let h=
+Math.floor(seconds/3600);
 
+let m=
+Math.floor(seconds/60)%60;
 
-let sessions=
-DATA.sessions.filter(
-x=>x.date===today()
-)
-.reverse();
+let s=
+seconds%60;
 
-
-$("sessionsToday").innerHTML=
-sessions.length
-?
-sessions.map(x=>`
-
-<div class="item">
-
-<div class="grow">
-
-<b>
-${escapeHTML(x.subject)}
-</b>
-
-<small>
-${escapeHTML(x.topic)}
- ·
-${fa(x.minutes)} دقیقه
-</small>
-
-</div>
-
-</div>
-
-`).join("")
-:
-"<p class='muted'>هنوز جلسه‌ای ثبت نشده.</p>";
+return[
+String(h).padStart(2,"0"),
+String(m).padStart(2,"0"),
+String(s).padStart(2,"0")
+].join(":");
 
 }
 
 
 function startTimer(){
 
-if(TIMER.running)return;
+if(TIMER.running)
+return;
 
 TIMER.running=true;
 
 TIMER.interval=
-setInterval(()=>{
+setInterval(
+()=>{
 
 TIMER.seconds++;
 
-if($("timer"))
-$("timer").textContent=
+if($("clock"))
+$("clock").textContent=
 formatTime(TIMER.seconds);
 
-},1000);
+},
+1000
+);
 
 }
 
@@ -1652,7 +1540,9 @@ function pauseTimer(){
 
 TIMER.running=false;
 
-clearInterval(TIMER.interval);
+clearInterval(
+TIMER.interval
+);
 
 }
 
@@ -1666,10 +1556,11 @@ Math.round(
 TIMER.seconds/60
 );
 
-
 if(minutes<1){
 
-alert("حداقل یک دقیقه مطالعه ثبت کن.");
+alert(
+"حداقل یک دقیقه مطالعه کن."
+);
 
 return;
 
@@ -1682,7 +1573,8 @@ date:today(),
 
 minutes,
 
-subject:$("studySubject").value,
+subject:
+$("studySubject").value,
 
 topic:
 $("studyTopic").value||
@@ -1697,7 +1589,8 @@ DATA.lastStudy!==today()
 
 DATA.streak++;
 
-DATA.lastStudy=today();
+DATA.lastStudy=
+today();
 
 }
 
@@ -1706,43 +1599,48 @@ TIMER.seconds=0;
 
 save();
 
-renderStudy();
+studyPage();
 
 }
 
 
 function startPomodoro(){
 
-let minutes=
-Number(DATA.profile.pomodoro)||50;
-
 TIMER.seconds=
-minutes*60;
+Number(
+DATA.profile.pomodoro
+)*60;
 
 startTimer();
 
 }
 
 
-/* TESTS */
+/* =========================
+   TEST SYSTEM
+========================= */
 
 function testsPage(){
 
-return `
+$("app").innerHTML=`
 
 <section class="card">
 
 <h2>
-📝 ثبت تست و آزمون
+📝 ثبت تست
 </h2>
 
 <div class="form">
 
 <select id="testSubject">
 
-${DATA.subjects
-.map(x=>`<option>${x.name}</option>`)
-.join("")}
+${
+DATA.subjects
+.map(
+x=>`<option>${x.name}</option>`
+)
+.join("")
+}
 
 </select>
 
@@ -1760,19 +1658,19 @@ placeholder="تعداد تست">
 id="testCorrect"
 type="number"
 min="0"
-placeholder="تعداد درست">
+placeholder="درست">
 
 <input
 id="testWrong"
 type="number"
 min="0"
-placeholder="تعداد غلط">
+placeholder="غلط">
 
 <input
 id="testBlank"
 type="number"
 min="0"
-placeholder="تعداد نزده">
+placeholder="نزده">
 
 <select id="testCause">
 
@@ -1801,10 +1699,52 @@ onclick="saveTest()">
 <section class="card">
 
 <h3>
-📋 آزمون‌های ثبت‌شده
+📋 نتایج تست
 </h3>
 
-<div id="testList"></div>
+<div class="list">
+
+${
+DATA.tests
+.slice(-25)
+.reverse()
+.map(
+x=>`
+
+<div class="item">
+
+<div class="grow">
+
+<b>
+${esc(x.subject)}
+</b>
+
+<div class="muted">
+${esc(x.topic)}
+ ·
+${fa(x.count)} تست
+ ·
+${fa(x.correct)} درست
+ ·
+${fa(x.wrong)} غلط
+</div>
+
+</div>
+
+<b>
+${fa(x.accuracy)}٪
+</b>
+
+</div>
+
+`
+)
+.join("")
+||
+'<p class="muted">هنوز نتیجه‌ای ثبت نشده.</p>'
+}
+
+</div>
 
 </section>
 
@@ -1815,33 +1755,55 @@ onclick="saveTest()">
 ❌ دفتر اشتباهات
 </h3>
 
-<div class="form">
+<div class="list">
 
-<select id="mistakeSubject">
+${
+DATA.mistakes
+.slice(-30)
+.reverse()
+.map(
+x=>{
 
-${DATA.subjects
-.map(x=>`<option>${x.name}</option>`)
-.join("")}
+let i=
+DATA.mistakes.indexOf(x);
 
-</select>
+return`
 
-<input
-id="mistakeTopic"
-placeholder="مبحث">
+<div class="item">
 
-<select id="mistakeReason">
+<div class="grow">
 
-<option>ضعف مفهومی</option>
-<option>بی‌دقتی</option>
-<option>محاسبات</option>
-<option>کمبود زمان</option>
-<option>فراموشی</option>
+<b>
+${esc(x.subject)}
+ —
+${esc(x.topic)}
+</b>
 
-</select>
+<div class="muted">
+${esc(x.reason)}
+ ·
+${x.reviewed?"مرور شده":"نیازمند مرور"}
+</div>
 
-<button onclick="addMistake()">
-ثبت اشتباه
+</div>
+
+<button
+onclick="reviewMistake(${i})">
+
+${x.reviewed?"✓":"مرور"}
+
 </button>
+
+</div>
+
+`;
+
+}
+)
+.join("")
+||
+'<p class="muted">دفتر اشتباهات خالی است.</p>'
+}
 
 </div>
 
@@ -1852,84 +1814,54 @@ placeholder="مبحث">
 }
 
 
-function renderTests(){
-
-$("testList").innerHTML=
-DATA.tests
-.slice(-20)
-.reverse()
-.map(x=>`
-
-<div class="item">
-
-<div class="grow">
-
-<b>
-${escapeHTML(x.subject)}
- ·
-${escapeHTML(x.topic||"آزمون")}
-</b>
-
-<small>
-
-${fa(x.count)} تست
- ·
-${fa(x.accuracy)}٪
- ·
-${x.date}
-
-</small>
-
-</div>
-
-</div>
-
-`)
-.join("")
-||
-"<p class='muted'>آزمونی ثبت نشده.</p>";
-
-}
-
-
 function saveTest(){
 
 let subject=
 $("testSubject").value;
 
 let topic=
-$("testTopic").value;
-
+$("testTopic").value||
+"نامشخص";
 
 let count=
-Number($("testCount").value)||0;
+Number(
+$("testCount").value
+)||0;
 
 let correct=
-Number($("testCorrect").value)||0;
+Number(
+$("testCorrect").value
+)||0;
 
 let wrong=
-Number($("testWrong").value)||0;
+Number(
+$("testWrong").value
+)||0;
 
 let blank=
-Number($("testBlank").value)||0;
+Number(
+$("testBlank").value
+)||0;
 
 
 if(count<1){
 
-alert("تعداد تست را وارد کن.");
+alert(
+"تعداد تست را وارد کن."
+);
 
 return;
 
 }
 
 
-let total=
-correct+wrong+blank;
+if(
+correct+wrong+blank>count
+){
 
-
-if(total>count){
-
-alert("جمع درست، غلط و نزده بیشتر از تعداد تست است.");
+alert(
+"جمع درست، غلط و نزده بیشتر از تعداد تست است."
+);
 
 return;
 
@@ -1938,7 +1870,7 @@ return;
 
 let accuracy=
 Math.round(
-(correct/count)*100
+correct/count*100
 );
 
 
@@ -1964,7 +1896,7 @@ accuracy
 
 
 if(
-accuracy<60 ||
+accuracy<60||
 wrong>correct
 ){
 
@@ -1974,512 +1906,25 @@ date:today(),
 
 subject,
 
-topic:topic||"آزمون",
+topic,
 
-cause:$("testCause").value,
-
-reviewed:false
-
-});
-
-}
-
-
-save();
-
-alert("نتیجه با موفقیت ثبت شد.");
-
-renderTests();
-
-}
-
-
-function addMistake(){
-
-DATA.mistakes.push({
-
-date:today(),
-
-subject:$("mistakeSubject").value,
-
-topic:
-$("mistakeTopic").value||
-"نامشخص",
-
-cause:
-$("mistakeReason").value,
+reason:
+$("testCause").value,
 
 reviewed:false
 
 });
 
-
-save();
-
-alert("اشتباه ثبت شد.");
-
 }
-
-
-/* ANALYTICS */
-
-function analyticsPage(){
-
-return `
-
-<section class="card">
-
-<h2>
-📊 تحلیل عملکرد
-</h2>
-
-<div id="overview" class="stats"></div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🎯 وضعیت دروس
-</h3>
-
-<div id="subjectAnalytics"></div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-📈 هفت روز اخیر
-</h3>
-
-<div id="weekly"></div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-⚠️ خطاهای پرتکرار
-</h3>
-
-<div id="errorAnalytics"></div>
-
-</section>
-
-`;
-
-}
-
-
-function renderAnalytics(){
-
-let total=
-totalMinutes();
-
-
-let tests=
-DATA.tests.reduce(
-(a,x)=>a+x.count,
-0
-);
-
-
-let acc=
-overallAccuracy();
-
-
-$("overview").innerHTML=`
-
-<div class="card stat">
-<b>${fa(total)}</b>
-<span class="muted">دقیقه مطالعه</span>
-</div>
-
-<div class="card stat">
-<b>${fa(tests)}</b>
-<span class="muted">تست</span>
-</div>
-
-<div class="card stat">
-<b>${acc===null?"—":fa(acc)+"٪"}</b>
-<span class="muted">دقت کل</span>
-</div>
-
-<div class="card stat">
-<b>${fa(DATA.streak)}</b>
-<span class="muted">استریک</span>
-</div>
-
-`;
-
-
-$("subjectAnalytics").innerHTML=
-DATA.subjects
-.map(s=>{
-
-let t=
-DATA.tests.filter(
-x=>x.subject===s.name
-);
-
-let a=
-t.length
-?
-Math.round(
-t.reduce(
-(z,x)=>z+x.accuracy,
-0
-)/t.length
-)
-:
-0;
-
-
-let m=
-DATA.sessions
-.filter(
-x=>x.subject===s.name
-)
-.reduce(
-(a,x)=>a+x.minutes,
-0
-);
-
-
-return `
-
-<div class="card">
-
-<div class="head">
-
-<b>${s.name}</b>
-
-<span>
-${a?fa(a)+"٪":"بدون داده"}
-</span>
-
-</div>
-
-<p class="muted">
-مطالعه: ${fa(m)} دقیقه
-</p>
-
-<div class="bar">
-<i style="width:${a}%"></i>
-</div>
-
-</div>
-
-`;
-
-})
-.join("");
-
-
-let days=[];
-
-
-for(let i=6;i>=0;i--){
-
-let d=new Date();
-
-d.setDate(
-d.getDate()-i
-);
-
-let key=
-d.toISOString()
-.slice(0,10);
-
-
-let minutes=
-DATA.sessions
-.filter(x=>x.date===key)
-.reduce(
-(a,x)=>a+x.minutes,
-0
-);
-
-
-days.push({
-
-key,
-minutes
-
-});
-
-}
-
-
-$("weekly").innerHTML=
-days.map(x=>`
-
-<div class="item">
-
-<div class="grow">
-
-<b>
-${x.key}
-</b>
-
-<small>
-مطالعه: ${fa(x.minutes)} دقیقه
-</small>
-
-</div>
-
-<div style="
-width:45%;
-">
-
-<div class="bar">
-
-<i style="
-width:${Math.min(100,
-x.minutes/
-Math.max(1,
-DATA.profile.dailyHours*60
-)*100)}%
-"></i>
-
-</div>
-
-</div>
-
-</div>
-
-`).join("");
-
-
-let errors={};
-
-
-DATA.mistakes.forEach(x=>{
-
-errors[x.cause]=
-(errors[x.cause]||0)+1;
-
-});
-
-
-$("errorAnalytics").innerHTML=
-Object.entries(errors)
-.sort((a,b)=>b[1]-a[1])
-.map(x=>
-
-`<span class="chip">
-${escapeHTML(x[0])}:
-${fa(x[1])}
-</span>`
-
-)
-.join("")
-||
-"<span class='muted'>داده‌ای ثبت نشده.</span>";
-
-}
-
-
-/* TOOLS */
-
-function toolsPage(){
-
-return `
-
-<section class="card">
-
-<h2>
-🧰 ابزارها
-</h2>
-
-<div class="grid">
-
-<button onclick="openSettings()">
-⚙️ تنظیمات
-</button>
-
-<button onclick="backup()">
-💾 پشتیبان
-</button>
-
-<button onclick="document.getElementById('restoreFile').click()">
-📥 بازیابی
-</button>
-
-<button onclick="newNote()">
-📒 یادداشت
-</button>
-
-<button onclick="showMistakes()">
-❌ اشتباهات
-</button>
-
-<button onclick="toggleDark()">
-🌙 حالت شب
-</button>
-
-<button onclick="installHelp()">
-📱 نصب روی iPad
-</button>
-
-</div>
-
-<input
-id="restoreFile"
-type="file"
-accept=".json"
-hidden
-onchange="restore(event)">
-
-</section>
-
-
-<section class="card">
-
-<h3>
-📒 یادداشت‌ها
-</h3>
-
-<div id="notes"></div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🔁 مرور
-</h3>
-
-<div id="mistakes"></div>
-
-</section>
-
-`;
-
-}
-
-
-function renderTools(){
-
-$("notes").innerHTML=
-DATA.notes
-.slice(-20)
-.reverse()
-.map(x=>`
-
-<div class="item">
-
-<div class="grow">
-
-<b>
-${escapeHTML(x.title)}
-</b>
-
-<small>
-${escapeHTML(x.text)}
- ·
-${x.date}
-</small>
-
-</div>
-
-</div>
-
-`)
-.join("")
-||
-"<p class='muted'>یادداشتی وجود ندارد.</p>";
-
-
-showMistakes();
-
-}
-
-
-function newNote(){
-
-let title=
-prompt("عنوان یادداشت؟");
-
-if(!title)return;
-
-let text=
-prompt("متن یادداشت؟");
-
-if(!text)return;
-
-
-DATA.notes.push({
-
-date:today(),
-
-title,
-
-text
-
-});
 
 
 save();
 
-renderTools();
+alert(
+"نتیجه ثبت شد."
+);
 
-}
-
-
-function showMistakes(){
-
-if(!$("mistakes"))return;
-
-
-$("mistakes").innerHTML=
-DATA.mistakes
-.slice(-30)
-.reverse()
-.map(x=>{
-
-let i=
-DATA.mistakes.indexOf(x);
-
-return `
-
-<div class="item">
-
-<div class="grow">
-
-<b>
-${escapeHTML(x.subject)}
- —
-${escapeHTML(x.topic)}
-</b>
-
-<small>
-${escapeHTML(x.cause)}
- ·
-${x.reviewed?"مرور شده":"نیازمند مرور"}
-</small>
-
-</div>
-
-<button onclick="reviewMistake(${i})">
-
-${x.reviewed?"✓":"مرور"}
-
-</button>
-
-</div>
-
-`;
-
-})
-.join("")
-||
-"<p class='muted'>دفتر اشتباهات خالی است.</p>";
+testsPage();
 
 }
 
@@ -2494,23 +1939,411 @@ DATA.reviews.push({
 
 date:today(),
 
-mistake:i
+index:i
 
 });
 
 }
 
-
 save();
 
-renderTools();
+testsPage();
 
 }
 
 
-/* SETTINGS */
+/* =========================
+   ANALYSIS
+========================= */
 
-function openSettings(){
+function analysisPage(){
+
+let total=
+totalMinutes();
+
+let tests=
+DATA.tests.reduce(
+(a,x)=>a+x.count,
+0
+);
+
+let accuracy=
+overallAccuracy();
+
+
+$("app").innerHTML=`
+
+<section class="card">
+
+<h2>
+📊 مرکز تحلیل
+</h2>
+
+<div class="stats">
+
+<div class="stat">
+<b>${fa(total)}</b>
+<span class="muted">دقیقه مطالعه</span>
+</div>
+
+<div class="stat">
+<b>${fa(tests)}</b>
+<span class="muted">تست</span>
+</div>
+
+<div class="stat">
+<b>
+${accuracy===null
+?
+"—"
+:
+fa(accuracy)+"٪"}
+</b>
+<span class="muted">دقت کل</span>
+</div>
+
+<div class="stat">
+<b>
+${fa(DATA.streak)}
+</b>
+<span class="muted">استریک</span>
+</div>
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+🎯 تحلیل درس‌ها
+</h3>
+
+<div class="list">
+
+${DATA.subjects
+.map(subject=>{
+
+let t=
+DATA.tests.filter(
+x=>x.subject===subject.name
+);
+
+let a=
+t.length
+?
+Math.round(
+t.reduce(
+(z,x)=>z+x.accuracy,
+0
+)/t.length
+)
+:
+0;
+
+let m=
+DATA.sessions
+.filter(
+x=>x.subject===subject.name
+)
+.reduce(
+(z,x)=>z+x.minutes,
+0
+);
+
+return`
+
+<div class="card">
+
+<div class="row">
+
+<b class="grow">
+${subject.name}
+</b>
+
+<b>
+${a?fa(a)+"٪":"بدون داده"}
+</b>
+
+</div>
+
+<div class="muted">
+${fa(m)} دقیقه مطالعه
+</div>
+
+<div class="bar">
+<i style="width:${a}%"></i>
+</div>
+
+</div>
+
+`;
+
+})
+.join("")}
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+📅 هفت روز اخیر
+</h3>
+
+<div class="list">
+
+${weeklyData()
+.map(
+x=>`
+
+<div class="item">
+
+<div class="grow">
+
+<b>
+${x.date}
+</b>
+
+<div class="muted">
+${fa(x.minutes)} دقیقه مطالعه
+</div>
+
+</div>
+
+<div style="width:40%">
+
+<div class="bar">
+
+<i style="
+width:${Math.min(
+100,
+x.minutes/
+Math.max(
+1,
+DATA.profile.dailyHours*60
+)*100
+)}%
+"></i>
+
+</div>
+
+</div>
+
+</div>
+
+`
+)
+.join("")}
+
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+⚠️ علت اشتباهات
+</h3>
+
+<div>
+
+${errorStats()
+.map(
+x=>
+
+`<span class="chip">
+${esc(x[0])}:
+${fa(x[1])}
+</span>`
+
+)
+.join("")
+||
+'<span class="muted">داده‌ای ثبت نشده.</span>'
+}
+
+</div>
+
+</section>
+
+`;
+
+}
+
+
+function weeklyData(){
+
+let result=[];
+
+for(
+let i=6;
+i>=0;
+i--
+){
+
+let d=
+new Date();
+
+d.setDate(
+d.getDate()-i
+);
+
+let date=
+d.toISOString()
+.slice(0,10);
+
+let minutes=
+DATA.sessions
+.filter(
+x=>x.date===date
+)
+.reduce(
+(a,x)=>a+x.minutes,
+0
+);
+
+result.push({
+date,
+minutes
+});
+
+}
+
+return result;
+
+}
+
+
+function errorStats(){
+
+let map={};
+
+DATA.mistakes.forEach(
+x=>{
+
+map[x.reason]=
+(map[x.reason]||0)+1;
+
+}
+);
+
+return Object.entries(map)
+.sort(
+(a,b)=>b[1]-a[1]
+);
+
+}
+
+
+/* =========================
+   MORE
+========================= */
+
+function morePage(){
+
+$("app").innerHTML=`
+
+<section class="card">
+
+<h2>
+🧰 ابزارهای کامل
+</h2>
+
+<div class="grid">
+
+<button onclick="settings()">
+⚙️ تنظیمات
+</button>
+
+<button onclick="backup()">
+💾 پشتیبان
+</button>
+
+<button onclick="$('restore').click()">
+📥 بازیابی
+</button>
+
+<button onclick="newNote()">
+📒 یادداشت
+</button>
+
+<button onclick="darkMode()">
+🌙 حالت شب
+</button>
+
+<button onclick="installGuide()">
+📱 نصب روی iPad
+</button>
+
+</div>
+
+<input
+id="restore"
+type="file"
+accept=".json"
+hidden
+onchange="restoreBackup(event)">
+
+</section>
+
+
+<section class="card">
+
+<h3>
+📒 دفتر یادداشت
+</h3>
+
+<div class="list">
+
+${
+DATA.notes
+.slice(-20)
+.reverse()
+.map(
+x=>`
+
+<div class="item">
+
+<div>
+
+<b>
+${esc(x.title)}
+</b>
+
+<div class="muted">
+${esc(x.text)}
+</div>
+
+</div>
+
+</div>
+
+`
+)
+.join("")
+||
+'<p class="muted">یادداشتی وجود ندارد.</p>'
+}
+
+</div>
+
+</section>
+
+`;
+
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+function settings(){
 
 $("app").innerHTML=`
 
@@ -2523,21 +2356,21 @@ $("app").innerHTML=`
 <div class="form">
 
 <input
-id="setName"
+id="name"
 placeholder="نام"
-value="${escapeHTML(DATA.profile.name)}">
+value="${esc(DATA.profile.name)}">
 
 <input
-id="setGoal"
-placeholder="هدف"
-value="${escapeHTML(DATA.profile.goal)}">
+id="goal"
+placeholder="هدف اصلی"
+value="${esc(DATA.profile.goal)}">
 
 <label>
 تاریخ آزمون
 </label>
 
 <input
-id="setExam"
+id="exam"
 type="date"
 value="${DATA.profile.examDate}">
 
@@ -2546,18 +2379,18 @@ value="${DATA.profile.examDate}">
 </label>
 
 <input
-id="setHours"
+id="hours"
 type="number"
 min="1"
 max="18"
 value="${DATA.profile.dailyHours}">
 
 <label>
-مدت پومودورو
+پومودورو
 </label>
 
 <input
-id="setPomodoro"
+id="pomodoro"
 type="number"
 min="15"
 max="120"
@@ -2567,17 +2400,13 @@ value="${DATA.profile.pomodoro}">
 class="primary"
 onclick="saveSettings()">
 
-ذخیره تنظیمات
+ذخیره
 
-</button>
-
-<button onclick="installHelp()">
-📱 راهنمای نصب
 </button>
 
 <button
-class="danger"
-onclick="resetAll()">
+class="red"
+onclick="resetData()">
 
 حذف تمام اطلاعات
 
@@ -2591,14 +2420,18 @@ onclick="resetAll()">
 <section class="card">
 
 <h3>
-📚 سطح دروس
+📚 سطح هر درس
 </h3>
 
 <p class="muted">
-۱ = خیلی ضعیف، ۵ = خیلی قوی
+۱ = خیلی ضعیف • ۵ = خیلی قوی
 </p>
 
-${DATA.subjects.map(s=>`
+<div class="list">
+
+${DATA.subjects
+.map(
+s=>`
 
 <div class="item">
 
@@ -2607,16 +2440,20 @@ ${DATA.subjects.map(s=>`
 </div>
 
 <input
-style="width:80px"
+style="width:75px"
 type="number"
 min="1"
 max="5"
 value="${s.level}"
-onchange="changeLevel('${s.id}',this.value)">
+onchange="setLevel('${s.id}',this.value)">
 
 </div>
 
-`).join("")}
+`
+)
+.join("")}
+
+</div>
 
 </section>
 
@@ -2629,36 +2466,42 @@ onchange="changeLevel('${s.id}',this.value)">
 function saveSettings(){
 
 DATA.profile.name=
-$("setName").value.trim();
+$("name").value.trim();
 
 DATA.profile.goal=
-$("setGoal").value.trim();
+$("goal").value.trim();
 
 DATA.profile.examDate=
-$("setExam").value;
+$("exam").value;
 
 DATA.profile.dailyHours=
-Number($("setHours").value)||8;
+Number(
+$("hours").value
+)||8;
 
 DATA.profile.pomodoro=
-Number($("setPomodoro").value)||50;
-
+Number(
+$("pomodoro").value
+)||50;
 
 save();
 
-generatePlan();
+page(
+"home",
+document.querySelector("nav button")
+);
 
 }
 
 
-function changeLevel(id,value){
+function setLevel(id,value){
 
 let s=
 DATA.subjects.find(
 x=>x.id===id
 );
 
-if(!s)return;
+if(s){
 
 s.level=
 Math.max(
@@ -2669,12 +2512,57 @@ Number(value)||3
 )
 );
 
+}
+
 save();
 
 }
 
 
-function toggleDark(){
+/* =========================
+   NOTES
+========================= */
+
+function newNote(){
+
+let title=
+prompt(
+"عنوان یادداشت:"
+);
+
+if(!title)
+return;
+
+let text=
+prompt(
+"متن یادداشت:"
+);
+
+if(!text)
+return;
+
+DATA.notes.push({
+
+date:today(),
+
+title,
+
+text
+
+});
+
+save();
+
+morePage();
+
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+function darkMode(){
 
 DATA.profile.dark=
 !DATA.profile.dark;
@@ -2689,20 +2577,9 @@ save();
 }
 
 
-function installHelp(){
-
-alert(
-"برای نصب روی iPad:\n\n"+
-"سایت را با Safari باز کن.\n"+
-"Share را بزن.\n"+
-"Add to Home Screen را انتخاب کن.\n"+
-"سپس Add را بزن."
-);
-
-}
-
-
-/* BACKUP */
+/* =========================
+   BACKUP
+========================= */
 
 function backup(){
 
@@ -2720,36 +2597,40 @@ type:"application/json"
 }
 );
 
+let url=
+URL.createObjectURL(blob);
 
 let a=
 document.createElement("a");
 
-a.href=
-URL.createObjectURL(blob);
+a.href=url;
 
 a.download=
 "StudyCoach-Ultimate-Backup.json";
 
 a.click();
 
-URL.revokeObjectURL(a.href);
+setTimeout(
+()=>URL.revokeObjectURL(url),
+1000
+);
 
 }
 
 
-function restore(event){
+function restoreBackup(event){
 
 let file=
 event.target.files[0];
 
-if(!file)return;
-
+if(!file)
+return;
 
 let reader=
 new FileReader();
 
-
-reader.onload=()=>{
+reader.onload=
+function(){
 
 try{
 
@@ -2758,16 +2639,11 @@ JSON.parse(
 reader.result
 );
 
-
 if(
-!imported.profile ||
+!imported.profile||
 !imported.subjects
-){
-
+)
 throw new Error();
-
-}
-
 
 DATA=imported;
 
@@ -2776,7 +2652,6 @@ save();
 location.reload();
 
 }
-
 catch(e){
 
 alert(
@@ -2787,20 +2662,41 @@ alert(
 
 };
 
-
 reader.readAsText(file);
 
 }
 
 
-function resetAll(){
+/* =========================
+   IPAD INSTALL
+========================= */
+
+function installGuide(){
+
+alert(
+"نصب روی iPad:\n\n"+
+"1. سایت را در Safari باز کن.\n"+
+"2. دکمه Share را بزن.\n"+
+"3. گزینه Add to Home Screen را انتخاب کن.\n"+
+"4. Add را بزن.\n\n"+
+"آیکون StudyCoach روی صفحه اصلی قرار می‌گیرد."
+);
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetData(){
 
 if(
 !confirm(
-"تمام اطلاعات برنامه حذف شود؟"
+"⚠️ تمام برنامه‌ها، تست‌ها، جلسات، یادداشت‌ها و تنظیمات حذف شوند؟"
 )
-)return;
-
+)
+return;
 
 localStorage.removeItem(KEY);
 
@@ -2809,16 +2705,19 @@ location.reload();
 }
 
 
-/* START */
+/* =========================
+   STARTUP
+========================= */
 
 if(DATA.profile.dark){
 
-document.body.classList.add("dark");
+document.body.classList.add(
+"dark"
+);
 
 }
 
-
-go(
+page(
 "home",
 document.querySelector("nav button")
 );
