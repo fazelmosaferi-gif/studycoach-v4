@@ -1,2367 +1,651 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080b16">
-<title>StudyCoach V5 Ultimate</title>
-<style>
-*{box-sizing:border-box}
-:root{
- --bg:#070b14;
- --panel:#101827;
- --panel2:#172235;
- --border:#29364f;
- --text:#f8fafc;
- --muted:#94a3b8;
- --primary:#7657ff;
- --primary2:#9d8cff;
- --green:#22c55e;
- --red:#ef4444;
- --orange:#f59e0b;
-}
-body{
- margin:0;
- background:
- radial-gradient(circle at 0 0,#241858,transparent 35%),
- radial-gradient(circle at 100% 100%,#12344a,transparent 35%),
- var(--bg);
- color:var(--text);
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
-}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.app{min-height:100vh}
-.sidebar{
- position:fixed;
- right:0;
- top:0;
- bottom:0;
- width:270px;
- background:#0a101d;
- border-left:1px solid var(--border);
- padding:22px;
- z-index:20;
-}
-.logo{
- font-size:25px;
- font-weight:900;
-}
-.logo span{color:var(--primary2)}
-.version{
- font-size:11px;
- color:var(--muted);
- margin:5px 0 25px;
-}
-.nav button{
- display:block;
- width:100%;
- border:0;
- background:transparent;
- color:var(--muted);
- padding:13px;
- border-radius:13px;
- margin:4px 0;
- text-align:right;
- transition:.2s;
-}
-.nav button:hover,
-.nav button.active{
- background:var(--panel2);
- color:white;
-}
-.main{
- margin-right:270px;
- padding:25px;
- min-height:100vh;
-}
-.mobilebar{
- display:none;
- justify-content:space-between;
- align-items:center;
- margin-bottom:15px;
-}
-.page{display:none}
-.page.active{display:block}
-.header{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px;
- margin-bottom:20px;
-}
-.title{
- font-size:30px;
- font-weight:900;
-}
-.subtitle{
- color:var(--muted);
- margin-top:5px;
-}
-.grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:15px;
-}
-.grid2{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:15px;
-}
-.card{
- background:rgba(16,24,39,.94);
- border:1px solid var(--border);
- border-radius:20px;
- padding:20px;
-}
-.stat{
- font-size:30px;
- font-weight:900;
- margin-top:10px;
-}
-.muted{color:var(--muted)}
-.btn{
- border:1px solid var(--border);
- background:var(--panel2);
- color:white;
- padding:11px 16px;
- border-radius:13px;
-}
-.btn.primary{
- border:0;
- background:linear-gradient(135deg,var(--primary),var(--primary2));
-}
-.btn.green{
- background:var(--green);
- border:0;
-}
-.btn.red{
- background:var(--red);
- border:0;
-}
-.actions{
- display:flex;
- flex-wrap:wrap;
- gap:8px;
-}
-input,textarea,select{
- width:100%;
- padding:13px;
- border-radius:13px;
- border:1px solid var(--border);
- background:#090f1c;
- color:white;
- outline:none;
-}
-textarea{
- min-height:120px;
- resize:vertical;
-}
-.form{margin-bottom:14px}
-label{
- display:block;
- margin-bottom:7px;
- color:#cbd5e1;
-}
-.progress{
- height:10px;
- border-radius:20px;
- overflow:hidden;
- background:#070b13;
-}
-.progress div{
- height:100%;
- width:0;
- background:linear-gradient(90deg,var(--primary),var(--primary2));
- transition:.4s;
-}
-.status{
- display:flex;
- align-items:center;
- gap:8px;
-}
-.dot{
- width:10px;
- height:10px;
- border-radius:50%;
- background:var(--red);
-}
-.dot.online{background:var(--green)}
-.chat{
- height:calc(100vh - 165px);
- display:flex;
- flex-direction:column;
-}
-.messages{
- flex:1;
- overflow:auto;
- padding:5px;
-}
-.message{
- max-width:88%;
- padding:14px 17px;
- border-radius:18px;
- line-height:1.9;
- white-space:pre-wrap;
- margin-bottom:12px;
-}
-.message.user{
- background:linear-gradient(135deg,#513de0,#765cff);
- margin-right:auto;
-}
-.message.ai{
- background:#151f32;
- border:1px solid var(--border);
- margin-left:auto;
-}
-.chatbar{
- display:flex;
- gap:10px;
- padding-top:10px;
-}
-.chatbar textarea{
- min-height:65px;
-}
-.item{
- padding:15px;
- border:1px solid var(--border);
- border-radius:15px;
- margin-bottom:10px;
-}
-.badge{
- padding:5px 10px;
- border-radius:20px;
- background:#202b42;
- font-size:12px;
-}
-.badge.green{
- background:#12351f;
- color:#4ade80;
-}
-.badge.red{
- background:#36181b;
- color:#f87171;
-}
-.tablewrap{overflow:auto}
-table{
- width:100%;
- border-collapse:collapse;
-}
-th,td{
- padding:12px;
- border-bottom:1px solid var(--border);
- text-align:right;
- white-space:nowrap;
-}
-.timer{
- text-align:center;
- font-size:70px;
- font-weight:900;
-}
-.plan{
- white-space:pre-wrap;
- line-height:2;
-}
-.modal{
- display:none;
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.78);
- z-index:100;
- align-items:center;
- justify-content:center;
- padding:20px;
-}
-.modalbox{
- width:min(650px,100%);
- max-height:90vh;
- overflow:auto;
- background:var(--panel);
- border:1px solid var(--border);
- border-radius:22px;
- padding:22px;
-}
-.close{
- float:left;
- border:0;
- background:none;
- color:white;
- font-size:28px;
-}
-.toast{
- display:none;
- position:fixed;
- left:20px;
- bottom:20px;
- z-index:200;
- padding:14px 18px;
- background:#19243a;
- border:1px solid var(--border);
- border-radius:14px;
-}
-.notice{
- padding:14px;
- border:1px solid var(--border);
- border-radius:14px;
- margin:10px 0;
- background:#0c1423;
-}
-@media(max-width:900px){
- .sidebar{
-  transform:translateX(100%);
-  transition:.25s;
- }
- .sidebar.open{
-  transform:translateX(0);
- }
- .main{
-  margin-right:0;
-  padding:15px;
- }
- .mobilebar{
-  display:flex;
- }
- .grid{
-  grid-template-columns:repeat(2,1fr);
- }
- .grid2{
-  grid-template-columns:1fr;
- }
-}
-@media(max-width:600px){
- .title{
-  font-size:24px;
- }
- .timer{
-  font-size:48px;
- }
- .message{
-  max-width:95%;
- }
-}
-</style>
-</head>
-<body>
-<aside class="sidebar" id="sidebar">
-<div class="logo">
-Study<span>Coach</span>
-</div>
-<div class="version">
-V5 Ultimate • TeamoRouter AI
-</div>
-<nav class="nav">
-<button class="active" onclick="showPage('dashboard',this)">
-🏠 داشبورد
-</button>
-<button onclick="showPage('ai',this)">
-🤖 مشاور AI
-</button>
-<button onclick="showPage('planner',this)">
-📅 برنامه‌ریز AI
-</button>
-<button onclick="showPage('subjects',this)">
-📚 دروس
-</button>
-<button onclick="showPage('tests',this)">
-📝 آزمون‌ها
-</button>
-<button onclick="showPage('analytics',this)">
-📊 تحلیل
-</button>
-<button onclick="showPage('timer',this)">
-⏱️ مطالعه
-</button>
-<button onclick="showPage('goals',this)">
-🎯 اهداف
-</button>
-<button onclick="showPage('settings',this)">
-⚙️ تنظیمات
-</button>
-</nav>
-</aside>
-<main class="main">
-<div class="mobilebar">
-<button class="btn" onclick="toggleMenu()">☰</button>
-<strong>StudyCoach V5</strong>
-</div>
-<!-- DASHBOARD -->
-<section class="page active" id="dashboard">
-<div class="header">
-<div>
-<div class="title">
-داشبورد
-</div>
-<div class="subtitle">
-مرکز کنترل مطالعه و کنکور
-</div>
-</div>
-<div class="status">
-<span class="dot" id="dashDot"></span>
-<span id="dashStatus">
-AI آفلاین
-</span>
-</div>
-</div>
-<div class="grid">
-<div class="card">
-<div class="muted">
-مطالعه امروز
-</div>
-<div class="stat" id="todayStudy">
-0
-</div>
-<div class="muted">
-ساعت
-</div>
-</div>
-<div class="card">
-<div class="muted">
-آزمون امروز
-</div>
-<div class="stat" id="todayTests">
-0
-</div>
-</div>
-<div class="card">
-<div class="muted">
-میانگین درصد
-</div>
-<div class="stat" id="avgScore">
-0%
-</div>
-</div>
-<div class="card">
-<div class="muted">
-کل مطالعه
-</div>
-<div class="stat" id="allStudy">
-0
-</div>
-<div class="muted">
-ساعت
-</div>
-</div>
-</div>
-<br>
-<div class="grid2">
-<div class="card">
-<h3>
-🎯 هدف مطالعه امروز
-</h3>
-<div class="progress">
-<div id="progress"></div>
-</div>
-<p class="muted" id="progressText">
-0%
-</p>
-<div class="actions">
-<button class="btn primary"
-onclick="openModal('studyModal')">
-➕ ثبت مطالعه
-</button>
-<button class="btn"
-onclick="showPage('timer')">
-⏱️ تایمر
-</button>
-</div>
-</div>
-<div class="card">
-<h3>
-🧠 توصیه سریع AI
-</h3>
-<div id="quickAdvice" class="muted">
-برای دریافت تحلیل فوری کلیک کن.
-</div>
-<br>
-<button class="btn primary"
-onclick="quickAdvice()">
-🤖 تحلیل فوری
-</button>
-</div>
-</div>
-</section>
-<!-- AI -->
-<section class="page" id="ai">
-<div class="header">
-<div>
-<div class="title">
-🤖 مشاور خصوصی AI
-</div>
-<div class="subtitle">
-TeamoRouter • مشاور StudyCoach
-</div>
-</div>
-<div class="status">
-<span class="dot" id="aiDot"></span>
-<span id="aiStatus">
-آفلاین
-</span>
-</div>
-</div>
-<div class="card chat">
-<div class="messages" id="messages">
-<div class="message ai">
-سلام 👋
-من مشاور هوش مصنوعی StudyCoach هستم.
-می‌توانم با توجه به اطلاعات مطالعه و آزمون‌هایت:
-• برنامه روزانه بسازم
-• نقاط ضعف را پیدا کنم
-• عملکرد آزمون را تحلیل کنم
-• زمان مرور را پیشنهاد کنم
-• برای تست‌زنی برنامه بدهم
-• وضعیت پیشرفتت را بررسی کنم
-سؤالت را بپرس.
-</div>
-</div>
-<div class="chatbar">
-<textarea
-id="chatInput"
-placeholder="مثلاً: برای فردا چه برنامه‌ای داشته باشم؟"
-onkeydown="chatKey(event)"
-></textarea>
-<button
-class="btn primary"
-onclick="sendChat()">
-ارسال
-</button>
-</div>
-</div>
-</section>
-<!-- PLANNER -->
-<section class="page" id="planner">
-<div class="header">
-<div>
-<div class="title">
-📅 برنامه‌ریز هوشمند
-</div>
-<div class="subtitle">
-ساخت برنامه شخصی با AI
-</div>
-</div>
-<button
-class="btn primary"
-onclick="generatePlan()">
-🤖 ساخت برنامه
-</button>
-</div>
-<div class="grid2">
-<div class="card">
-<div class="form">
-<label>
-شروع مطالعه
-</label>
-<input
-id="wake"
-type="time"
-value="05:00">
-</div>
-<div class="form">
-<label>
-پایان مطالعه
-</label>
-<input
-id="sleep"
-type="time"
-value="00:00">
-</div>
-<div class="form">
-<label>
-هدف مطالعه روزانه
-</label>
-<input
-id="hours"
-type="number"
-value="10"
-min="1"
-max="20">
-</div>
-<div class="form">
-<label>
-تمرکز اصلی
-</label>
-<select id="focus">
-<option>زیست‌شناسی</option>
-<option>شیمی</option>
-<option>فیزیک</option>
-<option>ریاضی</option>
-<option>مرور</option>
-<option>جمع‌بندی</option>
-</select>
-</div>
-</div>
-<div class="card">
-<h3>
-برنامه پیشنهادی
-</h3>
-<div
-id="planOutput"
-class="plan muted">
-هنوز برنامه‌ای ساخته نشده.
-</div>
-</div>
-</div>
-</section>
-<!-- SUBJECTS -->
-<section class="page" id="subjects">
-<div class="header">
-<div>
-<div class="title">
-📚 دروس
-</div>
-<div class="subtitle">
-مدیریت سطح دروس
-</div>
-</div>
-<button
-class="btn primary"
-onclick="openModal('subjectModal')">
-➕ افزودن درس
-</button>
-</div>
-<div
-class="card"
-id="subjectsList">
-</div>
-</section>
-<!-- TESTS -->
-<section class="page" id="tests">
-<div class="header">
-<div>
-<div class="title">
-📝 آزمون‌ها
-</div>
-<div class="subtitle">
-ثبت و بررسی نتایج
-</div>
-</div>
-<button
-class="btn primary"
-onclick="openModal('testModal')">
-➕ ثبت آزمون
-</button>
-</div>
-<div class="card tablewrap">
-<table>
-<thead>
-<tr>
-<th>درس</th>
-<th>کل</th>
-<th>صحیح</th>
-<th>غلط</th>
-<th>نزده</th>
-<th>درصد</th>
-<th>تاریخ</th>
-</tr>
-</thead>
-<tbody id="testsTable"></tbody>
-</table>
-</div>
-</section>
-<!-- ANALYTICS -->
-<section class="page" id="analytics">
-<div class="header">
-<div>
-<div class="title">
-📊 تحلیل عملکرد
-</div>
-<div class="subtitle">
-تحلیل آماری + هوش مصنوعی
-</div>
-</div>
-<button
-class="btn primary"
-onclick="analyzeAI()">
-🤖 تحلیل AI
-</button>
-</div>
-<div class="grid">
-<div class="card">
-<div class="muted">
-تعداد آزمون
-</div>
-<div class="stat"
-id="totalTests">
-0
-</div>
-</div>
-<div class="card">
-<div class="muted">
-میانگین
-</div>
-<div class="stat"
-id="analysisAvg">
-0%
-</div>
-</div>
-<div class="card">
-<div class="muted">
-بهترین
-</div>
-<div class="stat"
-id="best">
-0%
-</div>
-</div>
-<div class="card">
-<div class="muted">
-مطالعه
-</div>
-<div class="stat"
-id="analysisStudy">
-0
-</div>
-</div>
-</div>
-<br>
-<div class="card">
-<h3>
-🧠 گزارش AI
-</h3>
-<div
-id="analysisOutput"
-class="plan muted">
-هنوز تحلیلی ساخته نشده.
-</div>
-</div>
-</section>
-<!-- TIMER -->
-<section class="page" id="timer">
-<div class="header">
-<div>
-<div class="title">
-⏱️ تایمر مطالعه
-</div>
-<div class="subtitle">
-Focus Timer
-</div>
-</div>
-</div>
-<div class="card">
-<div
-class="timer"
-id="timerDisplay">
-50:00
-</div>
-<br>
-<div
-class="actions"
-style="justify-content:center">
-<button
-class="btn primary"
-onclick="startTimer()">
-شروع
-</button>
-<button
-class="btn"
-onclick="pauseTimer()">
-توقف
-</button>
-<button
-class="btn red"
-onclick="resetTimer()">
-ریست
-</button>
-</div>
-<br>
-<label>
-مدت جلسه — دقیقه
-</label>
-<input
-id="timerMinutes"
-type="number"
-value="50"
-min="1">
-</div>
-</section>
-<!-- GOALS -->
-<section class="page" id="goals">
-<div class="header">
-<div>
-<div class="title">
-🎯 اهداف
-</div>
-<div class="subtitle">
-اهداف تحصیلی
-</div>
-</div>
-<button
-class="btn primary"
-onclick="openModal('goalModal')">
-➕ هدف جدید
-</button>
-</div>
-<div
-class="card"
-id="goalsList">
-</div>
-</section>
-<!-- SETTINGS -->
-<section class="page" id="settings">
-<div class="header">
-<div>
-<div class="title">
-⚙️ تنظیمات
-</div>
-<div class="subtitle">
-TeamoRouter AI
-</div>
-</div>
-</div>
-<div class="grid2">
-<div class="card">
-<h3>
-🤖 اتصال هوش مصنوعی
-</h3>
-<div class="notice">
-<strong>
-TeamoRouter
-</strong>
-<br>
-Base URL و مدل از قبل تنظیم شده‌اند.
-</div>
-<div class="form">
-<label>
-API Key
-</label>
-<input
-id="apiKey"
-type="password"
-placeholder="کلید TeamoRouter را اینجا وارد کن">
-</div>
-<div class="form">
-<label>
-Base URL
-</label>
-<input
-id="apiBase"
-value="https://api.teamorouter.com/v1"
-readonly>
-</div>
-<div class="form">
-<label>
-Model
-</label>
-<input
-id="apiModel"
-value="deepseek-v4-pro-free"
-readonly>
-</div>
-<div class="actions">
-<button
-class="btn primary"
-onclick="saveAPI()">
-💾 ذخیره API Key
-</button>
-<button
-class="btn"
-onclick="testConnection()">
-🔌 تست اتصال
-</button>
-</div>
-<br>
-<div class="status">
-<span
-class="dot"
-id="settingsDot">
-</span>
-<span
-id="settingsStatus">
-API تنظیم نشده
-</span>
-</div>
-</div>
-<div class="card">
-<h3>
-💾 مدیریت اطلاعات
-</h3>
-<p class="muted">
-اطلاعات مطالعه، آزمون‌ها و اهداف در مرورگر ذخیره می‌شوند.
-</p>
-<div class="actions">
-<button
-class="btn"
-onclick="exportData()">
-📤 خروجی
-</button>
-<label class="btn">
-📥 ورود
-<input
-type="file"
-accept=".json"
-style="display:none"
-onchange="importData(event)">
-</label>
-<button
-class="btn red"
-onclick="clearData()">
-🗑️ پاک کردن
-</button>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- STUDY MODAL -->
-<div
-class="modal"
-id="studyModal">
-<div class="modalbox">
-<button
-class="close"
-onclick="closeModal('studyModal')">
-×
-</button>
-<h2>
-➕ ثبت مطالعه
-</h2>
-<label>
-درس
-</label>
-<select id="studySubject">
-<option>زیست‌شناسی</option>
-<option>شیمی</option>
-<option>فیزیک</option>
-<option>ریاضی</option>
-<option>دینی</option>
-<option>فارسی</option>
-<option>زبان</option>
-</select>
-<br><br>
-<label>
-دقیقه
-</label>
-<input
-id="studyMinutes"
-type="number"
-value="60"
-min="1">
-<br><br>
-<label>
-نوع فعالیت
-</label>
-<select id="studyType">
-<option>مطالعه</option>
-<option>تست</option>
-<option>مرور</option>
-<option>جمع‌بندی</option>
-</select>
-<br><br>
-<button
-class="btn primary"
-onclick="saveStudy()">
-ثبت
-</button>
-</div>
-</div>
-<!-- TEST MODAL -->
-<div
-class="modal"
-id="testModal">
-<div class="modalbox">
-<button
-class="close"
-onclick="closeModal('testModal')">
-×
-</button>
-<h2>
-📝 ثبت آزمون
-</h2>
-<label>
-درس
-</label>
-<select id="testSubject">
-<option>زیست‌شناسی</option>
-<option>شیمی</option>
-<option>فیزیک</option>
-<option>ریاضی</option>
-</select>
-<br><br>
-<label>
-کل سوال
-</label>
-<input
-id="testTotal"
-type="number"
-value="20"
-min="1">
-<br><br>
-<label>
-صحیح
-</label>
-<input
-id="testCorrect"
-type="number"
-value="15"
-min="0">
-<br><br>
-<label>
-غلط
-</label>
-<input
-id="testWrong"
-type="number"
-value="3"
-min="0">
-<br><br>
-<label>
-نزده
-</label>
-<input
-id="testBlank"
-type="number"
-value="2"
-min="0">
-<br><br>
-<button
-class="btn primary"
-onclick="saveTest()">
-ثبت آزمون
-</button>
-</div>
-</div>
-<!-- SUBJECT MODAL -->
-<div
-class="modal"
-id="subjectModal">
-<div class="modalbox">
-<button
-class="close"
-onclick="closeModal('subjectModal')">
-×
-</button>
-<h2>
-📚 افزودن درس
-</h2>
-<label>
-نام درس
-</label>
-<input id="subjectName">
-<br><br>
-<label>
-سطح
-</label>
-<select id="subjectLevel">
-<option>ضعیف</option>
-<option>متوسط</option>
-<option>خوب</option>
-<option>عالی</option>
-</select>
-<br><br>
-<button
-class="btn primary"
-onclick="saveSubject()">
-ثبت
-</button>
-</div>
-</div>
-<!-- GOAL MODAL -->
-<div
-class="modal"
-id="goalModal">
-<div class="modalbox">
-<button
-class="close"
-onclick="closeModal('goalModal')">
-×
-</button>
-<h2>
-🎯 هدف جدید
-</h2>
-<label>
-هدف
-</label>
-<input id="goalText">
-<br><br>
-<label>
-توضیح
-</label>
-<textarea id="goalDescription"></textarea>
-<br>
-<button
-class="btn primary"
-onclick="saveGoal()">
-ثبت
-</button>
-</div>
-</div>
-<div
-class="toast"
-id="toast">
-</div>
 <script>
 /* =====================================================
    STUDYCOACH V5
-   TEAMOROUTER CONFIG
-===================================================== */
+   GEMINI FREE AI
+   ===================================================== */
 /*
-========================================================
-فقط اگر می‌خواهی API Key را مستقیماً داخل کد قرار دهی،
-این مقدار را وارد کن.
-مثال:
-const BUILT_IN_API_KEY = "sk-xxxxxxxx";
-اما توصیه می‌شود API Key را در Settings وارد کنی.
-========================================================
-*/
-const BUILT_IN_API_KEY = "sk-teamo-a4b959bf63cd5d08111242ead3aa6b1df3fd17cd2535ace4";
+ * فقط همین قسمت را تنظیم کن.
+ *
+ * API Key را می‌توانی از Google AI Studio بگیری.
+ *
+ * توصیه:
+ * API Key را داخل GitHub قرار نده.
+ */
+const GEMINI_API_KEY = "";
 /*
-========================================================
-TEAMOROUTER
-========================================================
-*/
-const AI_BASE =
-"https://api.teamorouter.com/v1";
-const AI_MODEL =
-"deepseek-v4-pro-free";
-/*
-========================================================
-DATABASE
-========================================================
-*/
-const STORAGE =
-"studycoach-v5-data";
-let db = {
- studies:[],
- tests:[],
- subjects:[
-  {
-   name:"زیست‌شناسی",
-   level:"متوسط"
-  },
-  {
-   name:"شیمی",
-   level:"ضعیف"
-  },
-  {
-   name:"فیزیک",
-   level:"متوسط"
-  },
-  {
-   name:"ریاضی",
-   level:"متوسط"
-  }
- ],
- goals:[]
-};
-let timerSeconds=3000;
-let timerInterval=null;
-/*
-========================================================
-LOAD
-========================================================
-*/
-function load(){
- const saved =
- localStorage.getItem(STORAGE);
- if(saved){
-  try{
-   const parsed =
-   JSON.parse(saved);
-   db={
-    ...db,
-    ...parsed
-   };
-  }catch(e){
-   console.error(e);
-  }
- }
- const key =
- localStorage.getItem("SC_TEAMO_KEY");
- if(key){
-  document.getElementById("apiKey")
-  .value=key;
- }
- renderAll();
-}
-/*
-========================================================
-SAVE
-========================================================
-*/
-function save(){
- localStorage.setItem(
-  STORAGE,
-  JSON.stringify(db)
- );
-}
-/*
-========================================================
-NAVIGATION
-========================================================
-*/
-function showPage(id,btn){
- document.querySelectorAll(".page")
- .forEach(x=>
-  x.classList.remove("active")
- );
- const target =
- document.getElementById(id);
- if(target)
- target.classList.add("active");
- document.querySelectorAll(".nav button")
- .forEach(x=>
-  x.classList.remove("active")
- );
- if(btn)
- btn.classList.add("active");
- document.getElementById("sidebar")
- .classList.remove("open");
- renderAll();
-}
-function toggleMenu(){
- document.getElementById("sidebar")
- .classList.toggle("open");
-}
-/*
-========================================================
-MODALS
-========================================================
-*/
-function openModal(id){
- document.getElementById(id)
- .style.display="flex";
-}
-function closeModal(id){
- document.getElementById(id)
- .style.display="none";
-}
-/*
-========================================================
-TOAST
-========================================================
-*/
-function toast(text){
- const el =
- document.getElementById("toast");
- el.textContent=text;
- el.style.display="block";
- setTimeout(
-  ()=>{
-   el.style.display="none";
-  },
-  2500
- );
-}
-/*
-========================================================
-STUDY
-========================================================
-*/
-function saveStudy(){
- const minutes =
- Number(
-  document.getElementById(
-   "studyMinutes"
-  ).value
- );
- if(!minutes || minutes<=0){
-  toast("مدت مطالعه معتبر نیست");
-  return;
- }
- db.studies.push({
-  id:Date.now(),
-  subject:
-  document.getElementById(
-   "studySubject"
-  ).value,
-  minutes,
-  type:
-  document.getElementById(
-   "studyType"
-  ).value,
-  date:new Date().toISOString()
- });
- save();
- closeModal("studyModal");
- renderAll();
- toast("مطالعه ثبت شد ✅");
-}
-/*
-========================================================
-TEST
-========================================================
-*/
-function saveTest(){
- const total =
- Number(
-  document.getElementById(
-   "testTotal"
-  ).value
- );
- const correct =
- Number(
-  document.getElementById(
-   "testCorrect"
-  ).value
- );
- const wrong =
- Number(
-  document.getElementById(
-   "testWrong"
-  ).value
- );
- const blank =
- Number(
-  document.getElementById(
-   "testBlank"
-  ).value
- );
- if(total<=0){
-  toast("تعداد سوال معتبر نیست");
-  return;
- }
- if(correct+wrong+blank>total){
-  toast("مجموع پاسخ‌ها از کل سوال بیشتر است");
-  return;
- }
- const score =
- ((correct-(wrong/3))/total)*100;
- db.tests.push({
-  id:Date.now(),
-  subject:
-  document.getElementById(
-   "testSubject"
-  ).value,
-  total,
-  correct,
-  wrong,
-  blank,
-  score:
-  Number(
-   score.toFixed(2)
-  ),
-  date:new Date().toISOString()
- });
- save();
- closeModal("testModal");
- renderAll();
- toast("آزمون ثبت شد ✅");
-}
-/*
-========================================================
-SUBJECT
-========================================================
-*/
-function saveSubject(){
- const name =
- document.getElementById(
-  "subjectName"
- ).value.trim();
- if(!name){
-  toast("نام درس را وارد کن");
-  return;
- }
- db.subjects.push({
-  name,
-  level:
-  document.getElementById(
-   "subjectLevel"
-  ).value
- });
- save();
- closeModal("subjectModal");
- renderAll();
- toast("درس اضافه شد");
-}
-/*
-========================================================
-GOALS
-========================================================
-*/
-function saveGoal(){
- const text =
- document.getElementById(
-  "goalText"
- ).value.trim();
- if(!text){
-  toast("هدف را وارد کن");
-  return;
- }
- db.goals.push({
-  id:Date.now(),
-  text,
-  description:
-  document.getElementById(
-   "goalDescription"
-  ).value,
-  done:false,
-  date:new Date().toISOString()
- });
- save();
- closeModal("goalModal");
- renderAll();
- toast("هدف ثبت شد 🎯");
-}
-function toggleGoal(id){
- const goal =
- db.goals.find(
-  x=>x.id===id
- );
- if(!goal)return;
- goal.done =
- !goal.done;
- save();
- renderGoals();
-}
-/*
-========================================================
-DASHBOARD
-========================================================
-*/
-function today(arr){
- const d =
- new Date().toDateString();
- return arr.filter(
-  x=>
-  new Date(x.date)
-  .toDateString()===d
- );
-}
-function renderDashboard(){
- const studies =
- today(db.studies);
- const tests =
- today(db.tests);
- const minutes =
- studies.reduce(
-  (a,b)=>a+b.minutes,
-  0
- );
- const total =
- db.studies.reduce(
-  (a,b)=>a+b.minutes,
-  0
- );
- const avg =
- db.tests.length
- ?
- db.tests.reduce(
-  (a,b)=>a+b.score,
-  0
- )/db.tests.length
- :
- 0;
- document.getElementById(
-  "todayStudy"
- ).textContent =
- (minutes/60).toFixed(1);
- document.getElementById(
-  "todayTests"
- ).textContent =
- tests.length;
- document.getElementById(
-  "avgScore"
- ).textContent =
- Math.round(avg)+"%";
- document.getElementById(
-  "allStudy"
- ).textContent =
- (total/60).toFixed(1);
- const goalHours=8;
- const percent =
- Math.min(
-  100,
-  ((minutes/60)/goalHours)*100
- );
- document.getElementById(
-  "progress"
- ).style.width =
- percent+"%";
- document.getElementById(
-  "progressText"
- ).textContent =
- Math.round(percent)+"٪ از هدف روزانه";
-}
-/*
-========================================================
-SUBJECTS
-========================================================
-*/
-function renderSubjects(){
- const el =
- document.getElementById(
-  "subjectsList"
- );
- if(!db.subjects.length){
-  el.innerHTML=
-  '<div class="muted">درسی ثبت نشده.</div>';
-  return;
- }
- el.innerHTML =
- db.subjects.map(
-  s=>`
-  <div class="item">
-   <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-   ">
-    <strong>
-     ${esc(s.name)}
-    </strong>
-    <span class="badge ${
-     s.level==="ضعیف"
-     ?"red"
-     :
-     s.level==="عالی"
-     ?"green"
-     :""
-    }">
-     ${esc(s.level)}
-    </span>
-   </div>
-  </div>
- `
- ).join("");
-}
-/*
-========================================================
-TESTS
-========================================================
-*/
-function renderTests(){
- const table =
- document.getElementById(
-  "testsTable"
- );
- if(!db.tests.length){
-  table.innerHTML=`
-  <tr>
-   <td
-    colspan="7"
-    style="text-align:center">
-    آزمونی ثبت نشده.
-   </td>
-  </tr>
-  `;
-  return;
- }
- table.innerHTML =
- db.tests
- .slice()
- .reverse()
- .map(
-  t=>`
-  <tr>
-   <td>
-    ${esc(t.subject)}
-   </td>
-   <td>
-    ${t.total}
-   </td>
-   <td>
-    ${t.correct}
-   </td>
-   <td>
-    ${t.wrong}
-   </td>
-   <td>
-    ${t.blank}
-   </td>
-   <td>
-    <span class="badge ${
-     t.score>=50
-     ?"green"
-     :"red"
-    }">
-     ${t.score}%
-    </span>
-   </td>
-   <td>
-    ${
-     new Date(t.date)
-     .toLocaleDateString("fa-IR")
+ * مدل Gemini
+ *
+ * Gemini 3 Flash دارای Free Tier در Gemini API است.
+ */
+const GEMINI_MODEL = "gemini-3-flash-preview";
+const GEMINI_URL =
+"https://generativelanguage.googleapis.com/v1beta/models/"
++
+GEMINI_MODEL
++
+":generateContent?key=";
+/* =====================================================
+   GET API KEY
+   ===================================================== */
+function getGeminiKey(){
+    /*
+     * اول کلید ذخیره‌شده در مرورگر
+     */
+    const saved =
+        localStorage.getItem("STUDYCOACH_GEMINI_KEY");
+    if(saved && saved.trim()){
+        return saved.trim();
     }
-   </td>
-  </tr>
- `
- )
- .join("");
+    /*
+     * اگر کلید ذخیره نشده بود،
+     * مقدار داخل کد را بررسی می‌کنیم.
+     */
+    return GEMINI_API_KEY.trim();
 }
-/*
-========================================================
-ANALYTICS
-========================================================
-*/
-function renderAnalytics(){
- const count =
- db.tests.length;
- const avg =
- count
- ?
- db.tests.reduce(
-  (a,b)=>a+b.score,
-  0
- )/count
- :
- 0;
- const best =
- count
- ?
- Math.max(
-  ...db.tests.map(
-   x=>x.score
-  )
- )
- :
- 0;
- const minutes =
- db.studies.reduce(
-  (a,b)=>a+b.minutes,
-  0
- );
- document.getElementById(
-  "totalTests"
- ).textContent=count;
- document.getElementById(
-  "analysisAvg"
- ).textContent=
- Math.round(avg)+"%";
- document.getElementById(
-  "best"
- ).textContent=
- Math.round(best)+"%";
- document.getElementById(
-  "analysisStudy"
- ).textContent=
- (minutes/60).toFixed(1)+"h";
-}
-/*
-========================================================
-GOALS
-========================================================
-*/
-function renderGoals(){
- const el =
- document.getElementById(
-  "goalsList"
- );
- if(!db.goals.length){
-  el.innerHTML=
-  '<div class="muted">هدف ثبت نشده.</div>';
-  return;
- }
- el.innerHTML =
- db.goals.map(
-  g=>`
-  <div class="item">
-   <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-   ">
-    <div>
-     <strong style="${
-      g.done
-      ?"text-decoration:line-through"
-      :""
-     }">
-      ${esc(g.text)}
-     </strong>
-     <div class="muted">
-      ${esc(
-       g.description||""
-      )}
-     </div>
-    </div>
-    <button
-     class="btn ${
-      g.done
-      ?"green"
-      :"primary"
-     }"
-     onclick="toggleGoal(${g.id})">
-     ${
-      g.done
-      ?"✓ انجام شد"
-      :"انجام شد"
-     }
-    </button>
-   </div>
-  </div>
- `
- ).join("");
-}
-/*
-========================================================
-TIMER
-========================================================
-*/
-function updateTimer(){
- const m =
- Math.floor(
-  timerSeconds/60
- );
- const s =
- timerSeconds%60;
- document.getElementById(
-  "timerDisplay"
- ).textContent =
- String(m).padStart(2,"0")
- +
- ":"
- +
- String(s).padStart(2,"0");
-}
-function startTimer(){
- if(timerInterval)return;
- timerInterval =
- setInterval(
-  ()=>{
-   if(timerSeconds<=0){
-    clearInterval(
-     timerInterval
+/* =====================================================
+   SAVE API KEY
+   ===================================================== */
+function saveGeminiAPI(){
+    const input =
+        document.getElementById("geminiApiKey");
+    if(!input){
+        return;
+    }
+    const key =
+        input.value.trim();
+    if(!key){
+        toast("API Key را وارد کن");
+        return;
+    }
+    localStorage.setItem(
+        "STUDYCOACH_GEMINI_KEY",
+        key
     );
-    timerInterval=null;
+    updateGeminiStatus();
     toast(
-     "جلسه مطالعه تمام شد 🎉"
+        "Gemini API Key ذخیره شد ✅"
     );
-    return;
-   }
-   timerSeconds--;
-   updateTimer();
-  },
-  1000
- );
 }
-function pauseTimer(){
- clearInterval(
-  timerInterval
- );
- timerInterval=null;
+/* =====================================================
+   TEST CONNECTION
+   ===================================================== */
+async function testGeminiConnection(){
+    const key =
+        getGeminiKey();
+    if(!key){
+        toast(
+            "ابتدا Gemini API Key را وارد کن"
+        );
+        return;
+    }
+    toast(
+        "در حال تست اتصال به Gemini..."
+    );
+    try{
+        const answer =
+            await callGemini([
+                {
+                    role:"user",
+                    content:
+                    "فقط بنویس: StudyCoach Connected"
+                }
+            ]);
+        console.log(answer);
+        setGeminiStatus(true);
+        toast(
+            "اتصال Gemini موفق بود ✅"
+        );
+    }catch(error){
+        setGeminiStatus(false);
+        toast(
+            "اتصال ناموفق: " +
+            error.message
+        );
+        console.error(error);
+    }
 }
-function resetTimer(){
- pauseTimer();
- timerSeconds =
- Number(
-  document.getElementById(
-   "timerMinutes"
-  ).value
- )*60;
- updateTimer();
+/* =====================================================
+   GEMINI API
+   ===================================================== */
+async function callGemini(messages){
+    const key =
+        getGeminiKey();
+    if(!key){
+        throw new Error(
+            "Gemini API Key وارد نشده است."
+        );
+    }
+    /*
+     * تبدیل پیام‌های StudyCoach
+     * به ساختار Gemini
+     */
+    const contents =
+        messages.map(message => {
+            let text =
+                message.content || "";
+            return {
+                role:
+                    message.role === "assistant"
+                    ?
+                    "model"
+                    :
+                    "user",
+                parts:[
+                    {
+                        text:text
+                    }
+                ]
+            };
+        });
+    const response =
+        await fetch(
+            GEMINI_URL + encodeURIComponent(key),
+            {
+                method:"POST",
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
+                body:
+                JSON.stringify({
+                    contents:contents,
+                    generationConfig:{
+                        temperature:0.7,
+                        maxOutputTokens:4000
+                    }
+                })
+            }
+        );
+    const raw =
+        await response.text();
+    let data;
+    try{
+        data =
+            JSON.parse(raw);
+    }catch{
+        throw new Error(
+            "پاسخ نامعتبر از Gemini دریافت شد."
+        );
+    }
+    if(!response.ok){
+        const errorMessage =
+            data?.error?.message ||
+            `HTTP ${response.status}`;
+        throw new Error(
+            errorMessage
+        );
+    }
+    const answer =
+        data
+        ?.candidates?.[0]
+        ?.content?.parts
+        ?.map(
+            part => part.text || ""
+        )
+        ?.join("")
+        ?.trim();
+    if(!answer){
+        throw new Error(
+            "Gemini پاسخ متنی ارسال نکرد."
+        );
+    }
+    return answer;
 }
-/*
-========================================================
-API KEY
-========================================================
-*/
-function getAPIKey(){
- const saved =
- localStorage.getItem(
-  "SC_TEAMO_KEY"
- );
- return (
-  saved ||
-  BUILT_IN_API_KEY ||
-  ""
- );
+/* =====================================================
+   STUDYCOACH CONTEXT
+   ===================================================== */
+function getStudyCoachContext(){
+    return {
+        student:{
+            target:
+            "کنکور تجربی",
+            language:
+            "فارسی"
+        },
+        subjects:
+            db.subjects,
+        studies:
+            db.studies.slice(-100),
+        tests:
+            db.tests.slice(-100),
+        goals:
+            db.goals
+    };
 }
-/*
-========================================================
-SAVE API
-========================================================
-*/
-function saveAPI(){
- const key =
- document.getElementById(
-  "apiKey"
- ).value.trim();
- if(!key){
-  toast("API Key را وارد کن");
-  return;
- }
- localStorage.setItem(
-  "SC_TEAMO_KEY",
-  key
- );
- setAIStatus(false);
- toast(
-  "API Key ذخیره شد ✅"
- );
-}
-/*
-========================================================
-REAL TEAMOROUTER API
-========================================================
-*/
-async function callAI(messages){
- const key =
- getAPIKey();
- if(!key){
-  throw new Error(
-   "API Key وارد نشده است. از تنظیمات واردش کن."
-  );
- }
- const response =
- await fetch(
-  AI_BASE+
-  "/chat/completions",
-  {
-   method:"POST",
-   headers:{
-    "Content-Type":
-    "application/json",
-    "Authorization":
-    "Bearer "+key
-   },
-   body:
-   JSON.stringify({
-    model:
-    AI_MODEL,
-    messages,
-    temperature:
-    .7,
-    max_tokens:
-    3500
-   })
-  }
- );
- const text =
- await response.text();
- let data;
- try{
-  data =
-  JSON.parse(text);
- }catch{
-  data={
-   error:text
-  };
- }
- if(!response.ok){
-  const message =
-   data?.error?.message ||
-   data?.error ||
-   `HTTP ${response.status}`;
-  throw new Error(
-   String(message)
-  );
- }
- const answer =
- data?.choices?.[0]
- ?.message?.content;
- if(!answer){
-  throw new Error(
-   "پاسخ معتبر از AI دریافت نشد."
-  );
- }
- return answer;
-}
-/*
-========================================================
-CONTEXT
-========================================================
-*/
-function context(){
- return {
-  student:{
-   target:"کنکور",
-   language:"فارسی"
-  },
-  subjects:
-  db.subjects,
-  studies:
-  db.studies.slice(-100),
-  tests:
-  db.tests.slice(-100),
-  goals:
-  db.goals
- };
-}
-/*
-========================================================
-CHAT
-========================================================
-*/
-function chatKey(e){
- if(
-  e.key==="Enter" &&
-  !e.shiftKey
- ){
-  e.preventDefault();
-  sendChat();
- }
-}
-function addMessage(
- text,
- type
-){
- const box =
- document.getElementById(
-  "messages"
- );
- const div =
- document.createElement(
-  "div"
- );
- div.className =
- "message "+type;
- div.textContent =
- text;
- box.appendChild(
-  div
- );
- box.scrollTop =
- box.scrollHeight;
- return div;
-}
+/* =====================================================
+   AI CHAT
+   ===================================================== */
 async function sendChat(){
- const input =
- document.getElementById(
-  "chatInput"
- );
- const text =
- input.value.trim();
- if(!text)return;
- addMessage(
-  text,
-  "user"
- );
- input.value="";
- const loading =
- addMessage(
-  "🤔 در حال تحلیل...",
-  "ai"
- );
- try{
-  const answer =
-  await callAI([
-   {
-    role:"system",
-    content:`
-تو مشاور خصوصی حرفه‌ای StudyCoach هستی.
-به زبان فارسی پاسخ بده.
-دانش‌آموز کنکوری است.
-پاسخ باید:
-- دقیق
-- عملی
-- اولویت‌بندی‌شده
-- قابل اجرا
-- متناسب با اطلاعات ثبت‌شده
-باشد.
-اگر اطلاعات کافی نیست،
-سؤال‌های ضروری را مطرح کن.
-اطلاعات دانش‌آموز:
-${JSON.stringify(
- context(),
- null,
- 2
-)}
-`
-   },
-   {
-    role:"user",
-    content:text
-   }
-  ]);
-  loading.textContent =
-  answer;
-  setAIStatus(true);
- }catch(error){
-  loading.textContent =
-  "❌ "+error.message;
-  setAIStatus(false);
- }
-}
-/*
-========================================================
-QUICK ADVICE
-========================================================
-*/
-async function quickAdvice(){
- const box =
- document.getElementById(
-  "quickAdvice"
- );
- box.textContent =
- "🤖 در حال تحلیل...";
- try{
-  const answer =
-  await callAI([
-   {
-    role:"system",
-    content:
-    "یک توصیه کوتاه و بسیار کاربردی برای پیشرفت تحصیلی بده."
-   },
-   {
-    role:"user",
-    content:
-    JSON.stringify(
-     context()
-    )
-   }
-  ]);
-  box.textContent =
-  answer;
-  setAIStatus(true);
- }catch(error){
-  box.textContent =
-  "❌ "+error.message;
-  setAIStatus(false);
- }
-}
-/*
-========================================================
-PLAN
-========================================================
-*/
-async function generatePlan(){
- const output =
- document.getElementById(
-  "planOutput"
- );
- output.textContent =
- "🤖 در حال ساخت برنامه اختصاصی...";
- const wake =
- document.getElementById(
-  "wake"
- ).value;
- const sleep =
- document.getElementById(
-  "sleep"
- ).value;
- const hours =
- document.getElementById(
-  "hours"
- ).value;
- const focus =
- document.getElementById(
-  "focus"
- ).value;
- const prompt = `
-یک برنامه مطالعاتی حرفه‌ای برای کنکور طراحی کن.
-زمان شروع:
-${wake}
-زمان پایان:
-${sleep}
-هدف:
-${hours} ساعت
-تمرکز اصلی:
-${focus}
+    const input =
+        document.getElementById(
+            "chatInput"
+        );
+    const text =
+        input.value.trim();
+    if(!text){
+        return;
+    }
+    addMessage(
+        text,
+        "user"
+    );
+    input.value="";
+    const loading =
+        addMessage(
+            "🤖 در حال فکر کردن...",
+            "ai"
+        );
+    try{
+        const context =
+            getStudyCoachContext();
+        const answer =
+            await callGemini([
+                {
+                    role:"user",
+                    content:`
+تو «StudyCoach» هستی؛
+یک مشاور خصوصی هوشمند برای دانش‌آموز کنکوری.
+همیشه فارسی پاسخ بده.
+وظیفه تو:
+• برنامه‌ریزی مطالعه
+• تحلیل آزمون
+• پیدا کردن نقاط ضعف
+• پیشنهاد روش مطالعه
+• مدیریت مرور
+• مدیریت تست
+• اولویت‌بندی دروس
+• بررسی روند پیشرفت
+• پیشنهاد برنامه روزانه
+• کمک به جمع‌بندی
+پاسخ‌ها باید عملی،
+دقیق و قابل اجرا باشند.
+از اطلاعات واقعی ثبت‌شده
+در StudyCoach استفاده کن.
 اطلاعات فعلی:
 ${JSON.stringify(
- context(),
- null,
- 2
-)}
-برنامه باید شامل:
-1. ساعت شروع و پایان هر بلوک
-2. درس
-3. مبحث
-4. مطالعه
-5. تست
-6. مرور
-7. استراحت‌های کوتاه
-8. اولویت‌بندی
-9. جمع‌بندی شبانه
-باشد.
-برنامه را به شکل جدول متنی و قابل اجرا ارائه کن.
-`;
- try{
-  const answer =
-  await callAI([
-   {
-    role:"system",
-    content:
-    "تو برنامه‌ریز حرفه‌ای کنکور هستی."
-   },
-   {
-    role:"user",
-    content:prompt
-   }
-  ]);
-  output.textContent =
-  answer;
-  setAIStatus(true);
- }catch(error){
-  output.textContent =
-  "❌ "+error.message;
-  setAIStatus(false);
- }
-}
-/*
-========================================================
-AI ANALYSIS
-========================================================
-*/
-async function analyzeAI(){
- const output =
- document.getElementById(
-  "analysisOutput"
- );
- output.textContent =
- "🤖 در حال تحلیل عملکرد...";
- try{
-  const answer =
-  await callAI([
-   {
-    role:"system",
-    content:`
-تو یک تحلیلگر حرفه‌ای عملکرد تحصیلی هستی.
-اطلاعات دانش‌آموز را بررسی کن.
-گزارش را با این بخش‌ها ارائه بده:
-1. نقاط قوت
-2. نقاط ضعف
-3. ضعیف‌ترین درس‌ها
-4. بهترین درس‌ها
-5. تحلیل درصدها
-6. تحلیل زمان مطالعه
-7. اشتباهات قابل اصلاح
-8. اولویت مطالعه
-9. برنامه پیشنهادی هفته بعد
-`
-   },
-   {
-    role:"user",
-    content:
-    JSON.stringify(
-     context(),
-     null,
-     2
-    )
-   }
-  ]);
-  output.textContent =
-  answer;
-  setAIStatus(true);
- }catch(error){
-  output.textContent =
-  "❌ "+error.message;
-  setAIStatus(false);
- }
-}
-/*
-========================================================
-CONNECTION
-========================================================
-*/
-async function testConnection(){
- const key =
- getAPIKey();
- if(!key){
-  toast(
-   "ابتدا API Key را وارد کن"
-  );
-  return;
- }
- toast(
-  "در حال تست اتصال..."
- );
- try{
-  await callAI([
-   {
-    role:"system",
-    content:
-    "Reply with OK."
-   },
-   {
-    role:"user",
-    content:
-    "Connection test."
-   }
-  ]);
-  setAIStatus(true);
-  toast(
-   "اتصال به TeamoRouter موفق بود ✅"
-  );
- }catch(error){
-  setAIStatus(false);
-  toast(
-   "اتصال ناموفق: "+
-   error.message
-  );
- }
-}
-/*
-========================================================
-STATUS
-========================================================
-*/
-function setAIStatus(online){
- const pairs=[
-  [
-   "dashDot",
-   "dashStatus"
-  ],
-  [
-   "aiDot",
-   "aiStatus"
-  ],
-  [
-   "settingsDot",
-   "settingsStatus"
-  ]
- ];
- pairs.forEach(
-  ([dot,label])=>{
-   const d =
-   document.getElementById(
-    dot
-   );
-   const l =
-   document.getElementById(
-    label
-   );
-   if(d){
-    d.classList.toggle(
-     "online",
-     online
-    );
-   }
-   if(l){
-    l.textContent =
-    online
-    ?
-    "AI متصل است"
-    :
-    "AI آفلاین";
-   }
-  }
- );
-}
-/*
-========================================================
-EXPORT
-========================================================
-*/
-function exportData(){
- const blob =
- new Blob(
-  [
-   JSON.stringify(
-    db,
+    context,
     null,
     2
-   )
-  ],
-  {
-   type:
-   "application/json"
-  }
- );
- const url =
- URL.createObjectURL(
-  blob
- );
- const a =
- document.createElement(
-  "a"
- );
- a.href=url;
- a.download =
- "studycoach-backup.json";
- a.click();
- URL.revokeObjectURL(
-  url
- );
- toast(
-  "فایل پشتیبان ساخته شد"
- );
+)}
+سؤال دانش‌آموز:
+${text}
+`
+                }
+            ]);
+        loading.textContent =
+            answer;
+        setGeminiStatus(true);
+    }catch(error){
+        loading.textContent =
+            "❌ خطا در Gemini:\n\n" +
+            error.message;
+        setGeminiStatus(false);
+    }
 }
-/*
-========================================================
-IMPORT
-========================================================
-*/
-function importData(event){
- const file =
- event.target.files[0];
- if(!file)return;
- const reader =
- new FileReader();
- reader.onload =
- ()=>{
-  try{
-   db =
-   JSON.parse(
-    reader.result
-   );
-   save();
-   renderAll();
-   toast(
-    "اطلاعات وارد شد ✅"
-   );
-  }catch{
-   toast(
-    "فایل نامعتبر است"
-   );
-  }
- };
- reader.readAsText(
-  file
- );
+/* =====================================================
+   AI QUICK ADVICE
+   ===================================================== */
+async function quickAdvice(){
+    const box =
+        document.getElementById(
+            "quickAdvice"
+        );
+    box.textContent =
+        "🤖 در حال تحلیل...";
+    try{
+        const answer =
+            await callGemini([
+                {
+                    role:"user",
+                    content:`
+با توجه به اطلاعات زیر،
+یک توصیه بسیار کوتاه،
+واقع‌بینانه و کاربردی
+برای بهتر شدن مطالعه امروز بده.
+${JSON.stringify(
+    getStudyCoachContext(),
+    null,
+    2
+)}
+`
+                }
+            ]);
+        box.textContent =
+            answer;
+        setGeminiStatus(true);
+    }catch(error){
+        box.textContent =
+            "❌ " +
+            error.message;
+        setGeminiStatus(false);
+    }
 }
-/*
-========================================================
-CLEAR
-========================================================
-*/
-function clearData(){
- if(
-  !confirm(
-   "تمام اطلاعات StudyCoach حذف شود؟"
-  )
- )return;
- localStorage.removeItem(
-  STORAGE
- );
- location.reload();
+/* =====================================================
+   AI STUDY PLAN
+   ===================================================== */
+async function generatePlan(){
+    const output =
+        document.getElementById(
+            "planOutput"
+        );
+    output.textContent =
+        "🤖 در حال ساخت برنامه اختصاصی...";
+    const wake =
+        document.getElementById(
+            "wake"
+        ).value;
+    const sleep =
+        document.getElementById(
+            "sleep"
+        ).value;
+    const hours =
+        document.getElementById(
+            "hours"
+        ).value;
+    const focus =
+        document.getElementById(
+            "focus"
+        ).value;
+    try{
+        const answer =
+            await callGemini([
+                {
+                    role:"user",
+                    content:`
+برای یک دانش‌آموز کنکوری
+یک برنامه مطالعاتی حرفه‌ای بساز.
+شروع:
+${wake}
+پایان:
+${sleep}
+هدف:
+${hours} ساعت مطالعه
+تمرکز:
+${focus}
+اطلاعات قبلی:
+${JSON.stringify(
+    getStudyCoachContext(),
+    null,
+    2
+)}
+برنامه باید شامل:
+1. ساعت شروع
+2. ساعت پایان
+3. درس
+4. مبحث
+5. مطالعه
+6. تست
+7. مرور
+8. استراحت کوتاه
+9. اولویت
+10. جمع‌بندی آخر شب
+باشد.
+برنامه را واضح،
+جدولی و قابل اجرا بنویس.
+`
+                }
+            ]);
+        output.textContent =
+            answer;
+        setGeminiStatus(true);
+    }catch(error){
+        output.textContent =
+            "❌ " +
+            error.message;
+        setGeminiStatus(false);
+    }
 }
-/*
-========================================================
-ESCAPE
-========================================================
-*/
-function esc(value){
- return String(
-  value ?? ""
- )
- .replace(
-  /&/g,
-  "&amp;"
- )
- .replace(
-  /</g,
-  "&lt;"
- )
- .replace(
-  />/g,
-  "&gt;"
- )
- .replace(
-  /"/g,
-  "&quot;"
- )
- .replace(
-  /'/g,
-  "&#039;"
- );
+/* =====================================================
+   AI TEST ANALYSIS
+   ===================================================== */
+async function analyzeAI(){
+    const output =
+        document.getElementById(
+            "analysisOutput"
+        );
+    output.textContent =
+        "🤖 در حال تحلیل عملکرد...";
+    try{
+        const answer =
+            await callGemini([
+                {
+                    role:"user",
+                    content:`
+تو تحلیلگر حرفه‌ای عملکرد کنکور هستی.
+اطلاعات زیر را بررسی کن:
+${JSON.stringify(
+    getStudyCoachContext(),
+    null,
+    2
+)}
+گزارش را در این بخش‌ها ارائه کن:
+━━━━━━━━━━━━━━
+۱. نقاط قوت
+۲. نقاط ضعف
+۳. ضعیف‌ترین درس‌ها
+۴. بهترین درس‌ها
+۵. تحلیل درصدها
+۶. تحلیل روند مطالعه
+۷. مشکلات اصلی
+۸. کارهای فوری
+۹. اولویت مطالعه
+۱۰. پیشنهاد برنامه هفته آینده
+━━━━━━━━━━━━━━
+در پایان یک جمع‌بندی کوتاه بده.
+`
+                }
+            ]);
+        output.textContent =
+            answer;
+        setGeminiStatus(true);
+    }catch(error){
+        output.textContent =
+            "❌ " +
+            error.message;
+        setGeminiStatus(false);
+    }
 }
-/*
-========================================================
-RENDER ALL
-========================================================
-*/
-function renderAll(){
- renderDashboard();
- renderSubjects();
- renderTests();
- renderAnalytics();
- renderGoals();
- updateTimer();
+/* =====================================================
+   STATUS
+   ===================================================== */
+function setGeminiStatus(online){
+    const elements = [
+        [
+            "dashDot",
+            "dashStatus"
+        ],
+        [
+            "aiDot",
+            "aiStatus"
+        ],
+        [
+            "settingsDot",
+            "settingsStatus"
+        ]
+    ];
+    elements.forEach(
+        pair => {
+            const dot =
+                document.getElementById(
+                    pair[0]
+                );
+            const text =
+                document.getElementById(
+                    pair[1]
+                );
+            if(dot){
+                dot.classList.toggle(
+                    "online",
+                    online
+                );
+            }
+            if(text){
+                text.textContent =
+                    online
+                    ?
+                    "Gemini متصل است"
+                    :
+                    "Gemini آفلاین";
+            }
+        }
+    );
 }
-/*
-========================================================
-START
-========================================================
-*/
-load();
-/*
-========================================================
-AUTO STATUS
-========================================================
-*/
-if(getAPIKey()){
- setAIStatus(false);
+/* =====================================================
+   UPDATE SETTINGS
+   ===================================================== */
+function updateGeminiStatus(){
+    const key =
+        getGeminiKey();
+    const input =
+        document.getElementById(
+            "geminiApiKey"
+        );
+    if(input && key){
+        input.value =
+            key;
+    }
+    setGeminiStatus(
+        false
+    );
 }
+/* =====================================================
+   ADD SETTINGS UI
+   ===================================================== */
+function createGeminiSettings(){
+    const settings =
+        document.getElementById(
+            "settings"
+        );
+    if(!settings){
+        return;
+    }
+    /*
+     * اگر قبلاً ساخته شده،
+     * دوباره نساز.
+     */
+    if(
+        document.getElementById(
+            "geminiSettings"
+        )
+    ){
+        return;
+    }
+    const box =
+        document.createElement(
+            "div"
+        );
+    box.id =
+        "geminiSettings";
+    box.className =
+        "card";
+    box.style.marginTop =
+        "15px";
+    box.innerHTML = `
+        <h3>
+            🤖 اتصال رایگان Gemini
+        </h3>
+        <p class="muted">
+            StudyCoach اکنون می‌تواند
+            به Gemini متصل شود.
+            <br><br>
+            مدل:
+            <strong>
+                ${GEMINI_MODEL}
+            </strong>
+        </p>
+        <label>
+            Gemini API Key
+        </label>
+        <input
+            id="geminiApiKey"
+            type="password"
+            placeholder="AIza..."
+        >
+        <br><br>
+        <div class="actions">
+            <button
+                class="btn primary"
+                onclick="saveGeminiAPI()">
+                💾 ذخیره کلید
+            </button>
+            <button
+                class="btn"
+                onclick="testGeminiConnection()">
+                🔌 تست اتصال
+            </button>
+        </div>
+        <br>
+        <div class="status">
+            <span
+                class="dot"
+                id="geminiSettingsDot">
+            </span>
+            <span
+                id="geminiSettingsStatus">
+                آماده اتصال
+            </span>
+        </div>
+    `;
+    settings.appendChild(
+        box
+    );
+    const saved =
+        localStorage.getItem(
+            "STUDYCOACH_GEMINI_KEY"
+        );
+    if(saved){
+        document.getElementById(
+            "geminiApiKey"
+        ).value =
+            saved;
+    }
+}
+/* =====================================================
+   OVERRIDE STATUS
+   ===================================================== */
+const originalSetGeminiStatus =
+    setGeminiStatus;
+setGeminiStatus =
+function(online){
+    originalSetGeminiStatus(
+        online
+    );
+    const dot =
+        document.getElementById(
+            "geminiSettingsDot"
+        );
+    const text =
+        document.getElementById(
+            "geminiSettingsStatus"
+        );
+    if(dot){
+        dot.classList.toggle(
+            "online",
+            online
+        );
+    }
+    if(text){
+        text.textContent =
+            online
+            ?
+            "Gemini متصل است"
+            :
+            "Gemini آفلاین";
+    }
+};
+/* =====================================================
+   INIT
+   ===================================================== */
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+        setTimeout(
+            function(){
+                createGeminiSettings();
+                updateGeminiStatus();
+            },
+            100
+        );
+    }
+);
 </script>
-</body>
-</html>
