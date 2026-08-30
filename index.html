@@ -1,2589 +1,1909 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
-<meta name="theme-color" content="#0f172a">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<title>StudyCoach V5</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --bg:#f1f5f9;
-    --card:#ffffff;
-    --text:#0f172a;
-    --muted:#64748b;
-    --primary:#2563eb;
-    --primary2:#4f46e5;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --warning:#f59e0b;
-    --border:#e2e8f0;
-    --shadow:0 10px 30px rgba(15,23,42,.08);
-}
-
-body.dark{
-    --bg:#020617;
-    --card:#0f172a;
-    --text:#f8fafc;
-    --muted:#94a3b8;
-    --border:#1e293b;
-    --shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-body{
-    font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Tahoma,
-    Arial,
-    sans-serif;
-
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    transition:.25s;
-}
-
-button,
-input,
-textarea,
-select{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-    border:0;
-}
-
-.app{
-    display:flex;
-    min-height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-    width:260px;
-    background:var(--card);
-    border-left:1px solid var(--border);
-    padding:20px;
-    position:fixed;
-    top:0;
-    right:0;
-    bottom:0;
-    z-index:100;
-    overflow-y:auto;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:21px;
-    font-weight:900;
-    margin-bottom:30px;
-}
-
-.logoIcon{
-    width:42px;
-    height:42px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    color:white;
-    font-size:21px;
-}
-
-.nav{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.nav button{
-    width:100%;
-    padding:13px 14px;
-    background:transparent;
-    color:var(--muted);
-    border-radius:12px;
-    text-align:right;
-    font-size:14px;
-    transition:.2s;
-}
-
-.nav button:hover,
-.nav button.active{
-    background:rgba(37,99,235,.1);
-    color:var(--primary);
-    font-weight:700;
-}
-
-.sidebarBottom{
-    margin-top:30px;
-    padding-top:20px;
-    border-top:1px solid var(--border);
-}
-
-.aiStatus{
-    padding:12px;
-    border-radius:12px;
-    background:var(--bg);
-    margin-bottom:10px;
-    font-size:12px;
-}
-
-.aiDot{
-    display:inline-block;
-    width:8px;
-    height:8px;
-    background:var(--danger);
-    border-radius:50%;
-    margin-left:5px;
-}
-
-.aiDot.online{
-    background:var(--success);
-}
-
-/* MAIN */
-
-.main{
-    width:calc(100% - 260px);
-    margin-right:260px;
-    min-height:100vh;
-}
-
-.topbar{
-    height:70px;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 30px;
-    position:sticky;
-    top:0;
-    z-index:50;
-}
-
-.menuBtn{
-    display:none;
-    background:transparent;
-    font-size:24px;
-    color:var(--text);
-}
-
-.topTitle{
-    font-size:18px;
-    font-weight:800;
-}
-
-.topActions{
-    display:flex;
-    gap:8px;
-}
-
-.iconBtn{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    background:var(--bg);
-    color:var(--text);
-    font-size:18px;
-}
-
-/* CONTENT */
-
-.content{
-    padding:28px;
-    max-width:1500px;
-    margin:auto;
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.hero{
-    background:
-    linear-gradient(135deg,#2563eb,#4f46e5);
-    color:white;
-    border-radius:24px;
-    padding:30px;
-    margin-bottom:22px;
-    box-shadow:var(--shadow);
-}
-
-.hero h1{
-    font-size:29px;
-    margin-bottom:8px;
-}
-
-.hero p{
-    opacity:.9;
-    line-height:1.8;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px;
-    box-shadow:var(--shadow);
-}
-
-.stat{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.statIcon{
-    width:45px;
-    height:45px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:rgba(37,99,235,.1);
-    font-size:20px;
-}
-
-.statValue{
-    font-size:27px;
-    font-weight:900;
-    margin-top:12px;
-}
-
-.statLabel{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.sectionTitle{
-    font-size:20px;
-    font-weight:900;
-    margin:28px 0 14px;
-}
-
-.two{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-/* BUTTONS */
-
-.btn{
-    padding:11px 17px;
-    border-radius:11px;
-    font-weight:700;
-    font-size:14px;
-}
-
-.btnPrimary{
-    background:var(--primary);
-    color:white;
-}
-
-.btnSuccess{
-    background:var(--success);
-    color:white;
-}
-
-.btnDanger{
-    background:var(--danger);
-    color:white;
-}
-
-.btnSecondary{
-    background:var(--bg);
-    color:var(--text);
-    border:1px solid var(--border);
-}
-
-.btnSmall{
-    padding:8px 12px;
-    font-size:12px;
-}
-
-/* FORMS */
-
-.formGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-.field{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-}
-
-.field label{
-    font-size:13px;
-    font-weight:700;
-}
-
-.field input,
-.field textarea,
-.field select{
-    width:100%;
-    border:1px solid var(--border);
-    background:var(--bg);
-    color:var(--text);
-    border-radius:11px;
-    padding:12px;
-    outline:none;
-}
-
-.field textarea{
-    min-height:110px;
-    resize:vertical;
-}
-
-.field input:focus,
-.field textarea:focus,
-.field select:focus{
-    border-color:var(--primary);
-}
-
-/* SUBJECTS */
-
-.subjectGrid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-}
-
-.subject{
-    padding:18px;
-    border:1px solid var(--border);
-    background:var(--card);
-    border-radius:16px;
-}
-
-.subject h3{
-    margin-bottom:10px;
-}
-
-.progress{
-    height:9px;
-    background:var(--bg);
-    border-radius:100px;
-    overflow:hidden;
-}
-
-.progressBar{
-    height:100%;
-    background:linear-gradient(90deg,var(--primary),var(--primary2));
-    border-radius:100px;
-}
-
-/* CHAT */
-
-.chat{
-    height:calc(100vh - 140px);
-    min-height:550px;
-    display:flex;
-    flex-direction:column;
-}
-
-.messages{
-    flex:1;
-    overflow-y:auto;
-    padding:15px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.message{
-    max-width:85%;
-    padding:14px 16px;
-    border-radius:16px;
-    line-height:1.9;
-    white-space:pre-wrap;
-}
-
-.message.user{
-    align-self:flex-start;
-    background:var(--primary);
-    color:white;
-    border-bottom-left-radius:5px;
-}
-
-.message.ai{
-    align-self:flex-end;
-    background:var(--bg);
-    border:1px solid var(--border);
-    border-bottom-right-radius:5px;
-}
-
-.chatInput{
-    display:flex;
-    gap:10px;
-    padding:12px;
-    border-top:1px solid var(--border);
-}
-
-.chatInput textarea{
-    flex:1;
-    resize:none;
-    min-height:50px;
-    max-height:140px;
-    padding:13px;
-    border:1px solid var(--border);
-    background:var(--bg);
-    color:var(--text);
-    border-radius:13px;
-    outline:none;
-}
-
-/* TIMER */
-
-.timer{
-    text-align:center;
-    padding:40px 20px;
-}
-
-.timerCircle{
-    width:260px;
-    height:260px;
-    border-radius:50%;
-    margin:20px auto;
-    border:12px solid var(--primary);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-}
-
-.timerTime{
-    font-size:48px;
-    font-weight:900;
-    direction:ltr;
-}
-
-.timerLabel{
-    color:var(--muted);
-}
-
-.timerControls{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-}
-
-/* TASKS */
-
-.task{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    border-bottom:1px solid var(--border);
-}
-
-.task:last-child{
-    border-bottom:0;
-}
-
-.task input{
-    width:20px;
-    height:20px;
-}
-
-.taskInfo{
-    flex:1;
-}
-
-.taskDone{
-    text-decoration:line-through;
-    opacity:.5;
-}
-
-/* TABLE */
-
-.tableWrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th,
-td{
-    padding:13px;
-    border-bottom:1px solid var(--border);
-    text-align:right;
-    white-space:nowrap;
-}
-
-th{
-    color:var(--muted);
-    font-size:12px;
-}
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modalBox{
-    width:min(600px,100%);
-    max-height:90vh;
-    overflow:auto;
-    background:var(--card);
-    border-radius:20px;
-    padding:25px;
-}
-
-.modalHeader{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:20px;
-}
-
-/* TOAST */
-
-.toast{
-    position:fixed;
-    bottom:25px;
-    left:25px;
-    background:#0f172a;
-    color:white;
-    padding:13px 17px;
-    border-radius:12px;
-    opacity:0;
-    transform:translateY(15px);
-    pointer-events:none;
-    transition:.25s;
-    z-index:2000;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* MOBILE */
-
-@media(max-width:1000px){
-
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .subjectGrid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .two{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:750px){
-
-    .sidebar{
-        transform:translateX(100%);
-        transition:.25s;
-    }
-
-    .sidebar.open{
-        transform:translateX(0);
-    }
-
-    .main{
-        width:100%;
-        margin-right:0;
-    }
-
-    .menuBtn{
-        display:block;
-    }
-
-    .topbar{
-        padding:0 15px;
-    }
-
-    .content{
-        padding:15px;
-    }
-
-    .grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .subjectGrid{
-        grid-template-columns:1fr;
-    }
-
-    .formGrid{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding:22px;
-    }
-
-    .hero h1{
-        font-size:23px;
-    }
-
-    .statValue{
-        font-size:22px;
-    }
-
-    .timerCircle{
-        width:220px;
-        height:220px;
-    }
-}
-
-@media(max-width:430px){
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .message{
-        max-width:92%;
-    }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <title>StudyCoach V5 Ultimate</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="app">
+  <!-- =====================================================
+       APP
+  ====================================================== -->
 
-<!-- SIDEBAR -->
+  <div id="app">
 
-<aside class="sidebar" id="sidebar">
+    <!-- ===================================================
+         SIDEBAR
+    ==================================================== -->
 
-    <div class="logo">
-        <div class="logoIcon">🎓</div>
-        <span>StudyCoach V5</span>
-    </div>
+    <aside id="sidebar" class="sidebar">
 
-    <nav class="nav">
+      <div class="sidebar-header">
 
-        <button class="active" data-page="dashboard">
-            🏠 داشبورد
-        </button>
-
-        <button data-page="ai">
-            🤖 مشاور هوشمند
-        </button>
-
-        <button data-page="planner">
-            📅 برنامه‌ریزی
-        </button>
-
-        <button data-page="subjects">
-            📚 دروس
-        </button>
-
-        <button data-page="tasks">
-            ✅ وظایف
-        </button>
-
-        <button data-page="timer">
-            ⏱️ تایمر مطالعه
-        </button>
-
-        <button data-page="analytics">
-            📊 عملکرد
-        </button>
-
-        <button data-page="settings">
-            ⚙️ تنظیمات
-        </button>
-
-    </nav>
-
-    <div class="sidebarBottom">
-
-        <div class="aiStatus">
-            <span class="aiDot" id="aiDot"></span>
-            <span id="aiStatusText">در حال بررسی AI...</span>
+        <div class="brand-icon">
+          🎓
         </div>
 
+        <div class="brand-text">
+          <strong>StudyCoach</strong>
+          <span>V5 Ultimate</span>
+        </div>
+
+      </div>
+
+
+      <div class="profile-mini">
+
+        <div class="profile-avatar">
+          👨‍🎓
+        </div>
+
+        <div class="profile-info">
+
+          <strong id="sidebarUserName">
+            دانش‌آموز
+          </strong>
+
+          <span id="sidebarUserGoal">
+            هدف: پزشکی
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <nav class="sidebar-nav">
+
         <button
-            class="btn btnSecondary"
-            style="width:100%"
-            onclick="toggleTheme()">
-            🌙 تغییر حالت
+          class="nav-item active"
+          data-page="dashboard"
+          type="button"
+        >
+          <span>🏠</span>
+          <span>داشبورد</span>
         </button>
 
-    </div>
-
-</aside>
-
-
-<!-- MAIN -->
-
-<main class="main">
-
-<header class="topbar">
-
-    <div style="display:flex;align-items:center;gap:12px">
 
         <button
-            class="menuBtn"
-            onclick="toggleSidebar()">
+          class="nav-item"
+          data-page="coach"
+          type="button"
+        >
+          <span>🤖</span>
+          <span>مشاور هوشمند</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="planner"
+          type="button"
+        >
+          <span>📅</span>
+          <span>برنامه‌ریزی</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="subjects"
+          type="button"
+        >
+          <span>📚</span>
+          <span>دروس</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="tests"
+          type="button"
+        >
+          <span>📝</span>
+          <span>ثبت تست</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="reviews"
+          type="button"
+        >
+          <span>🔄</span>
+          <span>مرور هوشمند</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="timer"
+          type="button"
+        >
+          <span>⏱️</span>
+          <span>تایمر مطالعه</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="analytics"
+          type="button"
+        >
+          <span>📊</span>
+          <span>تحلیل عملکرد</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="goals"
+          type="button"
+        >
+          <span>🎯</span>
+          <span>اهداف</span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-page="settings"
+          type="button"
+        >
+          <span>⚙️</span>
+          <span>تنظیمات</span>
+        </button>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+
+        <button
+          id="backupButton"
+          class="sidebar-footer-button"
+          type="button"
+        >
+          💾 پشتیبان‌گیری
+        </button>
+
+        <button
+          id="restoreButton"
+          class="sidebar-footer-button"
+          type="button"
+        >
+          📥 بازیابی اطلاعات
+        </button>
+
+        <input
+          id="restoreFile"
+          type="file"
+          accept=".json"
+          hidden
+        >
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MAIN
+    ==================================================== -->
+
+    <main class="main-content">
+
+
+      <!-- =================================================
+           TOP BAR
+      ================================================== -->
+
+      <header class="topbar">
+
+        <div class="topbar-right">
+
+          <button
+            id="menuButton"
+            class="icon-button menu-button"
+            type="button"
+            aria-label="منو"
+          >
             ☰
-        </button>
+          </button>
 
-        <div
-            class="topTitle"
-            id="pageTitle">
-            داشبورد
+
+          <div>
+
+            <h1 id="pageTitle">
+              داشبورد
+            </h1>
+
+            <p id="pageSubtitle">
+              وضعیت امروزت را بررسی کن
+            </p>
+
+          </div>
+
         </div>
 
-    </div>
 
-    <div class="topActions">
+        <div class="topbar-left">
 
-        <button
-            class="iconBtn"
-            onclick="showPage('ai')">
-            🤖
-        </button>
+          <div
+            id="streakBadge"
+            class="streak-badge"
+          >
+            🔥
+            <span id="streakValue">
+              ۰
+            </span>
+          </div>
 
-        <button
-            class="iconBtn"
-            onclick="toggleTheme()">
+
+          <button
+            id="themeButton"
+            class="icon-button"
+            type="button"
+            aria-label="تغییر حالت نمایش"
+          >
             🌙
-        </button>
-
-    </div>
-
-</header>
-
-
-<div class="content">
-
-
-<!-- DASHBOARD -->
-
-<section class="page active" id="page-dashboard">
-
-    <div class="hero">
-
-        <h1>سلام 👋</h1>
-
-        <p>
-            به StudyCoach V5 خوش آمدی.
-            اینجا می‌توانی برنامه‌ریزی کنی،
-            مطالعه‌ات را ثبت کنی و از مشاور هوشمند کمک بگیری.
-        </p>
-
-        <div style="margin-top:18px">
-
-            <button
-                class="btn"
-                style="background:white;color:#2563eb"
-                onclick="showPage('ai')">
-                شروع گفتگو با مشاور 🤖
-            </button>
+          </button>
 
         </div>
 
-    </div>
+      </header>
 
 
-    <div class="grid">
+      <!-- =================================================
+           CONTENT
+      ================================================== -->
 
-        <div class="card">
-            <div class="stat">
-                <div>
-                    <div class="statLabel">مطالعه امروز</div>
-                    <div class="statValue" id="todayStudy">
-                        0
-                    </div>
-                </div>
-                <div class="statIcon">⏱️</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="stat">
-                <div>
-                    <div class="statLabel">وظایف انجام شده</div>
-                    <div class="statValue" id="doneTasks">
-                        0
-                    </div>
-                </div>
-                <div class="statIcon">✅</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="stat">
-                <div>
-                    <div class="statLabel">هدف روزانه</div>
-                    <div class="statValue">
-                        <span id="dailyGoal">8</span>
-                        ساعت
-                    </div>
-                </div>
-                <div class="statIcon">🎯</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="stat">
-                <div>
-                    <div class="statLabel">وضعیت AI</div>
-                    <div class="statValue" id="dashboardAI">
-                        —
-                    </div>
-                </div>
-                <div class="statIcon">🤖</div>
-            </div>
-        </div>
-
-    </div>
+      <div class="page-container">
 
 
-    <div class="sectionTitle">
-        برنامه امروز
-    </div>
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
 
-    <div class="card" id="todayPlan">
-        هنوز برنامه‌ای ثبت نشده است.
-    </div>
+        <section
+          id="dashboardPage"
+          class="page active"
+          data-page-content="dashboard"
+        >
 
+          <div class="welcome-card">
 
-    <div class="sectionTitle">
-        وضعیت دروس
-    </div>
+            <div class="welcome-content">
 
-    <div class="subjectGrid" id="dashboardSubjects"></div>
+              <span class="welcome-label">
+                مشاور شخصی مطالعه
+              </span>
 
-</section>
-
-
-<!-- AI -->
-
-<section class="page" id="page-ai">
-
-    <div class="card chat">
-
-        <div
-            style="padding:15px;border-bottom:1px solid var(--border);font-weight:900">
-            🤖 مشاور هوشمند StudyCoach
-        </div>
-
-        <div
-            class="messages"
-            id="messages">
-
-            <div class="message ai">
+              <h2 id="welcomeTitle">
                 سلام 👋
-                من مشاور هوشمند StudyCoach هستم.
+              </h2>
 
-                می‌توانی درباره برنامه‌ریزی،
-                روش مطالعه،
-                مدیریت زمان،
-                جمع‌بندی،
-                تست‌زنی و دروس کنکور از من سؤال بپرسی.
-            </div>
+              <p id="welcomeText">
+                آماده‌ای امروز بهترین عملکردت را داشته باشی؟
+              </p>
 
-        </div>
-
-        <div class="chatInput">
-
-            <textarea
-                id="chatInput"
-                placeholder="پیامت را بنویس..."
-                onkeydown="handleChatKey(event)"></textarea>
-
-            <button
-                class="btn btnPrimary"
-                onclick="sendMessage()">
-                ارسال
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- PLANNER -->
-
-<section class="page" id="page-planner">
-
-    <div class="card">
-
-        <h2 style="margin-bottom:20px">
-            📅 ساخت برنامه
-        </h2>
-
-        <div class="formGrid">
-
-            <div class="field">
-
-                <label>
-                    تاریخ
-                </label>
-
-                <input
-                    type="date"
-                    id="planDate">
-
-            </div>
-
-            <div class="field">
-
-                <label>
-                    درس
-                </label>
-
-                <select id="planSubject">
-                    <option>زیست</option>
-                    <option>شیمی</option>
-                    <option>فیزیک</option>
-                    <option>ریاضی</option>
-                    <option>دینی</option>
-                    <option>فارسی</option>
-                    <option>عربی</option>
-                    <option>زبان</option>
-                </select>
-
-            </div>
-
-            <div class="field">
-
-                <label>
-                    مدت مطالعه (دقیقه)
-                </label>
-
-                <input
-                    type="number"
-                    id="planMinutes"
-                    value="90"
-                    min="10">
-
-            </div>
-
-            <div class="field">
-
-                <label>
-                    مبحث
-                </label>
-
-                <input
-                    id="planTopic"
-                    placeholder="مثلاً فصل اول زیست">
-
-            </div>
-
-        </div>
-
-        <div style="margin-top:18px">
-
-            <button
-                class="btn btnPrimary"
-                onclick="addPlan()">
-                افزودن به برنامه
-            </button>
-
-            <button
-                class="btn btnSecondary"
-                onclick="generateAIPlan()">
-                🤖 برنامه با AI
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="sectionTitle">
-        برنامه ثبت‌شده
-    </div>
-
-    <div class="card">
-
-        <div class="tableWrap">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>تاریخ</th>
-                        <th>درس</th>
-                        <th>مبحث</th>
-                        <th>زمان</th>
-                        <th></th>
-                    </tr>
-                </thead>
-
-                <tbody id="planTable"></tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- SUBJECTS -->
-
-<section class="page" id="page-subjects">
-
-    <div class="card">
-
-        <h2>
-            📚 مدیریت دروس
-        </h2>
-
-        <p style="color:var(--muted);margin-top:8px">
-            درصد تسلط خودت را برای هر درس ثبت کن.
-        </p>
-
-    </div>
-
-    <div
-        class="subjectGrid"
-        style="margin-top:18px"
-        id="subjectList">
-    </div>
-
-</section>
-
-
-<!-- TASKS -->
-
-<section class="page" id="page-tasks">
-
-    <div class="card">
-
-        <h2>
-            ✅ وظایف امروز
-        </h2>
-
-        <div
-            style="display:flex;gap:10px;margin-top:18px">
-
-            <input
-                id="taskInput"
-                placeholder="وظیفه جدید..."
-                style="flex:1;padding:12px;border:1px solid var(--border);border-radius:11px;background:var(--bg);color:var(--text)">
-
-            <button
-                class="btn btnPrimary"
-                onclick="addTask()">
-                افزودن
-            </button>
-
-        </div>
-
-        <div id="taskList" style="margin-top:18px"></div>
-
-    </div>
-
-</section>
-
-
-<!-- TIMER -->
-
-<section class="page" id="page-timer">
-
-    <div class="card timer">
-
-        <h2>
-            ⏱️ تایمر مطالعه
-        </h2>
-
-        <div class="timerCircle">
-
-            <div
-                class="timerTime"
-                id="timerDisplay">
-                25:00
-            </div>
-
-            <div class="timerLabel">
-                مطالعه
-            </div>
-
-        </div>
-
-        <div class="timerControls">
-
-            <button
-                class="btn btnPrimary"
-                onclick="startTimer()">
-                ▶ شروع
-            </button>
-
-            <button
-                class="btn btnSecondary"
-                onclick="pauseTimer()">
-                ⏸ توقف
-            </button>
-
-            <button
-                class="btn btnDanger"
-                onclick="resetTimer()">
-                ↻ ریست
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ANALYTICS -->
-
-<section class="page" id="page-analytics">
-
-    <div class="grid">
-
-        <div class="card">
-            <div class="statLabel">
-                کل زمان مطالعه
-            </div>
-            <div
-                class="statValue"
-                id="totalStudy">
-                0
-            </div>
-            <div class="statLabel">
-                دقیقه
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="statLabel">
-                میانگین روزانه
-            </div>
-            <div
-                class="statValue"
-                id="averageStudy">
-                0
-            </div>
-            <div class="statLabel">
-                دقیقه
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="statLabel">
-                تعداد جلسات
-            </div>
-            <div
-                class="statValue"
-                id="sessions">
-                0
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="statLabel">
-                پیشرفت
-            </div>
-            <div
-                class="statValue"
-                id="overallProgress">
-                0%
-            </div>
-        </div>
-
-    </div>
-
-    <div class="sectionTitle">
-        گزارش هوشمند
-    </div>
-
-    <div class="card">
-
-        <button
-            class="btn btnPrimary"
-            onclick="analyzePerformance()">
-            🤖 تحلیل عملکرد با AI
-        </button>
-
-        <div
-            id="analysisResult"
-            style="margin-top:18px;line-height:2">
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-
-<section class="page" id="page-settings">
-
-    <div class="card">
-
-        <h2>
-            ⚙️ تنظیمات
-        </h2>
-
-        <div class="formGrid" style="margin-top:20px">
-
-            <div class="field">
-
-                <label>
-                    نام
-                </label>
-
-                <input
-                    id="userName"
-                    placeholder="نام شما">
-
-            </div>
-
-            <div class="field">
-
-                <label>
-                    هدف مطالعه روزانه
-                </label>
-
-                <input
-                    type="number"
-                    id="goalInput"
-                    value="8"
-                    min="1"
-                    max="24">
-
-            </div>
-
-        </div>
-
-        <div style="margin-top:20px">
-
-            <button
-                class="btn btnPrimary"
-                onclick="saveSettings()">
-                ذخیره تنظیمات
-            </button>
-
-            <button
-                class="btn btnDanger"
-                onclick="clearAllData()">
-                پاک کردن اطلاعات
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="card" style="margin-top:18px">
-
-        <h3>
-            وضعیت اتصال
-        </h3>
-
-        <p
-            id="connectionInfo"
-            style="margin-top:10px;color:var(--muted)">
-            در حال بررسی...
-        </p>
-
-        <button
-            class="btn btnSecondary"
-            style="margin-top:15px"
-            onclick="testAI()">
-            تست اتصال AI
-        </button>
-
-    </div>
-
-</section>
-
-</div>
-</main>
-
-</div>
-
-
-<!-- MODAL -->
-
-<div
-    class="modal"
-    id="modal">
-
-    <div class="modalBox">
-
-        <div class="modalHeader">
-
-            <h2 id="modalTitle">
-                StudyCoach
-            </h2>
-
-            <button
-                class="iconBtn"
-                onclick="closeModal()">
-                ✕
-            </button>
-
-        </div>
-
-        <div id="modalContent"></div>
-
-    </div>
-
-</div>
-
-
-<div
-    class="toast"
-    id="toast">
-</div>
-
-
-<script src="ai.js"></script>
-
-<script>
-
-/* =========================
-   STORAGE
-========================= */
-
-const STORAGE_KEY = "studycoach_v5_data";
-
-let data = JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "null"
-);
-
-if(!data){
-
-    data = {
-
-        user:{
-            name:"",
-            dailyGoal:8
-        },
-
-        plans:[],
-
-        tasks:[],
-
-        subjects:{
-            "زیست":0,
-            "شیمی":0,
-            "فیزیک":0,
-            "ریاضی":0,
-            "دینی":0,
-            "فارسی":0,
-            "عربی":0,
-            "زبان":0
-        },
-
-        studyMinutes:0,
-
-        sessions:0
-
-    };
-
-}
-
-function saveData(){
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-}
-
-
-/* =========================
-   UI
-========================= */
-
-const pageNames = {
-
-    dashboard:"داشبورد",
-    ai:"مشاور هوشمند",
-    planner:"برنامه‌ریزی",
-    subjects:"دروس",
-    tasks:"وظایف",
-    timer:"تایمر مطالعه",
-    analytics:"عملکرد",
-    settings:"تنظیمات"
-
-};
-
-document
-.querySelectorAll(".nav button")
-.forEach(btn=>{
-
-    btn.addEventListener("click",()=>{
-
-        showPage(
-            btn.dataset.page
-        );
-
-    });
-
-});
-
-
-function showPage(name){
-
-    document
-    .querySelectorAll(".page")
-    .forEach(p=>p.classList.remove("active"));
-
-    const page =
-        document.getElementById(
-            "page-"+name
-        );
-
-    if(page)
-        page.classList.add("active");
-
-    document
-    .querySelectorAll(".nav button")
-    .forEach(btn=>{
-
-        btn.classList.toggle(
-            "active",
-            btn.dataset.page===name
-        );
-
-    });
-
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-        pageNames[name] || name;
-
-    document
-    .getElementById("sidebar")
-    .classList.remove("open");
-
-    if(name==="dashboard")
-        renderDashboard();
-
-    if(name==="planner")
-        renderPlans();
-
-    if(name==="subjects")
-        renderSubjects();
-
-    if(name==="tasks")
-        renderTasks();
-
-    if(name==="analytics")
-        renderAnalytics();
-
-}
-
-
-function toggleSidebar(){
-
-    document
-    .getElementById("sidebar")
-    .classList.toggle("open");
-
-}
-
-
-function toggleTheme(){
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-        "studycoach_theme",
-        document.body.classList.contains("dark")
-            ? "dark"
-            : "light"
-    );
-
-}
-
-
-if(
-    localStorage.getItem("studycoach_theme")
-    ==="dark"
-){
-
-    document.body.classList.add("dark");
-
-}
-
-
-/* =========================
-   TOAST
-========================= */
-
-let toastTimer;
-
-function toast(message){
-
-    const el =
-        document.getElementById("toast");
-
-    el.textContent = message;
-
-    el.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-        setTimeout(
-            ()=>{
-                el.classList.remove("show");
-            },
-            2500
-        );
-
-}
-
-
-/* =========================
-   DASHBOARD
-========================= */
-
-function renderDashboard(){
-
-    document.getElementById(
-        "todayStudy"
-    ).textContent =
-        data.studyMinutes + " دقیقه";
-
-    const done =
-        data.tasks.filter(
-            t=>t.done
-        ).length;
-
-    document.getElementById(
-        "doneTasks"
-    ).textContent = done;
-
-    document.getElementById(
-        "dailyGoal"
-    ).textContent =
-        data.user.dailyGoal;
-
-    document.getElementById(
-        "dashboardAI"
-    ).textContent =
-        "فعال";
-
-    const box =
-        document.getElementById(
-            "dashboardSubjects"
-        );
-
-    box.innerHTML="";
-
-    Object.entries(
-        data.subjects
-    ).forEach(([name,value])=>{
-
-        box.innerHTML += `
-
-        <div class="subject">
-
-            <h3>${escapeHTML(name)}</h3>
-
-            <div
-                style="font-size:22px;font-weight:900;margin-bottom:10px">
-                ${value}%
-            </div>
-
-            <div class="progress">
-
-                <div
-                    class="progressBar"
-                    style="width:${value}%">
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-    const plans =
-        data.plans.filter(
-            p=>p.date === today()
-        );
-
-    const todayPlan =
-        document.getElementById(
-            "todayPlan"
-        );
-
-    if(!plans.length){
-
-        todayPlan.innerHTML =
-            "برای امروز برنامه‌ای ثبت نشده است.";
-
-    }else{
-
-        todayPlan.innerHTML =
-            plans.map(p=>`
-
-            <div class="task">
-
-                <div class="taskInfo">
-
-                    <strong>
-                        ${escapeHTML(p.subject)}
-                    </strong>
-
-                    <div style="color:var(--muted);font-size:13px">
-                        ${escapeHTML(p.topic || "بدون مبحث")}
-                        — ${p.minutes} دقیقه
-                    </div>
-
-                </div>
-
-            </div>
-
-            `).join("");
-
-    }
-
-}
-
-
-/* =========================
-   SUBJECTS
-========================= */
-
-function renderSubjects(){
-
-    const box =
-        document.getElementById(
-            "subjectList"
-        );
-
-    box.innerHTML="";
-
-    Object.entries(
-        data.subjects
-    ).forEach(([name,value])=>{
-
-        box.innerHTML += `
-
-        <div class="subject">
-
-            <h3>
-                ${escapeHTML(name)}
-            </h3>
-
-            <div
-                style="font-size:25px;font-weight:900;margin:10px 0">
-                ${value}%
-            </div>
-
-            <input
-                type="range"
-                min="0"
-                max="100"
-                value="${value}"
-                style="width:100%"
-                oninput="updateSubject('${escapeAttr(name)}',this.value)">
-
-            <div class="progress" style="margin-top:12px">
-
-                <div
-                    class="progressBar"
-                    style="width:${value}%">
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-
-function updateSubject(name,value){
-
-    data.subjects[name] =
-        Number(value);
-
-    saveData();
-
-    renderSubjects();
-
-    renderDashboard();
-
-}
-
-
-/* =========================
-   PLANNER
-========================= */
-
-function addPlan(){
-
-    const date =
-        document.getElementById(
-            "planDate"
-        ).value || today();
-
-    const subject =
-        document.getElementById(
-            "planSubject"
-        ).value;
-
-    const minutes =
-        Number(
-            document.getElementById(
-                "planMinutes"
-            ).value
-        );
-
-    const topic =
-        document.getElementById(
-            "planTopic"
-        ).value.trim();
-
-    if(!minutes || minutes<1){
-
-        toast("مدت مطالعه را وارد کن.");
-
-        return;
-
-    }
-
-    data.plans.push({
-
-        id:Date.now(),
-
-        date,
-
-        subject,
-
-        minutes,
-
-        topic
-
-    });
-
-    saveData();
-
-    renderPlans();
-
-    renderDashboard();
-
-    toast("برنامه اضافه شد.");
-
-}
-
-
-function renderPlans(){
-
-    const table =
-        document.getElementById(
-            "planTable"
-        );
-
-    table.innerHTML="";
-
-    data.plans
-    .slice()
-    .reverse()
-    .forEach(p=>{
-
-        table.innerHTML += `
-
-        <tr>
-
-            <td>${p.date}</td>
-
-            <td>${escapeHTML(p.subject)}</td>
-
-            <td>${escapeHTML(p.topic || "-")}</td>
-
-            <td>${p.minutes} دقیقه</td>
-
-            <td>
+              <div class="welcome-actions">
 
                 <button
-                    class="btn btnDanger btnSmall"
-                    onclick="deletePlan(${p.id})">
-                    حذف
+                  id="dashboardPlanButton"
+                  class="primary-button"
+                  type="button"
+                >
+                  ✨ ساخت برنامه امروز
                 </button>
 
-            </td>
+                <button
+                  id="dashboardCoachButton"
+                  class="secondary-button"
+                  type="button"
+                >
+                  🤖 صحبت با مشاور
+                </button>
 
-        </tr>
+              </div>
 
-        `;
-
-    });
-
-}
-
-
-function deletePlan(id){
-
-    data.plans =
-        data.plans.filter(
-            p=>p.id!==id
-        );
-
-    saveData();
-
-    renderPlans();
-
-    renderDashboard();
-
-}
-
-
-/* =========================
-   TASKS
-========================= */
-
-function addTask(){
-
-    const input =
-        document.getElementById(
-            "taskInput"
-        );
-
-    const title =
-        input.value.trim();
-
-    if(!title){
-
-        toast("عنوان وظیفه را وارد کن.");
-
-        return;
-
-    }
-
-    data.tasks.push({
-
-        id:Date.now(),
-
-        title,
-
-        done:false
-
-    });
-
-    input.value="";
-
-    saveData();
-
-    renderTasks();
-
-    renderDashboard();
-
-}
-
-
-function toggleTask(id){
-
-    const task =
-        data.tasks.find(
-            t=>t.id===id
-        );
-
-    if(task)
-        task.done=!task.done;
-
-    saveData();
-
-    renderTasks();
-
-    renderDashboard();
-
-}
-
-
-function deleteTask(id){
-
-    data.tasks =
-        data.tasks.filter(
-            t=>t.id!==id
-        );
-
-    saveData();
-
-    renderTasks();
-
-    renderDashboard();
-
-}
-
-
-function renderTasks(){
-
-    const box =
-        document.getElementById(
-            "taskList"
-        );
-
-    if(!data.tasks.length){
-
-        box.innerHTML =
-            `<p style="color:var(--muted)">
-                هنوز وظیفه‌ای اضافه نشده.
-            </p>`;
-
-        return;
-
-    }
-
-    box.innerHTML =
-        data.tasks.map(t=>`
-
-        <div class="task">
-
-            <input
-                type="checkbox"
-                ${t.done?"checked":""}
-                onchange="toggleTask(${t.id})">
-
-            <div
-                class="taskInfo ${t.done?"taskDone":""}">
-                ${escapeHTML(t.title)}
             </div>
 
+
+            <div class="welcome-illustration">
+              🎓
+            </div>
+
+          </div>
+
+
+          <!-- STATS -->
+
+          <div class="stats-grid">
+
+
+            <div class="stat-card">
+
+              <div class="stat-icon">
+                ⏱️
+              </div>
+
+              <div class="stat-content">
+
+                <span>
+                  مطالعه امروز
+                </span>
+
+                <strong id="todayStudy">
+                  ۰
+                </strong>
+
+                <small>
+                  دقیقه
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              <div class="stat-icon">
+                📝
+              </div>
+
+              <div class="stat-content">
+
+                <span>
+                  تست امروز
+                </span>
+
+                <strong id="todayTests">
+                  ۰
+                </strong>
+
+                <small>
+                  تست
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              <div class="stat-icon">
+                🎯
+              </div>
+
+              <div class="stat-content">
+
+                <span>
+                  دقت تست
+                </span>
+
+                <strong id="todayAccuracy">
+                  ۰٪
+                </strong>
+
+                <small>
+                  عملکرد
+                </small>
+
+              </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              <div class="stat-icon">
+                🔥
+              </div>
+
+              <div class="stat-content">
+
+                <span>
+                  استمرار
+                </span>
+
+                <strong id="todayStreak">
+                  ۰
+                </strong>
+
+                <small>
+                  روز
+                </small>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- MAIN DASHBOARD GRID -->
+
+          <div class="dashboard-grid">
+
+
+            <!-- TODAY -->
+
+            <div class="panel">
+
+              <div class="panel-header">
+
+                <div>
+
+                  <span class="panel-kicker">
+                    برنامه امروز
+                  </span>
+
+                  <h3>
+                    کارهای امروز
+                  </h3>
+
+                </div>
+
+                <button
+                  id="addTaskButton"
+                  class="small-button"
+                  type="button"
+                >
+                  + افزودن
+                </button>
+
+              </div>
+
+
+              <div
+                id="todayTasks"
+                class="task-list"
+              >
+
+                <div class="empty-state">
+                  هنوز کاری برای امروز ثبت نشده.
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- AI ADVICE -->
+
+            <div class="panel ai-panel">
+
+              <div class="panel-header">
+
+                <div>
+
+                  <span class="panel-kicker">
+                    هوش مصنوعی
+                  </span>
+
+                  <h3>
+                    پیشنهاد مشاور
+                  </h3>
+
+                </div>
+
+                <span class="ai-status">
+                  ● آنلاین
+                </span>
+
+              </div>
+
+
+              <div
+                id="dashboardAdvice"
+                class="ai-advice"
+              >
+                برای دریافت تحلیل شخصی، روی «تحلیل وضعیت» بزن.
+              </div>
+
+
+              <button
+                id="analyzeButton"
+                class="primary-button full-button"
+                type="button"
+              >
+                🧠 تحلیل وضعیت من
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- QUICK ACTIONS -->
+
+          <div class="panel">
+
+            <div class="panel-header">
+
+              <div>
+
+                <span class="panel-kicker">
+                  دسترسی سریع
+                </span>
+
+                <h3>
+                  چه کاری می‌خواهی انجام دهی؟
+                </h3>
+
+              </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+              <button
+                class="quick-action"
+                data-action="study"
+                type="button"
+              >
+                <span>📖</span>
+                <strong>ثبت مطالعه</strong>
+                <small>زمان مطالعه را ثبت کن</small>
+              </button>
+
+
+              <button
+                class="quick-action"
+                data-action="test"
+                type="button"
+              >
+                <span>📝</span>
+                <strong>ثبت تست</strong>
+                <small>عملکرد تستی امروز</small>
+              </button>
+
+
+              <button
+                class="quick-action"
+                data-action="plan"
+                type="button"
+              >
+                <span>📅</span>
+                <strong>ساخت برنامه</strong>
+                <small>برنامه هوشمند بساز</small>
+              </button>
+
+
+              <button
+                class="quick-action"
+                data-action="timer"
+                type="button"
+              >
+                <span>⏱️</span>
+                <strong>شروع مطالعه</strong>
+                <small>تمرکز را شروع کن</small>
+              </button>
+
+            </div>
+
+          </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             COACH
+        ================================================== -->
+
+        <section
+          id="coachPage"
+          class="page"
+          data-page-content="coach"
+        >
+
+          <div class="coach-layout">
+
+
+            <div class="coach-header panel">
+
+              <div class="coach-avatar">
+                🤖
+              </div>
+
+              <div>
+
+                <h2>
+                  مشاور هوشمند StudyCoach
+                </h2>
+
+                <p>
+                  برنامه، عملکرد و وضعیتت را بررسی می‌کنم و برای قدم بعدی پیشنهاد می‌دهم.
+                </p>
+
+              </div>
+
+              <span class="ai-status">
+                ● آماده
+              </span>
+
+            </div>
+
+
+            <div class="chat-panel panel">
+
+              <div
+                id="chatMessages"
+                class="chat-messages"
+              >
+
+                <div class="chat-message ai-message">
+
+                  <div class="message-avatar">
+                    🤖
+                  </div>
+
+                  <div class="message-content">
+
+                    <strong>
+                      مشاور
+                    </strong>
+
+                    <p>
+                      سلام! 👋
+                      من مشاور StudyCoach هستم.
+                      وضعیت امروزت را بگو تا با هم بررسی کنیم.
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="chat-suggestions">
+
+                <button
+                  class="suggestion-button"
+                  type="button"
+                >
+                  امروز چه بخوانم؟
+                </button>
+
+                <button
+                  class="suggestion-button"
+                  type="button"
+                >
+                  از کدام درس شروع کنم؟
+                </button>
+
+                <button
+                  class="suggestion-button"
+                  type="button"
+                >
+                  برنامه‌ام عقب افتاده
+                </button>
+
+                <button
+                  class="suggestion-button"
+                  type="button"
+                >
+                  عملکرد تست‌هایم را تحلیل کن
+                </button>
+
+              </div>
+
+
+              <div class="chat-input-area">
+
+                <textarea
+                  id="chatInput"
+                  rows="2"
+                  placeholder="پیامت را برای مشاور بنویس..."
+                ></textarea>
+
+                <button
+                  id="sendMessageButton"
+                  class="primary-button send-button"
+                  type="button"
+                >
+                  ارسال 🚀
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PLANNER
+        ================================================== -->
+
+        <section
+          id="plannerPage"
+          class="page"
+          data-page-content="planner"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="panel-kicker">
+                برنامه‌ریزی
+              </span>
+
+              <h2>
+                برنامه مطالعه هوشمند
+              </h2>
+
+              <p>
+                برنامه را بر اساس زمان، هدف و اولویت دروس تنظیم کن.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="planner-grid">
+
+
+            <div class="panel">
+
+              <h3>
+                ⚙️ تنظیمات برنامه
+              </h3>
+
+
+              <div class="form-grid">
+
+                <label class="form-field">
+
+                  <span>
+                    ساعت مطالعه هدف
+                  </span>
+
+                  <input
+                    id="planHours"
+                    type="number"
+                    min="1"
+                    max="20"
+                    value="8"
+                  >
+
+                </label>
+
+
+                <label class="form-field">
+
+                  <span>
+                    اولویت اصلی
+                  </span>
+
+                  <select id="planPriority">
+
+                    <option value="زیست">
+                      زیست
+                    </option>
+
+                    <option value="شیمی">
+                      شیمی
+                    </option>
+
+                    <option value="فیزیک">
+                      فیزیک
+                    </option>
+
+                    <option value="ریاضی">
+                      ریاضی
+                    </option>
+
+                    <option value="دینی">
+                      دینی
+                    </option>
+
+                    <option value="فارسی">
+                      فارسی
+                    </option>
+
+                    <option value="عربی">
+                      عربی
+                    </option>
+
+                    <option value="زبان">
+                      زبان
+                    </option>
+
+                  </select>
+
+                </label>
+
+
+                <label class="form-field">
+
+                  <span>
+                    شدت برنامه
+                  </span>
+
+                  <select id="planIntensity">
+
+                    <option value="normal">
+                      متعادل
+                    </option>
+
+                    <option value="heavy">
+                      فشرده
+                    </option>
+
+                    <option value="aggressive">
+                      تهاجمی
+                    </option>
+
+                  </select>
+
+                </label>
+
+
+                <label class="form-field">
+
+                  <span>
+                    زمان هر جلسه
+                  </span>
+
+                  <select id="sessionMinutes">
+
+                    <option value="45">
+                      ۴۵ دقیقه
+                    </option>
+
+                    <option value="50" selected>
+                      ۵۰ دقیقه
+                    </option>
+
+                    <option value="60">
+                      ۶۰ دقیقه
+                    </option>
+
+                    <option value="75">
+                      ۷۵ دقیقه
+                    </option>
+
+                    <option value="90">
+                      ۹۰ دقیقه
+                    </option>
+
+                  </select>
+
+                </label>
+
+              </div>
+
+
+              <button
+                id="generatePlanButton"
+                class="primary-button full-button"
+                type="button"
+              >
+                ✨ تولید برنامه
+              </button>
+
+            </div>
+
+
+            <div class="panel">
+
+              <h3>
+                🎯 هدف امروز
+              </h3>
+
+              <div class="goal-preview">
+
+                <strong id="planGoalPreview">
+                  ۸ ساعت مطالعه
+                </strong>
+
+                <span>
+                  تمرکز روی نقاط ضعف و اولویت اصلی
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="panel-header">
+
+              <div>
+
+                <span class="panel-kicker">
+                  خروجی
+                </span>
+
+                <h3>
+                  برنامه پیشنهادی
+                </h3>
+
+              </div>
+
+              <button
+                id="clearPlanButton"
+                class="small-button"
+                type="button"
+              >
+                پاک کردن
+              </button>
+
+            </div>
+
+
+            <div
+              id="generatedPlan"
+              class="generated-plan"
+            >
+
+              <div class="empty-state">
+                برای ساخت برنامه، تنظیمات را انتخاب کن.
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SUBJECTS
+        ================================================== -->
+
+        <section
+          id="subjectsPage"
+          class="page"
+          data-page-content="subjects"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="panel-kicker">
+                مدیریت دروس
+              </span>
+
+              <h2>
+                وضعیت درسی
+              </h2>
+
+              <p>
+                عملکرد هر درس را جداگانه بررسی کن.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="subjectsGrid"
+            class="subjects-grid"
+          >
+
+            <!-- JS -->
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TESTS
+        ================================================== -->
+
+        <section
+          id="testsPage"
+          class="page"
+          data-page-content="tests"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="panel-kicker">
+                تست
+              </span>
+
+              <h2>
+                ثبت و تحلیل تست
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="form-grid">
+
+              <label class="form-field">
+
+                <span>
+                  درس
+                </span>
+
+                <select id="testSubject">
+
+                  <option>زیست</option>
+                  <option>شیمی</option>
+                  <option>فیزیک</option>
+                  <option>ریاضی</option>
+
+                </select>
+
+              </label>
+
+
+              <label class="form-field">
+
+                <span>
+                  تعداد کل
+                </span>
+
+                <input
+                  id="testTotal"
+                  type="number"
+                  min="1"
+                  value="20"
+                >
+
+              </label>
+
+
+              <label class="form-field">
+
+                <span>
+                  صحیح
+                </span>
+
+                <input
+                  id="testCorrect"
+                  type="number"
+                  min="0"
+                  value="15"
+                >
+
+              </label>
+
+
+              <label class="form-field">
+
+                <span>
+                  غلط
+                </span>
+
+                <input
+                  id="testWrong"
+                  type="number"
+                  min="0"
+                  value="3"
+                >
+
+              </label>
+
+
+              <label class="form-field">
+
+                <span>
+                  نزده
+                </span>
+
+                <input
+                  id="testBlank"
+                  type="number"
+                  min="0"
+                  value="2"
+                >
+
+              </label>
+
+            </div>
+
+
             <button
-                class="btn btnDanger btnSmall"
-                onclick="deleteTask(${t.id})">
-                حذف
+              id="saveTestButton"
+              class="primary-button"
+              type="button"
+            >
+              ثبت تست
             </button>
 
-        </div>
+          </div>
 
-        `).join("");
 
-}
+          <div class="panel">
 
+            <div class="panel-header">
 
-/* =========================
-   TIMER
-========================= */
+              <div>
 
-let timerSeconds = 25*60;
+                <span class="panel-kicker">
+                  تاریخچه
+                </span>
 
-let timerInterval = null;
+                <h3>
+                  تست‌های اخیر
+                </h3>
 
-function updateTimerDisplay(){
+              </div>
 
-    const m =
-        Math.floor(
-            timerSeconds/60
-        )
-        .toString()
-        .padStart(2,"0");
+            </div>
 
-    const s =
-        (timerSeconds%60)
-        .toString()
-        .padStart(2,"0");
 
-    document.getElementById(
-        "timerDisplay"
-    ).textContent =
-        `${m}:${s}`;
+            <div
+              id="testHistory"
+              class="history-list"
+            >
 
-}
+              <div class="empty-state">
+                هنوز تستی ثبت نشده است.
+              </div>
 
+            </div>
 
-function startTimer(){
+          </div>
 
-    if(timerInterval)
-        return;
+        </section>
 
-    timerInterval =
-        setInterval(()=>{
 
-            if(timerSeconds<=0){
+        <!-- =================================================
+             REVIEWS
+        ================================================== -->
 
-                clearInterval(
-                    timerInterval
-                );
+        <section
+          id="reviewsPage"
+          class="page"
+          data-page-content="reviews"
+        >
 
-                timerInterval=null;
+          <div class="section-heading">
 
-                data.studyMinutes += 25;
+            <div>
 
-                data.sessions++;
+              <span class="panel-kicker">
+                مرور
+              </span>
 
-                saveData();
+              <h2>
+                مرور هوشمند
+              </h2>
 
-                renderDashboard();
+              <p>
+                مباحثی که احتمال فراموشی آن‌ها بیشتر است در اولویت قرار می‌گیرند.
+              </p>
 
-                renderAnalytics();
+            </div>
 
-                toast(
-                    "جلسه مطالعه تمام شد 🎉"
-                );
+          </div>
 
-                timerSeconds =
-                    25*60;
 
-                updateTimerDisplay();
+          <div
+            id="reviewsList"
+            class="review-grid"
+          >
 
-                return;
+            <div class="empty-state">
+              هنوز مرور هوشمندی ایجاد نشده است.
+            </div>
 
-            }
+          </div>
 
-            timerSeconds--;
+        </section>
 
-            updateTimerDisplay();
 
-        },1000);
+        <!-- =================================================
+             TIMER
+        ================================================== -->
 
-}
+        <section
+          id="timerPage"
+          class="page"
+          data-page-content="timer"
+        >
 
+          <div class="timer-wrapper">
 
-function pauseTimer(){
+            <div class="panel timer-panel">
 
-    clearInterval(
-        timerInterval
-    );
+              <span class="panel-kicker">
+                Focus Mode
+              </span>
 
-    timerInterval=null;
+              <h2>
+                زمان تمرکز
+              </h2>
 
-}
 
+              <div
+                id="timerClock"
+                class="timer-clock"
+              >
+                25:00
+              </div>
 
-function resetTimer(){
 
-    pauseTimer();
+              <div class="timer-presets">
 
-    timerSeconds=25*60;
+                <button
+                  class="timer-preset active"
+                  data-minutes="25"
+                  type="button"
+                >
+                  ۲۵ دقیقه
+                </button>
 
-    updateTimerDisplay();
+                <button
+                  class="timer-preset"
+                  data-minutes="50"
+                  type="button"
+                >
+                  ۵۰ دقیقه
+                </button>
 
-}
+                <button
+                  class="timer-preset"
+                  data-minutes="90"
+                  type="button"
+                >
+                  ۹۰ دقیقه
+                </button>
 
+              </div>
 
-/* =========================
-   ANALYTICS
-========================= */
 
-function renderAnalytics(){
+              <div class="timer-controls">
 
-    document.getElementById(
-        "totalStudy"
-    ).textContent =
-        data.studyMinutes;
+                <button
+                  id="startTimerButton"
+                  class="primary-button"
+                  type="button"
+                >
+                  ▶ شروع
+                </button>
 
-    document.getElementById(
-        "sessions"
-    ).textContent =
-        data.sessions;
+                <button
+                  id="resetTimerButton"
+                  class="secondary-button"
+                  type="button"
+                >
+                  ↻ بازنشانی
+                </button>
 
-    const average =
-        data.sessions
-        ? Math.round(
-            data.studyMinutes /
-            data.sessions
-        )
-        : 0;
+              </div>
 
-    document.getElementById(
-        "averageStudy"
-    ).textContent =
-        average;
 
-    const values =
-        Object.values(
-            data.subjects
-        );
+              <div class="timer-note">
 
-    const overall =
-        values.length
-        ? Math.round(
-            values.reduce(
-                (a,b)=>a+b,
-                0
-            ) / values.length
-        )
-        : 0;
+                💡 هنگام تایمر، موبایل و حواس‌پرتی‌ها را کنار بگذار.
 
-    document.getElementById(
-        "overallProgress"
-    ).textContent =
-        overall+"%";
+              </div>
 
-}
+            </div>
 
+          </div>
 
-/* =========================
-   AI
-========================= */
+        </section>
 
-async function sendMessage(){
 
-    const input =
-        document.getElementById(
-            "chatInput"
-        );
+        <!-- =================================================
+             ANALYTICS
+        ================================================== -->
 
-    const text =
-        input.value.trim();
+        <section
+          id="analyticsPage"
+          class="page"
+          data-page-content="analytics"
+        >
 
-    if(!text)
-        return;
+          <div class="section-heading">
 
-    addMessage(
-        text,
-        "user"
-    );
+            <div>
 
-    input.value="";
+              <span class="panel-kicker">
+                تحلیل
+              </span>
 
-    const loading =
-        addMessage(
-            "در حال فکر کردن... 🤖",
-            "ai"
-        );
+              <h2>
+                عملکرد من
+              </h2>
 
-    try{
+              <p>
+                روند مطالعه و تست‌هایت را بررسی کن.
+              </p>
 
-        const answer =
-            await askAI(text);
+            </div>
 
-        loading.remove();
+          </div>
 
-        addMessage(
-            answer,
-            "ai"
-        );
 
-    }catch(error){
+          <div class="analytics-grid">
 
-        loading.remove();
 
-        addMessage(
-            "خطا در اتصال به هوش مصنوعی:\n"
-            + error.message,
-            "ai"
-        );
+            <div class="panel">
 
-    }
+              <h3>
+                📚 مطالعه
+              </h3>
 
-}
+              <div id="analyticsStudy">
+                در حال محاسبه...
+              </div>
 
+            </div>
 
-function addMessage(text,type){
 
-    const box =
-        document.getElementById(
-            "messages"
-        );
+            <div class="panel">
 
-    const div =
-        document.createElement("div");
+              <h3>
+                📝 تست
+              </h3>
 
-    div.className =
-        "message "+type;
+              <div id="analyticsTests">
+                در حال محاسبه...
+              </div>
 
-    div.textContent =
-        text;
+            </div>
 
-    box.appendChild(div);
 
-    box.scrollTop =
-        box.scrollHeight;
+            <div class="panel">
 
-    return div;
+              <h3>
+                🎯 دقت
+              </h3>
 
-}
+              <div id="analyticsAccuracy">
+                در حال محاسبه...
+              </div>
 
+            </div>
 
-function handleChatKey(event){
 
-    if(
-        event.key==="Enter" &&
-        !event.shiftKey
-    ){
+            <div class="panel">
 
-        event.preventDefault();
+              <h3>
+                🔥 استمرار
+              </h3>
 
-        sendMessage();
+              <div id="analyticsStreak">
+                در حال محاسبه...
+              </div>
 
-    }
+            </div>
 
-}
+          </div>
 
 
-async function generateAIPlan(){
+          <div class="analytics-two-column">
 
-    const prompt = `
+            <div class="panel">
 
-من یک دانش‌آموز کنکوری هستم.
+              <div class="panel-header">
 
-اطلاعات فعلی من:
+                <h3>
+                  📈 روند هفتگی
+                </h3>
 
-هدف مطالعه روزانه:
-${data.user.dailyGoal} ساعت
+              </div>
 
-تسلط دروس:
-${JSON.stringify(data.subjects)}
+              <div
+                id="weeklyChart"
+                class="chart-area"
+              >
+                نمودار پس از ثبت اطلاعات نمایش داده می‌شود.
+              </div>
 
-برنامه‌های فعلی:
-${JSON.stringify(data.plans)}
+            </div>
 
-برای من یک برنامه مطالعه عملی و قابل اجرا پیشنهاد بده.
 
-برنامه را فارسی،
-ساختاریافته،
-واقع‌بینانه
-و با اولویت‌بندی مباحث ارائه کن.
+            <div class="panel">
 
-`;
+              <div class="panel-header">
 
-    showPage("ai");
+                <h3>
+                  ⚠️ نقاط قابل بهبود
+                </h3>
 
-    const loading =
-        addMessage(
-            "در حال ساخت برنامه اختصاصی... 🤖",
-            "ai"
-        );
+              </div>
 
-    try{
+              <div
+                id="weaknessList"
+                class="weakness-list"
+              >
+                هنوز داده کافی وجود ندارد.
+              </div>
 
-        const answer =
-            await askAI(prompt);
+            </div>
 
-        loading.remove();
+          </div>
 
-        addMessage(
-            answer,
-            "ai"
-        );
+        </section>
 
-    }catch(error){
 
-        loading.remove();
+        <!-- =================================================
+             GOALS
+        ================================================== -->
 
-        addMessage(
-            error.message,
-            "ai"
-        );
+        <section
+          id="goalsPage"
+          class="page"
+          data-page-content="goals"
+        >
 
-    }
+          <div class="section-heading">
 
-}
+            <div>
 
+              <span class="panel-kicker">
+                هدف
+              </span>
 
-async function analyzePerformance(){
+              <h2>
+                اهداف من
+              </h2>
 
-    const result =
-        document.getElementById(
-            "analysisResult"
-        );
+            </div>
 
-    result.textContent =
-        "در حال تحلیل عملکرد... 🤖";
+          </div>
 
-    const prompt = `
 
-تو مشاور حرفه‌ای کنکور هستی.
+          <div class="panel">
 
-این اطلاعات دانش‌آموز است:
+            <div class="form-grid">
 
-زمان مطالعه:
-${data.studyMinutes} دقیقه
+              <label class="form-field">
 
-تعداد جلسات:
-${data.sessions}
+                <span>
+                  هدف اصلی
+                </span>
 
-تسلط دروس:
-${JSON.stringify(data.subjects)}
+                <input
+                  id="goalInput"
+                  type="text"
+                  placeholder="مثلاً پزشکی دانشگاه تهران"
+                >
 
-تعداد وظایف:
-${data.tasks.length}
+              </label>
 
-وظایف انجام‌شده:
-${data.tasks.filter(t=>t.done).length}
 
-این وضعیت را تحلیل کن و:
+              <label class="form-field">
 
-1. نقاط قوت
-2. نقاط ضعف
-3. مشکل اصلی
-4. پیشنهاد فردا
-5. اولویت دروس
-6. پیشنهاد افزایش بازدهی
+                <span>
+                  تاریخ آزمون
+                </span>
 
-را به فارسی ارائه بده.
+                <input
+                  id="examDateInput"
+                  type="date"
+                >
 
-`;
+              </label>
 
-    try{
 
-        result.textContent =
-            await askAI(prompt);
+              <label class="form-field">
 
-    }catch(error){
+                <span>
+                  ساعت مطالعه روزانه
+                </span>
 
-        result.textContent =
-            error.message;
+                <input
+                  id="dailyGoalInput"
+                  type="number"
+                  min="1"
+                  max="20"
+                  value="8"
+                >
 
-    }
+              </label>
 
-}
+            </div>
 
 
-async function testAI(){
+            <button
+              id="saveGoalButton"
+              class="primary-button"
+              type="button"
+            >
+              ذخیره هدف
+            </button>
 
-    const info =
-        document.getElementById(
-            "connectionInfo"
-        );
+          </div>
 
-    info.textContent =
-        "در حال تست اتصال...";
 
-    try{
+          <div class="goal-dashboard panel">
 
-        const answer =
-            await askAI(
-                "فقط بنویس: اتصال StudyCoach به هوش مصنوعی موفق است."
-            );
+            <div class="goal-main-icon">
+              🎯
+            </div>
 
-        info.textContent =
-            "✅ اتصال موفق است: "
-            + answer;
+            <div>
 
-        setAIStatus(true);
+              <span>
+                هدف فعلی
+              </span>
 
-    }catch(error){
+              <h2 id="currentGoal">
+                پزشکی دانشگاه تهران
+              </h2>
 
-        info.textContent =
-            "❌ اتصال ناموفق: "
-            + error.message;
+              <p id="examCountdown">
+                تاریخ آزمون هنوز تنظیم نشده است.
+              </p>
 
-        setAIStatus(false);
+            </div>
 
-    }
+          </div>
 
-}
+        </section>
 
 
-function setAIStatus(online){
+        <!-- =================================================
+             SETTINGS
+        ================================================== -->
 
-    const dot =
-        document.getElementById(
-            "aiDot"
-        );
+        <section
+          id="settingsPage"
+          class="page"
+          data-page-content="settings"
+        >
 
-    const text =
-        document.getElementById(
-            "aiStatusText"
-        );
+          <div class="section-heading">
 
-    if(online){
+            <div>
 
-        dot.classList.add("online");
+              <span class="panel-kicker">
+                تنظیمات
+              </span>
 
-        text.textContent =
-            "AI متصل است";
+              <h2>
+                تنظیمات StudyCoach
+              </h2>
 
-    }else{
+            </div>
 
-        dot.classList.remove("online");
+          </div>
 
-        text.textContent =
-            "AI متصل نیست";
 
-    }
+          <div class="panel">
 
-}
+            <h3>
+              👤 پروفایل
+            </h3>
 
 
-/* =========================
-   SETTINGS
-========================= */
+            <div class="form-grid">
 
-function saveSettings(){
+              <label class="form-field">
 
-    data.user.name =
-        document.getElementById(
-            "userName"
-        ).value.trim();
+                <span>
+                  نام
+                </span>
 
-    data.user.dailyGoal =
-        Number(
-            document.getElementById(
-                "goalInput"
-            ).value
-        ) || 8;
+                <input
+                  id="nameInput"
+                  type="text"
+                  placeholder="نام شما"
+                >
 
-    saveData();
+              </label>
 
-    renderDashboard();
 
-    toast(
-        "تنظیمات ذخیره شد."
-    );
+              <label class="form-field">
 
-}
+                <span>
+                  هدف
+                </span>
 
+                <input
+                  id="profileGoalInput"
+                  type="text"
+                  placeholder="هدف تحصیلی"
+                >
 
-function loadSettings(){
+              </label>
 
-    document.getElementById(
-        "userName"
-    ).value =
-        data.user.name || "";
+            </div>
 
-    document.getElementById(
-        "goalInput"
-    ).value =
-        data.user.dailyGoal || 8;
 
-}
+            <button
+              id="saveProfileButton"
+              class="primary-button"
+              type="button"
+            >
+              ذخیره پروفایل
+            </button>
 
+          </div>
 
-/* =========================
-   RESET
-========================= */
 
-function clearAllData(){
+          <div class="panel">
 
-    if(
-        !confirm(
-            "تمام اطلاعات StudyCoach پاک شود؟"
-        )
-    )
-        return;
+            <h3>
+              💾 مدیریت اطلاعات
+            </h3>
 
-    localStorage.removeItem(
-        STORAGE_KEY
-    );
+            <p>
+              اطلاعات StudyCoach به صورت محلی در مرورگر ذخیره می‌شود.
+            </p>
 
-    location.reload();
 
-}
+            <div class="settings-actions">
 
+              <button
+                id="settingsBackupButton"
+                class="secondary-button"
+                type="button"
+              >
+                💾 دریافت پشتیبان
+              </button>
 
-/* =========================
-   HELPERS
-========================= */
 
-function today(){
+              <button
+                id="settingsRestoreButton"
+                class="secondary-button"
+                type="button"
+              >
+                📥 بازیابی پشتیبان
+              </button>
 
-    const d =
-        new Date();
 
-    return d
-        .toISOString()
-        .split("T")[0];
+              <button
+                id="clearDataButton"
+                class="danger-button"
+                type="button"
+              >
+                🗑️ پاک کردن تمام اطلاعات
+              </button>
 
-}
+            </div>
 
+          </div>
 
-function escapeHTML(value){
+        </section>
 
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
 
-}
+      </div>
 
+    </main>
 
-function escapeAttr(value){
+  </div>
 
-    return String(value)
-        .replaceAll("'","\\'");
 
-}
+  <!-- =====================================================
+       TASK MODAL
+  ====================================================== -->
 
+  <div
+    id="taskModal"
+    class="modal hidden"
+  >
 
-/* =========================
-   INIT
-========================= */
+    <div class="modal-box">
 
-document.getElementById(
-    "planDate"
-).value =
-    today();
+      <div class="modal-header">
 
-loadSettings();
+        <h3>
+          افزودن کار
+        </h3>
 
-renderDashboard();
+        <button
+          class="modal-close"
+          data-close-modal="taskModal"
+          type="button"
+        >
+          ×
+        </button>
 
-renderPlans();
+      </div>
 
-renderSubjects();
 
-renderTasks();
+      <label class="form-field">
 
-renderAnalytics();
+        <span>
+          عنوان کار
+        </span>
 
-updateTimerDisplay();
+        <input
+          id="taskInput"
+          type="text"
+          placeholder="مثلاً زیست فصل ۵"
+        >
 
-setAIStatus(false);
+      </label>
 
-testAI();
 
-</script>
+      <div class="modal-actions">
+
+        <button
+          id="saveTaskButton"
+          class="primary-button"
+          type="button"
+        >
+          ذخیره
+        </button>
+
+        <button
+          class="secondary-button"
+          data-close-modal="taskModal"
+          type="button"
+        >
+          لغو
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       STUDY MODAL
+  ====================================================== -->
+
+  <div
+    id="studyModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-header">
+
+        <h3>
+          ثبت مطالعه
+        </h3>
+
+        <button
+          class="modal-close"
+          data-close-modal="studyModal"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <label class="form-field">
+
+          <span>
+            درس
+          </span>
+
+          <select id="studySubject">
+
+            <option>زیست</option>
+            <option>شیمی</option>
+            <option>فیزیک</option>
+            <option>ریاضی</option>
+            <option>دینی</option>
+            <option>فارسی</option>
+            <option>عربی</option>
+            <option>زبان</option>
+
+          </select>
+
+        </label>
+
+
+        <label class="form-field">
+
+          <span>
+            دقیقه مطالعه
+          </span>
+
+          <input
+            id="studyMinutes"
+            type="number"
+            min="1"
+            value="50"
+          >
+
+        </label>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          id="saveStudyButton"
+          class="primary-button"
+          type="button"
+        >
+          ثبت مطالعه
+        </button>
+
+        <button
+          class="secondary-button"
+          data-close-modal="studyModal"
+          type="button"
+        >
+          لغو
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
+
+
+  <!-- =====================================================
+       LOADING
+  ====================================================== -->
+
+  <div
+    id="loadingOverlay"
+    class="loading-overlay hidden"
+  >
+
+    <div class="loading-box">
+
+      <div class="loading-spinner"></div>
+
+      <strong>
+        مشاور در حال تحلیل است...
+      </strong>
+
+      <span>
+        لطفاً چند لحظه صبر کن
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       APP JS
+  ====================================================== -->
+
+  <script src="app.js"></script>
 
 </body>
 </html>
