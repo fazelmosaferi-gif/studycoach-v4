@@ -2,32 +2,29 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090d18">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16">
 <title>StudyCoach V5 Ultimate AI</title>
-
 <style>
 *{box-sizing:border-box}
 :root{
- --bg:#080c17;
+ --bg:#080b16;
  --panel:#111827;
- --panel2:#172033;
- --border:#28354e;
+ --panel2:#182238;
+ --border:#293650;
  --text:#f8fafc;
  --muted:#94a3b8;
- --primary:#7357ff;
- --primary2:#9b87ff;
+ --primary:#7657ff;
+ --primary2:#9b86ff;
  --green:#22c55e;
  --red:#ef4444;
  --orange:#f59e0b;
- --radius:20px;
 }
 body{
  margin:0;
  background:
- radial-gradient(circle at 10% 0,#211858 0,transparent 30%),
- radial-gradient(circle at 100% 100%,#132c43 0,transparent 30%),
+ radial-gradient(circle at 0 0,#241858,transparent 35%),
+ radial-gradient(circle at 100% 100%,#12344a,transparent 35%),
  var(--bg);
  color:var(--text);
  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
@@ -41,35 +38,32 @@ button{cursor:pointer}
  top:0;
  bottom:0;
  width:270px;
- padding:20px;
  background:#0b1120;
  border-left:1px solid var(--border);
+ padding:22px;
  z-index:20;
 }
 .logo{
- font-size:23px;
+ font-size:24px;
  font-weight:900;
- margin-bottom:25px;
+ margin-bottom:5px;
 }
 .logo span{color:var(--primary2)}
-.version{
- font-size:11px;
- color:var(--muted);
-}
+.version{font-size:11px;color:var(--muted);margin-bottom:25px}
 .nav button{
+ display:block;
  width:100%;
  border:0;
  background:transparent;
  color:var(--muted);
  padding:13px;
- margin:3px 0;
  border-radius:13px;
+ margin:4px 0;
  text-align:right;
 }
-.nav button:hover,
-.nav button.active{
+.nav button:hover,.nav button.active{
  background:var(--panel2);
- color:#fff;
+ color:white;
 }
 .main{
  margin-right:270px;
@@ -101,34 +95,29 @@ button{cursor:pointer}
 .grid2{
  display:grid;
  grid-template-columns:repeat(2,1fr);
- gap:18px;
+ gap:15px;
 }
 .card{
- background:rgba(17,24,39,.9);
+ background:rgba(17,24,39,.92);
  border:1px solid var(--border);
- border-radius:var(--radius);
+ border-radius:20px;
  padding:20px;
 }
-.stat{
- font-size:31px;
- font-weight:900;
- margin-top:10px;
-}
+.stat{font-size:30px;font-weight:900;margin-top:10px}
 .muted{color:var(--muted)}
 .btn{
- background:var(--panel2);
  border:1px solid var(--border);
+ background:var(--panel2);
  color:#fff;
- border-radius:13px;
  padding:11px 16px;
+ border-radius:13px;
 }
 .btn.primary{
- background:linear-gradient(135deg,var(--primary),var(--primary2));
  border:0;
+ background:linear-gradient(135deg,var(--primary),var(--primary2));
 }
 .btn.green{background:var(--green);border:0}
 .btn.red{background:var(--red);border:0}
-.btn.orange{background:var(--orange);border:0;color:#111}
 .actions{
  display:flex;
  flex-wrap:wrap;
@@ -136,18 +125,15 @@ button{cursor:pointer}
 }
 input,textarea,select{
  width:100%;
- background:#090f1c;
- border:1px solid var(--border);
- border-radius:13px;
  padding:13px;
- color:#fff;
+ border-radius:13px;
+ border:1px solid var(--border);
+ background:#090f1c;
+ color:white;
  outline:none;
 }
-textarea{
- min-height:120px;
- resize:vertical;
-}
-.form{margin-bottom:15px}
+textarea{min-height:120px;resize:vertical}
+.form{margin-bottom:14px}
 label{
  display:block;
  margin-bottom:7px;
@@ -155,9 +141,9 @@ label{
 }
 .progress{
  height:10px;
- background:#080c15;
  border-radius:20px;
  overflow:hidden;
+ background:#070b13;
 }
 .progress div{
  height:100%;
@@ -177,7 +163,7 @@ label{
 }
 .dot.online{background:var(--green)}
 .chat{
- height:calc(100vh - 170px);
+ height:calc(100vh - 165px);
  display:flex;
  flex-direction:column;
 }
@@ -187,19 +173,19 @@ label{
  padding:5px;
 }
 .message{
- max-width:86%;
- padding:14px 16px;
- margin-bottom:12px;
+ max-width:88%;
+ padding:14px 17px;
  border-radius:18px;
  line-height:1.9;
  white-space:pre-wrap;
+ margin-bottom:12px;
 }
 .message.user{
  background:linear-gradient(135deg,#513de0,#765cff);
  margin-right:auto;
 }
 .message.ai{
- background:#141e31;
+ background:#151f32;
  border:1px solid var(--border);
  margin-left:auto;
 }
@@ -208,48 +194,42 @@ label{
  gap:10px;
  padding-top:10px;
 }
-.chatbar textarea{
- min-height:65px;
+.chatbar textarea{min-height:65px}
+.item{
+ padding:15px;
+ border:1px solid var(--border);
+ border-radius:15px;
+ margin-bottom:10px;
 }
+.badge{
+ padding:5px 10px;
+ border-radius:20px;
+ background:#202b42;
+ font-size:12px;
+}
+.badge.green{background:#12351f;color:#4ade80}
+.badge.red{background:#36181b;color:#f87171}
 .tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse}
+table{
+ width:100%;
+ border-collapse:collapse;
+}
 th,td{
  padding:12px;
  border-bottom:1px solid var(--border);
  text-align:right;
  white-space:nowrap;
 }
-.badge{
- display:inline-block;
- padding:5px 10px;
- border-radius:20px;
- background:#202b42;
- font-size:12px;
-}
-.badge.green{color:#4ade80;background:#12301f}
-.badge.red{color:#f87171;background:#35171b}
-.item{
- border:1px solid var(--border);
- border-radius:15px;
- padding:15px;
- margin-bottom:10px;
-}
 .timer{
+ text-align:center;
  font-size:70px;
  font-weight:900;
- text-align:center;
- letter-spacing:3px;
-}
-.empty{
- text-align:center;
- padding:45px 20px;
- color:var(--muted);
 }
 .modal{
  display:none;
  position:fixed;
  inset:0;
- background:rgba(0,0,0,.72);
+ background:rgba(0,0,0,.75);
  z-index:100;
  align-items:center;
  justify-content:center;
@@ -261,15 +241,15 @@ th,td{
  overflow:auto;
  background:var(--panel);
  border:1px solid var(--border);
- border-radius:23px;
+ border-radius:22px;
  padding:22px;
 }
 .close{
  float:left;
- background:none;
  border:0;
+ background:none;
  color:#fff;
- font-size:27px;
+ font-size:28px;
 }
 .toast{
  display:none;
@@ -277,10 +257,10 @@ th,td{
  left:20px;
  bottom:20px;
  z-index:200;
- background:#182238;
+ padding:14px 18px;
+ background:#19243a;
  border:1px solid var(--border);
  border-radius:14px;
- padding:14px 18px;
 }
 .plan{
  white-space:pre-wrap;
@@ -301,260 +281,172 @@ th,td{
  .grid2{grid-template-columns:1fr}
 }
 @media(max-width:600px){
- .grid{grid-template-columns:1fr 1fr}
  .title{font-size:24px}
  .timer{font-size:48px}
 }
 </style>
 </head>
-
 <body>
-
-<div class="app">
-
 <aside class="sidebar" id="sidebar">
-
 <div class="logo">
 Study<span>Coach</span>
-<div class="version">V5 Ultimate AI</div>
 </div>
-
+<div class="version">
+V5 Ultimate AI
+</div>
 <nav class="nav">
-
-<button class="active" onclick="page('dashboard',this)">🏠 داشبورد</button>
-<button onclick="page('ai',this)">🤖 مشاور AI</button>
-<button onclick="page('planner',this)">📅 برنامه‌ریز</button>
-<button onclick="page('subjects',this)">📚 دروس</button>
-<button onclick="page('tests',this)">📝 آزمون‌ها</button>
-<button onclick="page('analytics',this)">📊 تحلیل</button>
-<button onclick="page('timer',this)">⏱️ مطالعه</button>
-<button onclick="page('goals',this)">🎯 اهداف</button>
-<button onclick="page('settings',this)">⚙️ تنظیمات</button>
-
+<button class="active" onclick="showPage('dashboard',this)">
+🏠 داشبورد
+</button>
+<button onclick="showPage('ai',this)">
+🤖 مشاور AI
+</button>
+<button onclick="showPage('planner',this)">
+📅 برنامه‌ریز
+</button>
+<button onclick="showPage('subjects',this)">
+📚 دروس
+</button>
+<button onclick="showPage('tests',this)">
+📝 آزمون‌ها
+</button>
+<button onclick="showPage('analytics',this)">
+📊 تحلیل
+</button>
+<button onclick="showPage('timer',this)">
+⏱️ مطالعه
+</button>
+<button onclick="showPage('goals',this)">
+🎯 اهداف
+</button>
+<button onclick="showPage('settings',this)">
+⚙️ تنظیمات
+</button>
 </nav>
 </aside>
-
 <main class="main">
-
 <div class="mobilebar">
 <button class="btn" onclick="toggleMenu()">☰</button>
 <strong>StudyCoach V5</strong>
-<button class="btn" onclick="page('ai')">🤖</button>
 </div>
-
-
-<!-- DASHBOARD -->
-
 <section class="page active" id="dashboard">
-
 <div class="header">
-
 <div>
 <div class="title">داشبورد</div>
 <div class="subtitle">مرکز کنترل مطالعه</div>
 </div>
-
 <div class="status">
-<span class="dot" id="statusDot"></span>
-<span id="statusText">AI متصل نیست</span>
+<span class="dot" id="dashDot"></span>
+<span id="dashStatus">AI</span>
 </div>
-
 </div>
-
 <div class="grid">
-
 <div class="card">
 <div class="muted">مطالعه امروز</div>
 <div class="stat" id="todayStudy">0</div>
 <div class="muted">ساعت</div>
 </div>
-
 <div class="card">
 <div class="muted">آزمون امروز</div>
 <div class="stat" id="todayTests">0</div>
 </div>
-
 <div class="card">
 <div class="muted">میانگین درصد</div>
 <div class="stat" id="avgScore">0%</div>
 </div>
-
 <div class="card">
 <div class="muted">کل مطالعه</div>
 <div class="stat" id="allStudy">0</div>
 <div class="muted">ساعت</div>
 </div>
-
 </div>
-
 <br>
-
 <div class="grid2">
-
 <div class="card">
-
-<h3>📈 هدف امروز</h3>
-
+<h3>🎯 هدف امروز</h3>
 <div class="progress">
 <div id="progress"></div>
 </div>
-
 <p class="muted" id="progressText">
-0٪ از هدف
+0%
 </p>
-
 <div class="actions">
 <button class="btn primary" onclick="openModal('studyModal')">
 ➕ ثبت مطالعه
 </button>
-
-<button class="btn" onclick="page('timer')">
-⏱️ شروع تایمر
+<button class="btn" onclick="showPage('timer')">
+⏱️ تایمر
 </button>
 </div>
-
 </div>
-
 <div class="card">
-
-<h3>🧠 پیشنهاد مشاور</h3>
-
+<h3>🧠 توصیه AI</h3>
 <div id="quickAdvice" class="muted">
-برای دریافت تحلیل AI روی دکمه زیر بزن.
+برای دریافت تحلیل فوری روی دکمه بزن.
 </div>
-
 <br>
-
 <button class="btn primary" onclick="quickAdvice()">
 🤖 تحلیل فوری
 </button>
-
 </div>
-
 </div>
-
-<br>
-
-<div class="card">
-
-<h3>⚡ دسترسی سریع</h3>
-
-<div class="actions">
-
-<button class="btn" onclick="openModal('studyModal')">
-➕ مطالعه
-</button>
-
-<button class="btn" onclick="openModal('testModal')">
-📝 آزمون
-</button>
-
-<button class="btn" onclick="generatePlan()">
-🤖 برنامه AI
-</button>
-
-<button class="btn" onclick="page('analytics')">
-📊 تحلیل
-</button>
-
-</div>
-
-</div>
-
 </section>
-
-
-<!-- AI -->
-
 <section class="page" id="ai">
-
 <div class="header">
-
 <div>
-<div class="title">🤖 مشاور هوش مصنوعی</div>
+<div class="title">🤖 مشاور AI</div>
 <div class="subtitle">مشاور خصوصی StudyCoach</div>
 </div>
-
 <div class="status">
-<span class="dot" id="chatDot"></span>
-<span id="chatStatus">AI</span>
+<span class="dot" id="aiDot"></span>
+<span id="aiStatus">آفلاین</span>
 </div>
-
 </div>
-
 <div class="card chat">
-
 <div class="messages" id="messages">
-
 <div class="message ai">
 سلام 👋
-
 من مشاور هوش مصنوعی StudyCoach هستم.
-
-می‌توانم با توجه به اطلاعات واقعی ثبت‌شده در برنامه، درباره برنامه‌ریزی، مطالعه، تست‌زنی، مرور، آزمون و نقاط ضعف بهت کمک کنم.
-
+اطلاعات مطالعه و آزمون‌هایت را تحلیل می‌کنم و برای برنامه‌ریزی، مرور، تست‌زنی و پیشرفت تحصیلی کمکت می‌کنم.
 سؤالت را بپرس.
 </div>
-
 </div>
-
 <div class="chatbar">
-
 <textarea
 id="chatInput"
-placeholder="مثلاً: با توجه به عملکردم، فردا چه برنامه‌ای داشته باشم؟"
+placeholder="مثلاً: با توجه به عملکردم فردا چه بخوانم؟"
 onkeydown="chatKey(event)"
 ></textarea>
-
 <button class="btn primary" onclick="sendChat()">
 ارسال
 </button>
-
 </div>
-
 </div>
-
 </section>
-
-
-<!-- PLANNER -->
-
 <section class="page" id="planner">
-
 <div class="header">
-
 <div>
 <div class="title">📅 برنامه‌ریز AI</div>
-<div class="subtitle">برنامه کاملاً شخصی‌سازی‌شده</div>
+<div class="subtitle">تولید برنامه شخصی</div>
 </div>
-
 <button class="btn primary" onclick="generatePlan()">
-🤖 تولید برنامه
+🤖 ساخت برنامه
 </button>
-
 </div>
-
 <div class="grid2">
-
 <div class="card">
-
-<h3>تنظیمات برنامه</h3>
-
 <div class="form">
-<label>ساعت شروع</label>
+<label>شروع</label>
 <input id="wake" type="time" value="05:00">
 </div>
-
 <div class="form">
-<label>ساعت پایان</label>
+<label>پایان</label>
 <input id="sleep" type="time" value="00:00">
 </div>
-
 <div class="form">
 <label>هدف مطالعه روزانه</label>
-<input id="hours" type="number" value="10" min="1" max="20">
+<input id="hours" type="number" value="10">
 </div>
-
 <div class="form">
 <label>تمرکز اصلی</label>
 <select id="focus">
@@ -566,67 +458,39 @@ onkeydown="chatKey(event)"
 <option>جمع‌بندی</option>
 </select>
 </div>
-
 </div>
-
 <div class="card">
-
-<h3>برنامه تولیدشده</h3>
-
-<div id="planOutput" class="plan empty">
-هنوز برنامه‌ای تولید نشده.
+<h3>برنامه</h3>
+<div id="planOutput" class="plan muted">
+هنوز برنامه‌ای ساخته نشده.
 </div>
-
 </div>
-
 </div>
-
 </section>
-
-
-<!-- SUBJECTS -->
-
 <section class="page" id="subjects">
-
 <div class="header">
-
 <div>
 <div class="title">📚 دروس</div>
-<div class="subtitle">مدیریت وضعیت دروس</div>
+<div class="subtitle">وضعیت دروس</div>
 </div>
-
 <button class="btn primary" onclick="openModal('subjectModal')">
 ➕ افزودن
 </button>
-
 </div>
-
 <div class="card" id="subjectsList"></div>
-
 </section>
-
-
-<!-- TESTS -->
-
 <section class="page" id="tests">
-
 <div class="header">
-
 <div>
 <div class="title">📝 آزمون‌ها</div>
-<div class="subtitle">ثبت نتایج آزمون</div>
+<div class="subtitle">نتایج آزمون</div>
 </div>
-
 <button class="btn primary" onclick="openModal('testModal')">
-➕ آزمون
+➕ ثبت آزمون
 </button>
-
 </div>
-
 <div class="card tablewrap">
-
 <table>
-
 <thead>
 <tr>
 <th>درس</th>
@@ -638,197 +502,149 @@ onkeydown="chatKey(event)"
 <th>تاریخ</th>
 </tr>
 </thead>
-
 <tbody id="testsTable"></tbody>
-
 </table>
-
 </div>
-
 </section>
-
-
-<!-- ANALYTICS -->
-
 <section class="page" id="analytics">
-
 <div class="header">
-
 <div>
-<div class="title">📊 تحلیل عملکرد</div>
-<div class="subtitle">آمار + تحلیل هوش مصنوعی</div>
+<div class="title">📊 تحلیل</div>
+<div class="subtitle">تحلیل عملکرد تحصیلی</div>
 </div>
-
 <button class="btn primary" onclick="analyzeAI()">
 🤖 تحلیل AI
 </button>
-
 </div>
-
 <div class="grid">
-
 <div class="card">
-<div class="muted">تعداد آزمون</div>
+<div class="muted">آزمون</div>
 <div class="stat" id="totalTests">0</div>
 </div>
-
 <div class="card">
 <div class="muted">میانگین</div>
 <div class="stat" id="analysisAvg">0%</div>
 </div>
-
 <div class="card">
 <div class="muted">بهترین</div>
 <div class="stat" id="best">0%</div>
 </div>
-
 <div class="card">
 <div class="muted">مطالعه</div>
 <div class="stat" id="analysisStudy">0</div>
 </div>
-
 </div>
-
 <br>
-
 <div class="card">
-
-<h3>🧠 گزارش مشاور</h3>
-
+<h3>🧠 گزارش AI</h3>
 <div id="analysisOutput" class="plan muted">
-هنوز تحلیلی تولید نشده.
+هنوز تحلیلی ساخته نشده.
 </div>
-
 </div>
-
 </section>
-
-
-<!-- TIMER -->
-
 <section class="page" id="timer">
-
 <div class="header">
-
 <div>
-<div class="title">⏱️ مطالعه</div>
-<div class="subtitle">تایمر تمرکز</div>
+<div class="title">⏱️ تایمر مطالعه</div>
+<div class="subtitle">Focus Timer</div>
 </div>
-
 </div>
-
 <div class="card">
-
 <div class="timer" id="timerDisplay">
 50:00
 </div>
-
-<br>
-
 <div class="actions" style="justify-content:center">
-
 <button class="btn primary" onclick="startTimer()">
 شروع
 </button>
-
 <button class="btn" onclick="pauseTimer()">
 توقف
 </button>
-
 <button class="btn red" onclick="resetTimer()">
 ریست
 </button>
-
 </div>
-
 <br>
-
-<div class="form">
-<label>مدت جلسه</label>
-<input id="timerMinutes" type="number" value="50">
+<label>دقیقه</label>
+<input
+id="timerMinutes"
+type="number"
+value="50"
+>
 </div>
-
-</div>
-
 </section>
-
-
-<!-- GOALS -->
-
 <section class="page" id="goals">
-
 <div class="header">
-
 <div>
 <div class="title">🎯 اهداف</div>
-<div class="subtitle">اهداف مطالعه</div>
+<div class="subtitle">اهداف شخصی</div>
 </div>
-
 <button class="btn primary" onclick="openModal('goalModal')">
 ➕ هدف
 </button>
-
 </div>
-
 <div class="card" id="goalsList"></div>
-
 </section>
-
-
-<!-- SETTINGS -->
-
 <section class="page" id="settings">
-
 <div class="header">
-
 <div>
-<div class="title">⚙️ تنظیمات</div>
-<div class="subtitle">وضعیت اتصال AI</div>
+<div class="title">⚙️ تنظیمات AI</div>
+<div class="subtitle">اتصال مستقیم به API</div>
 </div>
-
 </div>
-
 <div class="grid2">
-
 <div class="card">
-
-<h3>🤖 اتصال AI</h3>
-
+<h3>🤖 اتصال هوش مصنوعی</h3>
 <p class="muted">
-API Key در Netlify نگهداری می‌شود و داخل این صفحه قرار نمی‌گیرد.
+API Key فقط در مرورگر خودت ذخیره می‌شود.
+آن را داخل GitHub قرار نده.
 </p>
-
+<div class="form">
+<label>API Key</label>
+<input
+id="apiKey"
+type="password"
+placeholder="کلید API را وارد کن"
+>
+</div>
+<div class="form">
+<label>Base URL</label>
+<input
+id="apiBase"
+placeholder="https://api.example.com/v1"
+>
+</div>
+<div class="form">
+<label>Model</label>
+<input
+id="apiModel"
+placeholder="نام مدل"
+>
+</div>
 <div class="actions">
-
-<button class="btn primary" onclick="testConnection()">
+<button class="btn primary" onclick="saveAPI()">
+💾 ذخیره
+</button>
+<button class="btn" onclick="testConnection()">
 🔌 تست اتصال
 </button>
-
 </div>
-
 <br>
-
 <div class="status">
 <span class="dot" id="settingsDot"></span>
 <span id="settingsStatus">
-در حال بررسی...
+تنظیم نشده
 </span>
 </div>
-
 </div>
-
 <div class="card">
-
-<h3>💾 مدیریت اطلاعات</h3>
-
+<h3>💾 اطلاعات</h3>
 <div class="actions">
-
 <button class="btn" onclick="exportData()">
-خروجی JSON
+خروجی
 </button>
-
 <label class="btn">
-ورود JSON
+ورود
 <input
 type="file"
 accept=".json"
@@ -836,34 +652,19 @@ style="display:none"
 onchange="importData(event)"
 >
 </label>
-
 <button class="btn red" onclick="clearData()">
-پاک کردن همه
+پاک کردن
 </button>
-
 </div>
-
 </div>
-
 </div>
-
 </section>
-
 </main>
-</div>
-
-
-<!-- STUDY MODAL -->
-
+<!-- STUDY -->
 <div class="modal" id="studyModal">
-
 <div class="modalbox">
-
 <button class="close" onclick="closeModal('studyModal')">×</button>
-
 <h2>➕ ثبت مطالعه</h2>
-
-<div class="form">
 <label>درس</label>
 <select id="studySubject">
 <option>زیست‌شناسی</option>
@@ -874,42 +675,28 @@ onchange="importData(event)"
 <option>فارسی</option>
 <option>زبان</option>
 </select>
-</div>
-
-<div class="form">
+<br><br>
 <label>دقیقه</label>
 <input id="studyMinutes" type="number" value="60">
-</div>
-
-<div class="form">
-<label>نوع فعالیت</label>
+<br><br>
+<label>نوع</label>
 <select id="studyType">
 <option>مطالعه</option>
 <option>تست</option>
 <option>مرور</option>
 <option>جمع‌بندی</option>
 </select>
-</div>
-
+<br><br>
 <button class="btn primary" onclick="saveStudy()">
 ثبت
 </button>
-
 </div>
 </div>
-
-
-<!-- TEST MODAL -->
-
+<!-- TEST -->
 <div class="modal" id="testModal">
-
 <div class="modalbox">
-
 <button class="close" onclick="closeModal('testModal')">×</button>
-
 <h2>📝 ثبت آزمون</h2>
-
-<div class="form">
 <label>درس</label>
 <select id="testSubject">
 <option>زیست‌شناسی</option>
@@ -917,52 +704,32 @@ onchange="importData(event)"
 <option>فیزیک</option>
 <option>ریاضی</option>
 </select>
-</div>
-
-<div class="form">
-<label>تعداد سوال</label>
+<br><br>
+<label>کل سوال</label>
 <input id="testTotal" type="number" value="20">
-</div>
-
-<div class="form">
+<br><br>
 <label>صحیح</label>
 <input id="testCorrect" type="number" value="15">
-</div>
-
-<div class="form">
+<br><br>
 <label>غلط</label>
 <input id="testWrong" type="number" value="3">
-</div>
-
-<div class="form">
+<br><br>
 <label>نزده</label>
 <input id="testBlank" type="number" value="2">
-</div>
-
+<br><br>
 <button class="btn primary" onclick="saveTest()">
 ثبت آزمون
 </button>
-
 </div>
 </div>
-
-
-<!-- SUBJECT MODAL -->
-
+<!-- SUBJECT -->
 <div class="modal" id="subjectModal">
-
 <div class="modalbox">
-
 <button class="close" onclick="closeModal('subjectModal')">×</button>
-
 <h2>📚 افزودن درس</h2>
-
-<div class="form">
 <label>نام درس</label>
 <input id="subjectName">
-</div>
-
-<div class="form">
+<br><br>
 <label>سطح</label>
 <select id="subjectLevel">
 <option>ضعیف</option>
@@ -970,55 +737,34 @@ onchange="importData(event)"
 <option>خوب</option>
 <option>عالی</option>
 </select>
-</div>
-
+<br><br>
 <button class="btn primary" onclick="saveSubject()">
 ثبت
 </button>
-
 </div>
 </div>
-
-
-<!-- GOAL MODAL -->
-
+<!-- GOAL -->
 <div class="modal" id="goalModal">
-
 <div class="modalbox">
-
 <button class="close" onclick="closeModal('goalModal')">×</button>
-
 <h2>🎯 هدف جدید</h2>
-
-<div class="form">
 <label>هدف</label>
 <input id="goalText">
-</div>
-
-<div class="form">
+<br><br>
 <label>توضیح</label>
 <textarea id="goalDescription"></textarea>
-</div>
-
+<br>
 <button class="btn primary" onclick="saveGoal()">
 ثبت
 </button>
-
 </div>
 </div>
-
-
 <div class="toast" id="toast"></div>
-
-
 <script>
-
 /* =====================================================
-   STUDYCOACH V5
+   DATABASE
 ===================================================== */
-
-const KEY="studycoach-v5-ultimate";
-
+const STORAGE="studycoach-v5";
 let db={
  studies:[],
  tests:[],
@@ -1030,412 +776,314 @@ let db={
  ],
  goals:[]
 };
-
 let timerSeconds=3000;
 let timerInterval=null;
-
-
-/* ================= STORAGE ================= */
-
+/* =====================================================
+   STORAGE
+===================================================== */
 function load(){
-
- const saved=localStorage.getItem(KEY);
-
+ const saved=
+  localStorage.getItem(STORAGE);
  if(saved){
-
   try{
    db={
     ...db,
     ...JSON.parse(saved)
    };
   }catch(e){}
-
  }
-
+ const key=
+  localStorage.getItem("SC_API_KEY");
+ const base=
+  localStorage.getItem("SC_API_BASE");
+ const model=
+  localStorage.getItem("SC_API_MODEL");
+ if(key)
+  document.getElementById("apiKey").value=key;
+ if(base)
+  document.getElementById("apiBase").value=base;
+ if(model)
+  document.getElementById("apiModel").value=model;
  renderAll();
 }
-
 function save(){
- localStorage.setItem(KEY,JSON.stringify(db));
+ localStorage.setItem(
+  STORAGE,
+  JSON.stringify(db)
+ );
 }
-
-
-/* ================= NAV ================= */
-
-function page(id,button){
-
+/* =====================================================
+   NAVIGATION
+===================================================== */
+function showPage(id,btn){
  document.querySelectorAll(".page")
  .forEach(x=>x.classList.remove("active"));
-
- document.getElementById(id)
- .classList.add("active");
-
+ const target=document.getElementById(id);
+ if(target)
+  target.classList.add("active");
  document.querySelectorAll(".nav button")
  .forEach(x=>x.classList.remove("active"));
-
- if(button)
-  button.classList.add("active");
-
+ if(btn)
+  btn.classList.add("active");
  document.getElementById("sidebar")
  .classList.remove("open");
-
  renderAll();
 }
-
 function toggleMenu(){
  document.getElementById("sidebar")
  .classList.toggle("open");
 }
-
-
-/* ================= MODAL ================= */
-
+/* =====================================================
+   MODAL
+===================================================== */
 function openModal(id){
- document.getElementById(id).style.display="flex";
+ document.getElementById(id)
+ .style.display="flex";
 }
-
 function closeModal(id){
- document.getElementById(id).style.display="none";
+ document.getElementById(id)
+ .style.display="none";
 }
-
-
-/* ================= TOAST ================= */
-
-function toast(message){
-
- const x=document.getElementById("toast");
-
- x.textContent=message;
- x.style.display="block";
-
+/* =====================================================
+   TOAST
+===================================================== */
+function toast(text){
+ const t=
+  document.getElementById("toast");
+ t.textContent=text;
+ t.style.display="block";
  setTimeout(()=>{
-  x.style.display="none";
+  t.style.display="none";
  },2500);
 }
-
-
-/* ================= STUDY ================= */
-
+/* =====================================================
+   STUDY
+===================================================== */
 function saveStudy(){
-
- const minutes=Number(
-  document.getElementById("studyMinutes").value
- );
-
- if(minutes<=0){
+ const minutes=
+  Number(
+   document.getElementById("studyMinutes")
+   .value
+  );
+ if(!minutes||minutes<=0){
   toast("مدت مطالعه معتبر نیست");
   return;
  }
-
  db.studies.push({
-
   id:Date.now(),
-
   subject:
    document.getElementById("studySubject").value,
-
   minutes,
-
   type:
    document.getElementById("studyType").value,
-
   date:new Date().toISOString()
-
  });
-
  save();
-
  closeModal("studyModal");
-
  renderAll();
-
  toast("مطالعه ثبت شد ✅");
 }
-
-
-/* ================= TEST ================= */
-
+/* =====================================================
+   TEST
+===================================================== */
 function saveTest(){
-
- const total=Number(
-  document.getElementById("testTotal").value
- );
-
- const correct=Number(
-  document.getElementById("testCorrect").value
- );
-
- const wrong=Number(
-  document.getElementById("testWrong").value
- );
-
- const blank=Number(
-  document.getElementById("testBlank").value
- );
-
+ const total=
+  Number(document.getElementById("testTotal").value);
+ const correct=
+  Number(document.getElementById("testCorrect").value);
+ const wrong=
+  Number(document.getElementById("testWrong").value);
+ const blank=
+  Number(document.getElementById("testBlank").value);
  if(total<=0){
-  toast("تعداد سوال معتبر نیست");
+  toast("تعداد سوال نامعتبر است");
   return;
  }
-
  const score=
   ((correct-(wrong/3))/total)*100;
-
  db.tests.push({
-
   id:Date.now(),
-
   subject:
    document.getElementById("testSubject").value,
-
   total,
   correct,
   wrong,
   blank,
-
-  score:Number(score.toFixed(2)),
-
+  score:
+   Number(score.toFixed(2)),
   date:new Date().toISOString()
-
  });
-
  save();
-
  closeModal("testModal");
-
  renderAll();
-
  toast("آزمون ثبت شد ✅");
 }
-
-
-/* ================= SUBJECT ================= */
-
+/* =====================================================
+   SUBJECT
+===================================================== */
 function saveSubject(){
-
  const name=
   document.getElementById("subjectName")
   .value.trim();
-
  if(!name){
   toast("نام درس را وارد کن");
   return;
  }
-
  db.subjects.push({
-
   name,
-
   level:
    document.getElementById("subjectLevel").value
-
  });
-
  save();
-
  closeModal("subjectModal");
-
  renderAll();
-
  toast("درس اضافه شد");
 }
-
-
-/* ================= GOAL ================= */
-
+/* =====================================================
+   GOALS
+===================================================== */
 function saveGoal(){
-
  const text=
   document.getElementById("goalText")
   .value.trim();
-
  if(!text){
   toast("هدف را وارد کن");
   return;
  }
-
  db.goals.push({
-
   id:Date.now(),
-
   text,
-
   description:
-   document.getElementById("goalDescription")
-   .value.trim(),
-
+   document.getElementById("goalDescription").value,
   done:false,
-
   date:new Date().toISOString()
-
  });
-
  save();
-
  closeModal("goalModal");
-
  renderAll();
-
  toast("هدف ثبت شد 🎯");
 }
-
 function toggleGoal(id){
-
- const g=db.goals.find(x=>x.id===id);
-
+ const g=
+  db.goals.find(x=>x.id===id);
  if(!g)return;
-
  g.done=!g.done;
-
  save();
-
  renderGoals();
 }
-
-
-/* ================= DASHBOARD ================= */
-
-function todayItems(arr){
-
- const today=new Date().toDateString();
-
+/* =====================================================
+   DASHBOARD
+===================================================== */
+function today(arr){
+ const d=
+  new Date().toDateString();
  return arr.filter(
-  x=>new Date(x.date).toDateString()===today
+  x=>new Date(x.date).toDateString()===d
  );
 }
-
 function renderDashboard(){
-
- const todayStudies=
-  todayItems(db.studies);
-
- const todayTests=
-  todayItems(db.tests);
-
- const todayMinutes=
-  todayStudies.reduce(
-   (sum,x)=>sum+x.minutes,0
+ const studies=today(db.studies);
+ const tests=today(db.tests);
+ const minutes=
+  studies.reduce(
+   (a,b)=>a+b.minutes,
+   0
   );
-
- const totalMinutes=
+ const total=
   db.studies.reduce(
-   (sum,x)=>sum+x.minutes,0
+   (a,b)=>a+b.minutes,
+   0
   );
-
- const avg=db.tests.length
-  ?db.tests.reduce(
-   (sum,x)=>sum+x.score,0
-  )/db.tests.length
-  :0;
-
+ const avg=
+  db.tests.length
+   ?db.tests.reduce(
+    (a,b)=>a+b.score,
+    0
+   )/db.tests.length
+   :0;
  document.getElementById("todayStudy")
- .textContent=(todayMinutes/60).toFixed(1);
-
+ .textContent=(minutes/60).toFixed(1);
  document.getElementById("todayTests")
- .textContent=todayTests.length;
-
+ .textContent=tests.length;
  document.getElementById("avgScore")
  .textContent=Math.round(avg)+"%";
-
  document.getElementById("allStudy")
- .textContent=(totalMinutes/60).toFixed(1);
-
- const goal=Number(
-  localStorage.getItem("dailyGoal")||8
- );
-
- const percent=Math.min(
-  100,
-  (todayMinutes/60/goal)*100
- );
-
+ .textContent=(total/60).toFixed(1);
+ const goal=8;
+ const percent=
+  Math.min(
+   100,
+   ((minutes/60)/goal)*100
+  );
  document.getElementById("progress")
  .style.width=percent+"%";
-
  document.getElementById("progressText")
  .textContent=
   Math.round(percent)+"٪ از هدف روزانه";
 }
-
-
-/* ================= SUBJECTS ================= */
-
+/* =====================================================
+   SUBJECTS
+===================================================== */
 function renderSubjects(){
-
  const el=
   document.getElementById("subjectsList");
-
  if(!db.subjects.length){
-
   el.innerHTML=
-   '<div class="empty">درسی وجود ندارد.</div>';
-
+   '<div class="muted">درسی ثبت نشده.</div>';
   return;
  }
-
- el.innerHTML=db.subjects.map(s=>{
-
-  const cls=
-   s.level==="ضعیف"
-    ?"red"
-    :s.level==="عالی"
-     ?"green"
-     :"";
-
-  return `
+ el.innerHTML=
+  db.subjects.map(s=>`
    <div class="item">
-
-    <div style="display:flex;
-                justify-content:space-between">
-
-     <strong>${esc(s.name)}</strong>
-
-     <span class="badge ${cls}">
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    ">
+     <strong>
+      ${esc(s.name)}
+     </strong>
+     <span class="badge ${
+      s.level==="ضعیف"
+       ?"red"
+       :s.level==="عالی"
+        ?"green"
+        :""
+     }">
       ${esc(s.level)}
      </span>
-
     </div>
-
    </div>
-  `;
-
- }).join("");
+  `).join("");
 }
-
-
-/* ================= TESTS ================= */
-
+/* =====================================================
+   TESTS
+===================================================== */
 function renderTests(){
-
  const table=
   document.getElementById("testsTable");
-
  if(!db.tests.length){
-
   table.innerHTML=`
    <tr>
     <td colspan="7"
         style="text-align:center">
-     هنوز آزمونی ثبت نشده.
+     آزمونی ثبت نشده.
     </td>
    </tr>
   `;
-
   return;
  }
-
  table.innerHTML=
-  db.tests.slice().reverse()
+  db.tests
+  .slice()
+  .reverse()
   .map(t=>`
-
    <tr>
-
     <td>${esc(t.subject)}</td>
     <td>${t.total}</td>
     <td>${t.correct}</td>
     <td>${t.wrong}</td>
     <td>${t.blank}</td>
-
     <td>
      <span class="badge ${
       t.score>=50?"green":"red"
@@ -1443,670 +1091,545 @@ function renderTests(){
       ${t.score}%
      </span>
     </td>
-
     <td>
      ${new Date(t.date)
        .toLocaleDateString("fa-IR")}
     </td>
-
    </tr>
-
-  `).join("");
+  `)
+  .join("");
 }
-
-
-/* ================= ANALYTICS ================= */
-
+/* =====================================================
+   ANALYTICS
+===================================================== */
 function renderAnalytics(){
-
- const count=db.tests.length;
-
+ const count=
+  db.tests.length;
  const avg=count
   ?db.tests.reduce(
-    (a,b)=>a+b.score,0
-   )/count
+   (a,b)=>a+b.score,
+   0
+  )/count
   :0;
-
  const best=count
-  ?Math.max(...db.tests.map(x=>x.score))
+  ?Math.max(
+   ...db.tests.map(x=>x.score)
+  )
   :0;
-
  const minutes=
   db.studies.reduce(
-   (a,b)=>a+b.minutes,0
+   (a,b)=>a+b.minutes,
+   0
   );
-
  document.getElementById("totalTests")
  .textContent=count;
-
  document.getElementById("analysisAvg")
  .textContent=Math.round(avg)+"%";
-
  document.getElementById("best")
  .textContent=Math.round(best)+"%";
-
  document.getElementById("analysisStudy")
- .textContent=(minutes/60).toFixed(1)+"h";
+ .textContent=
+  (minutes/60).toFixed(1)+"h";
 }
-
-
-/* ================= GOALS ================= */
-
+/* =====================================================
+   GOALS
+===================================================== */
 function renderGoals(){
-
  const el=
   document.getElementById("goalsList");
-
  if(!db.goals.length){
-
   el.innerHTML=
-   '<div class="empty">هنوز هدفی ثبت نشده.</div>';
-
+   '<div class="muted">هدف ثبت نشده.</div>';
   return;
  }
-
  el.innerHTML=
   db.goals.map(g=>`
-
    <div class="item">
-
-    <div style="display:flex;
-                justify-content:space-between;
-                gap:10px">
-
+    <div style="
+     display:flex;
+     justify-content:space-between;
+     gap:10px;
+    ">
      <div>
-
       <strong style="${
-       g.done?"text-decoration:line-through":""
+       g.done
+        ?"text-decoration:line-through"
+        :""
       }">
        ${esc(g.text)}
       </strong>
-
-      <p class="muted">
+      <div class="muted">
        ${esc(g.description||"")}
-      </p>
-
+      </div>
      </div>
-
      <button
       class="btn ${
        g.done?"green":"primary"
       }"
       onclick="toggleGoal(${g.id})">
-
       ${g.done?"✓":"انجام شد"}
-
      </button>
-
     </div>
-
    </div>
-
   `).join("");
 }
-
-
-/* ================= TIMER ================= */
-
+/* =====================================================
+   TIMER
+===================================================== */
 function updateTimer(){
-
- const min=Math.floor(timerSeconds/60);
- const sec=timerSeconds%60;
-
+ const m=
+  Math.floor(timerSeconds/60);
+ const s=
+  timerSeconds%60;
  document.getElementById("timerDisplay")
  .textContent=
-  String(min).padStart(2,"0")+
+  String(m).padStart(2,"0")+
   ":"+
-  String(sec).padStart(2,"0");
+  String(s).padStart(2,"0");
 }
-
 function startTimer(){
-
  if(timerInterval)return;
-
- timerInterval=setInterval(()=>{
-
-  if(timerSeconds<=0){
-
-   clearInterval(timerInterval);
-   timerInterval=null;
-
-   toast("جلسه تمام شد 🎉");
-
-   return;
-  }
-
-  timerSeconds--;
-
-  updateTimer();
-
- },1000);
+ timerInterval=
+  setInterval(()=>{
+   if(timerSeconds<=0){
+    clearInterval(timerInterval);
+    timerInterval=null;
+    toast("جلسه تمام شد 🎉");
+    return;
+   }
+   timerSeconds--;
+   updateTimer();
+  },1000);
 }
-
 function pauseTimer(){
-
  clearInterval(timerInterval);
-
  timerInterval=null;
 }
-
 function resetTimer(){
-
  pauseTimer();
-
  timerSeconds=
   Number(
-   document.getElementById("timerMinutes")
-   .value
+   document.getElementById("timerMinutes").value
   )*60;
-
  updateTimer();
 }
-
-
-/* ================= AI CONTEXT ================= */
-
-function aiContext(){
-
- return {
-
-  student:{
-   target:"کنکور",
-   subjects:db.subjects
-  },
-
-  studies:db.studies.slice(-30),
-
-  tests:db.tests.slice(-30),
-
-  goals:db.goals
-
- };
+/* =====================================================
+   API SETTINGS
+===================================================== */
+function saveAPI(){
+ const key=
+  document.getElementById("apiKey")
+  .value.trim();
+ const base=
+  document.getElementById("apiBase")
+  .value.trim();
+ const model=
+  document.getElementById("apiModel")
+  .value.trim();
+ if(!key||!base||!model){
+  toast("هر سه مقدار را وارد کن");
+  return;
+ }
+ localStorage.setItem(
+  "SC_API_KEY",
+  key
+ );
+ localStorage.setItem(
+  "SC_API_BASE",
+  base
+ );
+ localStorage.setItem(
+  "SC_API_MODEL",
+  model
+ );
+ toast("تنظیمات AI ذخیره شد ✅");
+ setAIStatus(true);
 }
-
-
-/* ================= REAL AI ================= */
-
+/* =====================================================
+   REAL API CALL
+===================================================== */
 async function callAI(messages){
-
+ const key=
+  localStorage.getItem("SC_API_KEY");
+ const base=
+  localStorage.getItem("SC_API_BASE");
+ const model=
+  localStorage.getItem("SC_API_MODEL");
+ if(!key){
+  throw new Error(
+   "API Key تنظیم نشده است."
+  );
+ }
+ if(!base){
+  throw new Error(
+   "Base URL تنظیم نشده است."
+  );
+ }
+ if(!model){
+  throw new Error(
+   "Model تنظیم نشده است."
+  );
+ }
+ const url=
+  base.replace(/\/+$/,"")+
+  "/chat/completions";
  const response=
-  await fetch("/api/chat",{
-
+  await fetch(url,{
    method:"POST",
-
    headers:{
-    "Content-Type":"application/json"
+    "Content-Type":"application/json",
+    "Authorization":
+     "Bearer "+key
    },
-
    body:JSON.stringify({
+    model,
     messages,
     temperature:.7,
     max_tokens:3500
    })
-
   });
-
+ const text=
+  await response.text();
  let result;
-
  try{
-  result=await response.json();
+  result=JSON.parse(text);
  }catch{
-  throw new Error("پاسخ سرور معتبر نیست.");
+  result={error:text};
  }
-
  if(!response.ok){
-
   throw new Error(
-   result.error||
-   "خطا در اتصال به AI"
+   result?.error?.message||
+   result?.error||
+   "خطای API"
   );
-
  }
-
  const answer=
   result?.choices?.[0]?.message?.content;
-
  if(!answer){
-
   throw new Error(
-   "AI پاسخ معتبری ارسال نکرد."
+   "پاسخ AI خالی است."
   );
-
  }
-
  return answer;
 }
-
-
-/* ================= CHAT ================= */
-
+/* =====================================================
+   AI CONTEXT
+===================================================== */
+function context(){
+ return {
+  target:"کنکور",
+  subjects:db.subjects,
+  studies:db.studies.slice(-50),
+  tests:db.tests.slice(-50),
+  goals:db.goals
+ };
+}
+/* =====================================================
+   CHAT
+===================================================== */
 function chatKey(e){
-
- if(e.key==="Enter"&&!e.shiftKey){
-
+ if(
+  e.key==="Enter" &&
+  !e.shiftKey
+ ){
   e.preventDefault();
-
   sendChat();
  }
 }
-
 function addMessage(text,type){
-
  const box=
   document.getElementById("messages");
-
  const div=
   document.createElement("div");
-
- div.className="message "+type;
-
+ div.className=
+  "message "+type;
  div.textContent=text;
-
  box.appendChild(div);
-
- box.scrollTop=box.scrollHeight;
-
+ box.scrollTop=
+  box.scrollHeight;
  return div;
 }
-
 async function sendChat(){
-
  const input=
   document.getElementById("chatInput");
-
- const text=input.value.trim();
-
+ const text=
+  input.value.trim();
  if(!text)return;
-
  addMessage(text,"user");
-
  input.value="";
-
  const loading=
   addMessage(
-   "در حال فکر کردن... 🤔",
+   "🤔 در حال فکر کردن...",
    "ai"
   );
-
  try{
-
-  const system=`
-
-تو مشاور خصوصی و حرفه‌ای StudyCoach هستی.
-
-وظیفه:
-کمک به دانش‌آموز برای مطالعه، برنامه‌ریزی،
-آزمون، تست‌زنی، مرور و پیشرفت تحصیلی.
-
-قوانین پاسخ:
-- فارسی
+  const answer=
+   await callAI([
+    {
+     role:"system",
+     content:`
+تو مشاور خصوصی حرفه‌ای StudyCoach هستی.
+به فارسی پاسخ بده.
+پاسخ‌ها:
 - دقیق
-- کاربردی
+- عملی
 - شخصی‌سازی‌شده
-- اولویت‌بندی واضح
-- از توصیه‌های کلیشه‌ای خودداری کن
-- اگر اطلاعات کافی نیست، صریح بگو
-
-اطلاعات ثبت‌شده دانش‌آموز:
-
+- اولویت‌بندی‌شده
+داده‌های دانش‌آموز:
 ${JSON.stringify(
- aiContext(),
+ context(),
  null,
  2
 )}
-
-`;
-
-  const answer=
-   await callAI([
-
-    {
-     role:"system",
-     content:system
+`
     },
-
     {
      role:"user",
      content:text
     }
-
    ]);
-
-  loading.textContent=answer;
-
- }catch(e){
-
   loading.textContent=
-   "❌ خطا:\n"+e.message;
+   answer;
+  setAIStatus(true);
+ }catch(e){
+  loading.textContent=
+   "❌ "+e.message;
+  setAIStatus(false);
  }
 }
-
-
-/* ================= QUICK AI ================= */
-
+/* =====================================================
+   QUICK ADVICE
+===================================================== */
 async function quickAdvice(){
-
  const box=
   document.getElementById("quickAdvice");
-
  box.textContent=
-  "در حال تحلیل عملکرد...";
-
+  "🤖 در حال تحلیل...";
  try{
-
   const answer=
    await callAI([
-
     {
      role:"system",
      content:
-      "به عنوان مشاور کنکور، یک توصیه کوتاه و عملی بر اساس داده‌های دانش‌آموز بده."
+      "یک توصیه کوتاه، دقیق و کاربردی برای دانش‌آموز کنکوری بده."
     },
-
     {
      role:"user",
      content:
-      JSON.stringify(aiContext())
+      JSON.stringify(context())
     }
-
    ]);
-
-  box.textContent=answer;
-
+  box.textContent=
+   answer;
+  setAIStatus(true);
  }catch(e){
-
   box.textContent=
    "❌ "+e.message;
+  setAIStatus(false);
  }
 }
-
-
-/* ================= AI PLAN ================= */
-
+/* =====================================================
+   PLAN
+===================================================== */
 async function generatePlan(){
-
  const output=
   document.getElementById("planOutput");
-
- if(output)
-  output.textContent=
-   "🤖 در حال ساخت برنامه...";
-
- page("planner");
-
+ output.textContent=
+  "🤖 در حال ساخت برنامه...";
  try{
-
   const prompt=`
-
-یک برنامه مطالعاتی دقیق و قابل اجرا طراحی کن.
-
-ساعت شروع:
+برای دانش‌آموز یک برنامه مطالعاتی دقیق طراحی کن.
+شروع:
 ${document.getElementById("wake").value}
-
-ساعت پایان:
+پایان:
 ${document.getElementById("sleep").value}
-
-هدف مطالعه:
+هدف:
 ${document.getElementById("hours").value} ساعت
-
 تمرکز:
 ${document.getElementById("focus").value}
-
-داده‌های واقعی:
-
-${JSON.stringify(aiContext(),null,2)}
-
+داده‌های دانش‌آموز:
+${JSON.stringify(context(),null,2)}
 برنامه باید شامل:
-1. ساعت هر جلسه
-2. درس
-3. فعالیت
-4. مدت
-5. تعداد تست پیشنهادی
-6. مرور
-7. استراحت‌های لازم
-8. اولویت روز
-
-در پایان یک جمع‌بندی مشاور ارائه کن.
+- زمان
+- درس
+- فعالیت
+- تست
+- مرور
+- جمع‌بندی
+- اولویت‌ها
+باشد.
 `;
-
   const answer=
    await callAI([
-
     {
      role:"system",
      content:
       "تو برنامه‌ریز حرفه‌ای کنکور هستی."
     },
-
     {
      role:"user",
      content:prompt
     }
-
    ]);
-
-  output.textContent=answer;
-
+  output.textContent=
+   answer;
+  setAIStatus(true);
  }catch(e){
-
   output.textContent=
    "❌ "+e.message;
+  setAIStatus(false);
  }
 }
-
-
-/* ================= AI ANALYSIS ================= */
-
+/* =====================================================
+   ANALYSIS
+===================================================== */
 async function analyzeAI(){
-
  const output=
   document.getElementById("analysisOutput");
-
  output.textContent=
   "🤖 در حال تحلیل...";
-
  try{
-
   const answer=
    await callAI([
-
     {
      role:"system",
      content:`
-تو تحلیلگر عملکرد تحصیلی هستی.
-
-داده‌های آزمون و مطالعه را بررسی کن و:
-- نقاط قوت
-- نقاط ضعف
-- درس‌های پرریسک
-- روند پیشرفت
-- اشتباهات احتمالی
-- اولویت مطالعه
-- پیشنهاد هفته آینده
-
-را مشخص کن.
+تو تحلیلگر حرفه‌ای عملکرد تحصیلی هستی.
+داده‌های دانش‌آموز را بررسی کن.
+گزارش شامل:
+1. نقاط قوت
+2. نقاط ضعف
+3. درس‌های پرریسک
+4. تحلیل آزمون‌ها
+5. تحلیل مطالعه
+6. اولویت‌ها
+7. برنامه پیشنهادی
+باشد.
 `
     },
-
     {
      role:"user",
      content:
       JSON.stringify(
-       aiContext(),
+       context(),
        null,
        2
       )
     }
-
    ]);
-
-  output.textContent=answer;
-
+  output.textContent=
+   answer;
+  setAIStatus(true);
  }catch(e){
-
   output.textContent=
    "❌ "+e.message;
+  setAIStatus(false);
  }
 }
-
-
-/* ================= CONNECTION ================= */
-
+/* =====================================================
+   CONNECTION
+===================================================== */
 async function testConnection(){
-
- setStatus(
-  "settingsDot",
-  "settingsStatus",
-  false,
-  "در حال اتصال..."
- );
-
  try{
-
   await callAI([
-
    {
     role:"system",
-    content:"Reply only with OK."
+    content:"Reply with OK only."
    },
-
    {
     role:"user",
     content:"Connection test."
    }
-
   ]);
-
-  setStatus(
-   "settingsDot",
-   "settingsStatus",
-   true,
-   "AI متصل است ✅"
-  );
-
-  setStatus(
-   "statusDot",
-   "statusText",
-   true,
-   "AI متصل است"
-  );
-
-  setStatus(
-   "chatDot",
-   "chatStatus",
-   true,
-   "AI متصل"
-  );
-
+  setAIStatus(true);
   toast("اتصال AI موفق بود ✅");
-
  }catch(e){
-
-  setStatus(
-   "settingsDot",
-   "settingsStatus",
-   false,
-   "AI متصل نیست"
-  );
-
+  setAIStatus(false);
   toast("اتصال ناموفق بود");
  }
 }
-
-function setStatus(dotId,textId,online,text){
-
- const dot=
-  document.getElementById(dotId);
-
- const label=
-  document.getElementById(textId);
-
- if(dot)
-  dot.classList.toggle("online",online);
-
- if(label)
-  label.textContent=text;
+function setAIStatus(online){
+ const ids=[
+  ["dashDot","dashStatus"],
+  ["aiDot","aiStatus"],
+  ["settingsDot","settingsStatus"]
+ ];
+ ids.forEach(([dot,label])=>{
+  const d=
+   document.getElementById(dot);
+  const l=
+   document.getElementById(label);
+  if(d)
+   d.classList.toggle(
+    "online",
+    online
+   );
+  if(l)
+   l.textContent=
+    online
+     ?"AI متصل است"
+     :"AI آفلاین";
+ });
 }
-
-
-/* ================= EXPORT ================= */
-
+/* =====================================================
+   EXPORT
+===================================================== */
 function exportData(){
-
  const blob=
   new Blob(
    [JSON.stringify(db,null,2)],
    {type:"application/json"}
   );
-
  const url=
   URL.createObjectURL(blob);
-
  const a=
   document.createElement("a");
-
  a.href=url;
-
  a.download=
   "studycoach-backup.json";
-
  a.click();
-
  URL.revokeObjectURL(url);
 }
-
-
-/* ================= IMPORT ================= */
-
+/* =====================================================
+   IMPORT
+===================================================== */
 function importData(event){
-
- const file=event.target.files[0];
-
+ const file=
+  event.target.files[0];
  if(!file)return;
-
- const reader=new FileReader();
-
+ const reader=
+  new FileReader();
  reader.onload=()=>{
-
   try{
-
-   db=JSON.parse(reader.result);
-
+   db=
+    JSON.parse(
+     reader.result
+    );
    save();
-
    renderAll();
-
    toast("اطلاعات وارد شد ✅");
-
   }catch{
-
    toast("فایل نامعتبر است");
   }
-
  };
-
  reader.readAsText(file);
 }
-
-
-/* ================= CLEAR ================= */
-
+/* =====================================================
+   CLEAR
+===================================================== */
 function clearData(){
-
  if(!confirm(
-  "تمام اطلاعات حذف شود؟"
+  "تمام اطلاعات مطالعه و آزمون حذف شود؟"
  ))return;
-
- localStorage.removeItem(KEY);
-
+ localStorage.removeItem(
+  STORAGE
+ );
  location.reload();
 }
-
-
-/* ================= ESCAPE ================= */
-
+/* =====================================================
+   ESCAPE
+===================================================== */
 function esc(value){
-
  return String(value??"")
  .replace(/&/g,"&amp;")
  .replace(/</g,"&lt;")
@@ -2114,29 +1637,21 @@ function esc(value){
  .replace(/"/g,"&quot;")
  .replace(/'/g,"&#039;");
 }
-
-
-/* ================= RENDER ================= */
-
+/* =====================================================
+   RENDER
+===================================================== */
 function renderAll(){
-
  renderDashboard();
  renderSubjects();
  renderTests();
  renderAnalytics();
  renderGoals();
  updateTimer();
-
 }
-
-
-/* ================= START ================= */
-
+/* =====================================================
+   START
+===================================================== */
 load();
-
-setTimeout(testConnection,1200);
-
 </script>
-
 </body>
 </html>
