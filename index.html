@@ -1,578 +1,286 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
+
+<meta name="theme-color" content="#4f46e5">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="StudyCoach">
-<title>StudyCoach V5 Ultimate</title>
+
+<title>StudyCoach V7</title>
 
 <style>
-:root{
---bg:#f4f7fb;
---card:#fff;
---text:#0f172a;
---muted:#64748b;
---line:#e2e8f0;
---primary:#2563eb;
---primary2:#1d4ed8;
---soft:#eff6ff;
---success:#16a34a;
---warning:#f59e0b;
---danger:#dc2626;
---shadow:0 8px 30px rgba(15,23,42,.07);
-}
-
 *{box-sizing:border-box}
 
-html,body{
+body{
 margin:0;
-padding:0;
-background:var(--bg);
-color:var(--text);
-font-family:
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-Tahoma,
-sans-serif;
-}
-
-body.dark{
---bg:#020617;
---card:#0f172a;
---text:#f8fafc;
---muted:#94a3b8;
---line:#1e293b;
---soft:#172554;
---shadow:0 8px 30px rgba(0,0,0,.25);
+background:#f5f7fb;
+color:#111827;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,sans-serif
 }
 
 button,input,select,textarea{
-font:inherit;
+font:inherit
 }
 
 button{
 border:0;
-cursor:pointer;
-}
-
-input,select,textarea{
-width:100%;
-padding:13px;
-border:1px solid var(--line);
-background:var(--card);
-color:var(--text);
-border-radius:14px;
-outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-border-color:var(--primary);
+border-radius:12px;
+padding:10px 13px;
+background:#e9edf5;
+cursor:pointer
 }
 
 button.primary{
-background:var(--primary);
-color:#fff;
-padding:11px 16px;
-border-radius:13px;
-}
-
-button.primary:hover{
-background:var(--primary2);
-}
-
-button.secondary{
-background:var(--line);
-color:var(--text);
-padding:11px 16px;
-border-radius:13px;
+background:#4f46e5;
+color:white
 }
 
 button.danger{
 background:#fee2e2;
-color:#991b1b;
-padding:11px 16px;
-border-radius:13px;
+color:#991b1b
 }
 
-body.dark button.danger{
-background:#450a0a;
-color:#fecaca;
-}
-
-button.small{
-padding:7px 10px;
-border-radius:10px;
-font-size:12px;
-}
-
-.app{
-max-width:1200px;
+.wrap{
+max-width:1120px;
 margin:auto;
-padding:14px 14px 110px;
+padding:15px 14px 110px
 }
 
-.header{
+header{
 display:flex;
-align-items:center;
 justify-content:space-between;
-gap:10px;
-margin-bottom:12px;
+align-items:center
 }
 
-.logo{
+.brand{
 font-size:22px;
-font-weight:950;
+font-weight:900
 }
 
-.logo span{
-color:var(--primary);
-}
-
-.header-actions{
-display:flex;
-gap:7px;
+.muted,small{
+color:#6b7280;
+font-size:12px
 }
 
 .card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:22px;
-padding:18px;
-margin:12px 0;
-box-shadow:var(--shadow);
+background:white;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:15px;
+margin:11px 0;
+box-shadow:0 7px 25px #00000009
 }
 
 .hero{
-background:
-linear-gradient(
-135deg,
-#0f172a,
-#1e3a8a
-);
-color:white;
-border:0;
 display:flex;
 justify-content:space-between;
-align-items:center;
-gap:20px;
+gap:15px
 }
 
-.hero h1{
-margin:10px 0 6px;
-font-size:28px;
+.score{
+text-align:center
 }
 
-.hero p{
-margin:0;
-opacity:.85;
-line-height:1.8;
-}
-
-.pill{
-display:inline-block;
-padding:6px 11px;
-background:rgba(255,255,255,.15);
-border-radius:999px;
-font-size:12px;
-}
-
-.hero-score{
-text-align:center;
-min-width:110px;
-}
-
-.hero-score b{
+.score b{
 display:block;
-font-size:42px;
+font-size:33px;
+color:#4f46e5
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:9px
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-}
-
-.grid2{
-display:grid;
 grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
-
-.grid3{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
+gap:9px
 }
 
 .stat{
-text-align:center;
+text-align:center
 }
 
-.stat-value{
-font-size:28px;
-font-weight:950;
-}
-
-.stat-label{
+.stat b{
 display:block;
-margin-top:5px;
-font-size:13px;
-color:var(--muted);
+font-size:21px
 }
 
-.section-head{
+.head{
 display:flex;
-align-items:center;
 justify-content:space-between;
-gap:10px;
-margin-bottom:12px;
-}
-
-.section-head h2,
-.section-head h3{
-margin:0;
-}
-
-.muted{
-color:var(--muted);
-}
-
-.center{
-text-align:center;
+align-items:center;
+gap:8px
 }
 
 .list{
 display:grid;
-gap:10px;
+gap:8px
 }
 
 .item{
 display:flex;
 align-items:center;
-gap:11px;
-padding:13px;
-border:1px solid var(--line);
-border-radius:15px;
-background:var(--card);
+gap:9px;
+border:1px solid #e5e7eb;
+padding:10px;
+border-radius:13px
 }
 
-.item.done{
-opacity:.48;
+.grow{
+flex:1
 }
 
-.item-main{
-flex:1;
-min-width:0;
+.grow b,
+.grow small{
+display:block
 }
 
-.item-main b,
-.item-main small{
-display:block;
+.dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#4f46e5
 }
 
-.item-main small{
-margin-top:5px;
-color:var(--muted);
-line-height:1.6;
+.done{
+opacity:.55
 }
 
-.check{
-width:21px;
-height:21px;
-accent-color:var(--primary);
-}
-
-.progress{
-height:9px;
-background:var(--line);
-border-radius:99px;
-overflow:hidden;
-margin-top:8px;
-}
-
-.progress i{
-display:block;
-height:100%;
-background:var(--primary);
-border-radius:99px;
-}
-
-.chip{
-display:inline-block;
-padding:6px 10px;
-margin:3px;
-border-radius:999px;
-background:var(--soft);
-color:var(--primary);
-font-size:12px;
-}
-
-.advice{
-padding:14px;
-border-radius:15px;
-background:var(--soft);
-line-height:1.9;
-}
-
-.timer{
-font-size:58px;
-font-weight:950;
-letter-spacing:2px;
-padding:24px 5px;
-}
-
-.timer-mode{
-display:flex;
-justify-content:center;
-gap:7px;
-margin-bottom:10px;
-}
-
-.timer-mode button{
-padding:8px 12px;
-border-radius:10px;
-background:var(--line);
-color:var(--text);
-}
-
-.timer-mode button.active{
-background:var(--primary);
-color:white;
-}
-
-.chat{
-display:grid;
-gap:10px;
-margin-bottom:15px;
-}
-
-.msg{
-padding:13px;
-border-radius:15px;
-line-height:1.8;
-}
-
-.msg.user{
-background:var(--soft);
-}
-
-.msg.bot{
-background:var(--line);
-}
-
-.chart{
-display:flex;
-align-items:end;
-gap:8px;
-height:190px;
-padding:15px 5px 0;
-border-bottom:1px solid var(--line);
-}
-
-.chart-col{
-flex:1;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:end;
-align-items:center;
-gap:5px;
-}
-
-.chart-bar{
-width:100%;
-max-width:42px;
-min-height:3px;
-background:var(--primary);
-border-radius:8px 8px 0 0;
-}
-
-.chart-col small{
-font-size:10px;
-color:var(--muted);
-}
-
-.badge{
-display:inline-flex;
-align-items:center;
-gap:5px;
-padding:7px 10px;
-background:#fef3c7;
-color:#92400e;
-border-radius:12px;
-font-size:12px;
-margin:3px;
-}
-
-body.dark .badge{
-background:#422006;
-color:#fde68a;
-}
-
-.empty{
-padding:28px;
-text-align:center;
-color:var(--muted);
+.done .dot{
+background:#059669
 }
 
 .form{
 display:grid;
-gap:10px;
+gap:8px
 }
 
-.row{
-display:flex;
-gap:8px;
-align-items:center;
+input,select,textarea{
+width:100%;
+padding:10px;
+border:1px solid #dfe3ea;
+border-radius:12px;
+background:white
 }
 
-.grow{
-flex:1;
+.center{
+text-align:center
 }
 
-.bottom-nav{
+.clock{
+font-size:45px;
+font-weight:900;
+margin:18px
+}
+
+.msg{
+padding:10px 12px;
+border-radius:13px;
+margin:7px 0;
+line-height:1.8
+}
+
+.msg.u{
+background:#eef0ff
+}
+
+.msg.b{
+background:#f3f4f6
+}
+
+.bar{
+height:9px;
+background:#edf0f4;
+border-radius:99px;
+overflow:hidden
+}
+
+.bar i{
+display:block;
+height:100%;
+background:#4f46e5
+}
+
+.chip{
+display:inline-block;
+background:#eef0ff;
+color:#4338ca;
+padding:5px 9px;
+border-radius:99px;
+font-size:11px;
+margin:2px
+}
+
+nav{
 position:fixed;
-z-index:100;
+z-index:20;
+bottom:0;
 left:0;
 right:0;
-bottom:0;
+background:#fffffff2;
+backdrop-filter:blur(14px);
+border-top:1px solid #e5e7eb;
 display:flex;
-justify-content:center;
-gap:3px;
-background:rgba(255,255,255,.94);
-border-top:1px solid var(--line);
-backdrop-filter:blur(15px);
-padding:8px;
-padding-bottom:calc(8px + env(safe-area-inset-bottom));
+justify-content:space-around;
+padding:7px 2px calc(7px + env(safe-area-inset-bottom))
 }
 
-body.dark .bottom-nav{
-background:rgba(2,6,23,.94);
-}
-
-.bottom-nav button{
+nav button{
 background:transparent;
-color:var(--muted);
-padding:8px 12px;
-border-radius:12px;
-font-size:12px;
+font-size:11px;
+padding:8px
 }
 
-.bottom-nav button.active{
-background:var(--soft);
-color:var(--primary);
-font-weight:900;
+.on{
+background:#eef0ff!important;
+color:#4f46e5;
+font-weight:800
 }
 
-.toast{
-position:fixed;
-z-index:999;
-top:15px;
-left:50%;
-transform:translateX(-50%);
-background:#0f172a;
-color:white;
-padding:11px 17px;
-border-radius:12px;
-display:none;
-max-width:90%;
-text-align:center;
+body.dark{
+background:#111827;
+color:#f9fafb
 }
 
-.modal{
-position:fixed;
-inset:0;
-z-index:500;
-background:rgba(0,0,0,.55);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px;
+body.dark .card,
+body.dark input,
+body.dark select,
+body.dark textarea{
+background:#1f2937;
+color:#f9fafb;
+border-color:#374151
 }
 
-.modal-box{
-background:var(--card);
-color:var(--text);
-border-radius:22px;
-padding:20px;
-width:min(600px,100%);
-max-height:90vh;
-overflow:auto;
+body.dark .item{
+border-color:#374151
 }
 
-@media(max-width:800px){
-
-.grid{
-grid-template-columns:repeat(2,1fr);
+body.dark nav{
+background:#111827ee;
+border-color:#374151
 }
 
-.grid3{
-grid-template-columns:1fr;
+body.dark .msg.b{
+background:#374151
 }
 
-.hero{
-align-items:flex-start;
+@media(max-width:680px){
+
+.stats{
+grid-template-columns:repeat(2,1fr)
 }
 
+.wrap{
+padding-bottom:100px
 }
 
-@media(max-width:600px){
-
-.app{
-padding-left:10px;
-padding-right:10px;
-}
-
-.card{
-padding:15px;
-border-radius:18px;
-}
-
-.hero{
-flex-direction:column;
-}
-
-.hero-score{
-align-self:center;
-}
-
-.grid2{
-grid-template-columns:1fr;
-}
-
-.timer{
-font-size:43px;
-}
-
-.bottom-nav button{
-font-size:10px;
-padding:8px 7px;
-}
-
-}
-
-@media(min-width:801px){
-
-.bottom-nav{
-position:sticky;
-top:0;
-bottom:auto;
-max-width:1200px;
-margin:0 auto 12px;
-border:0;
-background:transparent;
-backdrop-filter:none;
-}
-
-.bottom-nav button{
-background:var(--card);
-border:1px solid var(--line);
+.hero h2{
+font-size:20px
 }
 
 }
@@ -581,85 +289,67 @@ border:1px solid var(--line);
 
 <body>
 
-<div id="toast" class="toast"></div>
+<div class="wrap">
 
-<div class="app">
+<header>
 
-<header class="header">
-
-<div class="logo">
-🎓 Study<span>Coach</span>
-<small>V5</small>
+<div>
+<div class="brand">🎓 StudyCoach V7</div>
+<div class="muted">
+مشاور، برنامه‌ریز و مدیریت مطالعه • رایگان
+</div>
 </div>
 
-<div class="header-actions">
-
-<button
-class="secondary small"
-onclick="toggleDark()">
-🌙
-</button>
-
-<button
-class="secondary small"
-onclick="navigate('settings')">
-⚙️
-</button>
-
-</div>
+<button onclick="settings()">⚙️</button>
 
 </header>
-
-<nav class="bottom-nav">
-
-<button data-page="home" onclick="navigate('home')">
-🏠<br>خانه
-</button>
-
-<button data-page="coach" onclick="navigate('coach')">
-🤖<br>مشاور
-</button>
-
-<button data-page="plan" onclick="navigate('plan')">
-📅<br>برنامه
-</button>
-
-<button data-page="study" onclick="navigate('study')">
-⏱️<br>مطالعه
-</button>
-
-<button data-page="analytics" onclick="navigate('analytics')">
-📊<br>تحلیل
-</button>
-
-<button data-page="more" onclick="navigate('more')">
-☰<br>بیشتر
-</button>
-
-</nav>
 
 <main id="app"></main>
 
 </div>
 
+
+<nav>
+
+<button class="on" onclick="page('home',this)">
+🏠<br>خانه
+</button>
+
+<button onclick="page('coach',this)">
+🤖<br>مشاور
+</button>
+
+<button onclick="page('plan',this)">
+📅<br>برنامه
+</button>
+
+<button onclick="page('study',this)">
+⏱️<br>مطالعه
+</button>
+
+<button onclick="page('analytics',this)">
+📊<br>تحلیل
+</button>
+
+<button onclick="page('tools',this)">
+🧰<br>ابزار
+</button>
+
+</nav>
+
+
 <script>
 
-/* =====================================================
-   STUDYCOACH V5
-   OFFLINE / FREE / NO API
-===================================================== */
+const KEY="StudyCoachV7";
 
-const KEY="StudyCoachV5_DATA";
-const THEME_KEY="StudyCoachV5_THEME";
+const DEF={
 
-const DEFAULT_DATA={
 profile:{
 name:"",
-goal:"پزشکی تهران",
+goal:"",
 examDate:"",
 dailyHours:8,
-wake:"07:00",
-sleep:"24:00"
+theme:"light"
 },
 
 subjects:[
@@ -669,155 +359,57 @@ subjects:[
 {id:"phys",name:"فیزیک",level:3}
 ],
 
-topics:[],
-
 plans:[],
-
 sessions:[],
-
 tests:[],
-
 mistakes:[],
-
 reviews:[],
-
-goals:[],
-
 messages:[],
+notes:[],
 
-achievements:[],
+streak:0,
+lastStudy:""
 
-settings:{
-pomodoro:25,
-shortBreak:5,
-longBreak:15
-}
-};
-
-let D=loadData();
-
-let STATE={
-page:"home",
-timer:{
-seconds:0,
-running:false,
-mode:"study",
-interval:null
-}
 };
 
 
-/* =========================
-   STORAGE
-========================= */
-
-function loadData(){
-
-try{
-
-const saved=
-JSON.parse(
-localStorage.getItem(KEY)
-);
-
-if(!saved)
-return structuredClone(DEFAULT_DATA);
-
-return mergeData(
-structuredClone(DEFAULT_DATA),
-saved
-);
-
-}catch{
-
-return structuredClone(DEFAULT_DATA);
-
-}
-
-}
+let D=
+JSON.parse(localStorage.getItem(KEY)||"null")
+||
+JSON.parse(JSON.stringify(DEF));
 
 
-function mergeData(base,saved){
-
-for(const key in saved){
-
-if(
-saved[key]!==undefined &&
-saved[key]!==null
-){
-
-if(
-typeof saved[key]==="object" &&
-!Array.isArray(saved[key]) &&
-typeof base[key]==="object"
-){
-
-base[key]={
-...base[key],
-...saved[key]
+let T={
+sec:0,
+run:false,
+id:null
 };
 
-}else{
 
-base[key]=saved[key];
+const $=x=>document.getElementById(x);
 
-}
+const save=()=>{
+localStorage.setItem(KEY,JSON.stringify(D))
+};
 
-}
-
-}
-
-return base;
-
-}
+const today=()=>{
+return new Date().toISOString().slice(0,10)
+};
 
 
-function save(){
-
-localStorage.setItem(
-KEY,
-JSON.stringify(D)
-);
-
-}
-
-
-/* =========================
-   UTILITIES
-========================= */
-
-function uid(){
-
-return Date.now().toString(36)+
-Math.random().toString(36).slice(2);
-
-}
-
-
-function today(){
-
-return new Date()
-.toISOString()
-.slice(0,10);
-
-}
-
-
-function fa(value){
-
-return String(value)
-.replace(
+const fa=n=>
+String(n).replace(
 /\d/g,
-d=>"۰۱۲۳۴۵۶۷۸۹"[d]
+x=>"۰۱۲۳۴۵۶۷۸۹"[x]
 );
 
-}
+
+const fmt=m=>
+`${fa(Math.floor(m/60))}:${String(Math.round(m%60)).padStart(2,"0")}`;
 
 
-function esc(value){
-
-return String(value??"")
-.replace(
+const esc=s=>
+String(s).replace(
 /[&<>"']/g,
 c=>({
 "&":"&amp;",
@@ -828,396 +420,203 @@ c=>({
 }[c])
 );
 
-}
 
-
-function fmtMinutes(minutes){
-
-minutes=Math.max(
-0,
-Math.round(minutes)
-);
-
-const h=
-Math.floor(minutes/60);
-
-const m=
-minutes%60;
-
-return h
-?
-`${fa(h)} ساعت ${fa(m)} دقیقه`
-:
-`${fa(m)} دقیقه`;
-
-}
-
-
-function shortTime(minutes){
-
-return String(
-Math.floor(minutes/60)%24
-).padStart(2,"0")
-+
-":"
-+
-String(minutes%60).padStart(2,"0");
-
-}
-
-
-function toast(text){
-
-const el=
-document.getElementById("toast");
-
-el.textContent=text;
-
-el.style.display="block";
-
-clearTimeout(window.__toast);
-
-window.__toast=setTimeout(
-()=>{
-el.style.display="none";
-},
-1800
-);
-
-}
-
-
-function clamp(n,min,max){
-
-return Math.min(
-max,
-Math.max(min,n)
-);
-
-}
-
-
-/* =========================
-   CALCULATIONS
-========================= */
-
-function studyMinutes(date=today()){
+function studyToday(){
 
 return D.sessions
-.filter(x=>x.date===date)
-.reduce(
-(a,x)=>a+(+x.minutes||0),
-0
-);
+.filter(x=>x.date===today())
+.reduce((a,x)=>a+x.minutes,0)
 
 }
 
 
-function testsFor(date=today()){
+function testsToday(){
 
-return D.tests
-.filter(x=>x.date===date);
-
-}
-
-
-function testCount(date=today()){
-
-return testsFor(date)
-.reduce(
-(a,x)=>a+(+x.count||0),
-0
-);
+return D.tests.filter(x=>x.date===today())
 
 }
 
 
-function accuracy(list=testsFor()){
+function accuracy(){
 
-if(!list.length)
-return null;
+let a=testsToday();
+
+if(!a.length)return null;
 
 return Math.round(
-list.reduce(
-(a,x)=>a+(+x.accuracy||0),
-0
-)/list.length
-);
+a.reduce((s,x)=>s+x.accuracy,0)/a.length
+)
 
 }
 
 
-function targetMinutes(){
+function daysLeft(){
 
-return Math.max(
-60,
-(+D.profile.dailyHours||8)*60
-);
-
-}
-
-
-function examDays(){
-
-if(!D.profile.examDate)
-return null;
+if(!D.profile.examDate)return null;
 
 return Math.max(
 0,
 Math.ceil(
-(
-new Date(D.profile.examDate)
--
-new Date()
-)/86400000
+(new Date(D.profile.examDate)-new Date())/86400000
 )
-);
-
-}
-
-
-function completion(){
-
-return Math.min(
-100,
-Math.round(
-studyMinutes()/
-targetMinutes()*
-100
 )
+
+}
+
+
+function advisor(){
+
+let h=studyToday();
+
+let target=D.profile.dailyHours*60;
+
+let a=accuracy();
+
+let open=
+D.plans.filter(
+x=>x.date===today()&&!x.done
 );
 
-}
+
+if(!D.profile.name)
+
+return "پروفایل را کامل کن تا مشاور شخصی فعال شود.";
 
 
-function streak(){
+if(a!==null && a<55)
 
-let count=0;
-
-for(
-let i=0;
-i<365;
-i++
-){
-
-const d=new Date();
-
-d.setDate(
-d.getDate()-i
-);
-
-const key=
-d.toISOString()
-.slice(0,10);
-
-if(studyMinutes(key)>0)
-count++;
-else
-break;
-
-}
-
-return count;
-
-}
+return `دقت امروز ${fa(a)}٪ است؛
+اول اشتباهات را تحلیل کن و سپس تست جدید بزن.`;
 
 
-function averageSubjectAccuracy(subject){
+if(open.length)
 
-const list=
-D.tests.filter(
-x=>x.subject===subject
-);
+return `اولویت بعدی:
+${open[0].subject} — ${open[0].topic}`;
 
-return accuracy(list);
+
+if(h<target*.4)
+
+return "از هدف امروز عقب هستی؛
+یک جلسه ۴۵ دقیقه‌ای شروع کن.";
+
+
+if(h>=target)
+
+return "هدف مطالعه امروز تکمیل شده؛
+مرور و تحلیل را انجام بده.";
+
+
+return "روند مطالعه مناسب است؛
+جلسه بعدی را اجرا و نتیجه را ثبت کن.";
 
 }
 
 
-function weakestSubject(){
-
-const values=
-D.subjects.map(
-s=>{
-
-const a=
-averageSubjectAccuracy(s.name);
-
-return {
-name:s.name,
-score:a===null?50:a
-};
-
-}
-);
-
-values.sort(
-(a,b)=>a.score-b.score
-);
-
-return values[0];
-
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function navigate(page){
-
-STATE.page=page;
+function page(p,b){
 
 document
-.querySelectorAll(".bottom-nav button")
-.forEach(
-b=>{
-b.classList.toggle(
-"active",
-b.dataset.page===page
-);
-}
-);
+.querySelectorAll("nav button")
+.forEach(x=>x.classList.remove("on"));
 
-const app=
-document.getElementById("app");
+if(b)b.classList.add("on");
 
-if(page==="home"){
-app.innerHTML=homeView();
-renderHome();
-}
+let pages={
+home,
+coach,
+plan,
+study,
+analytics,
+tools
+};
 
-else if(page==="coach"){
-app.innerHTML=coachView();
-renderCoach();
-}
+$("app").innerHTML=pages[p]();
 
-else if(page==="plan"){
-app.innerHTML=planView();
-renderPlan();
-}
+let renders={
+home:renderHome,
+coach:renderCoach,
+plan:renderPlan,
+study:renderStudy,
+analytics:renderAnalytics,
+tools:renderTools
+};
 
-else if(page==="study"){
-app.innerHTML=studyView();
-renderStudy();
-}
-
-else if(page==="analytics"){
-app.innerHTML=analyticsView();
-renderAnalytics();
-}
-
-else if(page==="more"){
-app.innerHTML=moreView();
-renderMore();
-}
-
-else if(page==="settings"){
-app.innerHTML=settingsView();
-}
+renders[p]();
 
 }
 
 
-/* =========================
-   HOME
-========================= */
+function home(){
 
-function homeView(){
-
-return`
+return `
 
 <section class="card hero">
 
 <div>
 
-<span class="pill">
-مشاور تطبیقی آفلاین V5
-</span>
+<span class="chip">FINAL V7</span>
 
-<h1 id="hello">
-سلام 👋
-</h1>
+<h2 id="hi">سلام 👋</h2>
 
-<p id="heroAdvice">
-پروفایل را تکمیل کن.
-</p>
+<p id="ad"></p>
 
 </div>
 
-<div class="hero-score">
+<div class="score">
 
-<b id="heroProgress">
-۰٪
-</b>
+<b id="pr">۰٪</b>
 
-<span>
+<small>
 پیشرفت امروز
-</span>
+</small>
 
 </div>
 
 </section>
 
 
-<section class="grid">
+<section class="stats">
 
 <div class="card stat">
 
-<div
-id="statStudy"
-class="stat-value">
-۰
-</div>
+<b id="mh"></b>
 
-<span class="stat-label">
-مطالعه امروز
-</span>
+<small>
+مطالعه
+</small>
 
 </div>
 
 
 <div class="card stat">
 
-<div
-id="statTests"
-class="stat-value">
-۰
-</div>
+<b id="tc"></b>
 
-<span class="stat-label">
-تست امروز
-</span>
+<small>
+تست
+</small>
 
 </div>
 
 
 <div class="card stat">
 
-<div
-id="statAccuracy"
-class="stat-value">
-—
-</div>
+<b id="ac"></b>
 
-<span class="stat-label">
-دقت امروز
-</span>
+<small>
+دقت
+</small>
 
 </div>
 
 
 <div class="card stat">
 
-<div
-id="statExam"
-class="stat-value">
-—
-</div>
+<b id="dl"></b>
 
-<span class="stat-label">
+<small>
 تا آزمون
-</span>
+</small>
 
 </div>
 
@@ -1226,24 +625,24 @@ class="stat-value">
 
 <section class="card">
 
-<div class="section-head">
+<div class="head">
 
-<h2>
+<h3>
 📅 برنامه امروز
-</h2>
+</h3>
 
 <button
 class="primary"
-onclick="generateSmartPlan()">
+onclick="smartPlan()">
 
-ساخت برنامه
+برنامه هوشمند
 
 </button>
 
 </div>
 
 <div
-id="homePlans"
+id="plans"
 class="list">
 </div>
 
@@ -1252,60 +651,13 @@ class="list">
 
 <section class="card">
 
-<div class="section-head">
-
-<h2>
+<h3>
 🧠 تصمیم مشاور
-</h2>
-
-</div>
+</h3>
 
 <div
-id="homeDecision"
-class="advice">
-</div>
-
-</section>
-
-
-<section class="grid3">
-
-<div class="card center">
-
-<div class="stat-value">
-🔥 <span id="streakValue">۰</span>
-</div>
-
-<div class="stat-label">
-روز پشت‌سرهم
-</div>
-
-</div>
-
-
-<div class="card center">
-
-<div class="stat-value">
-⭐ <span id="xpValue">۰</span>
-</div>
-
-<div class="stat-label">
-امتیاز
-</div>
-
-</div>
-
-
-<div class="card center">
-
-<div class="stat-value">
-🏆 <span id="badgeValue">۰</span>
-</div>
-
-<div class="stat-label">
-دستاورد
-</div>
-
+id="adv"
+class="msg b">
 </div>
 
 </section>
@@ -1315,188 +667,15 @@ class="advice">
 }
 
 
-function renderHome(){
+function item(x){
 
-const name=
-D.profile.name||"دانش‌آموز";
-
-hello.textContent=
-`سلام ${esc(name)} 👋`;
-
-heroAdvice.textContent=
-offlineAdvice();
-
-heroProgress.textContent=
-fa(completion())+"٪";
-
-statStudy.textContent=
-fmtMinutes(studyMinutes());
-
-statTests.textContent=
-fa(testCount());
-
-const a=accuracy();
-
-statAccuracy.textContent=
-a===null?"—":fa(a)+"٪";
-
-statExam.textContent=
-examDays()===null
-?
-"—"
-:
-fa(examDays());
-
-streakValue.textContent=
-fa(streak());
-
-xpValue.textContent=
-fa(xp());
-
-badgeValue.textContent=
-fa(unlockedAchievements().length);
-
-const plans=
-D.plans.filter(
-x=>x.date===today()
-);
-
-homePlans.innerHTML=
-plans.length
-?
-plans.map(
-planItemHTML
-).join("")
-:
-`
-<div class="empty">
-هنوز برنامه‌ای برای امروز وجود ندارد.
-<br><br>
-<button
-class="primary"
-onclick="generateSmartPlan()">
-ساخت برنامه هوشمند
-</button>
-</div>
-`;
-
-homeDecision.innerHTML=
-offlineAdvice();
-
-}
-
-
-/* =========================
-   OFFLINE ADVISER
-========================= */
-
-function offlineAdvice(){
-
-if(!D.profile.name)
-return"ابتدا پروفایل را کامل کن تا مشاور بتواند تصمیم‌های شخصی‌تری بگیرد.";
-
-const study=
-studyMinutes();
-
-const target=
-targetMinutes();
-
-const a=
-accuracy();
-
-const open=
-D.plans.filter(
-x=>x.date===today()&&!x.done
-);
-
-const weak=
-weakestSubject();
-
-if(
-a!==null &&
-a<50
-){
-
-return`
-دقت امروز فقط <b>${fa(a)}٪</b> است.
-افزایش حجم تست فعلاً اولویت ندارد.
-اول اشتباهاتت را تحلیل کن و همان مباحث را مرور کن.
-`;
-
-}
-
-if(
-study<target*.3 &&
-new Date().getHours()>=13
-){
-
-return`
-تا این لحظه ${fmtMinutes(study)} مطالعه ثبت شده
-در حالی که هدف روزانه ${fa(D.profile.dailyHours)} ساعت است.
-الان یک جلسه ${fa(45)} دقیقه‌ای شروع کن.
-`;
-
-}
-
-if(open.length){
-
-return`
-جلسه بعدی پیشنهادی:
-<b>${esc(open[0].subject)}</b>
-—
-${esc(open[0].topic)}.
-`;
-
-}
-
-if(
-weak.score<60
-){
-
-return`
-ضعیف‌ترین درس فعلی:
-<b>${esc(weak.name)}</b>.
-بهتر است یک جلسه یادگیری و سپس تست تحلیلی برای آن قرار دهی.
-`;
-
-}
-
-if(
-study>=target*.85
-){
-
-return`
-بیش از ۸۵٪ هدف امروز را انجام داده‌ای.
-به‌جای افزایش فشار، مرور اشتباهات و جمع‌بندی را انجام بده.
-`;
-
-}
-
-return`
-وضعیت امروز ثبت شده است.
-جلسه بعدی را شروع کن و نتیجه را ثبت کن تا مشاور خودش را با عملکردت تطبیق دهد.
-`;
-
-}
-
-
-/* =========================
-   PLAN
-========================= */
-
-function planItemHTML(x){
-
-return`
+return `
 
 <div class="item ${x.done?"done":""}">
 
-<input
-class="check"
-type="checkbox"
-${x.done?"checked":""}
-onchange="togglePlan('${x.id}')">
+<i class="dot"></i>
 
-<div class="item-main">
+<div class="grow">
 
 <b>
 ${esc(x.start)}
@@ -1507,17 +686,18 @@ ${esc(x.subject)}
 <small>
 ${esc(x.topic)}
  ·
-${fa(x.duration)} دقیقه
+${fa(x.duration)}
+ دقیقه
  ·
 ${esc(x.type)}
 </small>
 
 </div>
 
-<button
-class="secondary small"
-onclick="deletePlan('${x.id}')">
-حذف
+<button onclick="toggle('${x.id}')">
+
+${x.done?"✓":"انجام شد"}
+
 </button>
 
 </div>
@@ -1527,36 +707,241 @@ onclick="deletePlan('${x.id}')">
 }
 
 
-function planView(){
+function renderHome(){
 
-return`
+let h=studyToday();
+
+let target=D.profile.dailyHours*60;
+
+let a=accuracy();
+
+let l=D.plans.filter(
+x=>x.date===today()
+);
+
+
+$("hi").textContent=
+D.profile.name
+?
+`سلام ${esc(D.profile.name)} 👋`
+:
+"سلام 👋";
+
+
+$("ad").textContent=advisor();
+
+$("mh").textContent=fmt(h);
+
+$("tc").textContent=
+fa(
+testsToday()
+.reduce((s,x)=>s+x.count,0)
+);
+
+
+$("ac").textContent=
+a===null
+?
+"—"
+:
+fa(a)+"٪";
+
+
+$("dl").textContent=
+daysLeft()===null
+?
+"—"
+:
+fa(daysLeft());
+
+
+$("pr").textContent=
+fa(
+Math.min(
+100,
+Math.round(
+h/Math.max(1,target)*100
+)
+)
+)+"٪";
+
+
+$("adv").textContent=advisor();
+
+
+$("plans").innerHTML=
+l.length
+?
+l.map(item).join("")
+:
+"<p class='muted'>برنامه‌ای ساخته نشده.</p>";
+
+}
+
+
+function toggle(id){
+
+let x=D.plans.find(x=>x.id===id);
+
+if(x)x.done=!x.done;
+
+save();
+
+renderHome();
+
+}
+
+
+function smartPlan(){
+
+if(!D.profile.name){
+
+settings();
+
+return;
+
+}
+
+
+D.plans=
+D.plans.filter(
+x=>x.date!==today()
+);
+
+
+let total=
+Math.max(
+120,
+D.profile.dailyHours*60
+);
+
+
+let used=0;
+
+let now=
+Math.max(
+8*60,
+new Date().getHours()*60+10
+);
+
+
+let subjects=
+[...D.subjects]
+.sort((a,b)=>a.level-b.level);
+
+
+for(
+let i=0;
+used+45<=total && i<16;
+i++
+){
+
+let s=
+subjects[i%subjects.length];
+
+let duration=
+i<2
+?
+90
+:
+60;
+
+
+if(used+duration>total)
+
+duration=total-used;
+
+
+if(duration<45)break;
+
+
+let types=[
+["یادگیری","مطالعه مفهومی"],
+["تست","تست + تحلیل"],
+["مرور","مرور فعال"],
+["تست","آزمونک"]
+];
+
+
+let z=
+types[i%types.length];
+
+
+D.plans.push({
+
+id:crypto.randomUUID(),
+
+date:today(),
+
+subject:s.name,
+
+topic:z[1],
+
+duration,
+
+type:z[0],
+
+start:
+String(Math.floor(now/60))
+.padStart(2,"0")
++
+":"+
+String(now%60)
+.padStart(2,"0"),
+
+done:false
+
+});
+
+
+used+=duration;
+
+now+=duration+20;
+
+}
+
+
+save();
+
+page(
+"home",
+document.querySelector("nav button")
+);
+
+}
+
+
+function plan(){
+
+return `
 
 <section class="card">
 
-<div class="section-head">
-
-<div>
+<div class="head">
 
 <h2>
 📅 برنامه تطبیقی
 </h2>
 
-<p class="muted">
-برنامه بر اساس سطح دروس، ساعت مطالعه و عملکرد تستی ساخته می‌شود.
-</p>
-
-</div>
-
 <button
 class="primary"
-onclick="generateSmartPlan()">
+onclick="smartPlan()">
+
 بازسازی
+
 </button>
 
 </div>
 
+<p class="muted">
+
+برنامه بر اساس هدف مطالعه
+و سطح دروس ساخته می‌شود.
+
+</p>
+
 <div
-id="planList"
+id="all"
 class="list">
 </div>
 
@@ -1569,34 +954,21 @@ class="list">
 🔄 جبران عقب‌افتادگی
 </h3>
 
-<p class="muted">
-جلسه‌های انجام‌نشده را تحلیل می‌کند و مهم‌ترین‌ها را نگه می‌دارد.
-</p>
-
 <button
 class="primary"
-onclick="recovery()">
-اجرای تحلیل جبرانی
+onclick="recover()">
+
+تحلیل جبران
+
 </button>
 
 <div
-id="recoveryResult"
-class="advice"
-style="margin-top:10px">
-</div>
+id="rec"
+class="msg b">
 
-</section>
+جلسه‌های انجام‌نشده
+اولویت‌بندی می‌شوند.
 
-
-<section class="card">
-
-<h3>
-📆 نمای هفتگی
-</h3>
-
-<div
-id="weeklyPlan"
-class="list">
 </div>
 
 </section>
@@ -1608,1387 +980,85 @@ class="list">
 
 function renderPlan(){
 
-const plans=
+let l=
 D.plans.filter(
 x=>x.date===today()
 );
 
-planList.innerHTML=
-plans.length
+
+$("all").innerHTML=
+l.length
 ?
-plans.map(planItemHTML).join("")
+l.map(item).join("")
 :
-`<div class="empty">
-برنامه‌ای ساخته نشده.
-</div>`;
-
-renderWeeklyPlan();
+"<p class='muted'>برنامه‌ای وجود ندارد.</p>";
 
 }
 
 
-function renderWeeklyPlan(){
-
-const rows=[];
-
-for(let i=0;i<7;i++){
-
-const d=new Date();
-
-d.setDate(
-d.getDate()+i
-);
-
-const key=
-d.toISOString()
-.slice(0,10);
-
-const list=
-D.plans.filter(
-x=>x.date===key
-);
-
-rows.push(`
-
-<div class="item">
-
-<div class="item-main">
-
-<b>
-${i===0?"امروز":key}
-</b>
-
-<small>
-${fa(list.length)}
- جلسه
- ·
-${fmtMinutes(
-list.reduce(
-(a,x)=>a+x.duration,
-0
-)
-)}
-</small>
-
-</div>
-
-</div>
-
-`);
-
-}
-
-weeklyPlan.innerHTML=
-rows.join("");
-
-}
-
-
-function generateSmartPlan(){
-
-if(!D.profile.name){
-
-navigate("settings");
-
-toast("ابتدا پروفایل را کامل کن");
-
-return;
-
-}
-
-D.plans=
-D.plans.filter(
-x=>x.date!==today()
-);
-
-const total=
-targetMinutes();
-
-let used=0;
-
-let start=
-Math.max(
-8*60,
-new Date().getHours()*60+5
-);
-
-const subjects=
-[...D.subjects]
-.sort(
-(a,b)=>{
-
-const aa=
-averageSubjectAccuracy(a.name);
-
-const bb=
-averageSubjectAccuracy(b.name);
-
-const scoreA=
-(aa===null?50:aa)
-+
-a.level*5;
-
-const scoreB=
-(bb===null?50:bb)
-+
-b.level*5;
-
-return scoreA-scoreB;
-
-}
-);
-
-const modes=[
-
-["یادگیری","مبحث ضعیف",75],
-
-["تست","تست + تحلیل",60],
-
-["مرور","مرور فعال",45],
-
-["تست","تست زمان‌دار",60]
-
-];
-
-let i=0;
-
-while(
-used+45<=total &&
-i<24
-){
-
-const s=
-subjects[i%subjects.length];
-
-const mode=
-modes[i%modes.length];
-
-let duration=
-mode[2];
-
-if(
-total-used<duration
-)
-duration=
-total-used;
-
-if(duration<45)
-break;
-
-D.plans.push({
-
-id:uid(),
-
-date:today(),
-
-subject:s.name,
-
-topic:mode[1],
-
-duration,
-
-type:mode[0],
-
-start:shortTime(start),
-
-done:false
-
-});
-
-used+=duration;
-
-start+=duration+15;
-
-i++;
-
-}
-
-save();
-
-toast("برنامه هوشمند ساخته شد");
-
-navigate(STATE.page);
-
-}
-
-
-function togglePlan(id){
-
-const p=
-D.plans.find(
-x=>x.id===id
-);
-
-if(!p)return;
-
-p.done=!p.done;
-
-save();
-
-navigate(STATE.page);
-
-}
-
-
-function deletePlan(id){
-
-D.plans=
-D.plans.filter(
-x=>x.id!==id
-);
-
-save();
-
-navigate(STATE.page);
-
-}
-
-
-function recovery(){
-
-const open=
-D.plans.filter(
-x=>x.date===today()&&!x.done
-);
-
-if(!open.length){
-
-recoveryResult.textContent=
-"هیچ جلسه عقب‌افتاده‌ای وجود ندارد.";
-
-return;
-
-}
-
-open.sort(
-(a,b)=>b.duration-a.duration
-);
-
-const keep=
-open.slice(
+function recover(){
+
+let l=
+D.plans
+.filter(x=>x.date===today()&&!x.done)
+.sort((a,b)=>b.duration-a.duration);
+
+
+$("rec").textContent=
+l.length
+?
+"اول انجام بده: "+
+l
+.slice(
 0,
 Math.max(
 1,
-Math.ceil(open.length*.6)
+Math.ceil(l.length*.6)
 )
-);
-
-recoveryResult.innerHTML=
-`
-<b>جلسه‌های مهم:</b><br>
-${keep.map(
-x=>esc(x.subject)+" — "+esc(x.topic)
-).join("<br>")}
-<br><br>
-این جلسه‌ها را انجام بده و بقیه را به روز بعد منتقل کن.
-`;
-
-}
-
-
-/* =========================
-   STUDY TIMER
-========================= */
-
-function studyView(){
-
-return`
-
-<section class="card center">
-
-<h2>
-⏱️ جلسه مطالعه
-</h2>
-
-<div class="timer-mode">
-
-<button
-id="modeStudy"
-class="active"
-onclick="setTimerMode('study')">
-مطالعه
-</button>
-
-<button
-id="modePomodoro"
-onclick="setTimerMode('pomodoro')">
-پومودورو
-</button>
-
-<button
-id="modeBreak"
-onclick="setTimerMode('break')">
-استراحت
-</button>
-
-</div>
-
-<div
-id="timerDisplay"
-class="timer">
-00:00:00
-</div>
-
-<div class="grid2">
-
-<select id="studySubject">
-
-${D.subjects.map(
-s=>`
-<option>
-${esc(s.name)}
-</option>
-`
-).join("")}
-
-</select>
-
-<input
-id="studyTopic"
-placeholder="مبحث">
-
-</div>
-
-<br>
-
-<button
-class="primary"
-onclick="startTimer()">
-شروع
-</button>
-
-<button
-class="secondary"
-onclick="pauseTimer()">
-توقف
-</button>
-
-<button
-class="primary"
-onclick="finishTimer()">
-ثبت جلسه
-</button>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🍅 پومودورو
-</h3>
-
-<div class="grid3">
-
-<div>
-
-<label>
-مطالعه
-</label>
-
-<input
-type="number"
-id="pomStudy"
-value="${D.settings.pomodoro}"
-min="1"
-max="120">
-
-</div>
-
-<div>
-
-<label>
-استراحت کوتاه
-</label>
-
-<input
-type="number"
-id="pomShort"
-value="${D.settings.shortBreak}"
-min="1"
-max="60">
-
-</div>
-
-<div>
-
-<label>
-استراحت بلند
-</label>
-
-<input
-type="number"
-id="pomLong"
-value="${D.settings.longBreak}"
-min="1"
-max="90">
-
-</div>
-
-</div>
-
-<br>
-
-<button
-class="primary"
-onclick="savePomodoro()">
-ذخیره تنظیمات
-</button>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-📝 ثبت تست
-</h3>
-
-<div class="form">
-
-<select id="testSubject">
-
-${D.subjects.map(
-s=>`
-<option>
-${esc(s.name)}
-</option>
-`
-).join("")}
-
-</select>
-
-<input
-id="testCount"
-type="number"
-min="1"
-placeholder="تعداد تست">
-
-<input
-id="testCorrect"
-type="number"
-min="0"
-placeholder="تعداد درست">
-
-<input
-id="testWrong"
-type="number"
-min="0"
-placeholder="تعداد غلط">
-
-<input
-id="testBlank"
-type="number"
-min="0"
-placeholder="تعداد نزده">
-
-<select id="errorCause">
-
-<option>بدون مشکل خاص</option>
-<option>ضعف مفهومی</option>
-<option>بی‌دقتی</option>
-<option>محاسبات</option>
-<option>کمبود زمان</option>
-<option>فراموشی</option>
-<option>تله تستی</option>
-</select>
-
-<button
-class="primary"
-onclick="addTest()">
-ثبت نتیجه
-</button>
-
-</div>
-
-</section>
-
-`;
-
-
-}
-
-
-function renderStudy(){
-
-timerDisplay.textContent=
-timerText();
-
-}
-
-
-function timerText(){
-
-const s=
-STATE.timer.seconds;
-
-return[
-Math.floor(s/3600),
-Math.floor(s/60)%60,
-s%60
-]
-.map(
-x=>String(x).padStart(2,"0")
 )
-.join(":");
-
-}
-
-
-function setTimerMode(mode){
-
-pauseTimer();
-
-STATE.timer.mode=mode;
-
-STATE.timer.seconds=0;
-
-if(mode==="pomodoro"){
-
-STATE.timer.seconds=
-D.settings.pomodoro*60;
-
-}
-
-else if(mode==="break"){
-
-STATE.timer.seconds=
-D.settings.shortBreak*60;
-
-}
-
-renderStudy();
-
-}
-
-
-function startTimer(){
-
-if(STATE.timer.running)
-return;
-
-STATE.timer.running=true;
-
-STATE.timer.interval=
-setInterval(
-()=>{
-
-if(
-STATE.timer.mode==="pomodoro" ||
-STATE.timer.mode==="break"
-){
-
-if(STATE.timer.seconds<=0){
-
-pauseTimer();
-
-toast("زمان تمام شد");
-
-return;
-
-}
-
-STATE.timer.seconds--;
-
-}else{
-
-STATE.timer.seconds++;
-
-}
-
-const el=
-document.getElementById(
-"timerDisplay"
-);
-
-if(el)
-el.textContent=
-timerText();
-
-},
-1000
-);
-
-toast("تایمر شروع شد");
-
-}
-
-
-function pauseTimer(){
-
-STATE.timer.running=false;
-
-clearInterval(
-STATE.timer.interval
-);
-
-}
-
-
-function finishTimer(){
-
-pauseTimer();
-
-const seconds=
-STATE.timer.seconds;
-
-let minutes;
-
-if(
-STATE.timer.mode==="study"
-){
-
-minutes=
-Math.round(seconds/60);
-
-}else{
-
-minutes=
-0;
-
-}
-
-if(minutes<1){
-
-alert(
-"حداقل یک دقیقه مطالعه ثبت کن."
-);
-
-return;
-
-}
-
-D.sessions.push({
-
-id:uid(),
-
-date:today(),
-
-minutes,
-
-subject:
-document.getElementById(
-"studySubject"
-).value,
-
-topic:
-document.getElementById(
-"studyTopic"
-).value.trim()
-||
-"مطالعه آزاد"
-
-});
-
-STATE.timer.seconds=0;
-
-save();
-
-addXP(minutes);
-
-renderStudy();
-
-toast(
-"جلسه مطالعه ثبت شد"
-);
-
-}
-
-
-function savePomodoro(){
-
-D.settings.pomodoro=
-clamp(
-+pомStudy?.value||25,
-1,
-120
-);
-
-D.settings.shortBreak=
-clamp(
-+pомShort?.value||5,
-1,
-60
-);
-
-D.settings.longBreak=
-clamp(
-+pомLong?.value||15,
-1,
-90
-);
-
-save();
-
-toast("تنظیمات پومودورو ذخیره شد");
-
-}
-
-
-/* =========================
-   TESTS
-========================= */
-
-function addTest(){
-
-const count=
-+document.getElementById("testCount").value||0;
-
-const correct=
-+document.getElementById("testCorrect").value||0;
-
-const wrong=
-+document.getElementById("testWrong").value||0;
-
-const blank=
-+document.getElementById("testBlank").value||0;
-
-if(count<1){
-
-alert("تعداد تست را وارد کن.");
-
-return;
-
-}
-
-const actual=
-correct+wrong+blank;
-
-if(actual>count){
-
-alert(
-"مجموع درست، غلط و نزده نمی‌تواند بیشتر از تعداد تست باشد."
-);
-
-return;
-
-}
-
-const percentage=
-Math.round(
-(correct/count)*100
-);
-
-const subject=
-document.getElementById("testSubject").value;
-
-const cause=
-document.getElementById("errorCause").value;
-
-D.tests.push({
-
-id:uid(),
-
-date:today(),
-
-subject,
-
-count,
-
-correct,
-
-wrong,
-
-blank,
-
-accuracy:percentage,
-
-cause
-
-});
-
-if(
-wrong>0 &&
-cause!=="بدون مشکل خاص"
-){
-
-D.mistakes.push({
-
-id:uid(),
-
-date:today(),
-
-subject,
-
-cause,
-
-count:wrong
-
-});
-
-}
-
-save();
-
-addXP(
-count
-);
-
-document.getElementById("testCount").value="";
-document.getElementById("testCorrect").value="";
-document.getElementById("testWrong").value="";
-document.getElementById("testBlank").value="";
-
-toast(
-`نتیجه ثبت شد: ${fa(percentage)}٪`
-);
-
-}
-
-
-/* =========================
-   ANALYTICS
-========================= */
-
-function analyticsView(){
-
-return`
-
-<section class="card">
-
-<h2>
-📊 مرکز تحلیل
-</h2>
-
-<div
-id="analyticsOverview">
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-📈 مطالعه ۷ روز اخیر
-</h3>
-
-<div
-id="studyChart"
-class="chart">
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🎯 عملکرد دروس
-</h3>
-
-<div
-id="subjectAnalytics"
-class="list">
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-⚠️ بانک اشتباهات
-</h3>
-
-<div
-id="mistakeAnalytics">
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🏆 دستاوردها
-</h3>
-
-<div
-id="achievementAnalytics">
-</div>
-
-</section>
-
-`;
-
-}
-
-
-function renderAnalytics(){
-
-const totalStudy=
-D.sessions.reduce(
-(a,x)=>a+x.minutes,
-0
-);
-
-const totalTests=
-D.tests.reduce(
-(a,x)=>a+x.count,
-0
-);
-
-const totalAccuracy=
-accuracy(D.tests);
-
-analyticsOverview.innerHTML=`
-
-<div class="grid">
-
-<div class="card stat">
-
-<div class="stat-value">
-${fmtMinutes(totalStudy)}
-</div>
-
-<span class="stat-label">
-مطالعه کل
-</span>
-
-</div>
-
-<div class="card stat">
-
-<div class="stat-value">
-${fa(totalTests)}
-</div>
-
-<span class="stat-label">
-تست کل
-</span>
-
-</div>
-
-<div class="card stat">
-
-<div class="stat-value">
-${D.sessions.length}
-</div>
-
-<span class="stat-label">
-جلسه
-</span>
-
-</div>
-
-<div class="card stat">
-
-<div class="stat-value">
-${totalAccuracy===null?"—":fa(totalAccuracy)+"٪"}
-</div>
-
-<span class="stat-label">
-دقت کل
-</span>
-
-</div>
-
-</div>
-
-`;
-
-
-renderStudyChart();
-
-subjectAnalytics.innerHTML=
-D.subjects.map(
-s=>{
-
-const a=
-averageSubjectAccuracy(s.name);
-
-const minutes=
-D.sessions
-.filter(
-x=>x.subject===s.name
-)
-.reduce(
-(a,x)=>a+x.minutes,
-0
-);
-
-const tests=
-D.tests
-.filter(
-x=>x.subject===s.name
-)
-.reduce(
-(a,x)=>a+x.count,
-0
-);
-
-return`
-
-<div class="item">
-
-<div class="item-main">
-
-<b>
-${esc(s.name)}
-</b>
-
-<small>
-
-سطح:
-${fa(s.level)}
- ·
-مطالعه:
-${fmtMinutes(minutes)}
- ·
-تست:
-${fa(tests)}
-
-</small>
-
-<div class="progress">
-
-<i
-style="width:${a===null?0:a}%">
-</i>
-
-</div>
-
-<small>
-
-دقت:
-${a===null?"بدون داده":fa(a)+"٪"}
-
-</small>
-
-</div>
-
-</div>
-
-`;
-
-}
-).join("");
-
-
-renderMistakes();
-
-renderAchievements();
-
-}
-
-
-function renderStudyChart(){
-
-let html="";
-
-let max=1;
-
-const values=[];
-
-for(let i=6;i>=0;i--){
-
-const d=
-new Date();
-
-d.setDate(
-d.getDate()-i
-);
-
-const key=
-d.toISOString()
-.slice(0,10);
-
-const value=
-studyMinutes(key);
-
-max=Math.max(
-max,
-value
-);
-
-values.push({
-key,
-value,
-label:
-i===0
-?
-"امروز"
+.map(x=>x.subject+" — "+x.topic)
+.join("، ")
 :
-key.slice(5)
-});
-
-}
-
-for(const x of values){
-
-const height=
-Math.max(
-3,
-x.value/max*150
-);
-
-html+=`
-
-<div class="chart-col">
-
-<div
-class="chart-bar"
-style="height:${height}px">
-</div>
-
-<small>
-${x.label}
-</small>
-
-</div>
-
-`;
-
-}
-
-studyChart.innerHTML=html;
+"عقب‌افتادگی ثبت‌شده‌ای وجود ندارد.";
 
 }
 
 
-function renderMistakes(){
+function coach(){
 
-const causes={};
-
-D.mistakes.forEach(
-m=>{
-causes[m.cause]=
-(causes[m.cause]||0)+
-(+m.count||1);
-}
-);
-
-const rows=
-Object.entries(causes)
-.sort(
-(a,b)=>b[1]-a[1]
-);
-
-mistakeAnalytics.innerHTML=
-rows.length
-?
-rows.map(
-x=>
-`<span class="chip">
-${esc(x[0])}: ${fa(x[1])}
-</span>`
-).join("")
-:
-`<div class="empty">
-هنوز اشتباهی ثبت نشده.
-</div>`;
-
-}
-
-
-function renderAchievements(){
-
-achievementAnalytics.innerHTML=
-ALL_ACHIEVEMENTS.map(
-a=>{
-
-const unlocked=
-unlockedAchievements()
-.some(
-x=>x.id===a.id
-);
-
-return`
-
-<span
-class="${unlocked?"badge":"chip"}">
-
-${a.icon}
-${esc(a.name)}
-
-</span>
-
-`;
-
-}
-).join("");
-
-}
-
-
-/* =========================
-   ACHIEVEMENTS / XP
-========================= */
-
-const ALL_ACHIEVEMENTS=[
-
-{
-id:"first",
-icon:"🌱",
-name:"اولین جلسه",
-check:()=>D.sessions.length>=1
-},
-
-{
-id:"hour",
-icon:"⏱️",
-name:"اولین ساعت",
-check:()=>D.sessions.reduce((a,x)=>a+x.minutes,0)>=60
-},
-
-{
-id:"ten",
-icon:"🔥",
-name:"۱۰ جلسه",
-check:()=>D.sessions.length>=10
-},
-
-{
-id:"tests100",
-icon:"📝",
-name:"۱۰۰ تست",
-check:()=>D.tests.reduce((a,x)=>a+x.count,0)>=100
-},
-
-{
-id:"streak3",
-icon:"🔥",
-name:"۳ روز پشت‌سرهم",
-check:()=>streak()>=3
-},
-
-{
-id:"streak7",
-icon:"🏆",
-name:"۷ روز پشت‌سرهم",
-check:()=>streak()>=7
-},
-
-{
-id:"study10",
-icon:"🚀",
-name:"۱۰ ساعت مطالعه",
-check:()=>D.sessions.reduce((a,x)=>a+x.minutes,0)>=600
-},
-
-{
-id:"study50",
-icon:"👑",
-name:"۵۰ ساعت مطالعه",
-check:()=>D.sessions.reduce((a,x)=>a+x.minutes,0)>=3000
-}
-
-];
-
-
-function unlockedAchievements(){
-
-return ALL_ACHIEVEMENTS.filter(
-x=>x.check()
-);
-
-}
-
-
-function xp(){
-
-let value=0;
-
-value+=
-D.sessions.reduce(
-(a,x)=>a+x.minutes,
-0
-);
-
-value+=
-D.tests.reduce(
-(a,x)=>a+x.count,
-0
-)*2;
-
-value+=
-unlockedAchievements().length*100;
-
-return Math.round(value);
-
-}
-
-
-function addXP(){
-
-}
-
-
-/* =========================
-   COACH
-========================= */
-
-function coachView(){
-
-return`
+return `
 
 <section class="card">
 
 <h2>
-🤖 مشاور خصوصی آفلاین
+🤖 مشاور خصوصی
 </h2>
 
 <p class="muted">
 
-این مشاور بدون API خارجی کار می‌کند و تصمیم‌هایش را از داده‌های ثبت‌شده در StudyCoach می‌گیرد.
+مشاور داخلی بدون API پولی
+و بر اساس داده‌های برنامه.
 
 </p>
 
-<div
-id="chat"
-class="chat">
+<div id="chat">
 </div>
+
 
 <div class="form">
 
 <textarea
-id="question"
+id="q"
 rows="3"
-placeholder="مثلاً امروز ۲ ساعت عقب افتادم، چه کار کنم؟">
+placeholder="مثلاً امروز عقب افتادم، چه کنم؟">
 </textarea>
 
 <button
 class="primary"
-onclick="askCoach()">
+onclick="ask()">
+
 پرسیدن
-</button>
 
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-⚡ سؤال سریع
-</h3>
-
-<div class="grid2">
-
-<button
-class="secondary"
-onclick="quickQuestion('ضعیف‌ترین درس من کدام است؟')">
-ضعیف‌ترین درس
-</button>
-
-<button
-class="secondary"
-onclick="quickQuestion('امروز چقدر باید مطالعه کنم؟')">
-هدف امروز
-</button>
-
-<button
-class="secondary"
-onclick="quickQuestion('عقب افتادم چه کار کنم؟')">
-جبران
-</button>
-
-<button
-class="secondary"
-onclick="quickQuestion('وضعیت من چطور است؟')">
-ارزیابی
 </button>
 
 </div>
@@ -3002,204 +1072,253 @@ onclick="quickQuestion('وضعیت من چطور است؟')">
 
 function renderCoach(){
 
-const messages=
+$("chat").innerHTML=
+(
 D.messages.length
 ?
-D.messages.slice(-20)
+D.messages.slice(-15)
 :
-[
-{
-q:"",
-ans:offlineAdvice()
-}
-];
+[{q:"",a:advisor()}]
+)
+.map(m=>
 
-chat.innerHTML=
-messages.map(
-m=>`
-
-${m.q?
-`
-<div class="msg user">
-<b>شما:</b><br>
+(m.q
+?
+`<div class="msg u">
 ${esc(m.q)}
+</div>`
+:
+""
+)
+
++
+`
+<div class="msg b">
+${esc(m.a)}
 </div>
 `
-:""}
 
-<div class="msg bot">
-<b>🤖 مشاور:</b><br>
-${m.ans}
-</div>
-
-`
-).join("");
+)
+.join("");
 
 }
 
 
-function quickQuestion(text){
+function ask(){
 
-document.getElementById(
-"question"
-).value=text;
+let q=$("q").value.trim();
 
-askCoach();
-
-}
+if(!q)return;
 
 
-function askCoach(){
-
-const input=
-document.getElementById(
-"question"
+let open=
+D.plans.filter(
+x=>x.date===today()&&!x.done
 );
 
-const q=
-input.value.trim();
 
-if(!q)
-return;
+let a;
 
-const ans=
-coachResponse(q);
+
+if(
+/عقب|جبران|نرسید|نخوندم/
+.test(q)
+){
+
+a=
+open.length
+?
+`همه عقب‌افتادگی را
+فشرده نکن؛
+${open[0].subject}
+— ${open[0].topic}
+را اول انجام بده.`
+:
+"برنامه هوشمند را بساز.";
+
+}
+
+
+else if(
+/ضعف|ضعیف|کدام درس|کدوم درس/
+.test(q)
+){
+
+let z=
+D.subjects
+.map(s=>{
+
+let t=
+D.tests.filter(
+x=>x.subject===s.name
+);
+
+return [
+s.name,
+t.length
+?
+t.reduce(
+(a,b)=>a+b.accuracy,
+0
+)/t.length
+:
+50
+];
+
+})
+.sort((a,b)=>a[1]-b[1]);
+
+
+a=
+`بر اساس داده‌های فعلی،
+اولویت پیشنهادی
+${z[0][0]}
+است.`;
+
+}
+
+
+else if(
+/خسته|استراحت/
+.test(q)
+){
+
+a=
+"اگر خسته‌ای، یک وقفه کوتاه داشته باش؛
+بعد یک جلسه کوتاه و متمرکز
+شروع کن.";
+
+}
+
+
+else{
+
+a=advisor();
+
+}
+
 
 D.messages.push({
-
 date:today(),
-
 q,
-
-ans
-
+a
 });
+
 
 save();
 
-input.value="";
+$("q").value="";
 
 renderCoach();
 
 }
 
 
-function coachResponse(q){
+function study(){
 
-const weak=
-weakestSubject();
+return `
 
-const open=
-D.plans.filter(
-x=>x.date===today()&&!x.done
-);
+<section class="card center">
 
-if(
-/ضعیف|کدام درس|کدوم درس/.test(q)
-){
+<h2>
+⏱️ تایمر مطالعه
+</h2>
 
-return`
-بر اساس داده‌های فعلی، ضعیف‌ترین اولویت:
-<b>${esc(weak.name)}</b>
-است.
-میانگین دقت:
-<b>${weak.score===50?"داده کافی نیست":fa(Math.round(weak.score))+"٪"}</b>.
-`;
+<select id="sub">
 
-}
+${D.subjects
+.map(s=>`<option>${s.name}</option>`)
+.join("")}
 
-if(
-/عقب|جبران|نرسید|نخوندم/.test(q)
-){
+</select>
 
-if(!open.length){
-
-return`
-جلسه عقب‌افتاده‌ای در برنامه امروز ثبت نشده.
-اگر هنوز برنامه نساخته‌ای، از بخش «برنامه» برنامه هوشمند بساز.
-`;
-
-}
-
-return`
-همه عقب‌افتادگی را فشرده نکن.
-اول این جلسه را انجام بده:
-<b>${esc(open[0].subject)} — ${esc(open[0].topic)}</b>.
-`;
-
-}
-
-if(
-/چقدر|هدف|مطالعه/.test(q)
-){
-
-return`
-امروز تا الان
-<b>${fmtMinutes(studyMinutes())}</b>
-مطالعه ثبت کرده‌ای.
-هدف:
-<b>${fa(D.profile.dailyHours)} ساعت</b>.
-`;
-
-}
-
-if(
-/تست|درصد|دقت/.test(q)
-){
-
-const a=accuracy();
-
-return a===null
-?
-"هنوز تستی ثبت نکرده‌ای."
-:
-`میانگین دقت امروز ${fa(a)}٪ است.`;
-
-}
-
-return offlineAdvice();
-
-}
+<input
+id="topic"
+placeholder="مبحث">
 
 
-/* =========================
-   MORE
-========================= */
+<div
+id="clock"
+class="clock">
 
-function moreView(){
+00:00:00
 
-return`
+</div>
+
+
+<button
+class="primary"
+onclick="start()">
+
+شروع
+
+</button>
+
+<button
+onclick="pause()">
+
+توقف
+
+</button>
+
+<button
+onclick="finish()">
+
+ثبت جلسه
+
+</button>
+
+</section>
+
 
 <section class="card">
 
-<h2>
-☰ امکانات بیشتر
-</h2>
+<h3>
+📝 ثبت تست
+</h3>
 
-<div class="grid2">
+<div class="form">
+
+<select id="ts">
+
+${D.subjects
+.map(s=>`<option>${s.name}</option>`)
+.join("")}
+
+</select>
+
+<input
+id="cnt"
+type="number"
+min="1"
+placeholder="تعداد تست">
+
+<input
+id="pct"
+type="number"
+min="0"
+max="100"
+placeholder="درصد">
+
+
+<select id="cause">
+
+<option>بدون مشکل</option>
+<option>ضعف مفهومی</option>
+<option>بی‌دقتی</option>
+<option>محاسبات</option>
+<option>کمبود زمان</option>
+<option>فراموشی</option>
+
+</select>
+
 
 <button
-class="secondary"
-onclick="navigate('settings')">
-⚙️ تنظیمات
-</button>
+class="primary"
+onclick="addTest()">
 
-<button
-class="secondary"
-onclick="navigate('analytics')">
-📊 تحلیل
-</button>
+ثبت نتیجه
 
-<button
-class="secondary"
-onclick="showReviews()">
-🔁 مرورها
-</button>
-
-<button
-class="secondary"
-onclick="showGoals()">
-🎯 اهداف
 </button>
 
 </div>
@@ -3210,31 +1329,42 @@ onclick="showGoals()">
 <section class="card">
 
 <h3>
-📱 نصب روی آیپد
+❌ دفتر اشتباهات
 </h3>
 
-<p class="muted">
+<div class="form">
 
-در Safari می‌توانی از گزینه Share و سپس
-<b>Add to Home Screen</b>
-استفاده کنی.
+<select id="ms">
 
-</p>
+${D.subjects
+.map(s=>`<option>${s.name}</option>`)
+.join("")}
 
-</section>
+</select>
+
+<input
+id="mt"
+placeholder="مبحث اشتباه">
 
 
-<section class="card">
+<select id="mc">
 
-<h3>
-💾 اطلاعات
-</h3>
+<option>ضعف مفهومی</option>
+<option>بی‌دقتی</option>
+<option>محاسبات</option>
+<option>کمبود زمان</option>
+<option>فراموشی</option>
 
-<button
-class="primary"
-onclick="backupData()">
-خروجی گرفتن
+</select>
+
+
+<button onclick="addMistake()">
+
+ثبت اشتباه
+
 </button>
+
+</div>
 
 </section>
 
@@ -3243,89 +1373,819 @@ onclick="backupData()">
 }
 
 
-function renderMore(){}
+function renderStudy(){
+
+$("clock").textContent=clock();
+
+}
 
 
-/* =========================
-   SETTINGS
-========================= */
+function clock(){
 
-function settingsView(){
+return [
+Math.floor(T.sec/3600),
+Math.floor(T.sec/60)%60,
+T.sec%60
+]
+.map(x=>String(x).padStart(2,"0"))
+.join(":");
 
-return`
+}
+
+
+function start(){
+
+if(T.run)return;
+
+T.run=true;
+
+T.id=setInterval(()=>{
+
+T.sec++;
+
+if($("clock"))
+$("clock").textContent=clock();
+
+},1000);
+
+}
+
+
+function pause(){
+
+T.run=false;
+
+clearInterval(T.id);
+
+}
+
+
+function finish(){
+
+pause();
+
+let m=
+Math.round(T.sec/60);
+
+if(m<1){
+
+alert("حداقل یک دقیقه مطالعه کن.");
+
+return;
+
+}
+
+
+D.sessions.push({
+
+date:today(),
+
+minutes:m,
+
+subject:$("sub").value,
+
+topic:$("topic").value||"مطالعه"
+
+});
+
+
+if(D.lastStudy!==today()){
+
+D.streak++;
+
+D.lastStudy=today();
+
+}
+
+
+T.sec=0;
+
+save();
+
+renderStudy();
+
+}
+
+
+function addTest(){
+
+let c=+$("cnt").value;
+
+let p=+$("pct").value;
+
+
+if(!c||p<0||p>100){
+
+alert("مقادیر را درست وارد کن.");
+
+return;
+
+}
+
+
+D.tests.push({
+
+date:today(),
+
+subject:$("ts").value,
+
+count:c,
+
+accuracy:p
+
+});
+
+
+if(p<60){
+
+D.mistakes.push({
+
+date:today(),
+
+subject:$("ts").value,
+
+cause:$("cause").value,
+
+topic:"آزمون",
+
+reviewed:false
+
+});
+
+}
+
+
+save();
+
+alert("نتیجه ثبت شد.");
+
+}
+
+
+function addMistake(){
+
+D.mistakes.push({
+
+date:today(),
+
+subject:$("ms").value,
+
+cause:$("mc").value,
+
+topic:$("mt").value||"نامشخص",
+
+reviewed:false
+
+});
+
+
+save();
+
+alert("اشتباه ثبت شد.");
+
+}
+
+
+function analytics(){
+
+return `
 
 <section class="card">
 
 <h2>
-⚙️ پروفایل
+📊 تحلیل جامع
+</h2>
+
+<div
+id="ov"
+class="grid">
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+🎯 وضعیت دروس
+</h3>
+
+<div id="subs">
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+📈 هفت روز اخیر
+</h3>
+
+<div id="trend">
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+⚠️ خطاهای پرتکرار
+</h3>
+
+<div id="errs">
+</div>
+
+</section>
+
+`;
+
+}
+
+
+function renderAnalytics(){
+
+let all=
+D.sessions
+.reduce(
+(a,x)=>a+x.minutes,
+0
+);
+
+
+let n=
+D.tests
+.reduce(
+(a,x)=>a+x.count,
+0
+);
+
+
+let a=
+D.tests.length
+?
+Math.round(
+D.tests.reduce(
+(s,x)=>s+x.accuracy,
+0
+)/D.tests.length
+)
+:
+null;
+
+
+$("ov").innerHTML=`
+
+<div class="card stat">
+<small>مطالعه کل</small>
+<h2>${fmt(all)}</h2>
+</div>
+
+<div class="card stat">
+<small>تست کل</small>
+<h2>${fa(n)}</h2>
+</div>
+
+<div class="card stat">
+<small>دقت کل</small>
+<h2>${a===null?"—":fa(a)+"٪"}</h2>
+</div>
+
+<div class="card stat">
+<small>تداوم</small>
+<h2>${fa(D.streak)} روز</h2>
+</div>
+
+`;
+
+
+$("subs").innerHTML=
+D.subjects
+.map(s=>{
+
+let t=
+D.tests.filter(
+x=>x.subject===s.name
+);
+
+let aa=
+t.length
+?
+Math.round(
+t.reduce(
+(a,b)=>a+b.accuracy,
+0
+)/t.length
+)
+:
+0;
+
+
+let m=
+D.sessions
+.filter(x=>x.subject===s.name)
+.reduce(
+(a,x)=>a+x.minutes,
+0
+);
+
+
+return `
+
+<p>
+
+<b>${s.name}</b>
+
+ ·
+${aa?fa(aa)+"٪":"بدون داده"}
+
+ ·
+${fmt(m)}
+
+</p>
+
+<div class="bar">
+
+<i style="width:${aa}%"></i>
+
+</div>
+
+`;
+
+})
+.join("");
+
+
+let errors={};
+
+
+D.mistakes.forEach(x=>{
+
+errors[x.cause]=
+(errors[x.cause]||0)+1;
+
+});
+
+
+$("errs").innerHTML=
+Object.entries(errors)
+.sort((a,b)=>b[1]-a[1])
+.map(x=>
+`<span class="chip">
+${esc(x[0])}: ${fa(x[1])}
+</span>`
+)
+.join("")
+||
+"<span class='muted'>داده‌ای وجود ندارد.</span>";
+
+
+let trend=[];
+
+
+for(let i=6;i>=0;i--){
+
+let d=new Date();
+
+d.setDate(
+d.getDate()-i
+);
+
+let k=
+d.toISOString()
+.slice(0,10);
+
+
+let m=
+D.sessions
+.filter(x=>x.date===k)
+.reduce(
+(a,x)=>a+x.minutes,
+0
+);
+
+
+trend.push(`
+
+<div class="item">
+
+<div class="grow">
+
+<b>${k}</b>
+
+<small>
+مطالعه: ${fmt(m)}
+</small>
+
+</div>
+
+</div>
+
+`);
+
+}
+
+
+$("trend").innerHTML=
+trend.join("");
+
+}
+
+
+function tools(){
+
+return `
+
+<section class="card">
+
+<h2>
+🧰 ابزارها
+</h2>
+
+<div class="grid">
+
+<button onclick="exportData()">
+💾 پشتیبان‌گیری
+</button>
+
+<button onclick="$('file').click()">
+📥 بازیابی
+</button>
+
+<button onclick="addNote()">
+📒 یادداشت
+</button>
+
+<button onclick="review()">
+🔁 مرور
+</button>
+
+<button onclick="dark()">
+🌙 حالت شب
+</button>
+
+<button onclick="settings()">
+⚙️ تنظیمات
+</button>
+
+</div>
+
+
+<input
+id="file"
+type="file"
+accept=".json"
+hidden
+onchange="importData(event)">
+
+</section>
+
+
+<section class="card">
+
+<h3>
+📒 یادداشت‌ها
+</h3>
+
+<div id="notes">
+</div>
+
+</section>
+
+
+<section class="card">
+
+<h3>
+❌ دفتر اشتباهات
+</h3>
+
+<div id="mist">
+</div>
+
+</section>
+
+`;
+
+}
+
+
+function renderTools(){
+
+$("notes").innerHTML=
+D.notes
+.slice(-20)
+.reverse()
+.map(x=>`
+
+<div class="item">
+
+<div class="grow">
+
+<b>${esc(x.title)}</b>
+
+<small>
+${esc(x.text)}
+ ·
+${x.date}
+</small>
+
+</div>
+
+</div>
+
+`)
+.join("")
+||
+"<p class='muted'>یادداشتی وجود ندارد.</p>";
+
+
+$("mist").innerHTML=
+D.mistakes
+.slice(-25)
+.reverse()
+.map(x=>{
+
+let i=D.mistakes.indexOf(x);
+
+return `
+
+<div class="item">
+
+<div class="grow">
+
+<b>
+${esc(x.subject)}
+ —
+${esc(x.topic)}
+</b>
+
+<small>
+${esc(x.cause)}
+ ·
+${x.reviewed?"مرور شده":"نیازمند مرور"}
+</small>
+
+</div>
+
+<button onclick="reviewMistake(${i})">
+
+${x.reviewed?"✓":"مرور"}
+
+</button>
+
+</div>
+
+`;
+
+})
+.join("")
+||
+"<p class='muted'>اشتباهی وجود ندارد.</p>";
+
+}
+
+
+function addNote(){
+
+let title=
+prompt("عنوان یادداشت؟");
+
+let text=
+prompt("متن یادداشت؟");
+
+
+if(title&&text){
+
+D.notes.push({
+
+date:today(),
+
+title,
+
+text
+
+});
+
+save();
+
+renderTools();
+
+}
+
+}
+
+
+function reviewMistake(i){
+
+if(D.mistakes[i]){
+
+D.mistakes[i].reviewed=true;
+
+}
+
+
+D.reviews.push({
+
+date:today(),
+
+mistake:i
+
+});
+
+
+save();
+
+renderTools();
+
+}
+
+
+function review(){
+
+let n=
+D.mistakes
+.filter(x=>!x.reviewed)
+.length;
+
+
+alert(
+`موارد نیازمند مرور:
+${fa(n)}`
+);
+
+}
+
+
+function exportData(){
+
+let blob=
+new Blob(
+[
+JSON.stringify(
+D,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+
+let a=
+document.createElement("a");
+
+
+a.href=
+URL.createObjectURL(blob);
+
+
+a.download=
+"studycoach-backup.json";
+
+
+a.click();
+
+
+URL.revokeObjectURL(a.href);
+
+}
+
+
+function importData(e){
+
+let file=e.target.files[0];
+
+if(!file)return;
+
+
+let reader=
+new FileReader();
+
+
+reader.onload=()=>{
+
+try{
+
+D=
+JSON.parse(
+reader.result
+);
+
+save();
+
+location.reload();
+
+}
+
+catch{
+
+alert(
+"فایل پشتیبان معتبر نیست."
+);
+
+}
+
+};
+
+
+reader.readAsText(file);
+
+}
+
+
+function dark(){
+
+D.profile.theme=
+D.profile.theme==="dark"
+?
+"light"
+:
+"dark";
+
+
+document.body.classList.toggle(
+"dark",
+D.profile.theme==="dark"
+);
+
+save();
+
+}
+
+
+function settings(){
+
+$("app").innerHTML=`
+
+<section class="card">
+
+<h2>
+⚙️ تنظیمات
 </h2>
 
 <div class="form">
 
 <input
-id="nameInput"
+id="nm"
 placeholder="نام"
 value="${esc(D.profile.name)}">
 
+
 <input
-id="goalInput"
-placeholder="هدف"
+id="goal"
+placeholder="هدف اصلی"
 value="${esc(D.profile.goal)}">
+
 
 <label>
 تاریخ آزمون
 </label>
 
+
 <input
-id="examInput"
+id="exam"
 type="date"
 value="${D.profile.examDate}">
 
+
 <label>
-ساعت مطالعه روزانه
+هدف مطالعه روزانه
 </label>
 
+
 <input
-id="hoursInput"
+id="hrs"
 type="number"
 min="1"
 max="18"
 value="${D.profile.dailyHours}">
 
-<div class="grid2">
-
-<div>
-
-<label>
-شروع مطالعه
-</label>
-
-<input
-id="wakeInput"
-type="time"
-value="${D.profile.wake}">
-
-</div>
-
-<div>
-
-<label>
-پایان مطالعه
-</label>
-
-<input
-id="sleepInput"
-type="time"
-value="${D.profile.sleep}">
-
-</div>
-
-</div>
 
 <button
 class="primary"
-onclick="saveProfile()">
-ذخیره پروفایل
+onclick="saveSettings()">
+
+ذخیره و ساخت برنامه
+
+</button>
+
+
+<button onclick="install()">
+
+📱 نصب روی iPad
+
+</button>
+
+
+<button
+class="danger"
+onclick="wipe()">
+
+حذف همه اطلاعات
+
 </button>
 
 </div>
@@ -3340,84 +2200,32 @@ onclick="saveProfile()">
 </h3>
 
 <p class="muted">
-۱ = خیلی ضعیف · ۵ = خیلی قوی
+۱ ضعیف‌ترین و ۵ قوی‌ترین
 </p>
 
-<div class="list">
-
-${D.subjects.map(
-s=>`
+${D.subjects.map(s=>`
 
 <div class="item">
 
-<div class="item-main">
+<div class="grow">
 
 <b>
-${esc(s.name)}
+${s.name}
 </b>
 
 </div>
 
 <input
-style="max-width:90px"
+style="width:75px"
 type="number"
 min="1"
 max="5"
 value="${s.level}"
-onchange="changeLevel('${s.id}',this.value)">
+onchange="level('${s.id}',this.value)">
 
 </div>
 
-`
-).join("")}
-
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-💾 پشتیبان‌گیری
-</h3>
-
-<div class="grid2">
-
-<button
-class="primary"
-onclick="backupData()">
-⬇️ Export
-</button>
-
-<label class="secondary center">
-
-⬆️ Import
-
-<input
-type="file"
-accept=".json"
-onchange="restoreData(event)"
-style="display:none">
-
-</label>
-
-</div>
-
-</section>
-
-
-<section class="card">
-
-<h3>
-🗑️ پاک کردن اطلاعات
-</h3>
-
-<button
-class="danger"
-onclick="deleteEverything()">
-حذف همه اطلاعات
-</button>
+`).join("")}
 
 </section>
 
@@ -3426,179 +2234,73 @@ onclick="deleteEverything()">
 }
 
 
-function saveProfile(){
+function saveSettings(){
 
-D.profile.name=
-document.getElementById(
-"nameInput"
-).value.trim();
+D.profile={
 
-D.profile.goal=
-document.getElementById(
-"goalInput"
-).value.trim();
+name:$("nm").value.trim(),
 
-D.profile.examDate=
-document.getElementById(
-"examInput"
-).value;
+goal:$("goal").value.trim(),
 
-D.profile.dailyHours=
-clamp(
-+document.getElementById(
-"hoursInput"
-).value||8,
-1,
-18
-);
+examDate:$("exam").value,
 
-D.profile.wake=
-document.getElementById(
-"wakeInput"
-).value;
+dailyHours:+$("hrs").value||8,
 
-D.profile.sleep=
-document.getElementById(
-"sleepInput"
-).value;
+theme:D.profile.theme||"light"
+
+};
+
 
 save();
 
-toast("پروفایل ذخیره شد");
-
-generateSmartPlan();
+smartPlan();
 
 }
 
 
-function changeLevel(id,value){
+function level(id,v){
 
-const subject=
+let s=
 D.subjects.find(
 x=>x.id===id
 );
 
-if(!subject)
-return;
 
-subject.level=
-clamp(
-+value||3,
+s.level=
+Math.max(
 1,
-5
-);
-
-save();
-
-toast("سطح درس ذخیره شد");
-
-}
-
-
-/* =========================
-   BACKUP
-========================= */
-
-function backupData(){
-
-const blob=
-new Blob(
-[
-JSON.stringify(
-D,
-null,
-2
+Math.min(
+5,
++v||3
 )
-],
-{
-type:"application/json"
-}
 );
 
-const url=
-URL.createObjectURL(blob);
-
-const a=
-document.createElement("a");
-
-a.href=url;
-
-a.download=
-"StudyCoach-V5-Backup.json";
-
-document.body.appendChild(a);
-
-a.click();
-
-a.remove();
-
-URL.revokeObjectURL(url);
-
-toast("نسخه پشتیبان آماده شد");
-
-}
-
-
-function restoreData(event){
-
-const file=
-event.target.files[0];
-
-if(!file)
-return;
-
-const reader=
-new FileReader();
-
-reader.onload=()=>{
-
-try{
-
-const parsed=
-JSON.parse(
-reader.result
-);
-
-if(
-!parsed.profile ||
-!parsed.subjects
-){
-
-throw new Error();
-
-}
-
-D=mergeData(
-structuredClone(DEFAULT_DATA),
-parsed
-);
 
 save();
 
-toast("اطلاعات بازیابی شد");
+}
 
-navigate("home");
 
-}catch{
+function install(){
 
 alert(
-"فایل پشتیبان معتبر نیست."
+
+"برای نصب روی iPad در Safari:\n\n"+
+"1. سایت را از GitHub Pages باز کن.\n"+
+"2. دکمه Share را بزن.\n"+
+"3. Add to Home Screen را انتخاب کن.\n"+
+"4. Add را بزن."
+
 );
 
 }
 
-};
 
-reader.readAsText(file);
-
-}
-
-
-function deleteEverything(){
+function wipe(){
 
 if(
 confirm(
-"همه اطلاعات StudyCoach پاک شود؟"
+"همه اطلاعات StudyCoach حذف شود؟"
 )
 ){
 
@@ -3611,35 +2313,8 @@ location.reload();
 }
 
 
-/* =========================
-   DARK MODE
-========================= */
-
-function toggleDark(){
-
-const dark=
-document.body.classList.toggle(
-"dark"
-);
-
-localStorage.setItem(
-THEME_KEY,
-dark?"dark":"light"
-);
-
-toast(
-dark
-?
-"حالت تاریک فعال شد"
-:
-"حالت روشن فعال شد"
-);
-
-}
-
-
 if(
-localStorage.getItem(THEME_KEY)==="dark"
+D.profile.theme==="dark"
 ){
 
 document.body.classList.add("dark");
@@ -3647,332 +2322,10 @@ document.body.classList.add("dark");
 }
 
 
-/* =========================
-   REVIEWS
-========================= */
-
-function showReviews(){
-
-const weak=
-D.mistakes
-.slice()
-.sort(
-(a,b)=>b.count-a.count
-)
-.slice(0,10);
-
-const html=
-weak.length
-?
-weak.map(
-x=>`
-
-<div class="item">
-
-<div class="item-main">
-
-<b>
-${esc(x.subject)}
-</b>
-
-<small>
-${esc(x.cause)}
- ·
-${fa(x.count||1)}
- خطا
-</small>
-
-</div>
-
-</div>
-
-`
-).join("")
-:
-`<div class="empty">
-هنوز موردی برای مرور ثبت نشده.
-</div>`;
-
-showModal(
-"🔁 مرور اشتباهات",
-html
+page(
+"home",
+document.querySelector("nav button")
 );
-
-}
-
-
-/* =========================
-   GOALS
-========================= */
-
-function showGoals(){
-
-const html=`
-
-<div class="form">
-
-<input
-id="goalTitle"
-placeholder="هدف جدید">
-
-<input
-id="goalMinutes"
-type="number"
-placeholder="دقیقه هدف">
-
-<button
-class="primary"
-onclick="addGoal()">
-افزودن هدف
-</button>
-
-</div>
-
-<hr>
-
-${D.goals.map(
-g=>`
-
-<div class="item">
-
-<input
-class="check"
-type="checkbox"
-${g.done?"checked":""}
-onchange="toggleGoal('${g.id}')">
-
-<div class="item-main">
-
-<b>
-${esc(g.title)}
-</b>
-
-<small>
-${fa(g.minutes||0)} دقیقه
-</small>
-
-</div>
-
-</div>
-
-`
-).join("")}
-
-`;
-
-showModal(
-"🎯 اهداف",
-html
-);
-
-}
-
-
-function addGoal(){
-
-const title=
-document.getElementById(
-"goalTitle"
-)?.value.trim();
-
-const minutes=
-+document.getElementById(
-"goalMinutes"
-)?.value||0;
-
-if(!title)
-return;
-
-D.goals.push({
-
-id:uid(),
-
-title,
-
-minutes,
-
-done:false,
-
-date:today()
-
-});
-
-save();
-
-closeModal();
-
-toast("هدف اضافه شد");
-
-}
-
-
-function toggleGoal(id){
-
-const g=
-D.goals.find(
-x=>x.id===id
-);
-
-if(!g)return;
-
-g.done=!g.done;
-
-save();
-
-showGoals();
-
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function showModal(title,content){
-
-const modal=
-document.createElement("div");
-
-modal.className="modal";
-
-modal.style.display="flex";
-
-modal.id="tempModal";
-
-modal.innerHTML=`
-
-<div class="modal-box">
-
-<div class="section-head">
-
-<h2>
-${title}
-</h2>
-
-<button
-class="secondary small"
-onclick="closeModal()">
-✕
-</button>
-
-</div>
-
-${content}
-
-</div>
-
-`;
-
-document.body.appendChild(modal);
-
-}
-
-
-function closeModal(){
-
-document
-.getElementById("tempModal")
-?.remove();
-
-}
-
-
-/* =========================
-   SERVICE WORKER
-   OPTIONAL LOCAL CACHE
-========================= */
-
-if(
-"serviceWorker" in navigator
-&&
-location.protocol!=="file:"
-){
-
-const sw=`
-
-const CACHE="studycoach-v5-cache";
-
-self.addEventListener(
-"install",
-event=>{
-event.waitUntil(
-caches.open(CACHE)
-.then(
-cache=>cache.addAll(["./"])
-)
-);
-self.skipWaiting();
-}
-);
-
-self.addEventListener(
-"activate",
-event=>{
-event.waitUntil(
-self.clients.claim()
-);
-}
-);
-
-self.addEventListener(
-"fetch",
-event=>{
-event.respondWith(
-caches.match(event.request)
-.then(
-cached=>
-cached||
-fetch(event.request)
-.then(
-response=>{
-const copy=response.clone();
-
-caches.open(CACHE)
-.then(
-cache=>cache.put(
-event.request,
-copy
-)
-);
-
-return response;
-
-}
-)
-)
-);
-}
-);
-
-`;
-
-try{
-
-const blob=
-new Blob(
-[sw],
-{type:"text/javascript"}
-);
-
-const url=
-URL.createObjectURL(blob);
-
-navigator.serviceWorker
-.register(url)
-.catch(
-()=>{}
-);
-
-}catch{}
-
-}
-
-
-/* =========================
-   INITIALIZE
-========================= */
-
-navigate("home");
 
 </script>
 
