@@ -1,4 +1,5 @@
-export default async (req) => {
+export default async function handler(req) {
+
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -16,7 +17,7 @@ export default async (req) => {
   if (req.method !== "POST") {
     return new Response(
       JSON.stringify({
-        error: "Only POST requests are allowed."
+        error: "Method Not Allowed"
       }),
       {
         status: 405,
@@ -27,127 +28,177 @@ export default async (req) => {
 
   try {
 
-    const API_KEY = process.env.AI_API_KEY;
-    const API_BASE =
-      process.env.AI_API_BASE ||
-      "https://api.openai.com/v1";
+    const API_KEY =
+      process.env.AI_API_KEY;
 
-    const DEFAULT_MODEL =
-      process.env.AI_MODEL || "";
+    const API_BASE =
+      process.env.AI_API_BASE;
+
+    const MODEL =
+      process.env.AI_MODEL;
 
     if (!API_KEY) {
+
       return new Response(
         JSON.stringify({
-          error: "AI_API_KEY is not configured on Netlify."
+          error:
+            "AI_API_KEY در Netlify تنظیم نشده است."
         }),
         {
-          status: 500,
+          status:500,
           headers
         }
       );
+
     }
 
-    const body = await req.json();
+    if (!API_BASE) {
 
-    if (!body || !Array.isArray(body.messages)) {
       return new Response(
         JSON.stringify({
-          error: "Invalid request."
+          error:
+            "AI_API_BASE در Netlify تنظیم نشده است."
         }),
         {
-          status: 400,
+          status:500,
           headers
         }
       );
+
     }
 
-    const model =
-      body.model ||
-      DEFAULT_MODEL;
+    if (!MODEL) {
 
-    if (!model) {
       return new Response(
         JSON.stringify({
-          error: "AI_MODEL is not configured."
+          error:
+            "AI_MODEL در Netlify تنظیم نشده است."
         }),
         {
-          status: 500,
+          status:500,
           headers
         }
       );
+
     }
 
-    const upstreamURL =
-      API_BASE.replace(/\/+$/, "") +
+    const body=await req.json();
+
+    if(
+      !body ||
+      !Array.isArray(body.messages)
+    ){
+
+      return new Response(
+        JSON.stringify({
+          error:
+            "messages معتبر نیست."
+        }),
+        {
+          status:400,
+          headers
+        }
+      );
+
+    }
+
+    /*
+      محدودسازی اولیه درخواست
+    */
+
+    if(body.messages.length>30){
+
+      return new Response(
+        JSON.stringify({
+          error:
+            "تعداد پیام‌ها بیش از حد مجاز است."
+        }),
+        {
+          status:400,
+          headers
+        }
+      );
+
+    }
+
+    const url=
+      API_BASE.replace(/\/+$/,"")+
       "/chat/completions";
 
-    const upstreamResponse =
-      await fetch(upstreamURL, {
+    const upstream=
+      await fetch(url,{
 
-        method: "POST",
+        method:"POST",
 
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${API_KEY}`
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "Authorization":
+            `Bearer ${API_KEY}`
         },
 
-        body: JSON.stringify({
+        body:JSON.stringify({
 
-          model,
+          model:MODEL,
 
-          messages: body.messages,
+          messages:body.messages,
 
           temperature:
-            typeof body.temperature === "number"
-              ? body.temperature
-              : 0.7,
+            typeof body.temperature==="number"
+              ?body.temperature
+              :.7,
 
           max_tokens:
-            typeof body.max_tokens === "number"
-              ? body.max_tokens
-              : 3000
+            typeof body.max_tokens==="number"
+              ?Math.min(body.max_tokens,5000)
+              :3500
 
         })
 
       });
 
-    const text =
-      await upstreamResponse.text();
+    const text=
+      await upstream.text();
 
     let result;
 
-    try {
-      result = JSON.parse(text);
-    } catch {
-      result = {
-        error: text
+    try{
+
+      result=JSON.parse(text);
+
+    }catch{
+
+      result={
+        error:text
       };
+
     }
 
     return new Response(
       JSON.stringify(result),
       {
-        status: upstreamResponse.status,
+        status:upstream.status,
         headers
       }
     );
 
-  } catch (error) {
+  }catch(error){
 
     return new Response(
       JSON.stringify({
         error:
-          error?.message ||
-          "Unknown server error."
+          error?.message||
+          "خطای داخلی سرور"
       }),
       {
-        status: 500,
+        status:500,
         headers
       }
     );
   }
-};
+}
 
-export const config = {
-  path: "/api/chat"
+export const config={
+  path:"/api/chat"
 };
