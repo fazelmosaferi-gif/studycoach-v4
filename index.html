@@ -3,606 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#4f46e5">
+<meta name="theme-color" content="#0b1020">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="description" content="StudyCoach V5 Ultimate — مشاور و برنامه‌ریز هوشمند کنکور">
+
 <title>StudyCoach V5 Ultimate</title>
 
 <style>
-*{box-sizing:border-box}
-
 :root{
- --bg:#f4f6fb;
- --surface:#fff;
- --surface2:#f8fafc;
- --text:#111827;
- --muted:#64748b;
- --border:#e2e8f0;
- --primary:#4f46e5;
- --primary2:#7c3aed;
- --green:#16a34a;
- --red:#dc2626;
- --orange:#ea580c;
- --blue:#2563eb;
- --yellow:#ca8a04;
- --shadow:0 10px 35px rgba(15,23,42,.08);
- --radius:18px
+  --bg:#070b16;
+  --panel:#101728;
+  --panel2:#151e32;
+  --border:#27334d;
+  --text:#f5f7fb;
+  --muted:#9aa7bd;
+  --primary:#6d5dfc;
+  --primary2:#8b7fff;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --warning:#f59e0b;
+  --radius:20px;
 }
 
-html.dark{
- --bg:#080d18;
- --surface:#111827;
- --surface2:#172033;
- --text:#f8fafc;
- --muted:#94a3b8;
- --border:#263244;
- --shadow:0 10px 35px rgba(0,0,0,.28)
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
- margin:0;
- min-height:100%;
- background:var(--bg);
- color:var(--text);
- font-family:Tahoma,"Segoe UI",Arial,sans-serif
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top right,#19214a 0,transparent 35%),
+    radial-gradient(circle at bottom left,#16133b 0,transparent 30%),
+    var(--bg);
+  color:var(--text);
 }
 
-body{transition:.2s}
+button,input,textarea,select{
+  font:inherit;
+}
 
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
+button{
+  cursor:pointer;
+}
 
-.app{display:flex;min-height:100vh}
+.app{
+  min-height:100vh;
+  display:flex;
+}
 
 .sidebar{
- position:fixed;
- right:0;
- top:0;
- bottom:0;
- width:285px;
- background:var(--surface);
- border-left:1px solid var(--border);
- z-index:50;
- padding:18px 14px;
- overflow-y:auto;
- transition:.25s
+  width:270px;
+  background:rgba(9,14,28,.96);
+  border-left:1px solid var(--border);
+  padding:20px;
+  position:fixed;
+  top:0;
+  bottom:0;
+  right:0;
+  z-index:50;
+  overflow:auto;
 }
 
-.brand{
- display:flex;
- align-items:center;
- gap:10px;
- padding:12px;
- margin-bottom:18px;
- font-size:20px;
- font-weight:900
+.logo{
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:25px;
 }
 
-.brandIcon{
- width:44px;
- height:44px;
- display:grid;
- place-items:center;
- border-radius:14px;
- background:linear-gradient(135deg,var(--primary),var(--primary2));
- color:#fff
-}
-
-.brand small{
- display:block;
- color:var(--muted);
- font-size:10px;
- margin-top:3px
-}
-
-.navTitle{
- color:var(--muted);
- font-size:11px;
- padding:12px 10px 5px
+.logo span{
+  color:var(--primary2);
 }
 
 .nav button{
- width:100%;
- border:0;
- background:transparent;
- color:var(--text);
- padding:11px 13px;
- border-radius:12px;
- text-align:right;
- margin:2px 0;
- display:flex;
- align-items:center;
- gap:10px
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:13px;
+  border-radius:14px;
+  text-align:right;
+  margin-bottom:6px;
 }
 
 .nav button:hover,
 .nav button.active{
- background:rgba(79,70,229,.12);
- color:var(--primary);
- font-weight:700
+  background:var(--panel2);
+  color:white;
 }
 
 .main{
- margin-right:285px;
- width:calc(100% - 285px);
- min-width:0;
- padding:22px
+  width:calc(100% - 270px);
+  margin-right:270px;
+  padding:25px;
 }
 
-.topbar{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:15px;
- margin-bottom:22px
+.mobile-top{
+  display:none;
 }
 
-.topLeft{
- display:flex;
- align-items:center;
- gap:12px
+.page{
+  display:none;
 }
 
-.menu{
- display:none;
- border:1px solid var(--border);
- background:var(--surface);
- color:var(--text);
- padding:10px 13px;
- border-radius:12px
+.page.active{
+  display:block;
 }
 
-h1,h2,h3,h4{margin:0 0 10px}
-h1{font-size:25px}
-h2{font-size:20px}
-h3{font-size:16px}
-p{line-height:1.8}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:22px;
+}
 
-.muted{color:var(--muted)}
-.small{font-size:12px}
+.title{
+  font-size:30px;
+  font-weight:900;
+}
 
-.section{display:none}
-.section.active{display:block}
+.subtitle{
+  color:var(--muted);
+  margin-top:5px;
+}
 
 .grid{
- display:grid;
- grid-template-columns:repeat(4,minmax(0,1fr));
- gap:15px
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
 .grid2{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:15px
-}
-
-.grid3{
- display:grid;
- grid-template-columns:repeat(3,minmax(0,1fr));
- gap:15px
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
 .card{
- background:var(--surface);
- border:1px solid var(--border);
- border-radius:var(--radius);
- padding:18px;
- box-shadow:var(--shadow)
-}
-
-.statCard{min-height:145px}
-
-.statTop{
- display:flex;
- justify-content:space-between;
- align-items:center;
- color:var(--muted)
-}
-
-.statIcon{
- width:40px;
- height:40px;
- display:grid;
- place-items:center;
- border-radius:12px;
- background:rgba(79,70,229,.1)
+  background:rgba(16,23,40,.88);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:0 15px 50px rgba(0,0,0,.18);
 }
 
 .stat{
- font-size:30px;
- font-weight:900;
- margin:13px 0 2px
+  font-size:30px;
+  font-weight:900;
+  margin-top:10px;
+}
+
+.muted{
+  color:var(--muted);
 }
 
 .btn{
- border:0;
- border-radius:12px;
- padding:10px 15px;
- color:#fff;
- background:var(--primary);
- font-weight:700
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:white;
+  padding:11px 16px;
+  border-radius:13px;
 }
 
-.btn:hover{filter:brightness(.96)}
-.btn.green{background:var(--green)}
-.btn.red{background:var(--red)}
-.btn.orange{background:var(--orange)}
-.btn.blue{background:var(--blue)}
-
-.btn.gray{
- background:var(--surface2);
- color:var(--text);
- border:1px solid var(--border)
+.btn.primary{
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  border:0;
 }
 
-.btn.sm{
- padding:7px 10px;
- font-size:12px
+.btn.success{
+  background:var(--success);
+  border:0;
 }
 
-.actions{
- display:flex;
- flex-wrap:wrap;
- gap:8px
+.btn.danger{
+  background:var(--danger);
+  border:0;
 }
 
-.row{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px
+.btn.warning{
+  background:var(--warning);
+  border:0;
+  color:#111;
 }
 
-.gap{height:15px}
-
-.progress{
- width:100%;
- height:9px;
- border-radius:99px;
- background:var(--border);
- overflow:hidden
+.btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
-.progress>i{
- display:block;
- height:100%;
- border-radius:inherit;
- background:linear-gradient(90deg,var(--primary),var(--primary2));
- transition:.4s
-}
-
-.subjectGrid{
- display:grid;
- grid-template-columns:repeat(4,minmax(0,1fr));
- gap:12px
-}
-
-.subjectCard{
- padding:15px;
- border:1px solid var(--border);
- border-radius:15px;
- background:var(--surface2)
-}
-
-.subjectHead{
- display:flex;
- justify-content:space-between;
- gap:10px;
- align-items:center
-}
-
-.badge{
- display:inline-flex;
- padding:4px 8px;
- border-radius:99px;
- background:rgba(79,70,229,.1);
- color:var(--primary);
- font-size:11px
-}
-
-.badge.green{
- background:rgba(22,163,74,.1);
- color:var(--green)
-}
-
-.badge.red{
- background:rgba(220,38,38,.1);
- color:var(--red)
-}
-
-.badge.orange{
- background:rgba(234,88,12,.1);
- color:var(--orange)
-}
-
-.formGrid{
- display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
- gap:14px
-}
-
-.field label{
- display:block;
- font-weight:700;
- font-size:13px;
- margin-bottom:6px
-}
-
-input,select,textarea{
- width:100%;
- border:1px solid var(--border);
- background:var(--surface);
- color:var(--text);
- border-radius:11px;
- padding:11px 12px;
- outline:none
+input,
+textarea,
+select{
+  width:100%;
+  background:#0a1020;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  outline:none;
 }
 
 textarea{
- min-height:110px;
- resize:vertical
+  min-height:130px;
+  resize:vertical;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
- border-color:var(--primary);
- box-shadow:0 0 0 3px rgba(79,70,229,.1)
+label{
+  display:block;
+  margin-bottom:7px;
+  color:#cbd5e1;
 }
 
-.tableWrap{overflow:auto}
-
-table{
- width:100%;
- border-collapse:collapse;
- min-width:700px
+.form-group{
+  margin-bottom:15px;
 }
 
-th,td{
- padding:11px;
- border-bottom:1px solid var(--border);
- text-align:right;
- white-space:nowrap
+.progress{
+  height:10px;
+  background:#080d19;
+  border-radius:20px;
+  overflow:hidden;
 }
 
-th{
- color:var(--muted);
- font-size:12px
+.progress div{
+  height:100%;
+  background:linear-gradient(90deg,var(--primary),var(--primary2));
+  width:0%;
 }
 
-.empty{
- padding:35px 15px;
- text-align:center;
- color:var(--muted)
+.subject{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
 }
 
-.hero{
- background:linear-gradient(135deg,var(--primary),var(--primary2));
- color:#fff;
- border-radius:22px;
- padding:25px;
- margin-bottom:15px
-}
-
-.hero .muted{color:rgba(255,255,255,.8)}
-
-.quickGrid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:10px
-}
-
-.quick{
- border:1px solid var(--border);
- background:var(--surface);
- color:var(--text);
- border-radius:14px;
- padding:14px;
- text-align:right
-}
-
-.quick:hover{border-color:var(--primary)}
-
-.timerBox{
- text-align:center;
- padding:25px
-}
-
-.timer{
- font-size:85px;
- font-weight:900;
- letter-spacing:3px;
- margin:20px 0
-}
-
-.timerMode{
- display:inline-block;
- padding:6px 12px;
- border-radius:99px;
- background:rgba(79,70,229,.1);
- color:var(--primary)
+.subject:last-child{
+  border-bottom:0;
 }
 
 .chat{
- height:450px;
- overflow:auto;
- border:1px solid var(--border);
- border-radius:15px;
- padding:15px;
- background:var(--surface2)
+  height:calc(100vh - 180px);
+  display:flex;
+  flex-direction:column;
 }
 
-.msg{
- max-width:85%;
- padding:12px 14px;
- border-radius:15px;
- margin:8px 0;
- line-height:1.8;
- white-space:pre-wrap
+.messages{
+  flex:1;
+  overflow:auto;
+  padding:10px;
 }
 
-.msg.ai{
- background:var(--surface);
- border:1px solid var(--border);
- margin-left:auto
+.message{
+  max-width:85%;
+  padding:14px 16px;
+  border-radius:18px;
+  margin-bottom:12px;
+  white-space:pre-wrap;
+  line-height:1.8;
 }
 
-.msg.user{
- background:var(--primary);
- color:#fff;
- margin-right:auto
+.message.user{
+  margin-right:auto;
+  background:linear-gradient(135deg,#4438ca,#6d5dfc);
 }
 
-.chatInput{
- display:flex;
- gap:8px;
- margin-top:10px
+.message.ai{
+  margin-left:auto;
+  background:#141d31;
+  border:1px solid var(--border);
+}
+
+.chat-input{
+  display:flex;
+  gap:10px;
+  padding-top:12px;
+}
+
+.chat-input textarea{
+  min-height:60px;
+  max-height:160px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  text-align:right;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:20px;
+  background:#202b44;
+  color:#cbd5e1;
+  font-size:12px;
+}
+
+.badge.success{
+  background:rgba(34,197,94,.15);
+  color:#4ade80;
+}
+
+.badge.danger{
+  background:rgba(239,68,68,.15);
+  color:#f87171;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
 .toast{
- position:fixed;
- bottom:22px;
- left:22px;
- z-index:200;
- background:#111827;
- color:#fff;
- padding:13px 17px;
- border-radius:12px;
- transform:translateY(100px);
- opacity:0;
- transition:.25s
-}
-
-.toast.show{
- transform:translateY(0);
- opacity:1
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#151e32;
+  border:1px solid var(--border);
+  padding:14px 18px;
+  border-radius:14px;
+  z-index:100;
+  display:none;
 }
 
 .modal{
- display:none;
- position:fixed;
- inset:0;
- background:rgba(0,0,0,.6);
- z-index:100;
- padding:20px;
- align-items:center;
- justify-content:center
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:90;
 }
 
-.modal.show{display:flex}
-
-.modalBox{
- width:min(720px,100%);
- max-height:90vh;
- overflow:auto;
- background:var(--surface);
- color:var(--text);
- border-radius:22px;
- padding:22px
+.modal-box{
+  width:min(700px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:25px;
 }
 
-.chart{
- height:250px;
- display:flex;
- align-items:end;
- gap:5px;
- padding:10px
+.close{
+  float:left;
+  background:none;
+  border:0;
+  color:white;
+  font-size:25px;
 }
 
-.bar{
- flex:1;
- min-width:3px;
- background:linear-gradient(180deg,var(--primary2),var(--primary));
- border-radius:7px 7px 2px 2px
+.ai-status{
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-.calendar{
- display:grid;
- grid-template-columns:repeat(7,1fr);
- gap:5px
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--danger);
 }
 
-.day{
- min-height:75px;
- border:1px solid var(--border);
- border-radius:10px;
- padding:7px;
- background:var(--surface)
+.dot.online{
+  background:var(--success);
 }
 
-.day.today{
- border:2px solid var(--primary)
+.plan-item{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:10px;
 }
 
-.dayNum{
- font-size:12px;
- font-weight:700
+.timer{
+  text-align:center;
+  font-size:65px;
+  font-weight:900;
+  letter-spacing:3px;
 }
 
-.dayEvent{
- margin-top:5px;
- font-size:10px;
- padding:3px 5px;
- background:rgba(79,70,229,.1);
- color:var(--primary);
- border-radius:5px
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.achievement{
- display:flex;
- align-items:center;
- gap:12px;
- padding:12px;
- border:1px solid var(--border);
- border-radius:14px;
- margin-bottom:8px
+.empty{
+  text-align:center;
+  padding:50px 20px;
+  color:var(--muted);
 }
 
-.achievement.locked{opacity:.4}
-.achIcon{font-size:28px}
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(100%);
+    transition:.25s;
+  }
 
-@media(max-width:1150px){
- .grid{grid-template-columns:repeat(2,1fr)}
- .subjectGrid{grid-template-columns:repeat(2,1fr)}
- .quickGrid{grid-template-columns:repeat(2,1fr)}
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    width:100%;
+    margin-right:0;
+    padding:15px;
+  }
+
+  .mobile-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid2{
+    grid-template-columns:1fr;
+  }
 }
 
-@media(max-width:800px){
- .sidebar{
-  transform:translateX(100%);
-  box-shadow:var(--shadow)
- }
+@media(max-width:600px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
 
- .sidebar.open{transform:translateX(0)}
+  .quick{
+    grid-template-columns:1fr;
+  }
 
- .main{
-  margin-right:0;
-  width:100%;
-  padding:14px
- }
+  .title{
+    font-size:24px;
+  }
 
- .menu{display:block}
-
- .formGrid,
- .grid2,
- .grid3{
-  grid-template-columns:1fr
- }
-
- .grid{grid-template-columns:repeat(2,1fr)}
-
- .subjectGrid{grid-template-columns:1fr}
-
- .timer{font-size:55px}
-}
-
-@media(max-width:500px){
- .grid{grid-template-columns:1fr}
- .quickGrid{grid-template-columns:1fr}
- .stat{font-size:26px}
- .calendar{grid-template-columns:repeat(4,1fr)}
+  .timer{
+    font-size:48px;
+  }
 }
 </style>
 </head>
@@ -613,263 +470,113 @@ th{
 
 <aside class="sidebar" id="sidebar">
 
-<div class="brand">
- <div class="brandIcon">🎓</div>
- <div>
-  StudyCoach
-  <small>Ultimate V5</small>
- </div>
-</div>
+  <div class="logo">
+    Study<span>Coach</span>
+    <small> V5 Ultimate</small>
+  </div>
 
-<div class="nav">
+  <nav class="nav">
+    <button class="active" onclick="showPage('dashboard',this)">🏠 داشبورد</button>
+    <button onclick="showPage('ai',this)">🤖 مشاور هوش مصنوعی</button>
+    <button onclick="showPage('planner',this)">📅 برنامه‌ریز هوشمند</button>
+    <button onclick="showPage('subjects',this)">📚 دروس</button>
+    <button onclick="showPage('exams',this)">📝 آزمون‌ها</button>
+    <button onclick="showPage('analytics',this)">📊 تحلیل عملکرد</button>
+    <button onclick="showPage('pomodoro',this)">⏱️ مطالعه</button>
+    <button onclick="showPage('goals',this)">🎯 اهداف</button>
+    <button onclick="showPage('settings',this)">⚙️ تنظیمات</button>
+  </nav>
 
-<div class="navTitle">اصلی</div>
-
-<button data-page="dashboard">🏠 داشبورد</button>
-<button data-page="advisor">🤖 مشاور هوشمند</button>
-<button data-page="planner">📅 برنامه‌ریز</button>
-<button data-page="calendar">🗓️ تقویم</button>
-
-<div class="navTitle">مطالعه</div>
-
-<button data-page="study">📚 جلسات مطالعه</button>
-<button data-page="tests">📝 تست‌ها</button>
-<button data-page="subjects">📖 دروس</button>
-<button data-page="reviews">🔄 مرور هوشمند</button>
-<button data-page="resources">📦 منابع</button>
-
-<div class="navTitle">تحلیل</div>
-
-<button data-page="exams">🎯 آزمون‌ها</button>
-<button data-page="reports">📊 گزارش‌ها</button>
-<button data-page="achievements">🏆 دستاوردها</button>
-
-<div class="navTitle">ابزارها</div>
-
-<button data-page="focus">⏱️ Focus</button>
-<button data-page="notes">📝 یادداشت‌ها</button>
-<button data-page="todos">✅ کارها</button>
-
-<div class="navTitle">سیستم</div>
-
-<button data-page="settings">⚙️ تنظیمات</button>
-
-</div>
 </aside>
 
 <main class="main">
 
-<header class="topbar">
-
-<div class="topLeft">
-
-<button class="menu" onclick="toggleMenu()">☰</button>
-
-<div>
-<h1 id="pageTitle">داشبورد</h1>
-<div class="muted small" id="dateText"></div>
+<div class="mobile-top">
+  <button class="btn" onclick="toggleSidebar()">☰</button>
+  <strong>StudyCoach V5</strong>
+  <button class="btn" onclick="showPage('ai')">🤖</button>
 </div>
-
-</div>
-
-<div class="actions">
-
-<button class="btn gray" onclick="toggleTheme()">🌙</button>
-
-<button class="btn" onclick="openQuick()">＋ ثبت سریع</button>
-
-</div>
-
-</header>
 
 
 <!-- DASHBOARD -->
 
-<section id="dashboard" class="section active">
+<section id="dashboard" class="page active">
 
-<div class="hero">
-
-<h2 id="welcome">سلام 👋</h2>
-
-<p>
-StudyCoach آماده است تا برنامه، مطالعه و عملکردت را مدیریت کند.
-</p>
-
-<div class="actions">
-
-<button class="btn" onclick="smartPlan()">
-✨ برنامه هوشمند امروز
-</button>
-
-<button class="btn gray" onclick="navigate('focus')">
-⏱ شروع مطالعه
-</button>
-
+<div class="header">
+<div>
+<div class="title">داشبورد</div>
+<div class="subtitle">مرکز کنترل مطالعه و مشاوره هوشمند</div>
 </div>
 
+<div class="ai-status">
+<div class="dot" id="aiDot"></div>
+<span id="aiStatus">AI متصل نیست</span>
 </div>
-
+</div>
 
 <div class="grid">
 
-<div class="card statCard">
-
-<div class="statTop">
-<span>مطالعه امروز</span>
-<span class="statIcon">📚</span>
+<div class="card">
+<div class="muted">ساعت مطالعه امروز</div>
+<div class="stat" id="todayHours">0</div>
+<div class="muted">ساعت</div>
 </div>
 
-<div class="stat" id="dStudy">۰</div>
-
-<span class="muted">دقیقه</span>
-
+<div class="card">
+<div class="muted">تست‌های امروز</div>
+<div class="stat" id="todayTests">0</div>
 </div>
 
-
-<div class="card statCard">
-
-<div class="statTop">
-<span>تست امروز</span>
-<span class="statIcon">📝</span>
+<div class="card">
+<div class="muted">میانگین درصد</div>
+<div class="stat" id="averageScore">0%</div>
 </div>
 
-<div class="stat" id="dTests">۰</div>
-
-<span class="muted">سؤال</span>
-
-</div>
-
-
-<div class="card statCard">
-
-<div class="statTop">
-<span>دقت امروز</span>
-<span class="statIcon">🎯</span>
-</div>
-
-<div class="stat" id="dAccuracy">۰٪</div>
-
-<span class="muted">درصد</span>
-
-</div>
-
-
-<div class="card statCard">
-
-<div class="statTop">
-<span>Streak</span>
-<span class="statIcon">🔥</span>
-</div>
-
-<div class="stat" id="dStreak">۰</div>
-
-<span class="muted">روز</span>
-
+<div class="card">
+<div class="muted">هدف روزانه</div>
+<div class="stat" id="dailyGoal">8</div>
+<div class="muted">ساعت</div>
 </div>
 
 </div>
 
-
-<div class="gap"></div>
-
+<br>
 
 <div class="grid2">
 
 <div class="card">
-
-<div class="row">
-
-<h2>🎯 هدف امروز</h2>
-
-<span id="goalPercent" class="badge">
-۰٪
-</span>
-
-</div>
-
+<h3>📈 پیشرفت امروز</h3>
 <div class="progress">
-<i id="goalBar"></i>
+<div id="dailyProgress"></div>
 </div>
+<p class="muted" id="progressText">0٪ از هدف روزانه</p>
 
-<p id="goalText" class="muted">
-۰ از ۰ دقیقه
-</p>
-
+<div class="actions">
+<button class="btn primary" onclick="startStudy()">شروع مطالعه</button>
+<button class="btn" onclick="showPage('ai')">مشورت با AI</button>
 </div>
-
+</div>
 
 <div class="card">
-
-<h2>⏳ آزمون اصلی</h2>
-
-<div class="stat" id="mainCountdown">—</div>
-
-<div id="mainDate" class="muted">
-تاریخ تعیین نشده
+<h3>🧠 پیشنهاد فوری مشاور</h3>
+<div id="quickAdvice" class="muted">
+برای دریافت پیشنهاد، ابتدا اطلاعات مطالعه خود را ثبت کنید یا با AI صحبت کنید.
+</div>
+<br>
+<button class="btn primary" onclick="getQuickAdvice()">دریافت تحلیل AI</button>
 </div>
 
 </div>
 
-</div>
-
-
-<div class="gap"></div>
-
+<br>
 
 <div class="card">
+<h3>⚡ دسترسی سریع</h3>
 
-<div class="row">
-
-<h2>🤖 پیشنهاد مشاور</h2>
-
-<button class="btn sm" onclick="generateAdvice()">
-تحلیل مجدد
-</button>
-
-</div>
-
-<div id="smartAdvice"></div>
-
-</div>
-
-
-<div class="gap"></div>
-
-
-<div class="card">
-
-<h2>📖 وضعیت دروس</h2>
-
-<div class="subjectGrid" id="dashboardSubjects"></div>
-
-</div>
-
-
-<div class="gap"></div>
-
-
-<div class="card">
-
-<h2>⚡ دسترسی سریع</h2>
-
-<div class="quickGrid">
-
-<button class="quick" onclick="openQuick('study')">
-📚 ثبت مطالعه
-</button>
-
-<button class="quick" onclick="openQuick('test')">
-📝 ثبت تست
-</button>
-
-<button class="quick" onclick="navigate('planner')">
-📅 ساخت برنامه
-</button>
-
-<button class="quick" onclick="navigate('reviews')">
-🔄 مرورهای امروز
-</button>
-
+<div class="quick">
+<button class="btn" onclick="openModal('studyModal')">➕ ثبت مطالعه</button>
+<button class="btn" onclick="openModal('testModal')">📝 ثبت آزمون</button>
+<button class="btn" onclick="generatePlan()">🤖 ساخت برنامه با AI</button>
 </div>
 
 </div>
@@ -877,79 +584,43 @@ StudyCoach آماده است تا برنامه، مطالعه و عملکردت 
 </section>
 
 
-<!-- ADVISOR -->
+<!-- AI -->
 
-<section id="advisor" class="section">
+<section id="ai" class="page">
 
-<div class="card">
-
-<h2>🤖 مشاور درسی هوشمند</h2>
-
-<p class="muted">
-مشاور داخلی بر اساس داده‌های واقعی ثبت‌شده در StudyCoach تصمیم می‌گیرد.
-</p>
-
-<div class="grid3">
-
-<div class="field">
-
-<label>حال امروز</label>
-
-<select id="mood">
-
-<option value="great">عالی</option>
-<option value="good">خوب</option>
-<option value="normal" selected>معمولی</option>
-<option value="tired">خسته</option>
-
-</select>
-
+<div class="header">
+<div>
+<div class="title">🤖 مشاور هوش مصنوعی</div>
+<div class="subtitle">مشاور شخصی مطالعه و کنکور</div>
+</div>
 </div>
 
+<div class="card chat">
 
-<div class="field">
+<div class="messages" id="messages">
 
-<label>زمان باقی‌مانده امروز</label>
+<div class="message ai">
+سلام! 👋
+من مشاور هوش مصنوعی StudyCoach هستم.
 
-<input id="remainingHours" type="number" value="6" min="0" max="24">
+می‌توانم در مورد برنامه‌ریزی، تحلیل عملکرد، مدیریت زمان، مرور، تست‌زنی و استراتژی مطالعه بهت کمک کنم.
 
-</div>
-
-
-<div class="field">
-
-<label>اولویت</label>
-
-<select id="advisorPriority">
-
-<option value="weak">ضعیف‌ترین درس</option>
-<option value="chem">شیمی</option>
-<option value="bio">زیست‌شناسی</option>
-<option value="math">ریاضی</option>
-<option value="physics">فیزیک</option>
-
-</select>
-
+هر چیزی می‌خواهی بپرس.
 </div>
 
 </div>
 
-<br>
+<div class="chat-input">
 
-<button class="btn" onclick="generateAdvice()">
-🧠 تحلیل وضعیت
-</button>
+<textarea
+id="chatInput"
+placeholder="مثلاً: با توجه به عملکردم برای فردا چه برنامه‌ای داشته باشم؟"
+onkeydown="handleChatKey(event)"
+></textarea>
+
+<button class="btn primary" onclick="sendMessage()">ارسال</button>
 
 </div>
-
-
-<div class="gap"></div>
-
-<div class="card">
-
-<h2>نتیجه مشاوره</h2>
-
-<div id="advisorResult"></div>
 
 </div>
 
@@ -958,292 +629,62 @@ StudyCoach آماده است تا برنامه، مطالعه و عملکردت 
 
 <!-- PLANNER -->
 
-<section id="planner" class="section">
+<section id="planner" class="page">
 
-<div class="card">
-
-<h2>📅 برنامه‌ریز هوشمند</h2>
-
-<div class="formGrid">
-
-<div class="field">
-
-<label>ساعت مطالعه روزانه</label>
-
-<input id="pHours" type="number" value="8" min="1" max="24">
-
-</div>
-
-
-<div class="field">
-
-<label>تعداد روز</label>
-
-<input id="pDays" type="number" value="7" min="1" max="60">
-
-</div>
-
-
-<div class="field">
-
-<label>نوع برنامه</label>
-
-<select id="pMode">
-
-<option value="balanced">متعادل</option>
-<option value="aggressive">فشرده</option>
-<option value="test">تست‌محور</option>
-<option value="review">مرورمحور</option>
-<option value="weak">ضعف‌محور</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>شروع روز</label>
-
-<input id="pStart" type="time" value="07:00">
-
-</div>
-
-</div>
-
-<br>
-
-<div class="actions">
-
-<button class="btn" onclick="buildPlan()">
-✨ تولید برنامه
-</button>
-
-<button class="btn gray" onclick="saveGeneratedPlan()">
-💾 ذخیره برنامه
-</button>
-
-</div>
-
-</div>
-
-<div class="gap"></div>
-
-<div id="planResult"></div>
-
-</section>
-
-
-<!-- CALENDAR -->
-
-<section id="calendar" class="section">
-
-<div class="card">
-
-<div class="row">
-
+<div class="header">
 <div>
+<div class="title">📅 برنامه‌ریز هوشمند</div>
+<div class="subtitle">تولید برنامه شخصی با کمک AI</div>
+</div>
 
-<h2>🗓️ تقویم مطالعه</h2>
-
-<div id="calendarMonth" class="muted"></div>
+<button class="btn primary" onclick="generatePlan()">
+🤖 تولید برنامه
+</button>
 
 </div>
 
-<div class="actions">
-
-<button class="btn gray sm" onclick="changeMonth(-1)">‹</button>
-
-<button class="btn gray sm" onclick="goToday()">امروز</button>
-
-<button class="btn gray sm" onclick="changeMonth(1)">›</button>
-
-</div>
-
-</div>
-
-<br>
-
-<div class="calendar" id="calendarGrid"></div>
-
-</div>
-
-</section>
-
-
-<!-- STUDY -->
-
-<section id="study" class="section">
+<div class="grid2">
 
 <div class="card">
 
-<h2>📚 ثبت جلسه مطالعه</h2>
+<h3>اطلاعات برنامه</h3>
 
-<div class="formGrid">
-
-<div class="field">
-<label>درس</label>
-<select id="sSubject"></select>
+<div class="form-group">
+<label>ساعت بیداری</label>
+<input id="wakeTime" type="time" value="05:00">
 </div>
 
-<div class="field">
-<label>مبحث</label>
-<input id="sTopic" placeholder="مثلاً گوارش">
+<div class="form-group">
+<label>ساعت خواب</label>
+<input id="sleepTime" type="time" value="00:00">
 </div>
 
-<div class="field">
-<label>مدت مطالعه</label>
-<input id="sMinutes" type="number" min="1" placeholder="دقیقه">
+<div class="form-group">
+<label>هدف مطالعه روزانه</label>
+<input id="planHours" type="number" value="10" min="1" max="24">
 </div>
 
-<div class="field">
-<label>نوع فعالیت</label>
-<select id="sType">
-<option>آموزش</option>
-<option>تست</option>
-<option>مرور</option>
-<option>جمع‌بندی</option>
-<option>تمرکز</option>
+<div class="form-group">
+<label>تمرکز اصلی</label>
+<select id="focusSubject">
+<option>زیست‌شناسی</option>
+<option>شیمی</option>
+<option>فیزیک</option>
+<option>ریاضی</option>
+<option>دروس عمومی</option>
+<option>مرور و جمع‌بندی</option>
 </select>
 </div>
 
-<div class="field">
-<label>تاریخ</label>
-<input id="sDate" type="date">
 </div>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addStudy()">
-ثبت جلسه
-</button>
-
-</div>
-
-
-<div class="gap"></div>
 
 <div class="card">
 
-<div class="row">
+<h3>برنامه پیشنهادی</h3>
 
-<h2>تاریخچه مطالعه</h2>
-
-<button class="btn gray sm" onclick="clearStudy()">
-پاک‌سازی
-</button>
-
+<div id="planOutput" class="empty">
+برای تولید برنامه روی «تولید برنامه» بزن.
 </div>
-
-<div class="tableWrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>تاریخ</th>
-<th>درس</th>
-<th>مبحث</th>
-<th>مدت</th>
-<th>نوع</th>
-<th></th>
-</tr>
-
-</thead>
-
-<tbody id="studyTable"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- TESTS -->
-
-<section id="tests" class="section">
-
-<div class="card">
-
-<h2>📝 ثبت تست</h2>
-
-<div class="formGrid">
-
-<div class="field">
-<label>درس</label>
-<select id="tSubject"></select>
-</div>
-
-<div class="field">
-<label>مبحث</label>
-<input id="tTopic" placeholder="مبحث">
-</div>
-
-<div class="field">
-<label>کل تست</label>
-<input id="tTotal" type="number" min="1">
-</div>
-
-<div class="field">
-<label>صحیح</label>
-<input id="tCorrect" type="number" min="0">
-</div>
-
-<div class="field">
-<label>غلط</label>
-<input id="tWrong" type="number" min="0">
-</div>
-
-<div class="field">
-<label>تاریخ</label>
-<input id="tDate" type="date">
-</div>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addTest()">
-ثبت تست
-</button>
-
-</div>
-
-
-<div class="gap"></div>
-
-<div class="card">
-
-<h2>📊 تاریخچه تست</h2>
-
-<div class="tableWrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>تاریخ</th>
-<th>درس</th>
-<th>کل</th>
-<th>صحیح</th>
-<th>غلط</th>
-<th>دقت</th>
-<th>درصد</th>
-<th></th>
-</tr>
-
-</thead>
-
-<tbody id="testTable"></tbody>
-
-</table>
 
 </div>
 
@@ -1254,118 +695,20 @@ StudyCoach آماده است تا برنامه، مطالعه و عملکردت 
 
 <!-- SUBJECTS -->
 
-<section id="subjects" class="section">
+<section id="subjects" class="page">
+
+<div class="header">
+<div>
+<div class="title">📚 دروس</div>
+<div class="subtitle">مدیریت وضعیت هر درس</div>
+</div>
+
+<button class="btn primary" onclick="openModal('subjectModal')">➕ درس</button>
+</div>
 
 <div class="card">
 
-<h2>📖 وضعیت دروس</h2>
-
-<div id="subjectsPage" class="subjectGrid"></div>
-
-</div>
-
-</section>
-
-
-<!-- REVIEWS -->
-
-<section id="reviews" class="section">
-
-<div class="card">
-
-<h2>🔄 مرور فاصله‌دار</h2>
-
-<p class="muted">
-مباحثی که امروز موعد مرورشان رسیده در اینجا نمایش داده می‌شوند.
-</p>
-
-<div id="dueReviews"></div>
-
-</div>
-
-
-<div class="gap"></div>
-
-<div class="card">
-
-<h2>➕ افزودن مرور</h2>
-
-<div class="formGrid">
-
-<div class="field">
-<label>درس</label>
-<select id="rSubject"></select>
-</div>
-
-<div class="field">
-<label>مبحث</label>
-<input id="rTopic">
-</div>
-
-<div class="field">
-<label>فاصله اولیه</label>
-<select id="rDays">
-<option value="1">۱ روز</option>
-<option value="3">۳ روز</option>
-<option value="7">۷ روز</option>
-<option value="14">۱۴ روز</option>
-<option value="30">۳۰ روز</option>
-</select>
-</div>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addReview()">
-افزودن مرور
-</button>
-
-</div>
-
-</section>
-
-
-<!-- RESOURCES -->
-
-<section id="resources" class="section">
-
-<div class="card">
-
-<h2>📦 منابع</h2>
-
-<div class="formGrid">
-
-<div class="field">
-<label>نام منبع</label>
-<input id="resName">
-</div>
-
-<div class="field">
-<label>توضیح</label>
-<input id="resDesc">
-</div>
-
-<div class="field">
-<label>لینک</label>
-<input id="resUrl" placeholder="https://...">
-</div>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addResource()">
-افزودن منبع
-</button>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<div id="resourcesList"></div>
+<div id="subjectsList"></div>
 
 </div>
 
@@ -1374,190 +717,124 @@ StudyCoach آماده است تا برنامه، مطالعه و عملکردت 
 
 <!-- EXAMS -->
 
-<section id="exams" class="section">
+<section id="exams" class="page">
 
-<div class="card">
-
-<h2>🎯 آزمون‌ها</h2>
-
-<div class="formGrid">
-
-<div class="field">
-<label>نام آزمون</label>
-<input id="examName">
+<div class="header">
+<div>
+<div class="title">📝 آزمون‌ها</div>
+<div class="subtitle">ثبت و تحلیل نتایج</div>
 </div>
 
-<div class="field">
-<label>تاریخ</label>
-<input id="examDate" type="date">
+<button class="btn primary" onclick="openModal('testModal')">➕ ثبت آزمون</button>
 </div>
 
-<div class="field">
-<label>توضیح</label>
-<input id="examDesc">
-</div>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addExam()">
-افزودن آزمون
-</button>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<div id="examsList"></div>
-
-</div>
-
-</section>
-
-
-<!-- REPORTS -->
-
-<section id="reports" class="section">
-
-<div class="grid">
-
-<div class="card statCard">
-<div class="muted">کل مطالعه</div>
-<div class="stat" id="rStudy">۰</div>
-</div>
-
-<div class="card statCard">
-<div class="muted">کل تست</div>
-<div class="stat" id="rTests">۰</div>
-</div>
-
-<div class="card statCard">
-<div class="muted">دقت کلی</div>
-<div class="stat" id="rAccuracy">۰٪</div>
-</div>
-
-<div class="card statCard">
-<div class="muted">روزهای فعال</div>
-<div class="stat" id="rDays">۰</div>
-</div>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<h2>📈 مطالعه ۱۴ روز اخیر</h2>
-
-<div class="chart" id="studyChart"></div>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<h2>📊 تحلیل دروس</h2>
-
-<div class="tableWrap">
+<div class="card table-wrap">
 
 <table>
 
 <thead>
 <tr>
 <th>درس</th>
-<th>مطالعه</th>
-<th>تست</th>
-<th>دقت</th>
-<th>ریسک</th>
+<th>تعداد</th>
+<th>صحیح</th>
+<th>غلط</th>
+<th>درصد</th>
+<th>تاریخ</th>
 </tr>
 </thead>
 
-<tbody id="reportSubjects"></tbody>
+<tbody id="testsTable"></tbody>
 
 </table>
 
 </div>
 
-</div>
-
 </section>
 
 
-<!-- ACHIEVEMENTS -->
+<!-- ANALYTICS -->
 
-<section id="achievements" class="section">
+<section id="analytics" class="page">
+
+<div class="header">
+<div>
+<div class="title">📊 تحلیل عملکرد</div>
+<div class="subtitle">تحلیل آماری + تحلیل AI</div>
+</div>
+
+<button class="btn primary" onclick="analyzePerformance()">
+🤖 تحلیل با AI
+</button>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="muted">تعداد آزمون</div>
+<div class="stat" id="totalTests">0</div>
+</div>
+
+<div class="card">
+<div class="muted">میانگین درصد</div>
+<div class="stat" id="analyticsAvg">0%</div>
+</div>
+
+<div class="card">
+<div class="muted">بهترین درصد</div>
+<div class="stat" id="bestScore">0%</div>
+</div>
+
+<div class="card">
+<div class="muted">کل مطالعه</div>
+<div class="stat" id="totalStudy">0</div>
+</div>
+
+</div>
+
+<br>
 
 <div class="card">
 
-<h2>🏆 دستاوردها</h2>
+<h3>🧠 تحلیل مشاور</h3>
 
-<div id="achievementList"></div>
+<div id="analyticsOutput" class="muted">
+برای تحلیل عملکرد روی دکمه بالا بزن.
+</div>
 
 </div>
 
 </section>
 
 
-<!-- FOCUS -->
+<!-- POMODORO -->
 
-<section id="focus" class="section">
+<section id="pomodoro" class="page">
 
-<div class="card timerBox">
-
-<div class="timerMode" id="timerMode">
-Pomodoro 25
+<div class="header">
+<div>
+<div class="title">⏱️ مطالعه</div>
+<div class="subtitle">تایمر تمرکز</div>
+</div>
 </div>
 
-<div class="timer" id="timer">
-25:00
-</div>
+<div class="card">
+
+<div class="timer" id="timer">50:00</div>
 
 <div class="actions" style="justify-content:center">
 
-<button class="btn" onclick="startTimer()">
-▶ شروع
-</button>
-
-<button class="btn gray" onclick="pauseTimer()">
-⏸ توقف
-</button>
-
-<button class="btn red" onclick="resetTimer()">
-↻ ریست
-</button>
+<button class="btn primary" onclick="startTimer()">شروع</button>
+<button class="btn" onclick="pauseTimer()">توقف</button>
+<button class="btn danger" onclick="resetTimer()">ریست</button>
 
 </div>
 
 <br>
 
-<div class="actions" style="justify-content:center">
-
-<button class="btn gray sm" onclick="setTimer(25)">
-۲۵ دقیقه
-</button>
-
-<button class="btn gray sm" onclick="setTimer(45)">
-۴۵ دقیقه
-</button>
-
-<button class="btn gray sm" onclick="setTimer(60)">
-۶۰ دقیقه
-</button>
-
-<button class="btn gray sm" onclick="setTimer(90)">
-۹۰ دقیقه
-</button>
-
-</div>
-
-<br>
-
-<div class="muted">
-جلسات کامل‌شده: <b id="focusSessions">۰</b>
+<div class="form-group">
+<label>مدت جلسه مطالعه (دقیقه)</label>
+<input id="timerMinutes" type="number" value="50">
 </div>
 
 </div>
@@ -1565,76 +842,22 @@ Pomodoro 25
 </section>
 
 
-<!-- NOTES -->
+<!-- GOALS -->
 
-<section id="notes" class="section">
+<section id="goals" class="page">
+
+<div class="header">
+<div>
+<div class="title">🎯 اهداف</div>
+<div class="subtitle">هدف‌گذاری شخصی</div>
+</div>
+
+<button class="btn primary" onclick="openModal('goalModal')">➕ هدف</button>
+</div>
 
 <div class="card">
 
-<h2>📝 یادداشت جدید</h2>
-
-<div class="field">
-
-<label>عنوان</label>
-
-<input id="noteTitle">
-
-</div>
-
-<br>
-
-<div class="field">
-
-<label>متن</label>
-
-<textarea id="noteText"></textarea>
-
-</div>
-
-<br>
-
-<button class="btn" onclick="addNote()">
-ذخیره
-</button>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<div id="notesList"></div>
-
-</div>
-
-</section>
-
-
-<!-- TODOS -->
-
-<section id="todos" class="section">
-
-<div class="card">
-
-<h2>✅ کارهای امروز</h2>
-
-<div class="actions">
-
-<input id="todoInput" placeholder="مثلاً ۵۰ تست شیمی">
-
-<button class="btn" onclick="addTodo()">
-افزودن
-</button>
-
-</div>
-
-</div>
-
-<div class="gap"></div>
-
-<div class="card">
-
-<div id="todosList"></div>
+<div id="goalsList"></div>
 
 </div>
 
@@ -1643,65 +866,78 @@ Pomodoro 25
 
 <!-- SETTINGS -->
 
-<section id="settings" class="section">
+<section id="settings" class="page">
+
+<div class="header">
+<div>
+<div class="title">⚙️ تنظیمات</div>
+<div class="subtitle">اتصال واقعی به API و مدیریت اطلاعات</div>
+</div>
+</div>
+
+<div class="grid2">
 
 <div class="card">
 
-<h2>⚙️ تنظیمات پروفایل</h2>
+<h3>🤖 اتصال هوش مصنوعی</h3>
 
-<div class="formGrid">
-
-<div class="field">
-<label>نام</label>
-<input id="profileName">
+<div class="form-group">
+<label>API Base URL</label>
+<input
+id="apiBase"
+placeholder="https://your-api.com/v1"
+>
 </div>
 
-<div class="field">
-<label>هدف</label>
-<input id="profileTarget">
+<div class="form-group">
+<label>API Key</label>
+<input
+id="apiKey"
+type="password"
+placeholder="sk-..."
+>
 </div>
 
-<div class="field">
-<label>هدف مطالعه روزانه — ساعت</label>
-<input id="profileGoal" type="number" min="1" max="24">
+<div class="form-group">
+<label>نام مدل</label>
+<input
+id="modelName"
+placeholder="مدل موردنظر"
+>
 </div>
 
-<div class="field">
-<label>تاریخ آزمون اصلی</label>
-<input id="profileExam" type="date">
+<div class="actions">
+<button class="btn primary" onclick="saveAISettings()">ذخیره و تست اتصال</button>
+<button class="btn" onclick="testAI()">تست اتصال</button>
 </div>
 
-</div>
-
-<br>
-
-<button class="btn" onclick="saveProfile()">
-ذخیره پروفایل
-</button>
+<p class="muted">
+کلید API داخل کد قرار نگرفته و باید توسط خودت وارد شود.
+</p>
 
 </div>
-
-
-<div class="gap"></div>
-
 
 <div class="card">
 
-<h2>💾 اطلاعات</h2>
+<h3>💾 اطلاعات</h3>
 
 <div class="actions">
 
-<button class="btn" onclick="exportData()">
-📤 خروجی JSON
-</button>
+<button class="btn" onclick="exportData()">خروجی اطلاعات</button>
 
-<button class="btn gray" onclick="importData()">
-📥 بازیابی
-</button>
+<label class="btn">
+وارد کردن اطلاعات
+<input
+type="file"
+accept=".json"
+onchange="importData(event)"
+style="display:none"
+>
+</label>
 
-<button class="btn red" onclick="resetData()">
-🗑️ پاک‌کردن همه
-</button>
+<button class="btn danger" onclick="clearAllData()">پاک کردن همه اطلاعات</button>
+
+</div>
 
 </div>
 
@@ -1709,29 +945,154 @@ Pomodoro 25
 
 </section>
 
-
 </main>
 </div>
 
 
-<div class="modal" id="modal">
+<!-- STUDY MODAL -->
 
-<div class="modalBox">
+<div class="modal" id="studyModal">
 
-<div class="row">
+<div class="modal-box">
 
-<h2 id="modalTitle"></h2>
+<button class="close" onclick="closeModal('studyModal')">×</button>
 
-<button class="btn gray sm" onclick="closeModal()">
-×
-</button>
+<h2>ثبت مطالعه</h2>
 
+<div class="form-group">
+<label>درس</label>
+<select id="studySubject">
+<option>زیست‌شناسی</option>
+<option>شیمی</option>
+<option>فیزیک</option>
+<option>ریاضی</option>
+<option>دینی</option>
+<option>فارسی</option>
+<option>زبان</option>
+</select>
 </div>
 
-<div id="modalBody"></div>
-
+<div class="form-group">
+<label>مدت مطالعه (دقیقه)</label>
+<input id="studyMinutes" type="number" value="60">
 </div>
 
+<div class="form-group">
+<label>نوع فعالیت</label>
+<select id="studyType">
+<option>مطالعه</option>
+<option>تست</option>
+<option>مرور</option>
+<option>جمع‌بندی</option>
+</select>
+</div>
+
+<button class="btn primary" onclick="saveStudy()">ثبت</button>
+
+</div>
+</div>
+
+
+<!-- TEST MODAL -->
+
+<div class="modal" id="testModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('testModal')">×</button>
+
+<h2>ثبت آزمون</h2>
+
+<div class="form-group">
+<label>درس</label>
+<select id="testSubject">
+<option>زیست‌شناسی</option>
+<option>شیمی</option>
+<option>فیزیک</option>
+<option>ریاضی</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>تعداد سوال</label>
+<input id="testTotal" type="number" value="20">
+</div>
+
+<div class="form-group">
+<label>صحیح</label>
+<input id="testCorrect" type="number" value="15">
+</div>
+
+<div class="form-group">
+<label>غلط</label>
+<input id="testWrong" type="number" value="3">
+</div>
+
+<div class="form-group">
+<label>نزده</label>
+<input id="testBlank" type="number" value="2">
+</div>
+
+<button class="btn primary" onclick="saveTest()">ثبت آزمون</button>
+
+</div>
+</div>
+
+
+<!-- SUBJECT MODAL -->
+
+<div class="modal" id="subjectModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('subjectModal')">×</button>
+
+<h2>افزودن درس</h2>
+
+<div class="form-group">
+<label>نام درس</label>
+<input id="newSubject">
+</div>
+
+<div class="form-group">
+<label>سطح فعلی</label>
+<select id="subjectLevel">
+<option>ضعیف</option>
+<option>متوسط</option>
+<option>خوب</option>
+<option>عالی</option>
+</select>
+</div>
+
+<button class="btn primary" onclick="saveSubject()">ثبت</button>
+
+</div>
+</div>
+
+
+<!-- GOAL MODAL -->
+
+<div class="modal" id="goalModal">
+
+<div class="modal-box">
+
+<button class="close" onclick="closeModal('goalModal')">×</button>
+
+<h2>هدف جدید</h2>
+
+<div class="form-group">
+<label>هدف</label>
+<input id="goalText">
+</div>
+
+<div class="form-group">
+<label>توضیح</label>
+<textarea id="goalDescription"></textarea>
+</div>
+
+<button class="btn primary" onclick="saveGoal()">ثبت هدف</button>
+
+</div>
 </div>
 
 
@@ -1740,283 +1101,68 @@ Pomodoro 25
 
 <script>
 
-"use strict";
-
-
 /* =========================================================
-   DATABASE
+   STUDYCOACH V5 ULTIMATE
+   Core Application
 ========================================================= */
 
-const STORAGE_KEY="studycoach_v5_database";
+const STORAGE_KEY="studycoach_v5_data";
 
-
-const SUBJECTS=[
-
- {id:"bio",name:"زیست‌شناسی",icon:"🧬",weight:1.25},
- {id:"chem",name:"شیمی",icon:"⚗️",weight:1.25},
- {id:"math",name:"ریاضی",icon:"📐",weight:1.15},
- {id:"physics",name:"فیزیک",icon:"⚡",weight:1.15},
- {id:"dini",name:"دینی",icon:"📖",weight:1},
- {id:"persian",name:"فارسی",icon:"📝",weight:1},
- {id:"arabic",name:"عربی",icon:"📚",weight:1},
- {id:"english",name:"زبان انگلیسی",icon:"🌐",weight:1}
-
-];
-
-
-const DEFAULT_DB={
-
- profile:{
-  name:"دانش‌آموز",
-  target:"پزشکی دانشگاه تهران",
-  dailyGoal:8,
-  examDate:""
- },
-
- settings:{
-  dark:false,
-  notifications:true
- },
-
- sessions:[],
- tests:[],
- reviews:[],
- resources:[],
- exams:[],
- notes:[],
- todos:[],
- plans:[],
-
- focus:{
-  sessions:0,
-  minutes:0
- }
-
+let data={
+  studies:[],
+  tests:[],
+  subjects:[
+    {name:"زیست‌شناسی",level:"متوسط"},
+    {name:"شیمی",level:"ضعیف"},
+    {name:"فیزیک",level:"متوسط"},
+    {name:"ریاضی",level:"متوسط"}
+  ],
+  goals:[],
+  settings:{
+    apiBase:"",
+    apiKey:"",
+    model:""
+  }
 };
 
-
-let db=loadDatabase();
-
-let currentPage=
- localStorage.getItem(
-  "studycoach_page"
- )||"dashboard";
-
-let generatedPlan=[];
-
-let calendarDate=
- new Date();
-
-let timerSeconds=25*60;
-
+let timerSeconds=3000;
 let timerInterval=null;
-
-let timerRunning=false;
 
 
 /* =========================================================
-   UTILITIES
+   STORAGE
 ========================================================= */
 
-function clone(obj){
+function loadData(){
 
- return JSON.parse(
-  JSON.stringify(obj)
- );
+  const saved=localStorage.getItem(STORAGE_KEY);
 
-}
+  if(saved){
 
+    try{
+      const parsed=JSON.parse(saved);
 
-function merge(base,data){
+      data={
+        ...data,
+        ...parsed,
+        settings:{
+          ...data.settings,
+          ...(parsed.settings||{})
+        }
+      };
 
- for(const key in data){
-
-  if(
-   data[key] &&
-   typeof data[key]==="object" &&
-   !Array.isArray(data[key])
-  ){
-
-   base[key]=merge(
-    base[key]||{},
-    data[key]
-   );
-
-  }
-  else{
-
-   base[key]=data[key];
-
+    }catch(e){}
   }
 
- }
+  document.getElementById("apiBase").value=data.settings.apiBase||"";
+  document.getElementById("apiKey").value=data.settings.apiKey||"";
+  document.getElementById("modelName").value=data.settings.model||"";
 
- return base;
-
+  renderAll();
 }
 
-
-function loadDatabase(){
-
- try{
-
-  const raw=
-   localStorage.getItem(
-    STORAGE_KEY
-   );
-
-  if(!raw)
-   return clone(
-    DEFAULT_DB
-   );
-
-  return merge(
-   clone(DEFAULT_DB),
-   JSON.parse(raw)
-  );
-
- }
- catch(e){
-
-  return clone(
-   DEFAULT_DB
-  );
-
- }
-
-}
-
-
-function saveDatabase(){
-
- localStorage.setItem(
-  STORAGE_KEY,
-  JSON.stringify(db)
- );
-
- localStorage.setItem(
-  "studycoach_page",
-  currentPage
- );
-
-}
-
-
-function uid(){
-
- return Date.now()
-  .toString(36)+
-  Math.random()
-  .toString(36)
-  .slice(2);
-
-}
-
-
-function today(){
-
- return new Date()
-  .toISOString()
-  .slice(0,10);
-
-}
-
-
-function escapeHTML(value){
-
- return String(
-  value??""
- )
- .replace(
-  /[&<>"']/g,
-  char=>({
-
-   "&":"&amp;",
-   "<":"&lt;",
-   ">":"&gt;",
-   '"':"&quot;",
-   "'":"&#039;"
-
-  }[char])
- );
-
-}
-
-
-function subject(id){
-
- return SUBJECTS.find(
-  x=>x.id===id
- )||SUBJECTS[0];
-
-}
-
-
-function formatMinutes(minutes){
-
- minutes=
-  Number(minutes||0);
-
- const h=
-  Math.floor(
-   minutes/60
-  );
-
- const m=
-  minutes%60;
-
- if(h)
-  return `${h} ساعت ${m} دقیقه`;
-
- return `${m} دقیقه`;
-
-}
-
-
-function formatTimer(seconds){
-
- const m=
-  Math.floor(
-   seconds/60
-  )
-  .toString()
-  .padStart(2,"0");
-
- const s=
-  (
-   seconds%60
-  )
-  .toString()
-  .padStart(2,"0");
-
- return `${m}:${s}`;
-
-}
-
-
-function toast(message){
-
- const el=
-  document.getElementById(
-   "toast"
-  );
-
- el.textContent=
-  message;
-
- el.classList.add(
-  "show"
- );
-
- setTimeout(
-  ()=>{
-   el.classList.remove(
-    "show"
-   );
-  },
-  2400
- );
-
+function saveData(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
 }
 
 
@@ -2024,1104 +1170,59 @@ function toast(message){
    NAVIGATION
 ========================================================= */
 
-const PAGE_TITLES={
+function showPage(id,btn){
 
- dashboard:"داشبورد",
- advisor:"مشاور هوشمند",
- planner:"برنامه‌ریز",
- calendar:"تقویم",
- study:"جلسات مطالعه",
- tests:"تست‌ها",
- subjects:"دروس",
- reviews:"مرور هوشمند",
- resources:"منابع",
- exams:"آزمون‌ها",
- reports:"گزارش‌ها",
- achievements:"دستاوردها",
- focus:"Focus",
- notes:"یادداشت‌ها",
- todos:"کارها",
- settings:"تنظیمات"
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
 
-};
+  const page=document.getElementById(id);
 
+  if(page) page.classList.add("active");
 
-function navigate(page){
+  document.querySelectorAll(".nav button").forEach(b=>{
+    b.classList.remove("active");
+  });
 
- currentPage=
-  page;
+  if(btn) btn.classList.add("active");
 
- saveDatabase();
+  document.getElementById("sidebar").classList.remove("open");
 
- document.querySelectorAll(
-  ".section"
- )
- .forEach(
-  x=>
-   x.classList.remove(
-    "active"
-   )
- );
-
- const section=
-  document.getElementById(
-   page
-  );
-
- if(section)
-  section.classList.add(
-   "active"
-  );
-
- document.querySelectorAll(
-  ".nav button"
- )
- .forEach(
-  button=>{
-   button.classList.toggle(
-    "active",
-    button.dataset.page===page
-   );
-  }
- );
-
- document.getElementById(
-  "pageTitle"
- ).textContent=
-  PAGE_TITLES[page]||
-  "StudyCoach";
-
- renderPage(
-  page
- );
-
- document.getElementById(
-  "sidebar"
- ).classList.remove(
-  "open"
- );
-
- window.scrollTo(
-  0,
-  0
- );
-
+  renderAll();
 }
 
-
-function toggleMenu(){
-
- document.getElementById(
-  "sidebar"
- ).classList.toggle(
-  "open"
- );
-
-}
-
-
-function toggleTheme(){
-
- db.settings.dark=
-  !db.settings.dark;
-
- applyTheme();
-
- saveDatabase();
-
-}
-
-
-function applyTheme(){
-
- document.documentElement
-  .classList.toggle(
-   "dark",
-   !!db.settings.dark
-  );
-
+function toggleSidebar(){
+  document.getElementById("sidebar").classList.toggle("open");
 }
 
 
 /* =========================================================
-   DATA CALCULATIONS
+   MODALS
 ========================================================= */
 
-function studyMinutes(date){
-
- return db.sessions
-  .filter(
-   x=>
-    !date ||
-    x.date===date
-  )
-  .reduce(
-   (sum,x)=>
-    sum+
-    Number(
-     x.minutes||0
-    ),
-   0
-  );
-
+function openModal(id){
+  document.getElementById(id).style.display="flex";
 }
 
-
-function testStats(date){
-
- const arr=
-  db.tests.filter(
-   x=>
-    !date||
-    x.date===date
-  );
-
- const total=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.total||0
-    ),
-   0
-  );
-
- const correct=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.correct||0
-    ),
-   0
-  );
-
- const wrong=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.wrong||0
-    ),
-   0
-  );
-
- const blank=
-  Math.max(
-   0,
-   total-
-   correct-
-   wrong
-  );
-
- const accuracy=
-  total?
-   Math.round(
-    correct/
-    total*
-    100
-   ):
-   0;
-
- const score=
-  total?
-   Math.round(
-    (
-     correct-
-     wrong/3
-    )/
-    total*
-    100
-   ):
-   0;
-
- return{
-  total,
-  correct,
-  wrong,
-  blank,
-  accuracy,
-  score
- };
-
-}
-
-
-function subjectMinutes(id){
-
- return db.sessions
-  .filter(
-   x=>x.subject===id
-  )
-  .reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.minutes||0
-    ),
-   0
-  );
-
-}
-
-
-function subjectTests(id){
-
- const arr=
-  db.tests.filter(
-   x=>x.subject===id
-  );
-
- const total=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.total||0
-    ),
-   0
-  );
-
- const correct=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.correct||0
-    ),
-   0
-  );
-
- const wrong=
-  arr.reduce(
-   (s,x)=>
-    s+
-    Number(
-     x.wrong||0
-    ),
-   0
-  );
-
- return{
-
-  total,
-
-  correct,
-
-  wrong,
-
-  accuracy:
-   total?
-    Math.round(
-     correct/
-     total*
-     100
-    ):
-    0,
-
-  score:
-   total?
-    Math.round(
-     (
-      correct-
-      wrong/3
-     )/
-     total*
-     100
-    ):
-    0
-
- };
-
-}
-
-
-function subjectRisk(id){
-
- const minutes=
-  subjectMinutes(id);
-
- const tests=
-  subjectTests(id);
-
- const studyScore=
-  Math.min(
-   40,
-   minutes/20
-  );
-
- const accuracy=
-  tests.total?
-   tests.accuracy:
-   45;
-
- const risk=
-  65-
-  studyScore+
-  (
-   70-
-   accuracy
-  )*.45;
-
- return Math.max(
-  0,
-  Math.min(
-   100,
-   Math.round(
-    risk
-   )
-  )
- );
-
-}
-
-
-function weakestSubject(){
-
- return SUBJECTS
-  .map(
-   s=>({
-
-    ...s,
-
-    risk:
-     subjectRisk(
-      s.id
-     )
-
-   })
-  )
-  .sort(
-   (a,b)=>
-    b.risk-a.risk
-  )[0];
-
-}
-
-
-function activeDays(){
-
- return new Set(
-  db.sessions
-   .map(
-    x=>x.date
-   )
- ).size;
-
-}
-
-
-function streak(){
-
- const days=
-  new Set(
-   db.sessions.map(
-    x=>x.date
-   )
-  );
-
- let date=
-  new Date();
-
- let count=0;
-
- while(
-  days.has(
-   date.toISOString()
-    .slice(0,10)
-  )
- ){
-
-  count++;
-
-  date.setDate(
-   date.getDate()-1
-  );
-
- }
-
- return count;
-
+function closeModal(id){
+  document.getElementById(id).style.display="none";
 }
 
 
 /* =========================================================
-   DASHBOARD
+   TOAST
 ========================================================= */
 
-function renderDashboard(){
+function toast(text){
 
- const study=
-  studyMinutes(
-   today()
-  );
+  const el=document.getElementById("toast");
 
- const tests=
-  testStats(
-   today()
-  );
+  el.textContent=text;
+  el.style.display="block";
 
- document.getElementById(
-  "welcome"
- ).textContent=
-  `سلام ${db.profile.name} 👋`;
-
- document.getElementById(
-  "dStudy"
- ).textContent=
-  study;
-
- document.getElementById(
-  "dTests"
- ).textContent=
-  tests.total;
-
- document.getElementById(
-  "dAccuracy"
- ).textContent=
-  tests.accuracy+
-  "٪";
-
- document.getElementById(
-  "dStreak"
- ).textContent=
-  streak();
-
- const goal=
-  db.profile.dailyGoal*
-  60;
-
- const percent=
-  goal?
-   Math.min(
-    100,
-    Math.round(
-     study/
-     goal*
-     100
-    )
-   ):
-   0;
-
- document.getElementById(
-  "goalPercent"
- ).textContent=
-  percent+
-  "٪";
-
- document.getElementById(
-  "goalBar"
- ).style.width=
-  percent+
-  "%";
-
- document.getElementById(
-  "goalText"
- ).textContent=
-  `${study} از ${goal} دقیقه`;
-
- renderCountdown();
-
- renderDashboardSubjects();
-
- generateAdvice();
-
-}
-
-
-function renderDashboardSubjects(){
-
- const container=
-  document.getElementById(
-   "dashboardSubjects"
-  );
-
- container.innerHTML=
-  SUBJECTS.map(
-   s=>{
-
-    const minutes=
-     subjectMinutes(
-      s.id
-     );
-
-    const tests=
-     subjectTests(
-      s.id
-     );
-
-    const risk=
-     subjectRisk(
-      s.id
-     );
-
-    const level=
-     Math.max(
-      0,
-      100-risk
-     );
-
-    return`
-
-     <div class="subjectCard">
-
-      <div class="subjectHead">
-
-       <b>
-        ${s.icon}
-        ${s.name}
-       </b>
-
-       <span class="badge ${
-        risk>65?
-        "red":
-        risk>40?
-        "orange":
-        "green"
-       }">
-
-        ریسک ${risk}
-
-       </span>
-
-      </div>
-
-      <br>
-
-      <div class="progress">
-
-       <i style="width:${level}%"></i>
-
-      </div>
-
-      <br>
-
-      <div class="small muted">
-
-       مطالعه:
-       ${formatMinutes(minutes)}
-
-       <br>
-
-       تست:
-       ${tests.total}
-
-       ·
-
-       دقت:
-       ${tests.accuracy}٪
-
-      </div>
-
-     </div>
-
-    `;
-
-   }
-  ).join("");
-
-}
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-function renderCountdown(){
-
- const date=
-  db.profile.examDate;
-
- const counter=
-  document.getElementById(
-   "mainCountdown"
-  );
-
- const label=
-  document.getElementById(
-   "mainDate"
-  );
-
- if(!date){
-
-  counter.textContent="—";
-
-  label.textContent=
-   "تاریخ تعیین نشده";
-
-  return;
-
- }
-
- const target=
-  new Date(
-   date+
-   "T00:00:00"
-  );
-
- const diff=
-  Math.ceil(
-   (
-    target-
-    new Date()
-   )/
-   86400000
-  );
-
- counter.textContent=
-  diff>0?
-   `${diff} روز`:
-   "امروز";
-
- label.textContent=
-  date;
-
-}
-
-
-/* =========================================================
-   ADVISOR
-========================================================= */
-
-function buildAdvice(){
-
- const weak=
-  weakestSubject();
-
- const todayStudy=
-  studyMinutes(
-   today()
-  );
-
- const todayTests=
-  testStats(
-   today()
-  );
-
- const goal=
-  db.profile.dailyGoal*
-  60;
-
- const remaining=
-  Math.max(
-   0,
-   goal-
-   todayStudy
-  );
-
- let advice=[];
-
- advice.push(
-  `درس اولویت‌دار امروز: ${weak.icon} ${weak.name}`
- );
-
- advice.push(
-  `ریسک فعلی این درس حدود ${weak.risk} از 100 است.`
- );
-
- if(remaining>0){
-
-  advice.push(
-   `${formatMinutes(remaining)} از هدف مطالعه امروز باقی مانده است.`
-  );
-
- }
-
- if(todayTests.total){
-
-  advice.push(
-   `امروز ${todayTests.total} تست با دقت ${todayTests.accuracy}٪ ثبت شده است.`
-  );
-
-  if(todayTests.accuracy<50){
-
-   advice.push(
-    "قبل از افزایش حجم تست، غلط‌ها و مباحث پایه را تحلیل کن."
-   );
-
-  }
-  else if(todayTests.accuracy<70){
-
-   advice.push(
-    "ترکیب آموزش کوتاه + تست آموزشی برایت مناسب‌تر است."
-   );
-
-  }
-  else{
-
-   advice.push(
-    "دقت تستی مناسب است؛ می‌توانی تست زمان‌دار را افزایش دهی."
-   );
-
-  }
-
- }
- else{
-
-  advice.push(
-   "امروز هنوز تستی ثبت نشده؛ بعد از مطالعه یک بسته تست بزن."
-  );
-
- }
-
- advice.push(
-  "پیشنهاد جلسه: 60 تا 90 دقیقه مطالعه، سپس 20 تا 30 تست و تحلیل کامل غلط‌ها."
- );
-
- return advice.join(
-  "\n"
- );
-
-}
-
-
-function generateAdvice(){
-
- const advice=
-  buildAdvice();
-
- const box=
-  document.getElementById(
-   "smartAdvice"
-  );
-
- if(box)
-  box.innerHTML=
-   `
-    <p style="white-space:pre-line">
-     ${escapeHTML(advice)}
-    </p>
-   `;
-
- const result=
-  document.getElementById(
-   "advisorResult"
-  );
-
- if(result)
-  result.innerHTML=
-   `
-    <div class="kpi">
-
-     <h3>
-      🎯 پیشنهاد اختصاصی
-     </h3>
-
-     <p style="white-space:pre-line">
-      ${escapeHTML(advice)}
-     </p>
-
-    </div>
-   `;
-
-}
-
-
-function smartPlan(){
-
- navigate(
-  "planner"
- );
-
- setTimeout(
-  ()=>{
-   buildPlan();
-  },
-  100
- );
-
-}
-
-
-/* =========================================================
-   PLANNER
-========================================================= */
-
-function buildPlan(){
-
- const hours=
-  Math.max(
-   1,
-   Number(
-    document.getElementById(
-     "pHours"
-    ).value
-   )
-  );
-
- const days=
-  Math.max(
-   1,
-   Number(
-    document.getElementById(
-     "pDays"
-    ).value
-   )
-  );
-
- const mode=
-  document.getElementById(
-   "pMode"
-  ).value;
-
- const start=
-  document.getElementById(
-   "pStart"
-  ).value||
-  "07:00";
-
- let ranked=
-  SUBJECTS
-   .map(
-    s=>({
-
-     ...s,
-
-     risk:
-      subjectRisk(
-       s.id
-      )
-
-    })
-   );
-
- if(
-  mode==="weak"
- ){
-
-  ranked.sort(
-   (a,b)=>
-    b.risk-a.risk
-  );
-
- }
- else{
-
-  ranked.sort(
-   (a,b)=>
-    (
-     b.risk*
-     b.weight
-    )-
-    (
-     a.risk*
-     a.weight
-    )
-  );
-
- }
-
- generatedPlan=[];
-
- for(
-  let day=0;
-  day<days;
-  day++
- ){
-
-  const date=
-   new Date();
-
-  date.setDate(
-   date.getDate()+
-   day
-  );
-
-  const blocks=[];
-
-  let remaining=
-   hours*60;
-
-  let index=0;
-
-  while(
-   remaining>=45 &&
-   blocks.length<10
-  ){
-
-   const s=
-    ranked[
-     index%
-     ranked.length
-    ];
-
-   let duration=
-    mode==="aggressive"?
-     90:
-    mode==="test"?
-     75:
-    mode==="review"?
-     60:
-     75;
-
-   duration=
-    Math.min(
-     duration,
-     remaining
-    );
-
-   blocks.push({
-
-    subject:
-     s.id,
-
-    minutes:
-     duration,
-
-    type:
-     mode==="test"?
-      "تست و تحلیل":
-     mode==="review"?
-      "مرور":
-     "مطالعه عمیق"
-
-   });
-
-   remaining-=
-    duration;
-
-   index++;
-
- }
-
- generatedPlan.push({
-
-  date:
-   date.toISOString()
-    .slice(0,10),
-
-  start,
-
-  blocks
-
- });
-
- }
-
- renderPlan();
-
- toast(
-  "برنامه هوشمند تولید شد ✨"
- );
-
-}
-
-
-function renderPlan(){
-
- const box=
-  document.getElementById(
-   "planResult"
-  );
-
- if(!generatedPlan.length){
-
-  box.innerHTML=
-   `
-    <div class="card empty">
-     هنوز برنامه‌ای ساخته نشده.
-    </div>
-   `;
-
-  return;
-
- }
-
- box.innerHTML=
-  generatedPlan.map(
-   day=>`
-
-   <div class="card">
-
-    <div class="row">
-
-     <h2>
-      📅 ${day.date}
-     </h2>
-
-     <span class="badge">
-      شروع ${day.start}
-     </span>
-
-    </div>
-
-    <br>
-
-    ${day.blocks.map(
-     (block,i)=>`
-
-     <div class="subjectCard">
-
-      <div class="row">
-
-       <b>
-        ${i+1}.
-        ${subject(
-         block.subject
-        ).icon}
-        ${subject(
-         block.subject
-        ).name}
-       </b>
-
-       <span class="badge">
-        ${block.minutes}
-        دقیقه
-       </span>
-
-      </div>
-
-      <small class="muted">
-       ${block.type}
-      </small>
-
-     </div>
-
-     <br>
-
-    `
-    ).join("")}
-
-   </div>
-
-  `
-  ).join("");
-
-}
-
-
-function saveGeneratedPlan(){
-
- if(!generatedPlan.length){
-
-  toast(
-   "ابتدا برنامه تولید کن."
-  );
-
-  return;
-
- }
-
- db.plans.push({
-
-  id:uid(),
-
-  createdAt:
-   new Date().toISOString(),
-
-  days:
-   clone(
-    generatedPlan
-   )
-
- });
-
- saveDatabase();
-
- toast(
-  "برنامه ذخیره شد 💾"
- );
-
+  setTimeout(()=>{
+    el.style.display="none";
+  },2500);
 }
 
 
@@ -3129,151 +1230,40 @@ function saveGeneratedPlan(){
    STUDY
 ========================================================= */
 
-function addStudy(){
+function saveStudy(){
 
- const minutes=
-  Number(
-   document.getElementById(
-    "sMinutes"
-   ).value
+  const subject=document.getElementById("studySubject").value;
+
+  const minutes=Number(
+    document.getElementById("studyMinutes").value
   );
 
- if(!minutes){
+  const type=document.getElementById("studyType").value;
 
-  toast(
-   "مدت مطالعه را وارد کن."
-  );
+  if(!minutes || minutes<=0){
+    toast("مدت مطالعه معتبر نیست");
+    return;
+  }
 
-  return;
+  data.studies.push({
+    id:Date.now(),
+    subject,
+    minutes,
+    type,
+    date:new Date().toISOString()
+  });
 
- }
+  saveData();
 
- db.sessions.push({
+  closeModal("studyModal");
 
-  id:uid(),
+  renderAll();
 
-  subject:
-   document.getElementById(
-    "sSubject"
-   ).value,
-
-  topic:
-   document.getElementById(
-    "sTopic"
-   ).value.trim(),
-
-  minutes,
-
-  type:
-   document.getElementById(
-    "sType"
-   ).value,
-
-  date:
-   document.getElementById(
-    "sDate"
-   ).value||
-   today(),
-
-  createdAt:
-   new Date().toISOString()
-
- });
-
- saveDatabase();
-
- document.getElementById(
-  "sTopic"
- ).value="";
-
- document.getElementById(
-  "sMinutes"
- ).value="";
-
- renderStudy();
-
- renderDashboard();
-
- toast(
-  "جلسه مطالعه ثبت شد ✅"
- );
-
+  toast("مطالعه ثبت شد ✅");
 }
 
-
-function renderStudy(){
-
- const body=
-  document.getElementById(
-   "studyTable"
-  );
-
- body.innerHTML=
-  db.sessions
-   .slice()
-   .reverse()
-   .map(
-    x=>`
-
-    <tr>
-
-     <td>${x.date}</td>
-
-     <td>
-      ${subject(x.subject).icon}
-      ${subject(x.subject).name}
-     </td>
-
-     <td>
-      ${escapeHTML(x.topic)}
-     </td>
-
-     <td>
-      ${x.minutes} دقیقه
-     </td>
-
-     <td>
-      ${escapeHTML(x.type)}
-     </td>
-
-     <td>
-      <button
-       class="btn red sm"
-       onclick="
-        deleteRecord(
-         'sessions',
-         '${x.id}'
-        )
-       ">
-       حذف
-      </button>
-     </td>
-
-    </tr>
-
-   `
-   ).join("");
-
-}
-
-
-function clearStudy(){
-
- if(
-  !confirm(
-   "تمام جلسات مطالعه حذف شوند؟"
-  )
- )
-  return;
-
- db.sessions=[];
-
- saveDatabase();
-
- renderStudy();
-
- renderDashboard();
-
+function startStudy(){
+  showPage("pomodoro");
 }
 
 
@@ -3281,168 +1271,178 @@ function clearStudy(){
    TESTS
 ========================================================= */
 
-function addTest(){
+function saveTest(){
 
- const total=
-  Number(
-   document.getElementById(
-    "tTotal"
-   ).value
-  );
+  const subject=document.getElementById("testSubject").value;
 
- const correct=
-  Number(
-   document.getElementById(
-    "tCorrect"
-   ).value
-  );
+  const total=Number(document.getElementById("testTotal").value);
 
- const wrong=
-  Number(
-   document.getElementById(
-    "tWrong"
-   ).value
-  );
+  const correct=Number(document.getElementById("testCorrect").value);
 
- if(
-  !total||
-  correct<0||
-  wrong<0||
-  correct+
-  wrong>
-  total
- ){
+  const wrong=Number(document.getElementById("testWrong").value);
 
-  toast(
-   "اطلاعات تست نامعتبر است."
-  );
+  const blank=Number(document.getElementById("testBlank").value);
 
-  return;
+  if(total<=0){
+    toast("تعداد سوال معتبر نیست");
+    return;
+  }
 
- }
+  const score=((correct-(wrong/3))/total)*100;
 
- db.tests.push({
+  data.tests.push({
+    id:Date.now(),
+    subject,
+    total,
+    correct,
+    wrong,
+    blank,
+    score:Number(score.toFixed(2)),
+    date:new Date().toISOString()
+  });
 
-  id:uid(),
+  saveData();
 
-  subject:
-   document.getElementById(
-    "tSubject"
-   ).value,
+  closeModal("testModal");
 
-  topic:
-   document.getElementById(
-    "tTopic"
-   ).value.trim(),
+  renderAll();
 
-  total,
-
-  correct,
-
-  wrong,
-
-  date:
-   document.getElementById(
-    "tDate"
-   ).value||
-   today(),
-
-  createdAt:
-   new Date().toISOString()
-
- });
-
- saveDatabase();
-
- renderTests();
-
- renderDashboard();
-
- toast(
-  "تست ثبت شد 📝"
- );
-
+  toast("آزمون ثبت شد 📝");
 }
 
 
-function renderTests(){
+/* =========================================================
+   SUBJECTS
+========================================================= */
 
- const body=
-  document.getElementById(
-   "testTable"
+function saveSubject(){
+
+  const name=document.getElementById("newSubject").value.trim();
+
+  const level=document.getElementById("subjectLevel").value;
+
+  if(!name){
+    toast("نام درس را وارد کن");
+    return;
+  }
+
+  data.subjects.push({
+    name,
+    level
+  });
+
+  saveData();
+
+  closeModal("subjectModal");
+
+  renderAll();
+
+  toast("درس اضافه شد");
+}
+
+
+/* =========================================================
+   GOALS
+========================================================= */
+
+function saveGoal(){
+
+  const text=document.getElementById("goalText").value.trim();
+
+  const description=document.getElementById("goalDescription").value.trim();
+
+  if(!text){
+    toast("هدف را وارد کن");
+    return;
+  }
+
+  data.goals.push({
+    id:Date.now(),
+    text,
+    description,
+    completed:false,
+    date:new Date().toISOString()
+  });
+
+  saveData();
+
+  closeModal("goalModal");
+
+  renderAll();
+
+  toast("هدف ثبت شد 🎯");
+}
+
+function toggleGoal(id){
+
+  const goal=data.goals.find(g=>g.id===id);
+
+  if(goal){
+    goal.completed=!goal.completed;
+    saveData();
+    renderGoals();
+  }
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function getTodayStudies(){
+
+  const today=new Date().toDateString();
+
+  return data.studies.filter(x=>
+    new Date(x.date).toDateString()===today
+  );
+}
+
+function getTodayTests(){
+
+  const today=new Date().toDateString();
+
+  return data.tests.filter(x=>
+    new Date(x.date).toDateString()===today
+  );
+}
+
+function renderDashboard(){
+
+  const studies=getTodayStudies();
+
+  const tests=getTodayTests();
+
+  const minutes=studies.reduce((a,b)=>a+b.minutes,0);
+
+  const hours=minutes/60;
+
+  const avg=data.tests.length
+    ? data.tests.reduce((a,b)=>a+b.score,0)/data.tests.length
+    : 0;
+
+  document.getElementById("todayHours").textContent=
+    hours.toFixed(1);
+
+  document.getElementById("todayTests").textContent=
+    tests.length;
+
+  document.getElementById("averageScore").textContent=
+    Math.round(avg)+"%";
+
+  const goal=Number(
+    localStorage.getItem("dailyGoal")||8
   );
 
- body.innerHTML=
-  db.tests
-   .slice()
-   .reverse()
-   .map(
-    x=>{
+  document.getElementById("dailyGoal").textContent=goal;
 
-     const accuracy=
-      x.total?
-       Math.round(
-        x.correct/
-        x.total*
-        100
-       ):
-       0;
+  const percent=Math.min(100,(hours/goal)*100);
 
-     const score=
-      x.total?
-       Math.round(
-        (
-         x.correct-
-         x.wrong/3
-        )/
-        x.total*
-        100
-       ):
-       0;
+  document.getElementById("dailyProgress").style.width=
+    percent+"%";
 
-     return`
-
-      <tr>
-
-       <td>${x.date}</td>
-
-       <td>
-        ${subject(x.subject).name}
-       </td>
-
-       <td>${x.total}</td>
-
-       <td>${x.correct}</td>
-
-       <td>${x.wrong}</td>
-
-       <td>${accuracy}٪</td>
-
-       <td>${score}٪</td>
-
-       <td>
-
-        <button
-         class="btn red sm"
-         onclick="
-          deleteRecord(
-           'tests',
-           '${x.id}'
-          )
-         ">
-
-         حذف
-
-        </button>
-
-       </td>
-
-      </tr>
-
-     `;
-
-    }
-   ).join("");
+  document.getElementById("progressText").textContent=
+    Math.round(percent)+"٪ از هدف روزانه";
 
 }
 
@@ -3453,1916 +1453,800 @@ function renderTests(){
 
 function renderSubjects(){
 
- const box=
-  document.getElementById(
-   "subjectsPage"
-  );
+  const el=document.getElementById("subjectsList");
 
- box.innerHTML=
-  SUBJECTS.map(
-   s=>{
+  if(!data.subjects.length){
 
-    const risk=
-     subjectRisk(
-      s.id
-     );
+    el.innerHTML=
+      `<div class="empty">هنوز درسی اضافه نشده.</div>`;
 
-    const minutes=
-     subjectMinutes(
-      s.id
-     );
-
-    const tests=
-     subjectTests(
-      s.id
-     );
-
-    return`
-
-     <div class="subjectCard">
-
-      <div class="subjectHead">
-
-       <b>
-        ${s.icon}
-        ${s.name}
-       </b>
-
-       <span class="badge ${
-        risk>65?
-        "red":
-        risk>40?
-        "orange":
-        "green"
-       }">
-        ${risk}/100
-       </span>
-
-      </div>
-
-      <br>
-
-      <div class="progress">
-
-       <i style="
-        width:${100-risk}%
-       "></i>
-
-      </div>
-
-      <br>
-
-      <div class="small">
-
-       📚 مطالعه:
-       ${formatMinutes(minutes)}
-
-       <br>
-
-       📝 تست:
-       ${tests.total}
-
-       <br>
-
-       🎯 دقت:
-       ${tests.accuracy}٪
-
-       <br>
-
-       📊 درصد:
-       ${tests.score}٪
-
-      </div>
-
-     </div>
-
-    `;
-
-   }
-  ).join("");
-
-}
-
-
-/* =========================================================
-   REVIEWS
-========================================================= */
-
-function addReview(){
-
- const days=
-  Number(
-   document.getElementById(
-    "rDays"
-   ).value
-  );
-
- const date=
-  new Date();
-
- date.setDate(
-  date.getDate()+
-  days
- );
-
- db.reviews.push({
-
-  id:uid(),
-
-  subject:
-   document.getElementById(
-    "rSubject"
-   ).value,
-
-  topic:
-   document.getElementById(
-    "rTopic"
-   ).value.trim(),
-
-  interval:days,
-
-  next:
-   date.toISOString()
-    .slice(0,10)
-
- });
-
- saveDatabase();
-
- renderReviews();
-
- toast(
-  "مرور اضافه شد 🔄"
- );
-
-}
-
-
-function renderReviews(){
-
- const box=
-  document.getElementById(
-   "dueReviews"
-  );
-
- const due=
-  db.reviews.filter(
-   x=>
-    x.next<=today()
-  );
-
- if(!due.length){
-
-  box.innerHTML=
-   `
-    <div class="empty">
-     🎉 مرور عقب‌افتاده‌ای نداری.
-    </div>
-   `;
-
-  return;
-
- }
-
- box.innerHTML=
-  due.map(
-   x=>`
-
-   <div class="subjectCard">
-
-    <div class="row">
-
-     <b>
-      ${subject(x.subject).icon}
-      ${subject(x.subject).name}
-     </b>
-
-     <button
-      class="btn green sm"
-      onclick="
-       completeReview(
-        '${x.id}'
-       )
-      ">
-      مرور شد ✓
-     </button>
-
-    </div>
-
-    <p>
-     ${escapeHTML(x.topic)}
-    </p>
-
-   </div>
-
-   <br>
-
-  `
-  ).join("");
-
-}
-
-
-function completeReview(id){
-
- const item=
-  db.reviews.find(
-   x=>x.id===id
-  );
-
- if(!item)
-  return;
-
- const interval=
-  Math.min(
-   60,
-   Number(
-    item.interval||1
-   )*2
-  );
-
- const date=
-  new Date();
-
- date.setDate(
-  date.getDate()+
-  interval
- );
-
- item.interval=
-  interval;
-
- item.next=
-  date.toISOString()
-   .slice(0,10);
-
- saveDatabase();
-
- renderReviews();
-
- toast(
-  `مرور بعدی ${interval} روز دیگر`
- );
-
-}
-
-
-/* =========================================================
-   RESOURCES
-========================================================= */
-
-function addResource(){
-
- const name=
-  document.getElementById(
-   "resName"
-  ).value.trim();
-
- if(!name)
-  return;
-
- db.resources.push({
-
-  id:uid(),
-
-  name,
-
-  desc:
-   document.getElementById(
-    "resDesc"
-   ).value.trim(),
-
-  url:
-   document.getElementById(
-    "resUrl"
-   ).value.trim()
-
- });
-
- saveDatabase();
-
- renderResources();
-
- toast(
-  "منبع اضافه شد."
- );
-
-}
-
-
-function renderResources(){
-
- const box=
-  document.getElementById(
-   "resourcesList"
-  );
-
- if(!db.resources.length){
-
-  box.innerHTML=
-   `
-    <div class="empty">
-     هنوز منبعی اضافه نشده.
-    </div>
-   `;
-
-  return;
-
- }
-
- box.innerHTML=
-  db.resources
-   .slice()
-   .reverse()
-   .map(
-    x=>`
-
-    <div class="subjectCard">
-
-     <div class="row">
-
-      <b>
-       📚
-       ${escapeHTML(x.name)}
-      </b>
-
-      <button
-       class="btn red sm"
-       onclick="
-        deleteRecord(
-         'resources',
-         '${x.id}'
-        )
-       ">
-       حذف
-      </button>
-
-     </div>
-
-     <p class="muted">
-      ${escapeHTML(x.desc)}
-     </p>
-
-     ${
-      x.url?
-      `
-       <a
-        href="${escapeHTML(x.url)}"
-        target="_blank"
-        rel="noopener">
-        🔗 باز کردن
-       </a>
-      `:
-      ""
-     }
-
-    </div>
-
-    <br>
-
-   `
-   ).join("");
-
-}
-
-
-/* =========================================================
-   EXAMS
-========================================================= */
-
-function addExam(){
-
- const name=
-  document.getElementById(
-   "examName"
-  ).value.trim();
-
- const date=
-  document.getElementById(
-   "examDate"
-  ).value;
-
- if(!name||!date)
-  return;
-
- db.exams.push({
-
-  id:uid(),
-
-  name,
-
-  date,
-
-  desc:
-   document.getElementById(
-    "examDesc"
-   ).value.trim()
-
- });
-
- saveDatabase();
-
- renderExams();
-
- toast(
-  "آزمون اضافه شد 🎯"
- );
-
-}
-
-
-function renderExams(){
-
- const box=
-  document.getElementById(
-   "examsList"
-  );
-
- if(!db.exams.length){
-
-  box.innerHTML=
-   `
-    <div class="empty">
-     آزمونی ثبت نشده.
-    </div>
-   `;
-
-  return;
-
- }
-
- box.innerHTML=
-  db.exams
-   .slice()
-   .sort(
-    (a,b)=>
-     a.date.localeCompare(
-      b.date
-     )
-   )
-   .map(
-    x=>{
-
-     const days=
-      Math.ceil(
-       (
-        new Date(
-         x.date
-        )-
-        new Date()
-       )/
-       86400000
-      );
-
-     return`
-
-      <div class="subjectCard">
-
-       <div class="row">
-
-        <b>
-         🎯
-         ${escapeHTML(x.name)}
-        </b>
-
-        <button
-         class="btn red sm"
-         onclick="
-          deleteRecord(
-           'exams',
-           '${x.id}'
-          )
-         ">
-         حذف
-        </button>
-
-       </div>
-
-       <p>
-        ${x.date}
-       </p>
-
-       <span class="badge">
-        ${
-         days>=0?
-         `${days} روز مانده`:
-         "گذشته"
-        }
-       </span>
-
-       <p class="muted">
-        ${escapeHTML(x.desc)}
-       </p>
-
-      </div>
-
-      <br>
-
-     `;
-
-    }
-   ).join("");
-
-}
-
-
-/* =========================================================
-   REPORTS
-========================================================= */
-
-function renderReports(){
-
- const totalStudy=
-  studyMinutes();
-
- const totalTests=
-  testStats();
-
- document.getElementById(
-  "rStudy"
- ).textContent=
-  formatMinutes(
-   totalStudy
-  );
-
- document.getElementById(
-  "rTests"
- ).textContent=
-  totalTests.total;
-
- document.getElementById(
-  "rAccuracy"
- ).textContent=
-  totalTests.accuracy+
-  "٪";
-
- document.getElementById(
-  "rDays"
- ).textContent=
-  activeDays();
-
- renderStudyChart();
-
- document.getElementById(
-  "reportSubjects"
- ).innerHTML=
-  SUBJECTS.map(
-   s=>{
-
-    const minutes=
-     subjectMinutes(
-      s.id
-     );
-
-    const tests=
-     subjectTests(
-      s.id
-     );
-
-    return`
-
-     <tr>
-
-      <td>
-       ${s.icon}
-       ${s.name}
-      </td>
-
-      <td>
-       ${formatMinutes(minutes)}
-      </td>
-
-      <td>
-       ${tests.total}
-      </td>
-
-      <td>
-       ${tests.accuracy}٪
-      </td>
-
-      <td>
-       ${subjectRisk(s.id)}
-      </td>
-
-     </tr>
-
-    `;
-
-   }
-  ).join("");
-
-}
-
-
-function renderStudyChart(){
-
- const box=
-  document.getElementById(
-   "studyChart"
-  );
-
- let days=[];
-
- for(
-  let i=13;
-  i>=0;
-  i--
- ){
-
-  const d=
-   new Date();
-
-  d.setDate(
-   d.getDate()-i
-  );
-
-  days.push(
-   d.toISOString()
-    .slice(0,10)
-  );
-
- }
-
- const values=
-  days.map(
-   d=>
-    studyMinutes(d)
-  );
-
- const max=
-  Math.max(
-   60,
-   ...values
-  );
-
- box.innerHTML=
-  values.map(
-   (value,i)=>
-    `
-     <div
-      class="bar"
-      title="${days[i]} — ${value} دقیقه"
-      style="
-       height:${
-        Math.max(
-         5,
-         value/max*100
-        )
-       }%
-      ">
-     </div>
-    `
-  ).join("");
-
-}
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-function renderAchievements(){
-
- const study=
-  studyMinutes();
-
- const tests=
-  testStats().total;
-
- const achievements=[
-
-  {
-   icon:"🔥",
-   name:"۳ روز استمرار",
-   ok:streak()>=3
-  },
-
-  {
-   icon:"🔥",
-   name:"۷ روز استمرار",
-   ok:streak()>=7
-  },
-
-  {
-   icon:"📚",
-   name:"۱۰ ساعت مطالعه",
-   ok:study>=600
-  },
-
-  {
-   icon:"📚",
-   name:"۵۰ ساعت مطالعه",
-   ok:study>=3000
-  },
-
-  {
-   icon:"📝",
-   name:"۱۰۰ تست",
-   ok:tests>=100
-  },
-
-  {
-   icon:"📝",
-   name:"۵۰۰ تست",
-   ok:tests>=500
-  },
-
-  {
-   icon:"🏆",
-   name:"۱۰۰۰ تست",
-   ok:tests>=1000
+    return;
   }
 
- ];
+  el.innerHTML=data.subjects.map((s,i)=>{
 
- document.getElementById(
-  "achievementList"
- ).innerHTML=
-  achievements.map(
-   a=>`
+    let badge="";
 
-   <div class="achievement ${
-    a.ok?
-    "":
-    "locked"
-   }">
+    if(s.level==="ضعیف")
+      badge=`<span class="badge danger">ضعیف</span>`;
 
-    <div class="achIcon">
-     ${a.icon}
-    </div>
+    else if(s.level==="عالی")
+      badge=`<span class="badge success">عالی</span>`;
 
-    <div>
+    else
+      badge=`<span class="badge">${s.level}</span>`;
 
-     <b>
-      ${a.name}
-     </b>
+    return `
+      <div class="subject">
+        <strong>${escapeHTML(s.name)}</strong>
+        ${badge}
+      </div>
+    `;
 
-     <div class="small muted">
-      ${
-       a.ok?
-       "باز شده ✓":
-       "قفل"
-      }
-     </div>
-
-    </div>
-
-   </div>
-
-  `
-  ).join("");
-
+  }).join("");
 }
 
 
 /* =========================================================
-   FOCUS
+   TESTS
 ========================================================= */
 
-function setTimer(minutes){
+function renderTests(){
 
- pauseTimer();
+  const tbody=document.getElementById("testsTable");
 
- timerSeconds=
-  minutes*60;
+  if(!data.tests.length){
 
- updateTimer();
+    tbody.innerHTML=`
+      <tr>
+        <td colspan="6" class="empty">
+          هنوز آزمونی ثبت نشده.
+        </td>
+      </tr>
+    `;
 
- document.getElementById(
-  "timerMode"
- ).textContent=
-  `${minutes} دقیقه`;
+    return;
+  }
 
+  tbody.innerHTML=data.tests.slice().reverse().map(t=>`
+
+    <tr>
+
+      <td>${escapeHTML(t.subject)}</td>
+
+      <td>${t.total}</td>
+
+      <td>${t.correct}</td>
+
+      <td>${t.wrong}</td>
+
+      <td>
+        <span class="badge ${t.score>=50?"success":"danger"}">
+          ${t.score}%
+        </span>
+      </td>
+
+      <td>
+        ${new Date(t.date).toLocaleDateString("fa-IR")}
+      </td>
+
+    </tr>
+
+  `).join("");
 }
 
+
+/* =========================================================
+   ANALYTICS
+========================================================= */
+
+function renderAnalytics(){
+
+  const total=data.tests.length;
+
+  const avg=total
+    ? data.tests.reduce((a,b)=>a+b.score,0)/total
+    : 0;
+
+  const best=total
+    ? Math.max(...data.tests.map(x=>x.score))
+    : 0;
+
+  const studyMinutes=data.studies.reduce(
+    (a,b)=>a+b.minutes,
+    0
+  );
+
+  document.getElementById("totalTests").textContent=total;
+
+  document.getElementById("analyticsAvg").textContent=
+    Math.round(avg)+"%";
+
+  document.getElementById("bestScore").textContent=
+    Math.round(best)+"%";
+
+  document.getElementById("totalStudy").textContent=
+    (studyMinutes/60).toFixed(1)+"h";
+}
+
+
+/* =========================================================
+   GOALS
+========================================================= */
+
+function renderGoals(){
+
+  const el=document.getElementById("goalsList");
+
+  if(!data.goals.length){
+
+    el.innerHTML=
+      `<div class="empty">هنوز هدفی ثبت نشده.</div>`;
+
+    return;
+  }
+
+  el.innerHTML=data.goals.map(g=>`
+
+    <div class="plan-item">
+
+      <div style="display:flex;justify-content:space-between;gap:10px">
+
+        <div>
+
+          <strong style="${g.completed?'text-decoration:line-through':''}">
+            ${escapeHTML(g.text)}
+          </strong>
+
+          <p class="muted">
+            ${escapeHTML(g.description||"")}
+          </p>
+
+        </div>
+
+        <button
+          class="btn ${g.completed?'success':'primary'}"
+          onclick="toggleGoal(${g.id})"
+        >
+          ${g.completed?'✓ انجام شد':'انجام شد'}
+        </button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function updateTimer(){
+
+  const m=Math.floor(timerSeconds/60);
+
+  const s=timerSeconds%60;
+
+  document.getElementById("timer").textContent=
+    String(m).padStart(2,"0")+":"+
+    String(s).padStart(2,"0");
+}
 
 function startTimer(){
 
- if(timerRunning)
-  return;
+  if(timerInterval) return;
 
- timerRunning=true;
+  if(timerSeconds<=0){
 
- timerInterval=
-  setInterval(
-   ()=>{
+    timerSeconds=
+      Number(document.getElementById("timerMinutes").value)*60;
 
-    if(
-     timerSeconds<=0
-    ){
+  }
 
-     finishTimer();
+  timerInterval=setInterval(()=>{
 
-     return;
+    if(timerSeconds<=0){
 
+      clearInterval(timerInterval);
+
+      timerInterval=null;
+
+      toast("جلسه مطالعه تمام شد 🎉");
+
+      return;
     }
 
     timerSeconds--;
 
     updateTimer();
 
-   },
-   1000
-  );
-
+  },1000);
 }
-
 
 function pauseTimer(){
 
- timerRunning=false;
+  clearInterval(timerInterval);
 
- clearInterval(
-  timerInterval
- );
-
- timerInterval=null;
-
+  timerInterval=null;
 }
-
 
 function resetTimer(){
 
- pauseTimer();
+  pauseTimer();
 
- timerSeconds=
-  25*60;
+  timerSeconds=
+    Number(document.getElementById("timerMinutes").value)*60;
 
- updateTimer();
-
-}
-
-
-function updateTimer(){
-
- const el=
-  document.getElementById(
-   "timer"
-  );
-
- if(el)
-  el.textContent=
-   formatTimer(
-    timerSeconds
-   );
-
-}
-
-
-function finishTimer(){
-
- pauseTimer();
-
- db.focus.sessions++;
-
- db.focus.minutes+=
-  Math.round(
-   25
-  );
-
- db.sessions.push({
-
-  id:uid(),
-
-  subject:
-   weakestSubject().id,
-
-  topic:"Focus",
-
-  minutes:25,
-
-  type:"تمرکز",
-
-  date:today(),
-
-  createdAt:
-   new Date().toISOString()
-
- });
-
- saveDatabase();
-
- document.getElementById(
-  "focusSessions"
- ).textContent=
-  db.focus.sessions;
-
- toast(
-  "🎉 جلسه Focus تمام شد!"
- );
-
- resetTimer();
-
+  updateTimer();
 }
 
 
 /* =========================================================
-   NOTES
+   AI SETTINGS
 ========================================================= */
 
-function addNote(){
+function saveAISettings(){
 
- const title=
-  document.getElementById(
-   "noteTitle"
-  ).value.trim();
+  data.settings.apiBase=
+    document.getElementById("apiBase").value.trim();
 
- const text=
-  document.getElementById(
-   "noteText"
-  ).value.trim();
+  data.settings.apiKey=
+    document.getElementById("apiKey").value.trim();
 
- if(!text)
-  return;
+  data.settings.model=
+    document.getElementById("modelName").value.trim();
 
- db.notes.push({
+  saveData();
 
-  id:uid(),
+  toast("تنظیمات AI ذخیره شد");
 
-  title:
-   title||
-   "یادداشت",
-
-  text,
-
-  date:
-   today()
-
- });
-
- saveDatabase();
-
- renderNotes();
-
- document.getElementById(
-  "noteTitle"
- ).value="";
-
- document.getElementById(
-  "noteText"
- ).value="";
-
- toast(
-  "یادداشت ذخیره شد."
- );
-
+  testAI();
 }
 
 
-function renderNotes(){
+/* =========================================================
+   REAL AI REQUEST
+========================================================= */
 
- const box=
-  document.getElementById(
-   "notesList"
-  );
+async function callAI(messages){
 
- if(!db.notes.length){
+  const base=data.settings.apiBase.trim();
 
-  box.innerHTML=
-   `
-    <div class="empty">
-     یادداشتی وجود ندارد.
-    </div>
-   `;
+  const key=data.settings.apiKey.trim();
 
-  return;
+  const model=data.settings.model.trim();
 
- }
+  if(!base || !key || !model){
 
- box.innerHTML=
-  db.notes
-   .slice()
-   .reverse()
-   .map(
-    x=>`
+    throw new Error(
+      "تنظیمات API کامل نیست. Base URL، API Key و Model را وارد کن."
+    );
+  }
 
-    <div class="subjectCard">
+  const url=base.replace(/\/$/,"")+
+    "/chat/completions";
 
-     <div class="row">
+  const response=await fetch(url,{
 
-      <h3>
-       ${escapeHTML(x.title)}
-      </h3>
+    method:"POST",
 
-      <button
-       class="btn red sm"
-       onclick="
-        deleteRecord(
-         'notes',
-         '${x.id}'
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":"Bearer "+key
+    },
+
+    body:JSON.stringify({
+
+      model,
+
+      messages,
+
+      temperature:.7,
+
+      max_tokens:2500
+
+    })
+
+  });
+
+  if(!response.ok){
+
+    const text=await response.text();
+
+    throw new Error(
+      "API Error "+response.status+": "+text
+    );
+  }
+
+  const json=await response.json();
+
+  const content=
+    json?.choices?.[0]?.message?.content;
+
+  if(!content){
+
+    throw new Error(
+      "پاسخ معتبر از API دریافت نشد."
+    );
+  }
+
+  return content;
+}
+
+
+/* =========================================================
+   AI CONTEXT
+========================================================= */
+
+function buildContext(){
+
+  const recentTests=
+    data.tests.slice(-15).map(t=>({
+      subject:t.subject,
+      total:t.total,
+      correct:t.correct,
+      wrong:t.wrong,
+      blank:t.blank,
+      score:t.score,
+      date:t.date
+    }));
+
+  const recentStudies=
+    data.studies.slice(-20).map(s=>({
+      subject:s.subject,
+      minutes:s.minutes,
+      type:s.type,
+      date:s.date
+    }));
+
+  const weakSubjects=
+    data.subjects
+      .filter(x=>x.level==="ضعیف")
+      .map(x=>x.name);
+
+  return {
+
+    student:{
+      target:"کنکور و قبولی پزشکی",
+      weakSubjects
+    },
+
+    recentTests,
+
+    recentStudies,
+
+    goals:data.goals
+
+  };
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+function handleChatKey(event){
+
+  if(event.key==="Enter" && !event.shiftKey){
+
+    event.preventDefault();
+
+    sendMessage();
+
+  }
+}
+
+function addMessage(text,type){
+
+  const box=document.getElementById("messages");
+
+  const div=document.createElement("div");
+
+  div.className="message "+type;
+
+  div.textContent=text;
+
+  box.appendChild(div);
+
+  box.scrollTop=box.scrollHeight;
+
+  return div;
+}
+
+async function sendMessage(){
+
+  const input=document.getElementById("chatInput");
+
+  const text=input.value.trim();
+
+  if(!text) return;
+
+  addMessage(text,"user");
+
+  input.value="";
+
+  const loading=addMessage("در حال فکر کردن...","ai");
+
+  try{
+
+    const context=buildContext();
+
+    const system=`
+
+تو مشاور خصوصی هوش مصنوعی StudyCoach هستی.
+
+وظیفه تو کمک تخصصی به دانش‌آموز کنکوری است.
+
+پاسخ‌ها:
+- فارسی
+- عملی
+- دقیق
+- شخصی‌سازی‌شده
+- بدون حرف‌های کلیشه‌ای
+- با اولویت‌بندی واضح
+
+اطلاعات فعلی دانش‌آموز:
+
+${JSON.stringify(context,null,2)}
+
+اگر درباره برنامه مطالعه سوال شد، برنامه را بر اساس
+اطلاعات واقعی دانش‌آموز تنظیم کن.
+
+اگر داده کافی نیست، بهترین پیشنهاد ممکن را بده.
+`;
+
+    const answer=await callAI([
+
+      {
+        role:"system",
+        content:system
+      },
+
+      {
+        role:"user",
+        content:text
+      }
+
+    ]);
+
+    loading.textContent=answer;
+
+  }catch(error){
+
+    loading.textContent=
+      "❌ اتصال به AI ناموفق بود.\n\n"+
+      error.message;
+
+  }
+}
+
+
+/* =========================================================
+   AI TEST
+========================================================= */
+
+async function testAI(){
+
+  const dot=document.getElementById("aiDot");
+
+  const status=document.getElementById("aiStatus");
+
+  dot.classList.remove("online");
+
+  status.textContent="در حال اتصال...";
+
+  try{
+
+    await callAI([
+
+      {
+        role:"system",
+        content:"You are a connectivity test assistant."
+      },
+
+      {
+        role:"user",
+        content:"Reply only with OK"
+      }
+
+    ]);
+
+    dot.classList.add("online");
+
+    status.textContent="AI متصل است ✅";
+
+    toast("اتصال AI موفق بود ✅");
+
+  }catch(error){
+
+    status.textContent="AI متصل نیست";
+
+    toast("اتصال AI ناموفق بود");
+
+  }
+}
+
+
+/* =========================================================
+   AI QUICK ADVICE
+========================================================= */
+
+async function getQuickAdvice(){
+
+  const box=document.getElementById("quickAdvice");
+
+  box.textContent="در حال تحلیل عملکرد...";
+
+  try{
+
+    const answer=await callAI([
+
+      {
+        role:"system",
+        content:`
+تو مشاور مطالعه هستی.
+بر اساس داده‌های دانش‌آموز یک توصیه کوتاه و کاملاً عملی بده.
+`
+      },
+
+      {
+        role:"user",
+        content:
+          JSON.stringify(buildContext())
+      }
+
+    ]);
+
+    box.textContent=answer;
+
+  }catch(error){
+
+    box.textContent=
+      "اتصال AI برقرار نشد: "+error.message;
+
+  }
+}
+
+
+/* =========================================================
+   AI PLAN
+========================================================= */
+
+async function generatePlan(){
+
+  const output=document.getElementById("planOutput");
+
+  output.innerHTML="🤖 در حال ساخت برنامه...";
+
+  try{
+
+    const wake=document.getElementById("wakeTime").value;
+
+    const sleep=document.getElementById("sleepTime").value;
+
+    const hours=document.getElementById("planHours").value;
+
+    const focus=document.getElementById("focusSubject").value;
+
+    const prompt=`
+
+برای من یک برنامه مطالعاتی دقیق طراحی کن.
+
+ساعت بیداری: ${wake}
+ساعت خواب: ${sleep}
+هدف مطالعه: ${hours} ساعت
+تمرکز اصلی: ${focus}
+
+اطلاعات عملکرد:
+
+${JSON.stringify(buildContext(),null,2)}
+
+برنامه را به صورت جدول متنی ارائه کن.
+
+برای هر بازه:
+- ساعت
+- درس
+- فعالیت
+- مدت
+- هدف جلسه
+
+در پایان:
+1. اولویت‌ها
+2. مرورها
+3. تست‌ها
+4. توصیه مشاور
+
+را بنویس.
+`;
+
+    const answer=await callAI([
+
+      {
+        role:"system",
+        content:
+          "تو یک برنامه‌ریز حرفه‌ای کنکور هستی."
+      },
+
+      {
+        role:"user",
+        content:prompt
+      }
+
+    ]);
+
+    output.innerHTML=
+      `<div class="plan-item">${escapeHTML(answer)}</div>`;
+
+  }catch(error){
+
+    output.innerHTML=
+      `<div class="badge danger">
+        ${escapeHTML(error.message)}
+      </div>`;
+
+  }
+}
+
+
+/* =========================================================
+   AI PERFORMANCE
+========================================================= */
+
+async function analyzePerformance(){
+
+  const box=document.getElementById("analyticsOutput");
+
+  box.textContent="در حال تحلیل...";
+
+  try{
+
+    const answer=await callAI([
+
+      {
+        role:"system",
+        content:`
+تو تحلیلگر عملکرد یک دانش‌آموز کنکوری هستی.
+داده‌ها را بررسی کن و ضعف‌ها، قوت‌ها و اقدامات بعدی را مشخص کن.
+`
+      },
+
+      {
+        role:"user",
+        content:JSON.stringify(
+          buildContext(),
+          null,
+          2
         )
-       ">
-       حذف
-      </button>
+      }
 
-     </div>
+    ]);
 
-     <p style="white-space:pre-wrap">
-      ${escapeHTML(x.text)}
-     </p>
+    box.textContent=answer;
 
-     <small class="muted">
-      ${x.date}
-     </small>
+  }catch(error){
 
-    </div>
+    box.textContent=
+      "❌ "+error.message;
 
-    <br>
-
-   `
-   ).join("");
-
+  }
 }
 
 
 /* =========================================================
-   TODOS
-========================================================= */
-
-function addTodo(){
-
- const input=
-  document.getElementById(
-   "todoInput"
-  );
-
- const text=
-  input.value.trim();
-
- if(!text)
-  return;
-
- db.todos.push({
-
-  id:uid(),
-
-  text,
-
-  done:false,
-
-  date:
-   today()
-
- });
-
- saveDatabase();
-
- input.value="";
-
- renderTodos();
-
-}
-
-
-function renderTodos(){
-
- const box=
-  document.getElementById(
-   "todosList"
-  );
-
- if(!db.todos.length){
-
-  box.innerHTML=
-   `
-    <div class="empty">
-     کاری ثبت نشده.
-    </div>
-   `;
-
-  return;
-
- }
-
- box.innerHTML=
-  db.todos
-   .slice()
-   .reverse()
-   .map(
-    x=>`
-
-    <div class="subjectCard">
-
-     <div class="row">
-
-      <label style="display:flex;gap:8px">
-
-       <input
-        type="checkbox"
-        ${
-         x.done?
-         "checked":
-         ""
-        }
-        onchange="
-         toggleTodo(
-          '${x.id}'
-         )
-        ">
-
-       <span style="
-        ${
-         x.done?
-         "text-decoration:line-through":
-         ""
-        }
-       ">
-
-        ${escapeHTML(x.text)}
-
-       </span>
-
-      </label>
-
-      <button
-       class="btn red sm"
-       onclick="
-        deleteRecord(
-         'todos',
-         '${x.id}'
-        )
-       ">
-       حذف
-      </button>
-
-     </div>
-
-    </div>
-
-   `
-   ).join("");
-
-}
-
-
-function toggleTodo(id){
-
- const item=
-  db.todos.find(
-   x=>x.id===id
-  );
-
- if(item)
-  item.done=
-   !item.done;
-
- saveDatabase();
-
- renderTodos();
-
-}
-
-
-/* =========================================================
-   CALENDAR
-========================================================= */
-
-function changeMonth(amount){
-
- calendarDate.setMonth(
-  calendarDate.getMonth()+
-  amount
- );
-
- renderCalendar();
-
-}
-
-
-function goToday(){
-
- calendarDate=
-  new Date();
-
- renderCalendar();
-
-}
-
-
-function renderCalendar(){
-
- const year=
-  calendarDate.getFullYear();
-
- const month=
-  calendarDate.getMonth();
-
- document.getElementById(
-  "calendarMonth"
- ).textContent=
-  `${year} / ${String(
-   month+1
-  ).padStart(2,"0")}`;
-
- const grid=
-  document.getElementById(
-   "calendarGrid"
-  );
-
- const first=
-  new Date(
-   year,
-   month,
-   1
-  );
-
- const last=
-  new Date(
-   year,
-   month+1,
-   0
-  );
-
- const offset=
-  first.getDay();
-
- let html="";
-
- for(
-  let i=0;
-  i<offset;
-  i++
- ){
-
-  html+=
-   `<div></div>`;
-
- }
-
- for(
-  let day=1;
-  day<=last.getDate();
-  day++
- ){
-
-  const date=
-   new Date(
-    year,
-    month,
-    day
-   );
-
-  const key=
-   date.toISOString()
-    .slice(0,10);
-
-  const study=
-   studyMinutes(key);
-
-  const tests=
-   testStats(key).total;
-
-  html+=`
-
-   <div class="day ${
-    key===today()?
-    "today":
-    ""
-   }">
-
-    <div class="dayNum">
-     ${day}
-    </div>
-
-    ${
-     study?
-     `
-      <div class="dayEvent">
-       📚 ${study}د
-      </div>
-     `:
-     ""
-    }
-
-    ${
-     tests?
-     `
-      <div class="dayEvent">
-       📝 ${tests}
-      </div>
-     `:
-     ""
-    }
-
-   </div>
-
-  `;
-
- }
-
- grid.innerHTML=
-  html;
-
-}
-
-
-/* =========================================================
-   PROFILE / SETTINGS
-========================================================= */
-
-function saveProfile(){
-
- db.profile.name=
-  document.getElementById(
-   "profileName"
-  ).value.trim()||
-  "دانش‌آموز";
-
- db.profile.target=
-  document.getElementById(
-   "profileTarget"
-  ).value.trim();
-
- db.profile.dailyGoal=
-  Number(
-   document.getElementById(
-    "profileGoal"
-   ).value
-  )||
-  8;
-
- db.profile.examDate=
-  document.getElementById(
-   "profileExam"
-  ).value||
-  "";
-
- saveDatabase();
-
- renderDashboard();
-
- toast(
-  "پروفایل ذخیره شد ✅"
- );
-
-}
-
-
-function renderSettings(){
-
- document.getElementById(
-  "profileName"
- ).value=
-  db.profile.name;
-
- document.getElementById(
-  "profileTarget"
- ).value=
-  db.profile.target;
-
- document.getElementById(
-  "profileGoal"
- ).value=
-  db.profile.dailyGoal;
-
- document.getElementById(
-  "profileExam"
- ).value=
-  db.profile.examDate;
-
-}
-
-
-/* =========================================================
-   EXPORT / IMPORT
+   EXPORT
 ========================================================= */
 
 function exportData(){
 
- const blob=
-  new Blob(
-   [
-    JSON.stringify(
-     db,
-     null,
-     2
-    )
-   ],
-   {
-    type:
-     "application/json"
-   }
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
   );
 
- const url=
-  URL.createObjectURL(
-   blob
-  );
+  const url=URL.createObjectURL(blob);
 
- const a=
-  document.createElement(
-   "a"
-  );
+  const a=document.createElement("a");
 
- a.href=url;
+  a.href=url;
 
- a.download=
-  `studycoach-backup-${today()}.json`;
+  a.download=
+    "studycoach-backup-"+Date.now()+".json";
 
- document.body.appendChild(a);
+  a.click();
 
- a.click();
-
- a.remove();
-
- URL.revokeObjectURL(
-  url
- );
-
- toast(
-  "Backup ساخته شد 💾"
- );
-
+  URL.revokeObjectURL(url);
 }
 
 
-function importData(){
+/* =========================================================
+   IMPORT
+========================================================= */
 
- const input=
-  document.createElement(
-   "input"
-  );
+function importData(event){
 
- input.type="file";
+  const file=event.target.files[0];
 
- input.accept=
-  "application/json,.json";
+  if(!file) return;
 
- input.onchange=
-  event=>{
+  const reader=new FileReader();
 
-   const file=
-    event.target.files[0];
+  reader.onload=()=>{
 
-   if(!file)
-    return;
+    try{
 
-   const reader=
-    new FileReader();
+      const imported=JSON.parse(reader.result);
 
-   reader.onload=
-    ()=>{
-     try{
+      data=imported;
 
-      db=
-       merge(
-        clone(
-         DEFAULT_DB
-        ),
-        JSON.parse(
-         reader.result
-        )
-       );
+      saveData();
 
-      saveDatabase();
+      loadData();
 
-      location.reload();
+      toast("اطلاعات بازیابی شد ✅");
 
-     }
-     catch{
+    }catch(e){
 
-      toast(
-       "فایل Backup معتبر نیست."
-      );
+      toast("فایل معتبر نیست");
 
-     }
-
-    };
-
-   reader.readAsText(
-    file
-   );
+    }
 
   };
 
- input.click();
-
+  reader.readAsText(file);
 }
 
 
-function resetData(){
+/* =========================================================
+   CLEAR
+========================================================= */
 
- if(
-  !confirm(
-   "تمام اطلاعات حذف می‌شود. مطمئنی؟"
-  )
- )
-  return;
+function clearAllData(){
 
- localStorage.removeItem(
-  STORAGE_KEY
- );
+  if(!confirm(
+    "تمام اطلاعات StudyCoach حذف شود؟"
+  )) return;
 
- localStorage.removeItem(
-  "studycoach_page"
- );
+  localStorage.removeItem(STORAGE_KEY);
 
- location.reload();
+  location.reload();
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+function escapeHTML(str){
+
+  return String(str??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
 /* =========================================================
-   DELETE
+   RENDER
 ========================================================= */
 
-function deleteRecord(
- collection,
- id
-){
+function renderAll(){
 
- if(
-  !Array.isArray(
-   db[collection]
-  )
- )
-  return;
+  renderDashboard();
 
- db[collection]=
-  db[collection].filter(
-   x=>x.id!==id
-  );
+  renderSubjects();
 
- saveDatabase();
+  renderTests();
 
- renderPage(
-  currentPage
- );
+  renderAnalytics();
 
- renderDashboard();
+  renderGoals();
 
- toast(
-  "حذف شد."
- );
-
-}
-
-
-/* =========================================================
-   QUICK ACTIONS
-========================================================= */
-
-function openQuick(type){
-
- if(type==="test"){
-
-  document.getElementById(
-   "modalTitle"
-  ).textContent=
-   "📝 ثبت سریع تست";
-
-  document.getElementById(
-   "modalBody"
-  ).innerHTML=`
-
-   <div class="formGrid">
-
-    <div class="field">
-
-     <label>درس</label>
-
-     <select id="qSubject">
-
-      ${SUBJECTS.map(
-       s=>
-        `
-         <option value="${s.id}">
-          ${s.icon}
-          ${s.name}
-         </option>
-        `
-      ).join("")}
-
-     </select>
-
-    </div>
-
-    <div class="field">
-
-     <label>کل</label>
-
-     <input
-      id="qTotal"
-      type="number"
-      value="20">
-
-    </div>
-
-    <div class="field">
-
-     <label>صحیح</label>
-
-     <input
-      id="qCorrect"
-      type="number"
-      value="15">
-
-    </div>
-
-    <div class="field">
-
-     <label>غلط</label>
-
-     <input
-      id="qWrong"
-      type="number"
-      value="3">
-
-    </div>
-
-   </div>
-
-   <br>
-
-   <button
-    class="btn"
-    onclick="saveQuickTest()">
-
-    ثبت تست
-
-   </button>
-
-  `;
-
- }
- else{
-
-  document.getElementById(
-   "modalTitle"
-  ).textContent=
-   "📚 ثبت سریع مطالعه";
-
-  document.getElementById(
-   "modalBody"
-  ).innerHTML=`
-
-   <div class="formGrid">
-
-    <div class="field">
-
-     <label>درس</label>
-
-     <select id="qSubject">
-
-      ${SUBJECTS.map(
-       s=>
-        `
-         <option value="${s.id}">
-          ${s.icon}
-          ${s.name}
-         </option>
-        `
-      ).join("")}
-
-     </select>
-
-    </div>
-
-    <div class="field">
-
-     <label>مبحث</label>
-
-     <input id="qTopic">
-
-    </div>
-
-    <div class="field">
-
-     <label>دقیقه</label>
-
-     <input
-      id="qMinutes"
-      type="number"
-      value="60">
-
-    </div>
-
-   </div>
-
-   <br>
-
-   <button
-    class="btn"
-    onclick="saveQuickStudy()">
-
-    ثبت مطالعه
-
-   </button>
-
-  `;
-
- }
-
- document.getElementById(
-  "modal"
- ).classList.add(
-  "show"
- );
-
-}
-
-
-function saveQuickStudy(){
-
- const minutes=
-  Number(
-   document.getElementById(
-    "qMinutes"
-   ).value
-  );
-
- if(!minutes)
-  return;
-
- db.sessions.push({
-
-  id:uid(),
-
-  subject:
-   document.getElementById(
-    "qSubject"
-   ).value,
-
-  topic:
-   document.getElementById(
-    "qTopic"
-   ).value,
-
-  minutes,
-
-  type:"مطالعه",
-
-  date:today(),
-
-  createdAt:
-   new Date().toISOString()
-
- });
-
- saveDatabase();
-
- closeModal();
-
- renderDashboard();
-
- toast(
-  "مطالعه ثبت شد ✅"
- );
-
-}
-
-
-function saveQuickTest(){
-
- const total=
-  Number(
-   document.getElementById(
-    "qTotal"
-   ).value
-  );
-
- const correct=
-  Number(
-   document.getElementById(
-    "qCorrect"
-   ).value
-  );
-
- const wrong=
-  Number(
-   document.getElementById(
-    "qWrong"
-   ).value
-  );
-
- if(
-  !total||
-  correct+
-  wrong>
-  total
- )
-  return;
-
- db.tests.push({
-
-  id:uid(),
-
-  subject:
-   document.getElementById(
-    "qSubject"
-   ).value,
-
-  topic:"ثبت سریع",
-
-  total,
-
-  correct,
-
-  wrong,
-
-  date:today(),
-
-  createdAt:
-   new Date().toISOString()
-
- });
-
- saveDatabase();
-
- closeModal();
-
- renderDashboard();
-
- toast(
-  "تست ثبت شد 📝"
- );
-
-}
-
-
-function closeModal(){
-
- document.getElementById(
-  "modal"
- ).classList.remove(
-  "show"
- );
-
-}
-
-
-/* =========================================================
-   PAGE RENDER
-========================================================= */
-
-function renderPage(page){
-
- switch(page){
-
-  case"dashboard":
-   renderDashboard();
-   break;
-
-  case"study":
-   renderStudy();
-   break;
-
-  case"tests":
-   renderTests();
-   break;
-
-  case"subjects":
-   renderSubjects();
-   break;
-
-  case"reviews":
-   renderReviews();
-   break;
-
-  case"resources":
-   renderResources();
-   break;
-
-  case"exams":
-   renderExams();
-   break;
-
-  case"reports":
-   renderReports();
-   break;
-
-  case"achievements":
-   renderAchievements();
-   break;
-
-  case"calendar":
-   renderCalendar();
-   break;
-
-  case"notes":
-   renderNotes();
-   break;
-
-  case"todos":
-   renderTodos();
-   break;
-
-  case"settings":
-   renderSettings();
-   break;
-
-  case"focus":
-
-   document.getElementById(
-    "focusSessions"
-   ).textContent=
-    db.focus.sessions;
-
-   updateTimer();
-
-   break;
-
- }
+  updateTimer();
 
 }
 
@@ -5371,214 +2255,7 @@ function renderPage(page){
    INITIALIZATION
 ========================================================= */
 
-function fillSubjects(){
-
- const ids=[
-  "sSubject",
-  "tSubject",
-  "rSubject"
- ];
-
- ids.forEach(
-  id=>{
-
-   const el=
-    document.getElementById(
-     id
-    );
-
-   if(!el)
-    return;
-
-   el.innerHTML=
-    SUBJECTS.map(
-     s=>
-      `
-       <option value="${s.id}">
-        ${s.icon}
-        ${s.name}
-       </option>
-      `
-    ).join("");
-
-  }
- );
-
-}
-
-
-function setDefaultDates(){
-
- [
-  "sDate",
-  "tDate"
- ].forEach(
-  id=>{
-
-   const el=
-    document.getElementById(
-     id
-    );
-
-   if(el)
-    el.value=
-     today();
-
-  }
- );
-
-}
-
-
-function updateDate(){
-
- document.getElementById(
-  "dateText"
- ).textContent=
-  new Intl.DateTimeFormat(
-   "fa-IR",
-   {
-    dateStyle:"full"
-   }
-  ).format(
-   new Date()
-  );
-
-}
-
-
-function initNavigation(){
-
- document.querySelectorAll(
-  ".nav button"
- ).forEach(
-  button=>{
-
-   button.addEventListener(
-    "click",
-    ()=>{
-     navigate(
-      button.dataset.page
-     );
-    }
-   );
-
-  }
- );
-
-}
-
-
-function init(){
-
- applyTheme();
-
- fillSubjects();
-
- setDefaultDates();
-
- updateDate();
-
- initNavigation();
-
- navigate(
-  currentPage
- );
-
- setInterval(
-  renderCountdown,
-  60000
- );
-
-}
-
-
-/* =========================================================
-   ONLINE / OFFLINE
-========================================================= */
-
-window.addEventListener(
- "online",
- ()=>{
-  toast(
-   "اتصال اینترنت برقرار شد 🌐"
-  );
- }
-);
-
-
-window.addEventListener(
- "offline",
- ()=>{
-  toast(
-   "آفلاین شدی؛ اطلاعات محلی همچنان در دسترس است."
-  );
- }
-);
-
-
-/* =========================================================
-   AUTO SAVE
-========================================================= */
-
-window.addEventListener(
- "beforeunload",
- saveDatabase
-);
-
-
-document.addEventListener(
- "visibilitychange",
- ()=>{
-  if(
-   document.visibilityState===
-   "hidden"
-  )
-   saveDatabase();
- }
-);
-
-
-/* =========================================================
-   KEYBOARD SHORTCUTS
-========================================================= */
-
-document.addEventListener(
- "keydown",
- event=>{
-
-  if(
-   (event.metaKey||
-    event.ctrlKey)&&
-   event.key.toLowerCase()==="k"
-  ){
-
-   event.preventDefault();
-
-   openQuick();
-
-  }
-
-  if(
-   event.key==="Escape"
-  ){
-
-   closeModal();
-
-  }
-
- }
-);
-
-
-/* =========================================================
-   START
-========================================================= */
-
-document.addEventListener(
- "DOMContentLoaded",
- init
-);
+loadData();
 
 </script>
 
