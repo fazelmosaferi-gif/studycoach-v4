@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>StudyCoach V6</title>
+<style>
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+body{
+margin:0;
+font-family:
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+Tahoma,
+Arial,
+sans-serif;
+background:#f1f5f9;
+color:#0f172a;
+}
+body.dark{
+background:#020617;
+color:#f8fafc;
+}
+button,
+input,
+select,
+textarea{
+font-family:inherit;
+}
+button{
+cursor:pointer;
+}
+.top{
+height:68px;
+position:sticky;
+top:0;
+z-index:50;
+display:flex;
+align-items:center;
+gap:12px;
+padding:10px 15px;
+background:#0f172a;
+color:white;
+box-shadow:0 5px 20px #0003;
+}
+.logo{
+font-size:20px;
+font-weight:900;
+}
+.logo span{
+font-size:10px;
+background:#38bdf8;
+color:#082f49;
+padding:4px 7px;
+border-radius:8px;
+}
+.icon{
+border:0;
+background:#ffffff16;
+color:white;
+width:42px;
+height:42px;
+border-radius:12px;
+font-size:20px;
+}
+.sidebar{
+position:fixed;
+top:68px;
+right:0;
+bottom:0;
+width:245px;
+background:white;
+border-left:1px solid #e2e8f0;
+padding:14px;
+z-index:40;
+overflow:auto;
+}
+.dark .sidebar{
+background:#0f172a;
+border-color:#1e293b;
+}
+.nav{
+width:100%;
+border:0;
+background:transparent;
+padding:14px;
+margin:4px 0;
+border-radius:13px;
+text-align:right;
+font-size:14px;
+color:inherit;
+}
+.nav.active,
+.nav:hover{
+background:#e0f2fe;
+color:#0369a1;
+font-weight:800;
+}
+.dark .nav.active,
+.dark .nav:hover{
+background:#082f49;
+color:#7dd3fc;
+}
+.main{
+margin-right:245px;
+padding:20px;
+max-width:1450px;
+}
+h1{
+margin:0;
+font-size:28px;
+}
+h2{
+margin-top:0;
+}
+.sub{
+color:#64748b;
+font-size:13px;
+margin-top:5px;
+}
+.dark .sub{
+color:#94a3b8;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-top:18px;
+}
+.grid2{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+margin-top:18px;
+}
+.card{
+background:white;
+border:1px solid #e2e8f0;
+border-radius:19px;
+padding:18px;
+box-shadow:0 5px 18px #0f172a0c;
+}
+.dark .card{
+background:#0f172a;
+border-color:#1e293b;
+box-shadow:none;
+}
+.stat{
+font-size:30px;
+font-weight:900;
+margin-top:8px;
+}
+.muted{
+color:#64748b;
+font-size:13px;
+}
+.dark .muted{
+color:#94a3b8;
+}
+.progress{
+height:9px;
+background:#e2e8f0;
+border-radius:99px;
+overflow:hidden;
+margin-top:10px;
+}
+.progress div{
+height:100%;
+background:#0284c7;
+}
+.btn{
+border:0;
+border-radius:12px;
+padding:11px 15px;
+background:#0284c7;
+color:white;
+font-weight:800;
+}
+.btn.gray{
+background:#e2e8f0;
+color:#0f172a;
+}
+.dark .btn.gray{
+background:#1e293b;
+color:white;
+}
+.btn.red{
+background:#dc2626;
+}
+.btn.small{
+font-size:12px;
+padding:8px 11px;
+}
+.row{
+display:flex;
+gap:8px;
+align-items:center;
+flex-wrap:wrap;
+}
+.between{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+border:1px solid #cbd5e1;
+border-radius:12px;
+background:white;
+color:#0f172a;
+font-size:14px;
+}
+.dark input,
+.dark select,
+.dark textarea{
+background:#020617;
+color:white;
+border-color:#334155;
+}
+textarea{
+min-height:110px;
+resize:vertical;
+}
+.form{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+.list{
+display:flex;
+flex-direction:column;
+gap:9px;
+margin-top:15px;
+}
+.item{
+border:1px solid #e2e8f0;
+background:white;
+border-radius:14px;
+padding:13px;
+}
+.dark .item{
+background:#020617;
+border-color:#1e293b;
+}
+.tag{
+display:inline-block;
+padding:4px 8px;
+border-radius:999px;
+background:#e0f2fe;
+color:#0369a1;
+font-size:11px;
+}
+.dark .tag{
+background:#082f49;
+color:#7dd3fc;
+}
+.empty{
+padding:30px;
+text-align:center;
+color:#64748b;
+}
+.timer{
+font-size:58px;
+font-weight:900;
+text-align:center;
+margin:15px;
+}
+.chat{
+height:430px;
+overflow:auto;
+padding:10px;
+background:#f8fafc;
+border-radius:15px;
+}
+.dark .chat{
+background:#020617;
+}
+.message{
+padding:11px 14px;
+border-radius:14px;
+margin:8px 0;
+max-width:85%;
+line-height:1.8;
+white-space:pre-wrap;
+}
+.user{
+background:#dbeafe;
+margin-right:auto;
+}
+.ai{
+background:#e2e8f0;
+margin-left:auto;
+}
+.dark .user{
+background:#12335c;
+}
+.dark .ai{
+background:#1e293b;
+}
+.toast{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translate(-50%,30px);
+background:#0f172a;
+color:white;
+padding:12px 18px;
+border-radius:13px;
+opacity:0;
+transition:.25s;
+z-index:100;
+}
+.toast.show{
+opacity:1;
+transform:translate(-50%,0);
+}
+@media(max-width:900px){
+.sidebar{
+transform:translateX(110%);
+transition:.25s;
+}
+.sidebar.open{
+transform:translateX(0);
+}
+.main{
+margin-right:0;
+padding:14px;
+}
+.grid{
+grid-template-columns:repeat(2,1fr);
+}
+.grid2,
+.form{
+grid-template-columns:1fr;
+}
+}
+@media(max-width:500px){
+.grid{
+grid-template-columns:1fr;
+}
+h1{
+font-size:23px;
+}
+.card{
+padding:15px;
+}
+}
+</style>
+</head>
+<body>
+<header class="top">
+<button class="icon" id="menu">
+☰
+</button>
+<div>
+<div class="logo">
+StudyCoach
+<span>V6</span>
+</div>
+<div style="font-size:11px;color:#cbd5e1">
+مشاور هوشمند مطالعه
+</div>
+</div>
+<button class="icon" id="dark">
+☾
+</button>
+</header>
+<aside class="sidebar" id="sidebar">
+<button class="nav active" data-page="home">
+🏠 داشبورد
+</button>
+<button class="nav" data-page="plan">
+📅 برنامه‌ریزی
+</button>
+<button class="nav" data-page="tasks">
+✅ وظایف
+</button>
+<button class="nav" data-page="subjects">
+📚 دروس
+</button>
+<button class="nav" data-page="mistakes">
+❌ اشتباهات
+</button>
+<button class="nav" data-page="review">
+🔁 مرور
+</button>
+<button class="nav" data-page="tests">
+📝 آزمون‌ها
+</button>
+<button class="nav" data-page="coach">
+🤖 AI Coach
+</button>
+<button class="nav" data-page="profile">
+👤 پروفایل
+</button>
+<button class="nav" data-page="settings">
+⚙️ تنظیمات
+</button>
+</aside>
+<main class="main" id="app"></main>
+<div id="toast" class="toast"></div>
+<script>
+const KEY="StudyCoachV6";
+let data=JSON.parse(
+localStorage.getItem(KEY)||"null"
+)||{
+profile:{
+name:"",
+target:"پزشکی دانشگاه تهران",
+hours:8,
+exam:""
+},
+subjects:[
+{id:"bio",name:"زیست‌شناسی",hours:0},
+{id:"chem",name:"شیمی",hours:0},
+{id:"math",name:"ریاضی",hours:0},
+{id:"phys",name:"فیزیک",hours:0}
+],
+tasks:[],
+mistakes:[],
+reviews:[],
+tests:[],
+chat:[]
+};
+let current="home";
+let timer={
+seconds:1500,
+running:false,
+interval:null
+};
+function save(){
+localStorage.setItem(
+KEY,
+JSON.stringify(data)
+);
+}
+function toast(text){
+let x=document.getElementById("toast");
+x.textContent=text;
+x.classList.add("show");
+setTimeout(
+()=>x.classList.remove("show"),
+2200
+);
+}
+function today(){
+return new Date()
+.toISOString()
+.slice(0,10);
+}
+function uid(){
+return Date.now()+"_"+Math.random()
+.toString(36)
+.slice(2);
+}
+function esc(text){
+return String(text||"")
+.replace(/[&<>"']/g,m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m]));
+}
+function layout(title,subtitle,content){
+return `
+<div>
+<h1>${title}</h1>
+<div class="sub">
+${subtitle}
+</div>
+</div>
+${content}
+`;
+}
+function render(){
+document
+.querySelectorAll(".nav")
+.forEach(x=>{
+x.classList.toggle(
+"active",
+x.dataset.page===current
+);
+});
+let pages={
+home,
+plan,
+tasks,
+subjects,
+mistakes,
+review,
+tests,
+coach,
+profile,
+settings
+};
+document.getElementById("app")
+.innerHTML=pages[current]();
+bind();
+}
+function home(){
+let done=data.tasks.filter(x=>x.done).length;
+let total=data.tasks.length;
+let minutes=data.tasks
+.filter(x=>x.done)
+.reduce((a,x)=>a+(+x.minutes||0),0);
+let percent=total?
+Math.round(done/total*100):0;
+return layout(
+"داشبورد",
+"مرکز کنترل مطالعه",
+`
+<div class="grid">
+<div class="card">
+<div class="muted">
+کارهای انجام‌شده
+</div>
+<div class="stat">
+${done}/${total}
+</div>
+<div class="progress">
+<div style="width:${percent}%"></div>
+</div>
+</div>
+<div class="card">
+<div class="muted">
+ساعت مطالعه
+</div>
+<div class="stat">
+${(minutes/60).toFixed(1)}
+</div>
+</div>
+<div class="card">
+<div class="muted">
+اشتباهات
+</div>
+<div class="stat">
+${data.mistakes.length}
+</div>
+</div>
+<div class="card">
+<div class="muted">
+آزمون
+</div>
+<div class="stat">
+${data.tests.length}
+</div>
+</div>
+</div>
+<div class="grid2">
+<div class="card">
+<div class="between">
+<h2>
+کارهای امروز
+</h2>
+<button
+class="btn small"
+onclick="go('tasks')">
+مدیریت
+</button>
+</div>
+<div class="list">
+${
+data.tasks
+.filter(x=>x.date===today())
+.slice(0,7)
+.map(t=>`
+<div class="item">
+<label>
+<input
+type="checkbox"
+style="width:auto"
+${t.done?"checked":""}
+onchange="toggleTask('${t.id}')">
+${esc(t.title)}
+</label>
+<div class="muted">
+${t.minutes} دقیقه
+</div>
+</div>
+`).join("")
+||
+`<div class="empty">
+امروز هنوز کاری ثبت نشده.
+</div>`
+}
+</div>
+</div>
+<div class="card">
+<h2>
+Pomodoro
+</h2>
+<div
+class="timer"
+id="timer">
+25:00
+</div>
+<div
+class="row"
+style="justify-content:center">
+<button
+class="btn"
+onclick="startTimer()">
+شروع
+</button>
+<button
+class="btn gray"
+onclick="resetTimer()">
+بازنشانی
+</button>
+</div>
+</div>
+</div>
+`
+);
+}
+function plan(){
+return layout(
+"برنامه‌ریزی",
+"ساخت برنامه مطالعه روزانه",
+`
+<div class="card" style="margin-top:18px">
+<div class="form">
+<label>
+ساعت مطالعه
+<input
+id="hours"
+type="number"
+min="1"
+max="20"
+value="${data.profile.hours}">
+</label>
+<label>
+تاریخ آزمون
+<input
+id="exam"
+type="date"
+value="${data.profile.exam||""}">
+</label>
+</div>
+<button
+class="btn"
+style="margin-top:12px"
+onclick="generatePlan()">
+ساخت برنامه امروز
+</button>
+</div>
+<div class="grid">
+${data.subjects.map(s=>`
+<div class="card">
+<h3>
+${esc(s.name)}
+</h3>
+<div class="muted">
+سهم پیشنهادی
+</div>
+<div class="stat"
+style="font-size:22px">
+${(
+data.profile.hours/
+data.subjects.length
+).toFixed(1)}
+ساعت
+</div>
+</div>
+`).join("")}
+</div>
+`
+);
+}
+function tasks(){
+return layout(
+"وظایف",
+"مدیریت کارهای مطالعه",
+`
+<div class="card" style="margin-top:18px">
+<div class="form">
+<input
+id="taskTitle"
+placeholder="مثلاً زیست فصل ۳ + ۳۰ تست">
+<select id="taskSubject">
+${data.subjects.map(s=>`
+<option value="${s.id}">
+${esc(s.name)}
+</option>
+`).join("")}
+</select>
+<input
+id="taskMinutes"
+type="number"
+value="60"
+min="5"
+placeholder="دقیقه">
+<input
+id="taskDate"
+type="date"
+value="${today()}">
+</div>
+<button
+class="btn"
+style="margin-top:12px"
+onclick="addTask()">
+افزودن کار
+</button>
+</div>
+<div class="list">
+${
+data.tasks.map(t=>`
+<div class="item between">
+<div>
+<label>
+<input
+type="checkbox"
+style="width:auto"
+${t.done?"checked":""}
+onchange="toggleTask('${t.id}')">
+<b>
+${esc(t.title)}
+</b>
+</label>
+<div class="muted">
+${t.minutes} دقیقه · ${t.date}
+</div>
+</div>
+<button
+class="btn red small"
+onclick="deleteTask('${t.id}')">
+حذف
+</button>
+</div>
+`).join("")
+||
+`<div class="empty">
+کاری وجود ندارد.
+</div>`
+}
+</div>
+`
+);
+}
+function subjects(){
+return layout(
+"دروس",
+"مدیریت اهداف درسی",
+`
+<div class="grid">
+${data.subjects.map(s=>`
+<div class="card">
+<h2>
+${esc(s.name)}
+</h2>
+<label class="muted">
+هدف ساعت هفتگی
+<input
+type="number"
+value="${s.hours}"
+onchange="subjectHours('${s.id}',this.value)">
+</label>
+<button
+class="btn small"
+style="margin-top:10px"
+onclick="quickTask('${s.id}')">
+افزودن کار
+</button>
+</div>
+`).join("")}
+</div>
+`
+);
+}
+function mistakes(){
+return layout(
+"دفترچه اشتباهات",
+"اشتباهات تستی را ثبت کن",
+`
+<div class="card" style="margin-top:18px">
+<div class="form">
+<input
+id="mistakeTopic"
+placeholder="مبحث">
+<input
+id="mistakeQ"
+placeholder="شماره سؤال">
+</div>
+<textarea
+id="mistakeNote"
+style="margin-top:12px"
+placeholder="علت اشتباه و نکته مهم">
+</textarea>
+<button
+class="btn"
+style="margin-top:10px"
+onclick="addMistake()">
+ثبت اشتباه
+</button>
+</div>
+<div class="list">
+${data.mistakes.map(m=>`
+<div class="item">
+<div class="between">
+<h3>
+${esc(m.topic)}
+</h3>
+<span class="tag">
+${esc(m.q)}
+</span>
+</div>
+<p>
+${esc(m.note)}
+</p>
+<div class="row">
+<button
+class="btn small"
+onclick="mistakeReview('${m.id}')">
+مرور
+</button>
+<button
+class="btn red small"
+onclick="deleteMistake('${m.id}')">
+حذف
+</button>
+</div>
+</div>
+`).join("")
+||
+`<div class="empty">
+هنوز اشتباهی ثبت نشده.
+</div>`
+}
+</div>
+`
+);
+}
+function review(){
+return layout(
+"مرور هوشمند",
+"سیستم مرور فاصله‌دار",
+`
+<div class="card" style="margin-top:18px">
+<div class="form">
+<input
+id="reviewTitle"
+placeholder="موضوع مرور">
+<select id="reviewLevel">
+<option value="1">
+مرور اول — فردا
+</option>
+<option value="2">
+مرور دوم — ۳ روز
+</option>
+<option value="3">
+مرور سوم — ۷ روز
+</option>
+<option value="4">
+مرور چهارم — ۱۴ روز
+</option>
+</select>
+</div>
+<button
+class="btn"
+style="margin-top:10px"
+onclick="addReview()">
+برنامه‌ریزی مرور
+</button>
+</div>
+<div class="list">
+${data.reviews.map(r=>`
+<div class="item between">
+<div>
+<b>
+${esc(r.title)}
+</b>
+<div class="muted">
+مرور ${r.level}
+· موعد ${r.date}
+</div>
+</div>
+<button
+class="btn small"
+onclick="completeReview('${r.id}')">
+انجام شد
+</button>
+</div>
+`).join("")
+||
+`<div class="empty">
+مروری ثبت نشده.
+</div>`
+}
+</div>
+`
+);
+}
+function tests(){
+let avg=data.tests.length
+?
+data.tests.reduce(
+(a,x)=>a+x.score,
+0
+)/data.tests.length
+:0;
+return layout(
+"آزمون‌ها",
+"ثبت و تحلیل نتایج آزمون",
+`
+<div class="grid">
+<div class="card">
+<div class="muted">
+تعداد آزمون
+</div>
+<div class="stat">
+${data.tests.length}
+</div>
+</div>
+<div class="card">
+<div class="muted">
+میانگین درصد
+</div>
+<div class="stat">
+${avg.toFixed(1)}%
+</div>
+</div>
+</div>
+<div class="card" style="margin-top:18px">
+<div class="form">
+<input
+id="testName"
+placeholder="نام آزمون">
+<input
+id="testScore"
+type="number"
+min="0"
+max="100"
+placeholder="درصد">
+</div>
+<button
+class="btn"
+style="margin-top:10px"
+onclick="addTest()">
+ثبت آزمون
+</button>
+</div>
+<div class="list">
+${data.tests.map(t=>`
+<div class="item between">
+<div>
+<b>
+${esc(t.name)}
+</b>
+<div class="muted">
+${t.date}
+</div>
+</div>
+<span class="tag">
+${t.score}%
+</span>
+</div>
+`).join("")}
+</div>
+`
+);
+}
+function coach(){
+return layout(
+"AI Coach",
+"مشاور داخلی برنامه",
+`
+<div class="card" style="margin-top:18px">
+<div class="chat" id="chat">
+${
+data.chat.map(m=>`
+<div class="message ${m.role}">
+${esc(m.text)}
+</div>
+`).join("")
+||
+`<div class="empty">
+سلام! سؤال درسی یا برنامه‌ریزی‌ات را بپرس.
+</div>`
+}
+</div>
+<textarea
+id="question"
+placeholder="مثلاً امروز ۸ ساعت وقت دارم؛ چه برنامه‌ای داشته باشم؟"
+style="margin-top:10px">
+</textarea>
+<button
+class="btn"
+style="margin-top:10px"
+onclick="askAI()">
+مشاوره
+</button>
+</div>
+`
+);
+}
+function profile(){
+return layout(
+"پروفایل",
+"تنظیم اطلاعات دانش‌آموز",
+`
+<div class="card" style="margin-top:18px">
+<div class="form">
+<label>
+نام
+<input
+id="pname"
+value="${esc(data.profile.name)}">
+</label>
+<label>
+هدف
+<input
+id="ptarget"
+value="${esc(data.profile.target)}">
+</label>
+<label>
+ساعت روزانه
+<input
+id="phours"
+type="number"
+value="${data.profile.hours}">
+</label>
+<label>
+تاریخ هدف
+<input
+id="pexam"
+type="date"
+value="${data.profile.exam||""}">
+</label>
+</div>
+<button
+class="btn"
+style="margin-top:12px"
+onclick="saveProfile()">
+ذخیره
+</button>
+</div>
+`
+);
+}
+function settings(){
+return layout(
+"تنظیمات",
+"مدیریت برنامه",
+`
+<div class="card" style="margin-top:18px">
+<button
+class="btn red"
+onclick="resetAll()">
+حذف تمام اطلاعات
+</button>
+</div>
+`
+);
+}
+function go(p){
+current=p;
+document
+.getElementById("sidebar")
+.classList.remove("open");
+render();
+}
+function addTask(){
+let title=
+document.getElementById("taskTitle")
+.value.trim();
+if(!title){
+toast("عنوان کار را وارد کن");
+return;
+}
+data.tasks.push({
+id:uid(),
+title,
+subject:
+document.getElementById("taskSubject").value,
+minutes:
++document.getElementById("taskMinutes").value||60,
+date:
+document.getElementById("taskDate").value||today(),
+done:false
+});
+save();
+render();
+toast("کار اضافه شد");
+}
+function toggleTask(id){
+let t=data.tasks.find(
+x=>x.id===id
+);
+if(t)t.done=!t.done;
+save();
+render();
+}
+function deleteTask(id){
+data.tasks=
+data.tasks.filter(
+x=>x.id!==id
+);
+save();
+render();
+}
+function subjectHours(id,value){
+let s=data.subjects.find(
+x=>x.id===id
+);
+if(s)s.hours=+value||0;
+save();
+}
+function quickTask(id){
+current="tasks";
+render();
+setTimeout(()=>{
+document.getElementById(
+"taskSubject"
+).value=id;
+},100);
+}
+function generatePlan(){
+let hours=
++document.getElementById("hours")
+.value||8;
+data.profile.hours=hours;
+data.profile.exam=
+document.getElementById("exam")
+.value;
+let minutes=Math.round(
+hours*60/
+data.subjects.length
+);
+data.subjects.forEach(s=>{
+data.tasks.push({
+id:uid(),
+title:
+"مطالعه هدفمند "+s.name,
+subject:s.id,
+minutes,
+date:today(),
+done:false
+});
+});
+save();
+render();
+toast("برنامه امروز ساخته شد");
+}
+function addMistake(){
+let topic=
+document
+.getElementById("mistakeTopic")
+.value.trim();
+if(!topic){
+toast("مبحث را وارد کن");
+return;
+}
+data.mistakes.push({
+id:uid(),
+topic,
+q:
+document.getElementById("mistakeQ").value,
+note:
+document.getElementById("mistakeNote").value,
+date:today()
+});
+save();
+render();
+}
+function deleteMistake(id){
+data.mistakes=
+data.mistakes.filter(
+x=>x.id!==id
+);
+save();
+render();
+}
+function mistakeReview(id){
+let m=
+data.mistakes.find(
+x=>x.id===id
+);
+if(!m)return;
+let d=new Date();
+d.setDate(
+d.getDate()+1
+);
+data.reviews.push({
+id:uid(),
+title:
+m.topic+
+" — "+
+m.q,
+level:1,
+date:
+d.toISOString()
+.slice(0,10)
+});
+save();
+toast("به مرور اضافه شد");
+}
+function addReview(){
+let title=
+document
+.getElementById("reviewTitle")
+.value.trim();
+if(!title){
+toast("موضوع مرور را وارد کن");
+return;
+}
+let level=
++document
+.getElementById("reviewLevel")
+.value;
+let days=[
+1,
+3,
+7,
+14
+][level-1];
+let d=new Date();
+d.setDate(
+d.getDate()+days
+);
+data.reviews.push({
+id:uid(),
+title,
+level,
+date:
+d.toISOString()
+.slice(0,10)
+});
+save();
+render();
+}
+function completeReview(id){
+let r=
+data.reviews.find(
+x=>x.id===id
+);
+if(!r)return;
+r.level=Math.min(
+4,
+r.level+1
+);
+let days=[
+1,
+3,
+7,
+14
+][r.level-1];
+let d=new Date();
+d.setDate(
+d.getDate()+days
+);
+r.date=
+d.toISOString()
+.slice(0,10);
+save();
+render();
+}
+function addTest(){
+let name=
+document
+.getElementById("testName")
+.value.trim();
+if(!name){
+toast("نام آزمون را وارد کن");
+return;
+}
+let score=
+Math.max(
+0,
+Math.min(
+100,
++document
+.getElementById("testScore")
+.value||0
+)
+);
+data.tests.push({
+id:uid(),
+name,
+score,
+date:today()
+});
+save();
+render();
+}
+function saveProfile(){
+data.profile.name=
+document
+.getElementById("pname")
+.value;
+data.profile.target=
+document
+.getElementById("ptarget")
+.value;
+data.profile.hours=
++document
+.getElementById("phours")
+.value||8;
+data.profile.exam=
+document
+.getElementById("pexam")
+.value;
+save();
+toast("پروفایل ذخیره شد");
+}
+function askAI(){
+let input=
+document.getElementById("question");
+let q=input.value.trim();
+if(!q)return;
+data.chat.push({
+role:"user",
+text:q
+});
+let answer=localAI(q);
+data.chat.push({
+role:"ai",
+text:answer
+});
+save();
+render();
+}
+function localAI(q){
+let text=q.toLowerCase();
+if(
+text.includes("برنامه")||
+text.includes("درس")
+){
+return `بر اساس اطلاعات فعلی تو، پیشنهاد من این است:
+۱. ابتدا سخت‌ترین درس را در اولین بازه مطالعه قرار بده.
+۲. بعد از هر ۵۰ تا ۷۵ دقیقه مطالعه، یک وقفه کوتاه داشته باش.
+۳. برای هر درس فقط «خواندن» نداشته باش؛ مطالعه را با تست و مرور ترکیب کن.
+۴. اشتباهات تستی را در دفترچه اشتباهات ثبت کن.
+۵. آخر شب ۲۰ تا ۳۰ دقیقه مرور سریع مطالب همان روز انجام بده.
+برای برنامه دقیق‌تر، تعداد ساعت مطالعه و درس‌هایی که فردا باید بخوانی را وارد کن.`;
+}
+if(
+text.includes("زیست")
+){
+return `برای زیست:
+• مطالعه مفهومی
+• بررسی شکل‌ها
+• تست آموزشی
+• تحلیل گزینه‌ها
+• مرور فاصله‌دار
+را پشت سر هم انجام بده.
+زیست را فقط با خواندن جلو نبر؛ تست و تحلیل گزینه‌ها بخش اصلی یادگیری هستند.`;
+}
+if(
+text.includes("شیمی")
+){
+return `برای شیمی:
+ابتدا مفهوم را یاد بگیر،
+سپس مثال‌های آموزشی را حل کن،
+بعد تست زمان‌دار بزن
+و در نهایت غلط‌ها را تحلیل کن.
+برای مسائل، حل کردن با دست بسیار مهم است.`;
+}
+if(
+text.includes("ریاضی")
+||
+text.includes("فیزیک")
+){
+return `برای درس‌های محاسباتی:
+۱. آموزش کوتاه
+۲. مثال حل‌شده
+۳. تست آموزشی
+۴. تست زمان‌دار
+۵. تحلیل غلط‌ها
+بهتر است بیشتر زمانت صرف حل سؤال شود تا تماشای آموزش.`;
+}
+return `سؤال خوبی است.
+برای تصمیم‌گیری بهتر، وضعیت فعلی‌ات را بررسی کن:
+• ساعت مطالعه امروز
+• کارهای باقی‌مانده
+• درصدهای آزمون
+• اشتباهات اخیر
+• نزدیک‌ترین امتحان
+اگر این اطلاعات را وارد کنی، می‌توانم بر اساس داده‌های داخل StudyCoach پیشنهاد دقیق‌تری بدهم.`;
+}
+function startTimer(){
+if(timer.running)return;
+timer.running=true;
+timer.interval=
+setInterval(()=>{
+timer.seconds--;
+updateTimer();
+if(timer.seconds<=0){
+clearInterval(
+timer.interval
+);
+timer.running=false;
+toast(
+"جلسه مطالعه تمام شد 🎉"
+);
+}
+},1000);
+}
+function resetTimer(){
+clearInterval(
+timer.interval
+);
+timer.running=false;
+timer.seconds=1500;
+updateTimer();
+}
+function updateTimer(){
+let el=
+document.getElementById("timer");
+if(!el)return;
+let m=
+String(
+Math.floor(
+timer.seconds/60
+)
+).padStart(2,"0");
+let s=
+String(
+timer.seconds%60
+).padStart(2,"0");
+el.textContent=
+m+":"+s;
+}
+function resetAll(){
+if(
+confirm(
+"همه اطلاعات حذف شود؟"
+)
+){
+localStorage.removeItem(KEY);
+location.reload();
+}
+}
+document
+.getElementById("menu")
+.addEventListener(
+"click",
+()=>{
+document
+.getElementById("sidebar")
+.classList.toggle("open");
+}
+);
+document
+.getElementById("dark")
+.addEventListener(
+"click",
+()=>{
+document.body
+.classList.toggle("dark");
+}
+);
+document
+.querySelectorAll(".nav")
+.forEach(x=>{
+x.addEventListener(
+"click",
+()=>go(x.dataset.page)
+);
+});
+render();
+</script>
+</body>
+</html>
